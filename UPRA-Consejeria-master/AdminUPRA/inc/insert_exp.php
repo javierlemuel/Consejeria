@@ -8,7 +8,7 @@ $course = $_GET['course'];
 // The SQL query you want to run is entered as the parameter, and placeholders are written like this :placeholder_name
 foreach($courses as $course ){
   echo $course['crse_description'];
-  echo "  "
+  echo "  ";
 }
 $stmt = $conn->prepare("INSERT INTO stdnt_record (crse_code, special_id, crse_grade, crse_status, semester_pass, crse_recognition, crse_equivalence, crse_credits_ER, crseR_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
