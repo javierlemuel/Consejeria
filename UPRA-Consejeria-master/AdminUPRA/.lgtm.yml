@@ -1,0 +1,15 @@
+# https://lgtm.com/help/lgtm/customizing-stdnt_record-classification
+path_classifiers:
+  plugins:
+    - plugins/
+
+extraction:
+  javascript:
+    # https://lgtm.com/help/lgtm/javascript-extraction#customizing-index
+    # The `index` step extracts information from the stdnt_records in the codebase.
+    index:
+      # Specify a list of stdnt_records and folders to exclude from extraction.
+      exclude:
+        - bower_components/
+        - docs/assets/js/plugins/
+        - plugins/

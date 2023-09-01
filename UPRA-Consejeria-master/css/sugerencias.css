@@ -1,0 +1,131 @@
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 100;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+.suggestions {
+    padding: 2rem;
+    border: 1px solid rgb(214, 214, 214);
+    margin-bottom: 2rem;
+    
+}
+.suggestion {
+    border: 1px solid rgb(214, 214, 214);
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: .5rem;
+}
+.suggestion-title {
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+.student-name {
+    margin-right: 1rem;
+    color: #1177d1;
+    font-weight: 100;
+    font-size: .6rem;
+    word-spacing: .3rem;
+    text-transform: uppercase;
+}
+
+.date-published {
+
+}
+.suggestion-body {
+    width: 80%;
+    line-height: 1.5;
+    margin: 1rem 0;
+    font-size: .7rem;
+}
+.suggestion-controls {
+    width: fit-content;
+    margin-left: auto;
+    
+}
+.suggestion-controls > ul {
+    list-style-type: none;
+}
+
+.suggestion-controls > ul > li {
+    display: inline-block;
+}
+.suggestion-controls > ul > li > a {
+    text-decoration: none;
+    color: #1177d1;
+    padding: 1rem;
+}
+
+.reply {
+    width: 90%;
+    margin-left: auto;
+    margin-bottom: .5rem;
+    border: 1px solid rgb(214, 214, 214);
+    padding: 1rem;
+}
+
+.reply-title {
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+.suggestion-form {
+    display: grid;
+    max-height: 0;
+    opacity: 0;
+    transition: all 1s;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 20% 80%);
+    margin-bottom: 1rem;
+
+}
+.form-input {
+    width: 100%;
+    border: 1px solid rgb(214, 214, 214);
+    outline: none;
+    padding: 1rem;
+}
+.form-input-title {
+    width: 50%;
+    padding: .25rem;
+    border: 1px solid rgb(214, 214, 214);
+    outline: none;
+    
+}
+
+.active {
+    opacity: 1;
+}
+.suggestion-toggle {
+    background-color: #FFFF59;
+    padding: .5rem;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+}
+.submit-btn {
+    background-color: #FFFF59;
+    
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+}
+.cancel-btn {
+    background-color: #6c757d;
+ 
+    
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+}
+.submit-btn, .cancel-btn {
+    width: 100px;
+    padding: .5rem .3rem;
+    border-radius: .5rem;
+}

@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.background-dark {
+    width: 100vw;
+    height: 100vh;
+    background-color: #212529;
+    font-family: 'Source Sans Pro', sans-serif;
+    position: relative;
+}
+
+.login-form {
+    position: absolute;
+    top: 62.5%;
+    left: 50%;
+    width: 50%;
+   transform: translate(-50%, -50%);
+    color: #C2C7D0;
+    font-size: 1rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    
+}
+
+.form-group {
+    width: 80%;
+    margin: 2rem auto;
+}
+.form-group-label {
+    font-size: 1rem;
+}
+.form-group-label-invalid {
+    font-size: 1rem;
+    color: red;
+}
+
+.form-input {
+    width: 100%;
+    background-color: #212529;
+    border: none;
+    border-bottom: 1px solid #C2C7D0;
+    outline: none;
+    color: #C2C7D0;
+    font-size: 1.25rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 100;
+}
+.form-input-invalid {
+    width: 100%;
+    background-color: #212529;
+    border: none;
+    border-bottom: 1px solid red;
+    outline: none;
+    color: #C2C7D0;
+    font-size: 1.25rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 100;
+}
+
+
+.brand {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    text-align: center;
+  
+}
+
+.logo {
+   width: 100px;
+}
+.title {
+    color: #C2C7D0;
+    font-weight: 100;
+}
+
+.mx-auto {
+    width: fit-content;
+    margin: 0 auto;
+}
+.submit-btn {
+    background-color: #C2C7D0;
+    color: #212121;
+    width: 5rem;
+    margin: 2rem auto 0;
+    height: 2.5rem;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: .25rem;
+    padding: 0 .5rem;
+    transition:  all .5s;
+}
+
+.error-message {
+    border: 1px solid red;
+    background-color: rgb(255, 173, 163);
+    padding: .5rem;
+    font-size: .9rem;
+    border-radius: .5rem;
+    margin-top: .5rem;
+}
+
+
+
+
+/* MEDIA QUERIES */
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .logo {
+        width: 75px;
+    }
+    .brand {
+        width: 80%;
+    }
+    .title {
+        font-size: 1rem;
+
+    }
+    .error-message {
+        font-size: .9rem;
+        padding: 0.5rem;
+    }
+    .login-form {
+        top: 55%;
+    }
+    .form-group {
+        width: 100%;
+    }
+    .form-group-label {
+        font-size: 1rem;
+    }
+
+    
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (max-width: 600px) {
+    .logo {
+        width: 100px;
+    }
+   
+    .login-form {
+        width: 80%;
+    }
+    
+    .form-group-label {
+        font-size: 1rem;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (max-width: 768px) {
+      .error-message {
+          font-size: 1.2rem;
+      }
+      .form-group-label {
+          font-size: 3rem;
+      }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    
+  }
