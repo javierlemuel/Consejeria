@@ -29,7 +29,7 @@ if ($stmt = $conn->prepare('SELECT adv_password, adv_name FROM advisor WHERE adv
         // Note: remember to use password_hash in your registration file to store the hashed passwords.
         // =============REMEMBER TO USE PASSWORD ENCRYPTION ====================
         $pass = urlencode($password);
-        $pass_crypt = crypt($pass);
+        $pass_crypt = crypt($pass, $password);
         
    
         if ($pass_crypt == crypt($pass, $pass_crypt)) {
