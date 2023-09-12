@@ -297,41 +297,175 @@
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
                 <div>
-                    <!-- <div class="pt-5">
-                            <div class="mb-5 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Settings</h5>
-                            </div>
-                            
-                        </div> -->
+                    <!-- start cohorte 2017 -->
+                    <div class="mb-5" x-data="{ tab: 'firstYear'}">
+                        <!-- tabs-a~os -->
+                        <div>
+                            <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'home'}" @click="tab = 'firstYear'">
+                                        PPRIMER AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'profile'}" @click="tab = 'secondYear'">
+                                        SEGUNDO AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'contact'}" @click="tab='thirdYear'">
+                                        TERCER AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'contact'}" @click="tab='fourthYear'">
+                                        CUERTO AÑO</a>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <div class="mb-5" x-data="{ active: 1 }">
-                        <div class="space-y-2 font-semibold">
-                            <div id="intructionSection">
-                                <!-- Start Instructions accordion -->
-                                <div class="mb-5" x-data="{ active: 1 }">
-                                    <div class="space-y-2 font-semibold">
-                                        <div class="border border-[#d3d3d3] rounded dark:border-[#1b2e4b]">
-                                            <button type="button" class="p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b]" :class="{'!text-primary' : active === 1}" x-on:click="active === 1 ? active = null : active = 1">
-                                                Instrucciones
-                                            </button>
-                                            <div x-cloak x-show="active === 1" x-collapse>
-                                                <div class="space-y-2 p-4 text-white-dark text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
-                                                    <h5 class="m-0">Para realizar la consejeria academica siga los siguientes pasos:</h5>
-                                                    <ol class="list-inside list-decimal space-y-3 font-semibold">
-                                                        <li>Consulte su expediente</li>
-                                                        <li>Verifique su cohorte correspondiente.</li>
-                                                        <li>Escoja los cursos que aspira tomar el próximo semestre.</li>
-                                                        <li>Revise su lista de cursos seleccionados y confirme su consejería.</li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <!-- cursos -->
+                        <div class="flex-1 text-sm ">
+                            <template x-if="tab === 'firstYear'">
+                                <!-- prime año table -->
+                                <div class="table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>PRIMER SEMESTRE</th>
+                                            </tr>
+                                            <tr>
+                                                <th>CODIGO</th>
+                                                <th>NOMBRE</th>
+                                                <th>CREDITOS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="whitespace-nowrap">CCOM3001</td>
+                                                <td>Programacion I</td>
+                                                <td>5</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap">CCOM3025</td>
+                                                <td>Int. Sist. Comp.</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap">INGL3101*</td>
+                                                <td>Ingles Basico I</td>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </template>
+                            <template x-if="tab === 'secondYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <!-- end Instructions accordion -->
-                            </div>
-                            <!-- start course lists -->
-                            <div id="coursesSection"></div>
+                            </template>
+                            <template x-if="tab === 'thirdYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
+                            <template x-if="tab === 'fourthYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -484,31 +618,6 @@
                 },
             }));
 
-            Alpine.data("dropdown", (initialOpenState = false) => ({
-                open: initialOpenState,
-
-                toggle() {
-                    this.open = !this.open;
-                },
-            }));
-        });
-
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     //Necessary to check these buttons exist at moment of loading
-        //     // hook up click events for both buttons
-        //     //document.querySelector("#images/espresso_info.jpg").addEventListener("click", joinList("espresso"));
-        //     //$("#clear_form").addEventListener("click", clearForm);
-        //     document.querySelector(".elec").addEventListener("click") => {
-        //         document.getElementById("elec").innerHTML = "";
-        //     }
-
-        //     // set focus on first text box after the form loads
-        //     //$("#email_1").focus();
-        // });
-    </script>
-    <!-- dropdown script -->
-    <script>
-        document.addEventListener("alpine:init", () => {
             Alpine.data("dropdown", (initialOpenState = false) => ({
                 open: initialOpenState,
 

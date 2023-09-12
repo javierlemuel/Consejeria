@@ -297,43 +297,7 @@
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
                 <div>
-                    <!-- <div class="pt-5">
-                            <div class="mb-5 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Settings</h5>
-                            </div>
-                            
-                        </div> -->
 
-                    <div class="mb-5" x-data="{ active: 1 }">
-                        <div class="space-y-2 font-semibold">
-                            <div id="intructionSection">
-                                <!-- Start Instructions accordion -->
-                                <div class="mb-5" x-data="{ active: 1 }">
-                                    <div class="space-y-2 font-semibold">
-                                        <div class="border border-[#d3d3d3] rounded dark:border-[#1b2e4b]">
-                                            <button type="button" class="p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b]" :class="{'!text-primary' : active === 1}" x-on:click="active === 1 ? active = null : active = 1">
-                                                Instrucciones
-                                            </button>
-                                            <div x-cloak x-show="active === 1" x-collapse>
-                                                <div class="space-y-2 p-4 text-white-dark text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
-                                                    <h5 class="m-0">Para realizar la consejeria academica siga los siguientes pasos:</h5>
-                                                    <ol class="list-inside list-decimal space-y-3 font-semibold">
-                                                        <li>Consulte su expediente</li>
-                                                        <li>Verifique su cohorte correspondiente.</li>
-                                                        <li>Escoja los cursos que aspira tomar el próximo semestre.</li>
-                                                        <li>Revise su lista de cursos seleccionados y confirme su consejería.</li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end Instructions accordion -->
-                            </div>
-                            <!-- start course lists -->
-                            <div id="coursesSection"></div>
-                        </div>
-                    </div>
                 </div>
                 <!-- end main content section -->
 
@@ -484,31 +448,6 @@
                 },
             }));
 
-            Alpine.data("dropdown", (initialOpenState = false) => ({
-                open: initialOpenState,
-
-                toggle() {
-                    this.open = !this.open;
-                },
-            }));
-        });
-
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     //Necessary to check these buttons exist at moment of loading
-        //     // hook up click events for both buttons
-        //     //document.querySelector("#images/espresso_info.jpg").addEventListener("click", joinList("espresso"));
-        //     //$("#clear_form").addEventListener("click", clearForm);
-        //     document.querySelector(".elec").addEventListener("click") => {
-        //         document.getElementById("elec").innerHTML = "";
-        //     }
-
-        //     // set focus on first text box after the form loads
-        //     //$("#email_1").focus();
-        // });
-    </script>
-    <!-- dropdown script -->
-    <script>
-        document.addEventListener("alpine:init", () => {
             Alpine.data("dropdown", (initialOpenState = false) => ({
                 open: initialOpenState,
 
