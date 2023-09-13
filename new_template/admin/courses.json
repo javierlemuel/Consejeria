@@ -1,0 +1,99 @@
+[
+    {
+      "course": "CCOM 3001",
+      "courseName": "Programación I",
+      "credits": "5",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3010",
+      "courseName": "Niveles Lógicos",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3025",
+      "courseName": "Int. Sist. Comp.",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3002",
+      "courseName": "Programación II",
+      "credits": "5",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3015",
+      "courseName": "Comp. en la Sociedad",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3035",
+      "courseName": "Organización de Comp.",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4005",
+      "courseName": "Estructuras de Datos",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3020",
+      "courseName": "Matemáticas Discretas",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4006",
+      "courseName": "Diseño y Análisis de Algoritmos",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4007",
+      "courseName": "Int. Probabilidad y Estad.",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4065",
+      "courseName": "Álgebra Lineal Numérica",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 3041",
+      "courseName": "Sistemas Operativos",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4025",
+      "courseName": "Organización de Lenguaje",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4115",
+      "courseName": "Diseño de Base de Datos",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4075",
+      "courseName": "Ingeniería de Programación",
+      "credits": "3",
+      "matriculados": "3"
+    },
+    {
+      "course": "CCOM 4095",
+      "courseName": "Proyecto Ing. de Prog.",
+      "credits": "3",
+      "matriculados": "3"
+    }
+  ]
+  
