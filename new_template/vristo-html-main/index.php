@@ -333,7 +333,32 @@
                                 <!-- end Instructions accordion -->
                             </div>
                             <!-- start course lists -->
-                            <div id="coursesSection"></div>
+                            <div id="coursesSection">
+                                <?php
+
+                                $courseCategories = array(
+                                    "recomendadas", "concentracion", "generales", "humanidades", "ciencias Sociales",
+                                    "electivas departamentales", "electivas libres"
+                                );
+
+                                for ($i = 0; $i < count($courseCategories); $i++) {
+                                    $category = strtoupper($courseCategories[$i]);
+                                    $tab = $i + 1;
+                                    echo "<div class=\"border border-[#d3d3d3] dark:border-[#1b2e4b] rounded\">
+                                            <button type=\"button\" class=\"p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b]\" :class=\"{\'!text-primary\' : active === $tab}\" x-on:click=\"active === $tab ? active = null : active = $tab\">
+                                             $category
+                                             </button>
+                                             <div x-cloak x-show=\"active === $tab\" x-collapse>
+                                                <div class=\"p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]\">
+                                                    <ul class=\"space-y-1\">
+                                                        <li><a href=\"javascript:;\">Lista de cursos</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>";
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -356,7 +381,7 @@
     <script defer src="assets/js/alpine.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="assets/js/courses.js"></script>
+
 
     <script>
         document.addEventListener('alpine:init', () => {
