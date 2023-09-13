@@ -300,40 +300,40 @@
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
                 <!-- Vertical line tabs -->
-                <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
-                    <!-- buttons -->
-                    <div class="mx-10 mb-5 sm:mb-0">
-                        <ul class="w-24 m-auto text-center font-semibold">
-                            <li>
-                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
-                            </li>
-                            <li>
-                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- description -->
-                    <div class="flex-1 text-sm ">
-                        <template x-if="tab === 'info'">
-                            <div>
-                                <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
-                                <p class="mb-4"><b>Nombre:</b> Emanuel D Martinez Sanchez</p>
-                                <p class="mb-4"><b>Correo Electronico:</b> emanuel.martinez8@upr.edu</p>
-                                <p class="mb-4"><b>Numero de Estudiante:</b> 840-19-9721</p>
-                                <p class="mb-4"><b>Major:</b> CCOM</p>
-                                <p class="mb-4"><b>Origen:</b> Regular</p>
-                                <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
-                            </div>
-                        </template>
-                        <template x-if="tab === 'expediente'">
-                            <div>
-                                <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
-                                <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
-                            </div>
-                        </template>
-                    </div>
+                <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'info'}"> <!-- Cambiamos 'tab' a 'info' por defecto -->
+                <!-- buttons -->
+                <div class="mx-10 mb-5 sm:mb-0">
+                    <ul class="w-24 m-auto text-center font-semibold">
+                        <li>
+                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
+                        </li>
+                        <li>
+                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
+                        </li>
+                    </ul>
                 </div>
+
+                <!-- description -->
+                <div class="flex-1 text-sm ">
+                    <template x-if="tab === 'info'">
+                        <div>
+                            <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
+                            <p class="mb-4"><b>Nombre:</b> Emanuel D Martinez Sanchez</p>
+                            <p class="mb-4"><b>Correo Electronico:</b> emanuel.martinez8@upr.edu</p>
+                            <p class="mb-4"><b>Numero de Estudiante:</b> 840-19-9721</p>
+                            <p class="mb-4"><b>Major:</b> CCOM</p>
+                            <p class="mb-4"><b>Origen:</b> Regular</p>
+                            <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
+                        </div>
+                    </template>
+                    <template x-if="tab === 'expediente'">
+                        <div>
+                            <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
+                            <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
                 <!-- end main content section -->
 
             </div>
