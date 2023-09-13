@@ -1,3 +1,11 @@
+<?php
+function readJson($path)
+{
+    $jsonString = file_get_contents($path);
+    return json_decode($jsonString, true);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -301,174 +309,107 @@
                 <!-- start main content section -->
                 <div>
                     <!-- start cohorte 2017 -->
-                    <div class="mb-5" x-data="{ tab: 'firstYear'}">
+                    <div class="mb-5" x-data="{ tab: '1'}">
                         <!-- tabs-a~os -->
                         <div>
                             <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
                                 <li>
-                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === 'firstYear'}" @click="tab = 'firstYear'">
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === '1'}" @click="tab = '1'">
                                         PPRIMER AÑO</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === 'secondYear'}" @click="tab = 'secondYear'">
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === '2'}" @click="tab = '2'">
                                         SEGUNDO AÑO</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === 'thirdYear'}" @click="tab='thirdYear'">
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === '3'}" @click="tab='3'">
                                         TERCER AÑO</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === 'fourthYear'}" @click="tab='fourthYear'">
-                                        CUERTO AÑO</a>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary active' : tab === '4'}" @click="tab='4'">
+                                        CUARTO AÑO</a>
                                 </li>
                             </ul>
                         </div>
 
                         <!-- cursos -->
                         <div class="flex-1 text-sm ">
-                            <template x-if="tab === 'firstYear'">
-                                <!-- prime año table -->
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>PRIMER SEMESTRE</th>
-                                            </tr>
-                                            <tr>
-                                                <th>CODIGO</th>
-                                                <th>NOMBRE</th>
-                                                <th>CREDITOS</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="whitespace-normal">CCOM3001</td>
-                                                <td>Programacion I</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-normal">CCOM3025</td>
-                                                <td>Int. Sist. Comp.</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-normal">INGL3101*</td>
-                                                <td>Ingles Basico I</td>
-                                                <td>3</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <?php
+                            $years = 4;
+                            $allCourses = readJson("cohort.json");
 
-                            </template>
-                            <template x-if="tab === 'secondYear'">
-                                <div>
-                                    <!-- prime año table -->
-                                    <div class="table-responsive">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>PRIMER SEMESTRE</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CODIGO</th>
-                                                    <th>NOMBRE</th>
-                                                    <th>CREDITOS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3001</td>
-                                                    <td>Programacion II</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3025</td>
-                                                    <td>Int. Sist. Comp.</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">INGL3101*</td>
-                                                    <td>Ingles Basico I</td>
-                                                    <td>3</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </template>
-                            <template x-if="tab === 'thirdYear'">
-                                <div>
-                                    <!-- prime año table -->
-                                    <div class="table-responsive">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>PRIMER SEMESTRE</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CODIGO</th>
-                                                    <th>NOMBRE</th>
-                                                    <th>CREDITOS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3001</td>
-                                                    <td>Programacion I</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3025</td>
-                                                    <td>Int. Sist. Comp.</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">INGL3101*</td>
-                                                    <td>Ingles Basico I</td>
-                                                    <td>3</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </template>
-                            <template x-if="tab === 'fourthYear'">
-                                <div>
-                                    <!-- prime año table -->
-                                    <div class="table-responsive">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>PRIMER SEMESTRE</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CODIGO</th>
-                                                    <th>NOMBRE</th>
-                                                    <th>CREDITOS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3001</td>
-                                                    <td>Programacion I</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">CCOM3025</td>
-                                                    <td>Int. Sist. Comp.</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="whitespace-nowrap">INGL3101*</td>
-                                                    <td>Ingles Basico I</td>
-                                                    <td>3</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </template>
+                            for ($i = 1; $i <= $years; $i++) {
+                                echo "<template x-if=\"tab === '$i' \">
+                            <!-- prime año table -->
+                            <div class=\"table-responsive\">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>PRIMER SEMESTRE</th>
+                                        </tr>
+                                        <tr>
+                                            <th>CODIGO</th>
+                                            <th>NOMBRE</th>
+                                            <th>CREDITOS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>";
+
+                                foreach ($allCourses as $course) {
+                                    $code = $course["courseCode"];
+                                    $name = $course["name"];
+                                    $credits = $course["credits"];
+                                    if ($course["cohortYear"] == '2017' && $course["courseSemester"] == '1' && $course["courseYear"] == intval($i)) {
+                                        echo "
+                                            <tr>
+                                                <td class=\"whitespace-normal\">$code</td>
+                                                <td>$name</td>
+                                                <td>$credits</td>
+                                            </tr>";
+                                    }
+                                };
+                                echo "</tbody>
+                            </table>
+                        </div>
+                    </template>";
+                            }
+                            //second semester
+                            for ($i = 1; $i <= $years; $i++) {
+                                echo "<br><br><template x-if=\"tab === '$i' \">
+                            <!-- prime año table -->
+                            <div class=\"table-responsive\">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>SEGUNDO SEMESTRE</th>
+                                        </tr>
+                                        <tr>
+                                            <th>CODIGO</th>
+                                            <th>NOMBRE</th>
+                                            <th>CREDITOS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>";
+
+                                foreach ($allCourses as $course) {
+                                    $code = $course["courseCode"];
+                                    $name = $course["name"];
+                                    $credits = $course["credits"];
+                                    if ($course["cohortYear"] == '2017' && $course["courseSemester"] == '2' && $course["courseYear"] == intval($i)) {
+                                        echo "
+                                            <tr>
+                                                <td class=\"whitespace-normal\">$code</td>
+                                                <td>$name</td>
+                                                <td>$credits</td>
+                                            </tr>";
+                                    }
+                                };
+                                echo "</tbody>
+                            </table>
+                        </div>
+                    </template>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

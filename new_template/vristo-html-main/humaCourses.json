@@ -1,0 +1,149 @@
+
+[
+    {
+      "courseCode": "ARTE3115",
+      "name": "Apreciación del Arte",
+      "credits": 2
+    },
+    {
+      "courseCode": "ARTE3116",
+      "name": "Historia del Arte",
+      "credits": 3
+    },
+    {
+      "courseCode": "ARTE3118",
+      "name": "Arte de Puerto Rico",
+      "credits": 3
+    },
+    {
+      "courseCode": "ESIN4001",
+      "name": "Seminario de Investigación de Estudios Puertorriqueños",
+      "credits": 3
+    },
+    {
+      "courseCode": "FILO3001",
+      "name": "Introducción a la Filosofía I",
+      "credits": 3
+    },
+    {
+      "courseCode": "FILO3002",
+      "name": "Introducción a la Filosofía II",
+      "credits": 3
+    },
+    {
+      "courseCode": "FILO3005",
+      "name": "Ética",
+      "credits": 3
+    },
+    {
+      "courseCode": "FILO4006",
+      "name": "Lógica I",
+      "credits": 3
+    },
+    {
+      "courseCode": "FILO4027",
+      "name": "Bioética",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3111",
+      "name": "Historia de Estados Unidos I",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3112",
+      "name": "Historia de Estados Unidos II",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3165",
+      "name": "Historia del Renacimiento",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3177",
+      "name": "Historia de Puerto Rico",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3179",
+      "name": "Historia de Estados Unidos",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3241",
+      "name": "Historia de Puerto Rico I",
+      "credits": 3
+    },
+    {
+      "courseCode": "HIST3242",
+      "name": "Historia de Puerto Rico II",
+      "credits": 3
+    },
+    {
+      "courseCode": "HUMA3101",
+      "name": "Western Civilization I",
+      "credits": 3
+    },
+    {
+      "courseCode": "HUMA3102",
+      "name": "Western Civilization II",
+      "credits": 3
+    },
+    {
+      "courseCode": "HUMA3145",
+      "name": "Seminario de Integración de las Herramientas de la Web 2.0",
+      "credits": 3
+    },
+    {
+      "courseCode": "HUMA3201",
+      "name": "Western Civilization III",
+      "credits": 3
+    },
+    {
+      "courseCode": "HUMA3202",
+      "name": "Western Civilization IV",
+      "credits": 3
+    },
+    {
+      "courseCode": "INTD3046",
+      "name": "Escrituras Femeninas",
+      "credits": 3
+    },
+    {
+      "courseCode": "LITE3011",
+      "name": "Literatura Moderna",
+      "credits": 3
+    },
+    {
+      "courseCode": "LITE3012",
+      "name": "Literatura Contemporánea",
+      "credits": 3
+    },
+    {
+      "courseCode": "LITE3035",
+      "name": "Mitología en la Literatura Occidental",
+      "credits": 3
+    },
+    {
+      "courseCode": "LITE3055",
+      "name": "Literatura Digital",
+      "credits": 3
+    },
+    {
+      "courseCode": "MUSI3225",
+      "name": "Historia de la Música",
+      "credits": 3
+    },
+    {
+      "courseCode": "MUSI3235",
+      "name": "Apreciación de la Música",
+      "credits": 2
+    },
+    {
+      "courseCode": "TEAT3025",
+      "name": "Apreciación del Arte Dramático",
+      "credits": 3
+    }
+]
+    

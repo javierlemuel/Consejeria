@@ -1,3 +1,11 @@
+<?php
+function readJson($path)
+{
+    $jsonString = file_get_contents($path);
+    return json_decode($jsonString, true);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -299,13 +307,6 @@
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
                 <div>
-                    <!-- <div class="pt-5">
-                            <div class="mb-5 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Settings</h5>
-                            </div>
-                            
-                        </div> -->
-
                     <div class="mb-5" x-data="{ active: 1 }">
                         <div class="space-y-2 font-semibold">
                             <div id="intructionSection">
@@ -335,20 +336,25 @@
                             <!-- start course lists -->
                             <div id="coursesSection">
                                 <?php
-                                //get data from JSON
-                                $path = 'courses.json';
-                                $jsonString = file_get_contents($path);
-                                $jsonData = json_decode($jsonString, true);
-                                //var_dump($jsonData);
-
                                 $courseCategories = array(
-                                    "recomendadas", "concentracion", "generales", "humanidades", "ciencias Sociales",
-                                    "electivas departamentales", "electivas libres"
+                                    "recomendadas" => "ccomCourses.json",
+                                    "concentracion" => "ccomCourses.json",
+                                    "generales" => "generalCourses.json",
+                                    "humanidades" => "humaCourses.json",
+                                    "ciencias Sociales" => "cisoCourses.json",
+                                    "electivas departamentales" => "ccomElective.json",
+                                    "electivas libres" => "ccomCourses.json",
                                 );
+                                //variable to control that only the first tab in the accoridon is open by default
+                                $tab = 1;
 
-                                for ($i = 0; $i < count($courseCategories); $i++) {
-                                    $category = strtoupper($courseCategories[$i]);
-                                    $tab = $i + 1;
+                                foreach ($courseCategories as $category  => $jsonPath) {
+                                    //uppercasa category name
+                                    $category = strtoupper($category);
+                                    //read json and convert it to array
+                                    $allCourses = readJson($jsonPath);
+
+                                    //create accordion tabs
                                     echo "<div class=\"border border-[#d3d3d3] dark:border-[#1b2e4b] rounded\">
                                             <button type=\"button\" class=\"p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b]\" :class=\"{\'!text-primary\' : active === $tab}\" x-on:click=\"active === $tab ? active = null : active = $tab\">
                                              $category
@@ -366,10 +372,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>";
-                                    asort($jsonData);
-                                    foreach ($jsonData as $course) {
-                                        $courseCode = $course['course'];
-                                        $courseName = $course['courseName'];
+                                    //sort courses by course code
+                                    asort($allCourses);
+
+                                    //create rows with the course info
+                                    foreach ($allCourses as $course) {
+                                        $courseCode = $course['courseCode'];
+                                        $courseName = $course['name'];
                                         $credits = $course['credits'];
                                         echo "
                                                 <tr>
@@ -387,6 +396,7 @@
                                             </div>
                                         </div>
                                     </div>";
+                                    $tab = $tab + 1;
                                 }
                                 ?>
                             </div>

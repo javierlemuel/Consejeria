@@ -1,0 +1,77 @@
+[
+    {
+      "courseCode": "CCOM3027",
+      "name": "Programación Orientada a Objetos",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM3036",
+      "name": "Programación Visual",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM3042",
+      "name": "Arquitectura de Computadoras",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM3115",
+      "name": "Aplicaciones de Microprocesadores",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM3985",
+      "name": "Investigación Sub-graduada",
+      "credits": 2
+    },
+    {
+      "courseCode": "CCOM4018",
+      "name": "Redes de Computadoras",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4019",
+      "name": "Programación Web",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4125",
+      "name": "Inteligencia Artificial",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4135",
+      "name": "Diseño Compiladores",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4305",
+      "name": "Introducción Diseño Web",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4306",
+      "name": "Optimización Gráficas",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4307",
+      "name": "Mantenimiento de PC’s",
+      "credits": 4
+    },
+    {
+      "courseCode": "CCOM4401",
+      "name": "Desarrollo de Aplicaciones Móviles",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4420",
+      "name": "Cloud Computing Apps",
+      "credits": 3
+    },
+    {
+      "courseCode": "CCOM4501",
+      "name": "Robótica",
+      "credits": 4
+    }
+  ]
