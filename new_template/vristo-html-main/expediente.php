@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -170,31 +171,33 @@
                             </a>
                         </div>
                         <div class="hidden ltr:mr-2 rtl:ml-2 sm:block">
-                            <ul class="flex items-center space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
+                            <ul class="flex items-center space-x-4 rtl:space-x-reverse dark:text-[#d0d2d6]">
                                 <li>
-                                    <a href="index.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="index.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Consejería
                                     </a>
                                 </li>
 
                                 <li>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                                        <button class=" btn-link" @click="toggle">Cohorte</button>
+                                        <button class="btn-link hover:text-primary text-lg font-bold relative" @click="toggle">
+                                            Cohorte<!--<span class="dropdown-arrow"></span>-->
+                                        </button>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                            <li><a href="cohorte2017.php" @click="toggle">2017</a></li>
-                                            <li><a href="cohorte2022.php" @click="toggle">2022</a></li>
+                                            <li><a href="cohorte2017.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2017</a></li>
+                                            <li><a href="cohorte2022.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2022</a></li>
                                         </ul>
                                     </div>
                                 </li>
 
                                 <li>
-                                    <a href="expediente.php" class="block hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="expediente.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Expediente
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="citas.php" class="block hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="citas.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Citas
                                     </a>
                                 </li>
@@ -296,8 +299,40 @@
 
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
-                <div>
+                <!-- Vertical line tabs -->
+                <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
+                    <!-- buttons -->
+                    <div class="mx-10 mb-5 sm:mb-0">
+                        <ul class="w-24 m-auto text-center font-semibold">
+                            <li>
+                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
+                            </li>
+                            <li>
+                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
+                            </li>
+                        </ul>
+                    </div>
 
+                    <!-- description -->
+                    <div class="flex-1 text-sm ">
+                        <template x-if="tab === 'info'">
+                            <div>
+                                <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
+                                <p class="mb-4"><b>Nombre:</b> Emanuel D Martinez Sanchez</p>
+                                <p class="mb-4"><b>Correo Electronico:</b> emanuel.martinez8@upr.edu</p>
+                                <p class="mb-4"><b>Numero de Estudiante:</b> 840-19-9721</p>
+                                <p class="mb-4"><b>Major:</b> CCOM</p>
+                                <p class="mb-4"><b>Origen:</b> Regular</p>
+                                <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
+                            </div>
+                        </template>
+                        <template x-if="tab === 'expediente'">
+                            <div>
+                                <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
+                                <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
+                            </div>
+                        </template>
+                    </div>
                 </div>
                 <!-- end main content section -->
 
