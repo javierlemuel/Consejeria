@@ -333,6 +333,11 @@
                             <!-- start course lists -->
                             <div id="coursesSection">
                                 <?php
+                                //get data from JSON
+                                $path = 'courses.json';
+                                $jsonString = file_get_contents($path);
+                                $jsonData = json_decode($jsonString, true);
+                                //var_dump($jsonData);
 
                                 $courseCategories = array(
                                     "recomendadas", "concentracion", "generales", "humanidades", "ciencias Sociales",
@@ -348,12 +353,38 @@
                                              </button>
                                              <div x-cloak x-show=\"active === $tab\" x-collapse>
                                                 <div class=\"p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]\">
-                                                    <ul class=\"space-y-1\">
-                                                        <li><a href=\"javascript:;\">Lista de cursos</a></li>
-                                                    </ul>
+                                                <div class=\"table-responsive\">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Curso</th>
+                                                            <th>Nombre</th>
+                                                            <th>Creditos</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>";
+                                    asort($jsonData);
+                                    foreach ($jsonData as $course) {
+                                        $courseCode = $course['course'];
+                                        $courseName = $course['courseName'];
+                                        $credits = $course['credits'];
+                                        echo "
+                                                <tr>
+                                                    <td><input type=\"checkbox\" class=\"form-checkbox\" /></td>
+                                                    <td>$courseCode</td>
+                                                    <td>$courseName</td>
+                                                    <td>$credits</td>                                                            
+                                                </tr>                                              
+                                        ";
+                                    }
+
+                                    echo "              </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                        </div>";
+                                        </div>
+                                    </div>";
                                 }
                                 ?>
                             </div>
