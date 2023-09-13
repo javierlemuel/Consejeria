@@ -170,31 +170,33 @@
                             </a>
                         </div>
                         <div class="hidden ltr:mr-2 rtl:ml-2 sm:block">
-                            <ul class="flex items-center space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
+                            <ul class="flex items-center space-x-4 rtl:space-x-reverse dark:text-[#d0d2d6]">
                                 <li>
-                                    <a href="index.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="index.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Consejería
                                     </a>
                                 </li>
 
                                 <li>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                                        <button class=" btn-link" @click="toggle">Cohorte</button>
+                                        <button class="btn-link hover:text-primary text-lg font-bold relative" @click="toggle">
+                                            Cohorte<!--<span class="dropdown-arrow"></span>-->
+                                        </button>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                            <li><a href="cohorte2017.php" @click="toggle">2017</a></li>
-                                            <li><a href="cohorte2022.php" @click="toggle">2022</a></li>
+                                            <li><a href="cohorte2017.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2017</a></li>
+                                            <li><a href="cohorte2022.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2022</a></li>
                                         </ul>
                                     </div>
                                 </li>
 
                                 <li>
-                                    <a href="expediente.php" class="block hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="expediente.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Expediente
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="citas.php" class="block hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60">
+                                    <a href="citas.php" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
                                         Citas
                                     </a>
                                 </li>
