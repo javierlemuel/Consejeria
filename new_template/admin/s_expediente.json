@@ -1,0 +1,73 @@
+{
+    "Year": {
+        "Primer": {
+            "Primero": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ]
+        },
+
+        "Segundo": {
+            "Primero": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ]
+        },
+
+        "Tercer": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ]
+        },
+
+        "Cuarto": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ]
+        },
+
+        "Electivas": {
+            "": [
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            ]
+        }
+    }
+    }
+   

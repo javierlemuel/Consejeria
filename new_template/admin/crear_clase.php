@@ -187,75 +187,7 @@
                 <div class="flex-1 text-sm ">
                     <div>
     <!-- start cohort 2017 -->
-    <div x-data="{ tab1: null }">
-    <!-- start cohort 2017 -->
-    <?php
-    $path = 'cohort.json';
-    $jsonString = file_get_contents($path);
-    $jsonData = json_decode($jsonString, true);
-
-    echo "<div class='mb-5'>
-            <!-- tabs-años -->
-            <div>
-                <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
-
-    // Generate the outer year tabs
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        echo "<li>
-                <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                    :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                    @click='tab1 = \"$yearTitle\"'>
-                    " . strtoupper($yearTitle) . " AÑO
-                </a>
-            </li>";
-    }
-
-    echo "</ul>
-        </div>";
-
-    // Display data for the selected year
-
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        echo "<div x-show='tab1 === \"$yearTitle\"'></h2>";
-                // <h2>; . strtoupper($yearTitle) .  AÑO</h2>;
-
-        
-
-        foreach ($yearData as $semesterTitle => $semesterCourses) {
-            echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
-                    " . strtoupper($semesterTitle) . " SEMESTRE
-                </div>";
-
-                echo "<table>
-                <thead>
-                    <tr>
-                        <th>CODIGO</th>
-                        <th>NOMBRE</th>
-                        <th>CREDITOS</th>
-                    </tr>
-                </thead>
-                <tbody>";
-            foreach ($semesterCourses as $course) {
-                echo "<tr>
-                        <td class='whitespace-normal'>" . $course['code'] . "</td>
-                        <td>" . $course['name'] . "</td>
-                        <td>" . $course['credits'] . "</td>
-                    </tr>";
-            }
-            
-            echo "<form>
-            <label for ''
-            </form>";
-        
-
-        echo "</tbody>
-            </table>";
-        }        
-        echo "</div>";
-    }
-    ?>
-</div>
-
+    
 
 
 
@@ -282,6 +214,7 @@
         <div>
             <label for="gridYear">Año</label>
             <select id="gridYear" class="form-select text-white-dark">
+            <option>N/A</option>
                 <option>1er</option>
                 <option>2do</option>
                 <option>3er</option>
@@ -291,6 +224,7 @@
         <div>
             <label for="gridSemester">Semestre</label>
             <select id="gridSemester" class="form-select text-white-dark">
+            <option>N/A</option>
                 <option>1er</option>
                 <option>2do</option>
             </select>
@@ -300,36 +234,13 @@
             <select id="gridType" class="form-select text-white-dark">
                 <option>Concentración</option>
                 <option>General</option>
+                <option>Electiva CCOM</option>
+                <option>Electiva Libre</option>
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary !mt-6">Añadir</button>
-</form>
-<br><br><br>
-<form class="space-y-5">
-    <h1 style='font-size: 20px; bold'>Cantidad de electivas</h1>
-    <div class="grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div>
-            <label for="gridCode">Dept.</label>
-            <input id="gridCode" type="number" class="form-input" required/>
-        </div>
-        <div>
-            <label for="gridCode">Libre</label>
-            <input id="gridCode" type="number" class="form-input" required/>
-        </div>
-        <div>
-            <label for="gridName">CISO</label>
-            <input id="gridName" type="number" class="form-input" required/>
-        </div>
-        <div>
-        <label for="gridCred">HUMA</label>
-        <input id="gridCred" type="number" class="form-input" required />
-    </div>
-    </div>
-
-    <!-- profile -->
     <div x-data="modal">
-                                            <button type="button" class="btn btn-primary !mt-6" @click="toggle">Someter</button>
+                                            <button type="button" type=submit" class="btn btn-primary !mt-6" @click="toggle">Someter</button>
                                             <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="open && '!block'">
                                                 <div class="flex min-h-screen items-start justify-center px-4" @click.self="open = false">
                                                     <div
@@ -343,7 +254,7 @@
                                                         </div>
                                                         <div class="p-5">
                                                             <div class="py-5 text-center text-white dark:text-white-light">
-                                                                <p class="font-semibold">Su cohorte ha sido creado / actualizado.</p>
+                                                                <p class="font-semibold">Su curso ha sido creado.</p>
                                                             </div>
                                                             <div class="flex justify-center gap-4 p-5">
                                                                 <button type="button" @click="toggle" class="btn dark:btn-dark bg-white text-black">Cerrar</button>
@@ -353,6 +264,74 @@
                                                 </div>
                                             </div>
                                         </div>
+</form>
+<br><br><br>
+<form class="space-y-5">
+    <h1 style='font-size: 20px; bold'>Subir CSV</h1>
+    <div class="grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
+    </div>
+    <div x-data="app">
+                                        
+                                            <a href="#" @click="openUploadModal"><button type="button" class="btn btn-primary !mt-6">Subir</button></a>
+                                        
+                                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="showUploadModal ? '!block' : ''">
+                                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeUploadModal">
+                                                <div
+                                                    x-show="showUploadModal"
+                                                    x-transition
+                                                    x-transition.duration.300
+                                                    class="panel my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="absolute top-4 text-white-dark hover:text-dark ltr:right-4 rtl:left-4"
+                                                        @click="closeUploadModal"
+                                                    >
+                                                    <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24px"
+                                                            height="24px"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="1.5"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="h-6 w-6"
+                                                        >
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </button>
+                                                    <h3
+                                                        class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]"
+                                                    >
+                                                        Subir Archivo CSV
+                                                    </h3>
+                                                    <div class="p-5">
+                                                        <form @submit.prevent="submitForm">
+                                                            <div>
+                                                                <label for="csvfile">Subir el archivo .CSV con el formato requerido para añadir un estudiante.</label>
+                                                                <input
+                                                                    id="csvfile"
+                                                                    type="file"
+                                                                    class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary"
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div class="mt-8 flex items-center justify-end">
+                                                                <button type="button" class="btn btn-outline-danger" @click="closeUploadModal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">Subir</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    <!-- profile -->
+   
 </form>
 
 </div>
@@ -418,6 +397,30 @@
                     document.documentElement.scrollTop = 0;
                 },
             }));
+
+            Alpine.data('app', () => ({
+                    showUploadModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openUploadModal() {
+                        this.showUploadModal = true;
+                    },
+                    closeUploadModal() {
+                        this.showUploadModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showUploadModal = false;
+                    },
+                }));
 
 
             // sidebar section

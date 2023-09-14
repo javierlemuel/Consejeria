@@ -2,7 +2,7 @@
             <nav x-data="sidebar" class="sidebar fixed top-0 bottom-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
                 <div class="h-full bg-white dark:bg-[#0e1726]">
                     <div class="flex items-center justify-between px-4 py-3">
-                        <a href="index.html" class="main-logo flex shrink-0 items-center">
+                        <a href="index.php" class="main-logo flex shrink-0 items-center">
                             <img class="ml-[5px] w-8 flex-none" src="assets/images/university.png" alt="image" />
                             <span style='font-size: 20px' class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">CONSEJERIA UPRA</span>
                         </a>
@@ -52,7 +52,7 @@
                                         <a href="index.php">Lista</a>
                                     </li>
                                     <li>
-                                        <a style="cursor:pointer" onclick="addGrades()">Subir csv</a>
+                                        <a href="index.php">Subir csv</a>
                                     </li>
                                 </ul>
                             </li>
@@ -96,10 +96,10 @@
                                 </button>
                                 <ul x-cloak x-show="activeDropdown === 'cohort'" x-collapse class="sub-menu text-gray-500">
                                     <li>
-                                        <a href="clases.php">Crear</a>
+                                        <a href="crear_cohorte.php">Crear</a>
                                     </li>
                                     <li>
-                                        <a href="crear_clase.php">Editar</a>
+                                        <a href="editar_cohorte.php">Editar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -142,8 +142,11 @@
                                         <a href="clases.php">Ver clases</a>
                                     </li>
                                     <li>
-                                        <a href="crear_clase.php">Crear clase</a>
+                                        <a href="crear_clase.php">Crear clases</a>
                                     </li>
+                                    <!-- <li>
+                                        <a href="crear_clase.php">Crear clase</a>
+                                    </li> -->
                                 </ul>
                             </li>
 

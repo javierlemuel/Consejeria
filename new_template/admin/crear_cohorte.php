@@ -148,7 +148,7 @@
                                 <!-- user-profile -->
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                        <a href="login.php" class="!py-3 text-danger" @click="toggle">
+                                        <a href="auth-boxed-signin.html" class="!py-3 text-danger" @click="toggle">
                                             <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                                 <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -190,7 +190,7 @@
     <div x-data="{ tab1: null }">
     <!-- start cohort 2017 -->
     <?php
-    $path = 'cohort.json';
+    $path = 'create_cohort.json';
     $jsonString = file_get_contents($path);
     $jsonData = json_decode($jsonString, true);
 
@@ -303,12 +303,13 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary !mt-6">Añadir</button>
+    <button type="submit" class="btn btn-primary !mt-6">Someter</button>
 </form>
-<br><br><br>
+<br><br>
 <form class="space-y-5">
-    <h1 style='font-size: 20px; bold'>Cantidad de electivas</h1>
+<h1 style='font-size: 20px; bold'>Información extra</h1>
     <div class="grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
         <div>
             <label for="gridCode">Dept.</label>
             <input id="gridCode" type="number" class="form-input" required/>
@@ -325,34 +326,14 @@
         <label for="gridCred">HUMA</label>
         <input id="gridCred" type="number" class="form-input" required />
     </div>
+    <div class="grid grid-cols-1 md">
+    <div>
+            <label for="gridCohort">Año de cohorte</label>
+            <input id="gridCohort" type="year" class="form-input" required/>
+        </div>
     </div>
-
-    <!-- profile -->
-    <div x-data="modal">
-                                            <button type="button" class="btn btn-primary !mt-6" @click="toggle">Someter</button>
-                                            <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="open && '!block'">
-                                                <div class="flex min-h-screen items-start justify-center px-4" @click.self="open = false">
-                                                    <div
-                                                        x-show="open"
-                                                        x-transition
-                                                        x-transition.duration.300
-                                                        class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
-                                                    >
-                                                        <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
-                                                            
-                                                        </div>
-                                                        <div class="p-5">
-                                                            <div class="py-5 text-center text-white dark:text-white-light">
-                                                                <p class="font-semibold">Su cohorte ha sido creado / actualizado.</p>
-                                                            </div>
-                                                            <div class="flex justify-center gap-4 p-5">
-                                                                <button type="button" @click="toggle" class="btn dark:btn-dark bg-white text-black">Cerrar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    </div>
+    <button type="submit" class="btn btn-primary !mt-6">Completar cohorte</button>
 </form>
 
 </div>

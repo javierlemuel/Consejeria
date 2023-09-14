@@ -187,94 +187,26 @@
                 <div class="flex-1 text-sm ">
                     <div>
     <!-- start cohort 2017 -->
-    <div x-data="{ tab1: null }">
-    <!-- start cohort 2017 -->
-    <?php
-    $path = 'cohort.json';
-    $jsonString = file_get_contents($path);
-    $jsonData = json_decode($jsonString, true);
-
-    echo "<div class='mb-5'>
-            <!-- tabs-años -->
-            <div>
-                <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
-
-    // Generate the outer year tabs
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        echo "<li>
-                <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                    :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                    @click='tab1 = \"$yearTitle\"'>
-                    " . strtoupper($yearTitle) . " AÑO
-                </a>
-            </li>";
-    }
-
-    echo "</ul>
-        </div>";
-
-    // Display data for the selected year
-
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        echo "<div x-show='tab1 === \"$yearTitle\"'></h2>";
-                // <h2>; . strtoupper($yearTitle) .  AÑO</h2>;
-
-        
-
-        foreach ($yearData as $semesterTitle => $semesterCourses) {
-            echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
-                    " . strtoupper($semesterTitle) . " SEMESTRE
-                </div>";
-
-                echo "<table>
-                <thead>
-                    <tr>
-                        <th>CODIGO</th>
-                        <th>NOMBRE</th>
-                        <th>CREDITOS</th>
-                    </tr>
-                </thead>
-                <tbody>";
-            foreach ($semesterCourses as $course) {
-                echo "<tr>
-                        <td class='whitespace-normal'>" . $course['code'] . "</td>
-                        <td>" . $course['name'] . "</td>
-                        <td>" . $course['credits'] . "</td>
-                    </tr>";
-            }
-            
-            echo "<form>
-            <label for ''
-            </form>";
-        
-
-        echo "</tbody>
-            </table>";
-        }        
-        echo "</div>";
-    }
-    ?>
-</div>
-
+    
 
 
 
 
 
 <form class="space-y-5">
-    <h1 style='font-size: 20px; bold'>Añadir curso</h1><br>
+    <h1 style='font-size: 20px; bold'>CCOM3001</h1><br>
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div>
             <label for="gridCode">Código</label>
-            <input id="gridCode" type="text" placeholder="CCOM3001" class="form-input" required/>
+            <input id="gridCode" type="text" value="CCOM3001" class="form-input" required/>
         </div>
         <div>
             <label for="gridName">Nombre</label>
-            <input id="gridName" type="text" placeholder="Programacion Basica" class="form-input" required/>
+            <input id="gridName" type="text" value="Programacion Basica" class="form-input" required/>
         </div>
         <div>
         <label for="gridCred">Créditos</label>
-        <input id="gridCred" type="text" class="form-input" required />
+        <input id="gridCred" type="text" class="form-input" value=4 required />
     </div>
     </div>
     
@@ -282,7 +214,8 @@
         <div>
             <label for="gridYear">Año</label>
             <select id="gridYear" class="form-select text-white-dark">
-                <option>1er</option>
+            <option>N/A</option>
+                <option selected>1er</option>
                 <option>2do</option>
                 <option>3er</option>
                 <option>4to</option>
@@ -291,45 +224,23 @@
         <div>
             <label for="gridSemester">Semestre</label>
             <select id="gridSemester" class="form-select text-white-dark">
-                <option>1er</option>
+            <option>N/A</option>
+                <option selected>1er</option>
                 <option>2do</option>
             </select>
         </div>
         <div>
             <label for="gridType">Tipo</label>
             <select id="gridType" class="form-select text-white-dark">
-                <option>Concentración</option>
+                <option selected>Concentración</option>
                 <option>General</option>
+                <option>Electiva CCOM</option>
+                <option>Electiva Libre</option>
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary !mt-6">Añadir</button>
-</form>
-<br><br><br>
-<form class="space-y-5">
-    <h1 style='font-size: 20px; bold'>Cantidad de electivas</h1>
-    <div class="grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div>
-            <label for="gridCode">Dept.</label>
-            <input id="gridCode" type="number" class="form-input" required/>
-        </div>
-        <div>
-            <label for="gridCode">Libre</label>
-            <input id="gridCode" type="number" class="form-input" required/>
-        </div>
-        <div>
-            <label for="gridName">CISO</label>
-            <input id="gridName" type="number" class="form-input" required/>
-        </div>
-        <div>
-        <label for="gridCred">HUMA</label>
-        <input id="gridCred" type="number" class="form-input" required />
-    </div>
-    </div>
-
-    <!-- profile -->
     <div x-data="modal">
-                                            <button type="button" class="btn btn-primary !mt-6" @click="toggle">Someter</button>
+                                            <button type="button" type=submit" class="btn btn-primary !mt-6" @click="toggle">Someter</button>
                                             <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="open && '!block'">
                                                 <div class="flex min-h-screen items-start justify-center px-4" @click.self="open = false">
                                                     <div
@@ -343,10 +254,12 @@
                                                         </div>
                                                         <div class="p-5">
                                                             <div class="py-5 text-center text-white dark:text-white-light">
-                                                                <p class="font-semibold">Su cohorte ha sido creado / actualizado.</p>
+                                                                <p class="font-semibold">Su curso ha sido actualizado.</p>
                                                             </div>
                                                             <div class="flex justify-center gap-4 p-5">
-                                                                <button type="button" @click="toggle" class="btn dark:btn-dark bg-white text-black">Cerrar</button>
+                                                                <a href="clases.php">
+                                                                <button type="button" @click="toggle" class="btn dark:btn-dark bg-white text-black">Regresar</button>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -418,6 +331,30 @@
                     document.documentElement.scrollTop = 0;
                 },
             }));
+
+            Alpine.data('app', () => ({
+                    showUploadModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openUploadModal() {
+                        this.showUploadModal = true;
+                    },
+                    closeUploadModal() {
+                        this.showUploadModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showUploadModal = false;
+                    },
+                }));
 
 
             // sidebar section

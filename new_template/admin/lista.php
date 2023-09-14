@@ -201,7 +201,7 @@
                                 </button>
                                 <ul x-cloak x-show="activeDropdown === 'cohort'" x-collapse class="sub-menu text-gray-500">
                                     <li>
-                                        <a href="crear_cohorte.php">Crear</a>
+                                        <a href="clases.php">Crear</a>
                                     </li>
                                     <li>
                                         <a href="editar_cohorte.php">Editar</a>
@@ -272,7 +272,7 @@
                 <div class="shadow-sm">
                     <div class="relative flex w-full items-center bg-warning px-5 py-2.5 dark:bg-[#0e1726]">
                         <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                            <a href="index.php" class="main-logo flex shrink-0 items-center">
+                            <a href="index.html" class="main-logo flex shrink-0 items-center">
                                 <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/university.png" alt="image" />
                                 <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
                             </a>
@@ -383,148 +383,9 @@
                 <!-- start main content section -->
                 <div x-data="contacts">
                         <div class="flex flex-wrap items-center justify-between gap-4">
-                            <h2 class="text-xl">Expedientes de Estudiantes</h2>
+                            <h2 class="text-xl">5 Estudiante(s) en CCOM3001</h2>
                             <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                                <div class="flex gap-3">
-                                    <div>
-                                        <button type="button" class="btn btn-primary" @click="editUser">
-                                            <svg
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-5 w-5 ltr:mr-2 rtl:ml-2"
-                                            >
-                                                <circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.5" />
-                                                <path
-                                                    opacity="0.5"
-                                                    d="M18 17.5C18 19.9853 18 22 10 22C2 22 2 19.9853 2 17.5C2 15.0147 5.58172 13 10 13C14.4183 13 18 15.0147 18 17.5Z"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.5"
-                                                />
-                                                <path
-                                                    d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                />
-                                            </svg>
-                                            Crear estudiante
-                                        </button>
-                                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="addContactModal && '!block'">
-                                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="addContactModal = false">
-                                                <div
-                                                    x-show="addContactModal"
-                                                    x-transition
-                                                    x-transition.duration.300
-                                                    class="panel my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full"
-                                                >
-                                                    <button
-                                                        type="button"
-                                                        class="absolute top-4 text-white-dark hover:text-dark ltr:right-4 rtl:left-4"
-                                                        @click="addContactModal = false"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="24px"
-                                                            height="24px"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            stroke-width="1.5"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="h-6 w-6"
-                                                        >
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                    </button>
-                                                    <h3
-                                                        class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]"
-                                                        x-text="params.id ? 'Editar estudiante' : 'Crear estudiante'"
-                                                    ></h3>
-                                                    <div class="p-5">
-                                                        <form @submit.prevent="saveUser">
-                                                            <div class="mb-5 grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                                                <div>
-                                                                    <label for="nombre">Nombre</label>
-                                                                    <input x-model="params.nombre" id="nombre" type="text" placeholder="" class="form-input" required/>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="nombre2">2do nombre</label>
-                                                                    <input x-model="params.nombre2" id="nombre2" type="text" placeholder="" class="form-input"/>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="apellidoP">Apellido P</label>
-                                                                    <input x-model="params.apellidoP" id="apellidoP" type="text" placeholder="" class="form-input" required/>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="apellidoM">Apellido M</label>
-                                                                    <input x-model="params.apellidoM" id="apellidoM" type="text" placeholder="" class="form-input"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-5">
-                                                                <label for="email">Email</label>
-                                                                <input
-                                                                    id="email"
-                                                                    type="email"
-                                                                    placeholder="yeyo.soto2@upr.edu"
-                                                                    class="form-input"
-                                                                    x-model="params.email"
-                                                                />
-                                                            </div>
-                                                            <div class="mb-5">
-                                                                <label for="tipo">Minor</label>
-                                                                <select id="gridYear" x-model="params.minor" class="form-select text-white-dark">
-                                                                <option></option>    
-                                                                <option>Web Design</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="mb-5">
-                                                                <label for="numero">Número de estudiante</label>
-                                                                <input
-                                                                    id="numero"
-                                                                    type="text"
-                                                                    placeholder="840-xx-xxxx"
-                                                                    class="form-input"
-                                                                    x-model="params.numero"
-                                                                />
-                                                            </div>
-                                                            <div class="mb-5">
-                                                                <label for="cohorte">Cohorte</label>
-                                                                <input
-                                                                    id="cohorte"
-                                                                    type="text"
-                                                                    placeholder="2022"
-                                                                    class="form-input"
-                                                                    x-model="params.cohorte"
-                                                                />
-                                                            </div>
-                                                            <div class="mb-5">
-                                                                <label for="birthday">Birthday</label>
-                                                                <input type="date" x-model="params.birthday" id="birthday" name="birthday">               
-                                                            </div>
-                                                            
-                                                            <div class="mt-8 flex items-center justify-end">
-                                                                <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
-                                                                    Cancel
-                                                                </button>
-                                                                <button
-                                                                    type="submit"
-                                                                    class="btn btn-primary ltr:ml-4 rtl:mr-4"
-                                                                    x-text="params.id ? 'Update' : 'Add'"
-                                                                ></button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="relative">
                                     <input
@@ -551,8 +412,6 @@
                                             <tr>
                                                 <th>Estudiante</th>
                                                 <th>Número de estudiante</th>
-                                                <th>Consejería</th>
-                                                <th>Estatus</th>
                                                 <th class="!text-center">Expediente</th>
                                             </tr>
                                         </thead>
@@ -604,50 +463,6 @@
                                                         </div>
                                                     </td>
                                                     <td x-text="contact.numero"></td>
-                                                    <td x-text="contact.consejeria" class="whitespace-nowrap"></td>
-                                                    <td class="whitespace-nowrap">
-                                                        <template x-if="contact.priority">
-                                                                <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                                                                    <button
-                                                                        type="button"
-                                                                        class="badge rounded-full capitalize hover:top-0 hover:text-white"
-                                                                        x-text="contact.priority"
-                                                                        :class="{
-                                                                'badge-outline-primary hover:bg-primary': contact.priority === 'activo',
-                                                                'badge-outline-warning hover:bg-warning': contact.priority === 'inactivo',
-                                                                'text-white bg-primary': contact.priority === 'activo' && open,
-                                                                'text-white bg-warning': contact.priority === 'inactivo' && open,
-                                                                }"
-                                                                        @click="toggle"
-                                                                    ></button>
-                                                                    <ul
-                                                                        x-cloak
-                                                                    x-show="open"
-                                                                    x-transition
-                                                                    x-transition.duration.300ms
-                                                                    class="text-medium text-sm ltr:right-0 rtl:left-0"
-                                                                >
-                                                                    
-                                                                    <li>
-                                                                        <button
-                                                                            class="w-full text-primary ltr:text-left rtl:text-right"
-                                                                            @click="toggle,setPriority(contact, 'activo')"
-                                                                        >
-                                                                            Activo
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="w-full text-warning ltr:text-left rtl:text-right"
-                                                                            @click="toggle,setPriority(contact, 'inactivo')"
-                                                                        >
-                                                                            Inactivo
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </template>
-                                                    </td>
                                                     <td>
                                                         <div class="flex items-center justify-center gap-4">
                                                             <button type="button" class="btn btn-sm btn-outline-primary" onclick = "window.location.href='s_expediente.php'">

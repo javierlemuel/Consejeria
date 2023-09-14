@@ -1,0 +1,64 @@
+{
+    "Year": {
+        "Primer": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ]
+        },
+
+        "Segundo": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ]
+        },
+
+        "Tercer": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ]
+        },
+
+        "Cuarto": {
+            "Primer": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ],
+            "Segundo": [
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3},
+                {"code":"Sentra", "name":4, "credits":3}
+            ]
+        }
+    }
+    }
+   
