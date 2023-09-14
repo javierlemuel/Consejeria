@@ -103,14 +103,67 @@
                                     <li>
                                         <a href="index.php">Lista</a>
                                     </li>
-                                    <li>
-                                        <a href="">Subir csv</a>
-                                    </li>
+                                    <div x-data="app">
+                                        <li>
+                                            <a href="#" @click="openUploadModal">Subir csv</a>
+                                        </li>
+                                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="showUploadModal ? '!block' : ''">
+                                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeUploadModal">
+                                                <div
+                                                    x-show="showUploadModal"
+                                                    x-transition
+                                                    x-transition.duration.300
+                                                    class="panel my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="absolute top-4 text-white-dark hover:text-dark ltr:right-4 rtl:left-4"
+                                                        @click="closeUploadModal"
+                                                    >
+                                                    <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24px"
+                                                            height="24px"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="1.5"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="h-6 w-6"
+                                                        >
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </button>
+                                                    <h3
+                                                        class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]"
+                                                    >
+                                                        Subir Archivo CSV
+                                                    </h3>
+                                                    <div class="p-5">
+                                                        <form @submit.prevent="submitForm">
+                                                            <div>
+                                                                <label for="csvfile">Subir el archivo .CSV con el formato requerido para añadir un estudiante.</label>
+                                                                <input
+                                                                    id="csvfile"
+                                                                    type="file"
+                                                                    class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary"
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div class="mt-8 flex items-center justify-end">
+                                                                <button type="button" class="btn btn-outline-danger" @click="closeUploadModal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">Subir</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ul>
                             </li>
-
-                            
-
                             <li class="menu nav-item">
                                 <button
                                     type="button"
@@ -1063,8 +1116,33 @@
                     },
                 }));
             });
-
-        
+            
+            window.addEventListener('alpine:init', () => {
+                Alpine.data('app', () => ({
+                    showUploadModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openUploadModal() {
+                        this.showUploadModal = true;
+                    },
+                    closeUploadModal() {
+                        this.showUploadModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showUploadModal = false;
+                    },
+                }));
+            });
+ 
     </script>
 </body>
 
