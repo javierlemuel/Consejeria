@@ -1,0 +1,34 @@
+[
+    {
+        "courseCode": "CCOM 3002",
+        "cohortYear": "2022",
+        "courseYear": "1",
+        "courseSemester": "2",
+        "name": "Programación II",
+        "credits": "5"
+      },
+      {
+        "courseCode": "INGL3104",
+        "cohortYear": "2022",
+        "courseYear": "1",
+        "courseSemester": "2",
+        "name": "Inglés Intermedio II",
+        "credits": "3"
+    },
+    {
+        "courseCode": "MATE3172",
+        "cohortYear": "2022",
+        "courseYear": "1",
+        "courseSemester": "2",
+        "name": "Pre-Calculo II",
+        "credits": "3"
+    },
+    {
+        "courseCode": "CCOM 3035",
+        "cohortYear": "2022",
+        "courseYear": "1",
+        "courseSemester": "2",
+        "name": "Organización de Comp.",
+        "credits": "3"
+      }
+]

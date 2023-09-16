@@ -337,7 +337,7 @@ function readJson($path)
                             <div id="coursesSection">
                                 <?php
                                 $courseCategories = array(
-                                    "recomendadas" => "ccomCourses.json",
+                                    "recomendadas" => "recommendedCourses.json",
                                     "concentracion" => "ccomCourses.json",
                                     "generales" => "generalCourses.json",
                                     "humanidades" => "humaCourses.json",
