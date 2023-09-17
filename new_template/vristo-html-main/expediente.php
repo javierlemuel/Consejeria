@@ -220,7 +220,7 @@
                                     <li class="mb-5">
                                         <div class="relative overflow-hidden rounded-t-md !p-5 text-white">
                                             <div class="absolute inset-0 h-full w-full bg-[url('../images/menu-heade.jpg')] bg-cover bg-center bg-no-repeat"></div>
-                                            <h4 class="relative z-10 text-lg font-semibold">Messages</h4>
+                                            <h4 class="relative z-10 text-lg font-semibold">Mensajes</h4>
                                         </div>
                                     </li>
                                     <template x-for="msg in messages">
@@ -228,10 +228,10 @@
                                             <div class="flex items-center px-5 py-3" @click.self="toggle">
                                                 <div x-html="msg.image"></div>
                                                 <span class="px-3 dark:text-gray-500">
-                                                    <div class="text-sm font-semibold dark:text-white-light/90" x-text="msg.title"></div>
-                                                    <div x-text="msg.message"></div>
+                                                    <div class="text-sm font-semibold dark:text-white-light/90">Dra. Valenzuela, Consejera</div>
+                                                    <div>Solicitar equivalencia de HUMA1234 como electiva libre.</div>
                                                 </span>
-                                                <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span>
+                                                <!-- <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span> -->
                                                 <button type="button" class="text-neutral-300 hover:text-danger" @click="removeMessage(msg.id)">
                                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
@@ -241,7 +241,7 @@
                                             </div>
                                         </li>
                                     </template>
-                                    <template x-if="messages.length">
+                                    <!-- <template x-if="messages.length">
                                         <li class="mt-5 border-t border-white-light text-center dark:border-white/10">
                                             <div class="group flex cursor-pointer items-center justify-center px-4 py-4 font-semibold text-primary dark:text-gray-400" @click="toggle">
                                                 <span class="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
@@ -250,7 +250,7 @@
                                                 </svg>
                                             </div>
                                         </li>
-                                    </template>
+                                    </template> -->
                                     <template x-if="!messages.length">
                                         <li class="mb-5">
                                             <div class="!grid min-h-[200px] place-content-center text-lg hover:!bg-transparent">
@@ -301,39 +301,38 @@
                 <!-- start main content section -->
                 <!-- Vertical line tabs -->
                 <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'info'}"> <!-- Cambiamos 'tab' a 'info' por defecto -->
-                <!-- buttons -->
-                <div class="mx-10 mb-5 sm:mb-0">
-                    <ul class="w-24 m-auto text-center font-semibold">
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
-                        </li>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
-                        </li>
-                    </ul>
-                </div>
+                    <!-- buttons -->
+                    <div class="mx-10 mb-5 sm:mb-0">
+                        <ul class="w-24 m-auto text-center font-semibold">
+                            <li>
+                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
+                            </li>
+                            <li>
+                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- description -->
-                <div class="flex-1 text-sm ">
-                    <template x-if="tab === 'info'">
-                        <div>
-                            <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
-                            <p class="mb-4"><b>Nombre:</b> Emanuel D Martinez Sanchez</p>
-                            <p class="mb-4"><b>Correo Electronico:</b> emanuel.martinez8@upr.edu</p>
-                            <p class="mb-4"><b>Numero de Estudiante:</b> 840-19-9721</p>
-                            <p class="mb-4"><b>Major:</b> CCOM</p>
-                            <p class="mb-4"><b>Origen:</b> Regular</p>
-                            <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
-                        </div>
-                    </template>
-                    <template x-if="tab === 'expediente'">
-                        <div>
-                            <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
-                            <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
-                        </div>
-                    </template>
+                    <!-- description -->
+                    <div class="flex-1 text-sm ">
+                        <template x-if="tab === 'info'">
+                            <div>
+                                <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
+                                <p class="mb-4"><b>Nombre:</b> Pedro Reyes Reyes</p>
+                                <p class="mb-4"><b>Correo Electronico:</b> pedro.reyes@upr.edu</p>
+                                <p class="mb-4"><b>Numero de Estudiante:</b> 840-12-1234</p>
+                                <p class="mb-4"><b>Major:</b> CCOM</p>
+                                <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
+                            </div>
+                        </template>
+                        <template x-if="tab === 'expediente'">
+                            <div>
+                                <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
+                                <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
+                            </div>
+                        </template>
+                    </div>
                 </div>
-            </div>
                 <!-- end main content section -->
 
             </div>

@@ -181,7 +181,7 @@ function readJson($path)
                                 </h3>
                             </li>
                         </ul>
-                        <button class="btn btn-warning ">Confirmar Matricula</button>
+                        <button class="btn btn-warning ">Confirmar Consejeria</button>
 
 
                     </ul>

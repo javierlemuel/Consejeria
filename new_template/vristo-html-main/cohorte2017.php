@@ -310,6 +310,7 @@ function readJson($path)
                 <div>
                     <!-- start cohorte 2017 -->
                     <div class="mb-5" x-data="{ tab: '1'}">
+                        <h2>Cohorte 2017</h2>
                         <!-- tabs-a~os -->
                         <div>
                             <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
@@ -360,12 +361,15 @@ function readJson($path)
                                     $name = $course["name"];
                                     $credits = $course["credits"];
                                     if ($course["cohortYear"] == '2017' && $course["courseSemester"] == '1' && $course["courseYear"] == intval($i)) {
-                                        echo "
-                                            <tr>
-                                                <td class=\"whitespace-normal\">$code</td>
-                                                <td>$name</td>
-                                                <td>$credits</td>
-                                            </tr>";
+                                        //if para no tener todos los ingles en el mismo semestre
+                                        if ($code != "INGL3103" && $code != "INGL3011") {
+                                            echo "
+                                        <tr>
+                                            <td class=\"whitespace-normal\">$code</td>
+                                            <td>$name</td>
+                                            <td>$credits</td>
+                                        </tr>";
+                                        }
                                     }
                                 };
                                 echo "</tbody>
@@ -396,12 +400,14 @@ function readJson($path)
                                     $name = $course["name"];
                                     $credits = $course["credits"];
                                     if ($course["cohortYear"] == '2017' && $course["courseSemester"] == '2' && $course["courseYear"] == intval($i)) {
-                                        echo "
+                                        if ($code != "INGL3104") {
+                                            echo "
                                             <tr>
                                                 <td class=\"whitespace-normal\">$code</td>
                                                 <td>$name</td>
                                                 <td>$credits</td>
                                             </tr>";
+                                        }
                                     }
                                 };
                                 echo "</tbody>

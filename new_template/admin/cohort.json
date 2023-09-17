@@ -2,16 +2,16 @@
     "Year": {
         "Primer": {
             "Primer": [
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3}
+                {"code":"CCOM3001", "name":"Programación I", "credits":5},
+                {"code":"CCOM3010", "name":"Niveles Lógicos", "credits":3},
+                {"code":"INGL3101", "name":"Ingles Basico I", "credits":3},
+                {"code":"MATE3171", "name":"Pre-Calculo I", "credits":3}
             ],
             "Segundo": [
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3},
-                {"code":"Sentra", "name":4, "credits":3}
+                {"code":"CCOM3002", "name":"Programación II", "credits":5},
+                {"code":"CCOM3035", "name":"Organización de Comp.", "credits":3},
+                {"code":"MATE3172", "name":"Pre-Calculo II", "credits":3},
+                {"code":"INGL3102", "name":"Ingles Basico II", "credits":3}
             ]
         },
 

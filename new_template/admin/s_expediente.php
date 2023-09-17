@@ -94,8 +94,8 @@
                                     </li>
                                     <li>
                                         <form style='padding: 0px 10px' class="space-y-5">
-                                        <input type='textarea' style='font-size: 16px; width: 300px' placeholder='Recuerde solicitar el Minor' rows="4" cols="50">
-                                        <br><br>
+                                            <input type='textarea' style='font-size: 16px; width: 300px' placeholder='Recuerde solicitar el Minor' rows="4" cols="50">
+                                            <br><br>
                                         </form>
                                     </li>
                                 </ul>
@@ -149,65 +149,62 @@
                 <!-- description -->
                 <div class="flex-1 text-sm ">
                     <div>
-    <!-- start cohort 2017 -->
-    <div x-data="{ tab1: null }">
-    <!-- start cohort 2017 -->
-    <?php
-    $path = 's_expediente.json';
-    $jsonString = file_get_contents($path);
-    $jsonData = json_decode($jsonString, true);
+                        <!-- start cohort 2017 -->
+                        <div x-data="{ tab1: null }">
+                            <!-- start cohort 2017 -->
+                            <?php
+                            $path = 's_expediente.json';
+                            $jsonString = file_get_contents($path);
+                            $jsonData = json_decode($jsonString, true);
 
-    echo "<div class='mb-5'>
+                            echo "<div class='mb-5'>
             <!-- tabs-años -->
             <div>
                 <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
 
-    // Generate the outer year tabs
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        if ($yearTitle !== 'Electivas')
-        {
-            echo "<li>
+                            // Generate the outer year tabs
+                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
+                                if ($yearTitle !== 'Electivas') {
+                                    echo "<li>
                     <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
                         :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
                         @click='tab1 = \"$yearTitle\"'>
                         " . strtoupper($yearTitle) . " AÑO
                     </a>
                 </li>";
-        }
-        else{
-            echo "<li>
+                                } else {
+                                    echo "<li>
                     <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
                         :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
                         @click='tab1 = \"$yearTitle\"'>
                         " . strtoupper($yearTitle) . "
                     </a>
                 </li>";
-        }
-    }
+                                }
+                            }
 
-    echo "</ul>
+                            echo "</ul>
         </div>";
 
-    // Display data for the selected year
-    foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-        echo "<div x-show='tab1 === \"$yearTitle\"'>
+                            // Display data for the selected year
+                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
+                                echo "<div x-show='tab1 === \"$yearTitle\"'>
                 ";
 
-        
 
-        foreach ($yearData as $semesterTitle => $semesterCourses) {
-            echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
+
+                                foreach ($yearData as $semesterTitle => $semesterCourses) {
+                                    echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
                     " . strtoupper($semesterTitle);
-                    
-            if($semesterTitle !== ""){
-                echo" SEMESTRE
-                </div>";
-            }
-            else{
-                echo"</div>";
-            }
 
-                echo "<table>
+                                    if ($semesterTitle !== "") {
+                                        echo " SEMESTRE
+                </div>";
+                                    } else {
+                                        echo "</div>";
+                                    }
+
+                                    echo "<table>
                 <thead>
                     <tr>
                         <th></th>
@@ -220,101 +217,101 @@
                     </tr>
                 </thead>
                 <tbody>";
-            foreach ($semesterCourses as $course) {
-                echo "<tr>
+                                    foreach ($semesterCourses as $course) {
+                                        echo "<tr>
                         <td><input type='checkbox'></td>
                         <td class='whitespace-normal'>" . $course['code'] . "</td>
                         <td>" . $course['name'] . "</td>
                         <td>" . $course['credits'] . "</td>
                         <td>" . $course['nota'] . "</td>
                         <td>" . $course['semestre'] . "</td>
-                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='". $course['equivalencia']. "'> </td>
+                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='" . $course['equivalencia'] . "'> </td>
                     </tr>";
-            }
-        
+                                    }
 
-        echo "</tbody>
+
+                                    echo "</tbody>
             </table>";
-        }        
-        echo "</div>";
-    }
-    ?>
-</div>
+                                }
+                                echo "</div>";
+                            }
+                            ?>
+                        </div>
 
 
 
 
 
 
-<form action="index.php" class="space-y-5">
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div>
-            <label for="gridCode">Nombre</label>
-            <input id="gridCode" type="text" placeholder="Raul Jimenez" class="form-input" readonly/>
-        </div>
-        <div>
-            <label for="gridName">Email</label>
-            <input id="gridName" type="text" placeholder="raul.jimenez3@upr.edu" class="form-input" readonly/>
-        </div>
-        <div>
-        <label for="gridCred">Número de estudiante</label>
-        <input id="gridCred" type="number" placeholder="840-22-1240" class="form-input" readonly />
-        </div>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div>
-        <label for="gridYear">Año</label>
-        <input id="gridYear" type="number" placeholder="1" class="form-input" readonly />
-        </div>
-        <div>
-        <label for="gridSem">Semestre</label>
-        <input id="gridSem" type="number" placeholder="1" class="form-input" readonly />
-        </div>
-        <div>
-            <label for="gridType">Minor</label>
-            <select id="gridType" class="form-select text-white-dark">
-                <option></option>
-                <option>Web Design</option>
-            </select>
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        
-        <div>
-            <label for="gridStatus">Minor</label>
-            <select id="gridStatus" class="form-select text-white-dark">
-                <option selected>Activo</option>
-                <option>Inactivo</option>
-            </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary !mt-6">Someter</button>
-</form>
+                        <form action="index.php" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div>
+                                    <label for="gridCode">Nombre</label>
+                                    <input id="gridCode" type="text" placeholder="Raul Jimenez" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridName">Email</label>
+                                    <input id="gridName" type="text" placeholder="raul.jimenez3@upr.edu" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridCred">Número de estudiante</label>
+                                    <input id="gridCred" type="number" placeholder="840-22-1240" class="form-input" readonly />
+                                </div>
+                            </div>
 
-</div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div>
+                                    <label for="gridYear">Año</label>
+                                    <input id="gridYear" type="number" placeholder="1" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridSem">Semestre</label>
+                                    <input id="gridSem" type="number" placeholder="1" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridType">Minor</label>
+                                    <select id="gridType" class="form-select text-white-dark">
+                                        <option></option>
+                                        <option>Web Design</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-                        
-</div>          
-                        
-                    <!-- forms grid -->
+                                <div>
+                                    <label for="gridStatus">Estatus</label>
+                                    <select id="gridStatus" class="form-select text-white-dark">
+                                        <option selected>Activo</option>
+                                        <option>Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary !mt-6">Someter</button>
+                        </form>
+
+                    </div>
+
 
                 </div>
 
-                
-                </div>
-            </div>
-                                                
-                <!-- end main content section -->
+                <!-- forms grid -->
 
             </div>
 
-            <!-- start footer section -->
-            <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-                © <span id="footer-year">2022</span>. UPRA All rights reserved.
-            </div>
-            <!-- end footer section -->
+
         </div>
+    </div>
+
+    <!-- end main content section -->
+
+    </div>
+
+    <!-- start footer section -->
+    <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
+        © <span id="footer-year">2022</span>. UPRA All rights reserved.
+    </div>
+    <!-- end footer section -->
+    </div>
     </div>
 
     <script src="assets/js/alpine-collaspe.min.js"></script>
@@ -327,7 +324,7 @@
     <!-- <script src="assets/js/courses.js"></script> -->
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#sidebar").load("sidebar.php");
         });
 
@@ -491,11 +488,9 @@
                 },
             }));
 
-            
-                    
-            });
 
-        
+
+        });
     </script>
 </body>
 
