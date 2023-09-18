@@ -565,7 +565,7 @@
                                                 throw new Exception("Error de conexión: " . $conn->connect_error);
                                             }
 
-                                            $sql = "SELECT stdnt_name, stdnt_number, conducted_counseling FROM student NATURAL JOIN record_details";
+                                            $sql = "SELECT name1, student_num, conducted_counseling FROM student";
                                             $result = $conn->query($sql);
 
                                             if ($result === false) {
@@ -574,8 +574,8 @@
 
                                             while ($row = $result->fetch_assoc()) { 
                                                 echo '<tr>';
-                                                echo '<td>' . $row['stdnt_name'] .  '</td>';
-                                                echo '<td>' . $row['stdnt_number'] .  '</td>';
+                                                echo '<td>' . $row['name1'] .  '</td>';
+                                                echo '<td>' . $row['student_num'] .  '</td>';
                                                 if ($row['conducted_counseling'] == 0) {
                                                     echo '<td><span class="badge whitespace-nowrap badge-outline-danger">No realizada</span></td>';
                                                 } else {
