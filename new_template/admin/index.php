@@ -546,13 +546,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="table-responsive">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Student name</th>
-                                        <th>Student Number</th>
-                                        <th>Origin</th>
+                                        <th>Estudiante</th>
+                                        <th>Numero de estudiante</th>
+                                        <th>Consejeria</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -565,7 +565,7 @@
                                                 throw new Exception("Error de conexión: " . $conn->connect_error);
                                             }
 
-                                            $sql = "SELECT stdnt_name, stdnt_number, stdnt_origin FROM student";
+                                            $sql = "SELECT stdnt_name, stdnt_number, conducted_counseling FROM student NATURAL JOIN record_details";
                                             $result = $conn->query($sql);
 
                                             if ($result === false) {
@@ -576,7 +576,11 @@
                                                 echo '<tr>';
                                                 echo '<td>' . $row['stdnt_name'] .  '</td>';
                                                 echo '<td>' . $row['stdnt_number'] .  '</td>';
-                                                echo '<td>' . $row['stdnt_origin'] .  '</td>';
+                                                if ($row['conducted_counseling'] == 0) {
+                                                    echo '<td><span class="badge whitespace-nowrap badge-outline-danger">No realizada</span></td>';
+                                                } else {
+                                                    echo '<td><span class="badge whitespace-nowrap badge-outline-primary">Realizada</span></td>';
+                                                }
                                                 echo '</tr>';
                                             }
 
@@ -998,6 +1002,24 @@
             // window.addEventListener('alpine:init', () => {
                 
             // });
+
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("form", () => ({
+                    tableData: [{
+                            id: 1,
+                            name: 'John Doe',
+                            email: 'johndoe@yahoo.com',
+                            date: '10/08/2020',
+                            sale: 120,
+                            status: 'Complete',
+                            register: '5 min ago',
+                            progress: '40%',
+                            position: 'Developer',
+                            office: 'London'
+                        },
+                        ......
+                }));
+            });
  
     </script>
 </body>
