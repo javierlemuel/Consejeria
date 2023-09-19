@@ -558,11 +558,8 @@
                                 <tbody>
                                     <?php
                                         try {
-                                            include('connections/db_connect.php'); // Incluye el archivo de conexión
-                                            
-                                            // Verificar si la conexión se estableció correctamente
-                                            if ($conn->connect_error) {
-                                                throw new Exception("Error de conexión: " . $conn->connect_error);
+                                            if ($conn->connect_error) { // revisa si hay un error en la coneccion
+                                                throw new Exception("Error de conexión: " . $conn->connect_error); // de haber un error de coneccion tira el exception.
                                             }
 
                                             $sql = "SELECT name1, student_num, conducted_counseling FROM student";
