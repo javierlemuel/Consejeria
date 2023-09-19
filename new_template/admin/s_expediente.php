@@ -89,51 +89,15 @@
                                     <li class="mb-5">
                                         <div class="relative overflow-hidden rounded-t-md !p-5 text-white">
                                             <div class="absolute inset-0 h-full w-full bg-[url('../images/menu-heade.jpg')] bg-cover bg-center bg-no-repeat"></div>
-                                            <h4 class="relative z-10 text-lg font-semibold">Messages</h4>
+                                            <h4 class="relative z-10 text-lg font-semibold">Deje un mensaje al estudiante.</h4>
                                         </div>
                                     </li>
-                                    <template x-for="msg in messages">
-                                        <li>
-                                            <div class="flex items-center px-5 py-3" @click.self="toggle">
-                                                <div x-html="msg.image"></div>
-                                                <span class="px-3 dark:text-gray-500">
-                                                    <div class="text-sm font-semibold dark:text-white-light/90" x-text="msg.title"></div>
-                                                    <div x-text="msg.message"></div>
-                                                </span>
-                                                <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span>
-                                                <button type="button" class="text-neutral-300 hover:text-danger" @click="removeMessage(msg.id)">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-                                                        <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </template>
-                                    <template x-if="messages.length">
-                                        <li class="mt-5 border-t border-white-light text-center dark:border-white/10">
-                                            <div class="group flex cursor-pointer items-center justify-center px-4 py-4 font-semibold text-primary dark:text-gray-400" @click="toggle">
-                                                <span class="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
-                                                <svg class="h-4 w-4 transition duration-300 group-hover:translate-x-1 ltr:ml-1 rtl:mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </li>
-                                    </template>
-                                    <template x-if="!messages.length">
-                                        <li class="mb-5">
-                                            <div class="!grid min-h-[200px] place-content-center text-lg hover:!bg-transparent">
-                                                <div class="mx-auto mb-4 rounded-full text-primary ring-4 ring-primary/30">
-                                                    <svg width="40" height="40" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path opacity="0.5" d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10Z" fill="currentColor" />
-                                                        <path d="M10 4.25C10.4142 4.25 10.75 4.58579 10.75 5V11C10.75 11.4142 10.4142 11.75 10 11.75C9.58579 11.75 9.25 11.4142 9.25 11V5C9.25 4.58579 9.58579 4.25 10 4.25Z" fill="currentColor" />
-                                                        <path d="M10 15C10.5523 15 11 14.5523 11 14C11 13.4477 10.5523 13 10 13C9.44772 13 9 13.4477 9 14C9 14.5523 9.44772 15 10 15Z" fill="currentColor" />
-                                                    </svg>
-                                                </div>
-                                                No data available.
-                                            </div>
-                                        </li>
-                                    </template>
+                                    <li>
+                                        <form style='padding: 0px 10px' class="space-y-5">
+                                        <input type='textarea' style='font-size: 16px; width: 300px' placeholder='Recuerde solicitar el Minor' rows="4" cols="50">
+                                        <br><br>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -258,13 +222,13 @@
                 <tbody>";
             foreach ($semesterCourses as $course) {
                 echo "<tr>
-                        <td></td>
+                        <td><input type='checkbox'></td>
                         <td class='whitespace-normal'>" . $course['code'] . "</td>
                         <td>" . $course['name'] . "</td>
                         <td>" . $course['credits'] . "</td>
                         <td>" . $course['nota'] . "</td>
                         <td>" . $course['semestre'] . "</td>
-                        <td> <input type='text' style='border: 5px' placeholder='". $course['equivalencia']. "'> </td>
+                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='". $course['equivalencia']. "'> </td>
                     </tr>";
             }
         
@@ -312,6 +276,16 @@
             <select id="gridType" class="form-select text-white-dark">
                 <option></option>
                 <option>Web Design</option>
+            </select>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
+        <div>
+            <label for="gridStatus">Minor</label>
+            <select id="gridStatus" class="form-select text-white-dark">
+                <option selected>Activo</option>
+                <option>Inactivo</option>
             </select>
         </div>
     </div>
