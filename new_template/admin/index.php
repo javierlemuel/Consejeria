@@ -547,7 +547,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table>
+                            <table class="table-striped">
                                 <thead>
                                     <tr>
                                         <th>Estudiante</th>
@@ -562,17 +562,19 @@
                                                 throw new Exception("Error de conexión: " . $conn->connect_error); // de haber un error de coneccion tira el exception.
                                             }
 
-                                            $sql = "SELECT name1, student_num, conducted_counseling FROM student";
+                                            $sql = "SELECT name1, name2, last_name1, last_name2, student_num, conducted_counseling FROM student";
                                             $result = $conn->query($sql);
 
                                             if ($result === false) {
                                                 throw new Exception("Error en la consulta SQL: " . $conn->error);
                                             }
 
-                                            while ($row = $result->fetch_assoc()) { 
+                                            while ($row = $result->fetch_assoc()) {
+                                                $student_num = $row['student_num'];
+                                                $formatted_student_num = substr($student_num, 0, 3) . '-' . substr($student_num, 3, 2) . '-' . substr($student_num, 5);
                                                 echo '<tr>';
-                                                echo '<td>' . $row['name1'] .  '</td>';
-                                                echo '<td>' . $row['student_num'] .  '</td>';
+                                                echo '<td>' . $row['name1'] . " " . $row['name2'] . " " . $row['last_name1'] . " " . $row['last_name2'] . " " . '</td>';
+                                                echo '<td>' . $formatted_student_num .  '</td>';
                                                 if ($row['conducted_counseling'] == 0) {
                                                     echo '<td><span class="badge whitespace-nowrap badge-outline-danger">No realizada</span></td>';
                                                 } else {
