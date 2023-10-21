@@ -1,5 +1,5 @@
-// config/database.php
 <?php
+// config/database.php
 $host = 'localhost';
 $username = 'root';
 $password = 'contra';
