@@ -1,23 +1,23 @@
 <?php
 // models/LoginModel.php
 class LoginModel {
-    public function login($conn) {
-        $sql = "SELECT  FROM student";
+    public function authenticateUser($conn, $email, $password) {
+        // Implementa la lógica de autenticación aquí
+        // Por ejemplo, puedes realizar una consulta SQL para verificar las credenciales
+        $email = mysqli_real_escape_string($conn, $email); // Evita inyección SQL
+        $password = mysqli_real_escape_string($conn, $password);
+
+        $sql = "SELECT * FROM advisor WHERE email = '$email' AND pass = '$password'";
+
         $result = $conn->query($sql);
 
-        if ($result === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        if ($result && $result->num_rows > 0) {
+            // Las credenciales son correctas, el usuario está autenticado
+            return true;
+        } else {
+            // Las credenciales son incorrectas, la autenticación falló
+            return false;
         }
-
-        $students = [];
-        while ($row = $result->fetch_assoc()) {
-            $student_num = $row['student_num'];
-            $formatted_student_num = substr($student_num, 0, 3) . '-' . substr($student_num, 3, 2) . '-' . substr($student_num, 5);
-            $row['formatted_student_num'] = $formatted_student_num;
-            $students[] = $row;
-        }
-
-        return $students;
     }
 }
 ?>
