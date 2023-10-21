@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['authenticated'] = true;
 
         // Redirige al usuario a la página de expedientes
-        header("Location: expedientesController.php");
+        header("Location: ../index.php");
         exit;
     } else {
         // La autenticación falló, redirige al usuario nuevamente a loginView.php
