@@ -534,7 +534,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> <br>
                         <!-- inicio de tabla para presentar los estudiantes-->
                         <div class="table-responsive">
                             <table class="table-striped">
@@ -572,36 +572,36 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> <br>
                         <!-- final de tabla para presentar los estudiantes-->
                         <!--inicio de paginacion -->
-                        <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
-                            <li>
-                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                    </svg>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">1</button>
-                            </li>
-                            <li>
-                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-primary text-white dark:text-white-light dark:bg-primary">2</button>
-                            </li>
-                            <li>
-                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">3</button>
-                            </li>
-                            <li>
-                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                    </svg>
-                                </button>
-                            </li>
-                        </ul>
-                         <!-- termina la paginacion-->
-        </div>
+                        <div class="pagination">
+                            <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
+                                <li>
+                                    <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary" onclick="changePage(<?php echo $currentPage > 1 ? $currentPage - 1 : 1; ?>)">
+                                        <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <li>
+                                        <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition <?php echo ($i === $currentPage) ? 'bg-primary text-white' : 'bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary'; ?>" onclick="changePage(<?php echo $i; ?>)">
+                                            <?php echo $i; ?>
+                                        </button>
+                                    </li>
+                                <?php endfor; ?>
+                                <li>
+                                    <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary" onclick="changePage(<?php echo $currentPage < $totalPages ? $currentPage + 1 : $totalPages; ?>)">
+                                        <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                         <!-- termina la paginacion UTILIZA SCRIPTS-->
+        </div> <br>
             <!-- end main content section -->
 
             <!-- start footer section -->
@@ -773,6 +773,12 @@
     </script>
     <!-- dropdown script -->
     <script>
+
+        function changePage(page) {
+            // Redirige a la página correspondiente
+            window.location.href = "?page=" + page;
+        }    
+
         document.addEventListener("alpine:init", () => {
             Alpine.data("dropdown", (initialOpenState = false) => ({
                 open: initialOpenState,
