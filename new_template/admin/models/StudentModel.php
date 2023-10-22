@@ -2,7 +2,7 @@
 // models/StudentModel.php
 class StudentModel {
     public function getAllStudents($conn) {
-        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling FROM student";
+        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status FROM student";
         $result = $conn->query($sql);
 
         if ($result === false) {

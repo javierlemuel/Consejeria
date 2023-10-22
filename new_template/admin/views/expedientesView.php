@@ -550,6 +550,8 @@
                                         <th>Estudiante</th>
                                         <th>Numero de estudiante</th>
                                         <th>Consejeria</th>
+                                        <th>Estatus</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -564,6 +566,15 @@
                                                     <span class="badge whitespace-nowrap badge-outline-primary">Realizada</span>
                                                 <?php endif; ?>
                                             </td>
+                                            <td>
+                                                <?php if ($student['status'] == 'Inactivo'): ?>
+                                                    <span class="badge whitespace-nowrap badge-outline-danger">Inactivo</span>
+                                                <?php else: ?>
+                                                    <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><a href="" style="text-decoration: underline;">Editar</a></td>
+                                            <!--<td><?php //echo $student['status']; ?></td>-->
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
