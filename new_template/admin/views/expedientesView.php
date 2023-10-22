@@ -251,14 +251,6 @@
                                     </li>
                                 </ul>
                             </li>
-
-
-                            
-
-                            
-
-
-
                     </ul>
                 </div>
             </nav>
@@ -543,6 +535,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- inicio de tabla para presentar los estudiantes-->
                         <div class="table-responsive">
                             <table class="table-striped">
                                 <thead>
@@ -580,9 +573,36 @@
                                 </tbody>
                             </table>
                         </div>
-                <!-- end main content section -->
-
-            </div>
+                        <!-- final de tabla para presentar los estudiantes-->
+                        <!--inicio de paginacion -->
+                        <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
+                            <li>
+                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">1</button>
+                            </li>
+                            <li>
+                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-primary text-white dark:text-white-light dark:bg-primary">2</button>
+                            </li>
+                            <li>
+                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">3</button>
+                            </li>
+                            <li>
+                                <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </button>
+                            </li>
+                        </ul>
+                         <!-- termina la paginacion-->
+        </div>
+            <!-- end main content section -->
 
             <!-- start footer section -->
             <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
