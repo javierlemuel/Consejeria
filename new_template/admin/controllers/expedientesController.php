@@ -9,14 +9,17 @@ class ExpedientesController {
         $studentModel = new StudentModel();
 
         // Parámetros de paginación
-        $studentsPerPage = 2; // Cambia esto al número deseado
+        $studentsPerPage = 1; // Cambia esto al número deseado
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-        // Obtenemos la lista de estudiantes para la página actual
-        $students = $studentModel->getStudentsByPage($conn, $studentsPerPage, $currentPage);
+        // Agregar un filtro para estudiantes activos o inactivos
+        $statusFilter = isset($_GET['status']) ? $_GET['status'] : 'Todos';
 
-        // Contamos el total de estudiantes
-        $totalStudents = $studentModel->getTotalStudents($conn);
+        // Obtenemos la lista de estudiantes según el filtro
+        $students = $studentModel->getStudentsByPageAndStatus($conn, $studentsPerPage, $currentPage, $statusFilter);
+
+        // Contamos el total de estudiantes según el filtro
+        $totalStudents = $studentModel->getTotalStudentsByStatus($conn, $statusFilter);
 
         // Calculamos el número de páginas
         $totalPages = ceil($totalStudents / $studentsPerPage);

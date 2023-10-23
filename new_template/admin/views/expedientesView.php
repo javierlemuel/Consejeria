@@ -378,14 +378,15 @@
                             <h2 class="text-xl">Expedientes de Estudiantes</h2>
                             <!-- Comienzo Boton drop down -->
                             <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" @click="toggle">Action
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
-                                    <text x="50" y="65" font-size="48" fill="White">▼</text>
-                                </svg>
+                                <button class="btn btn-primary dropdown-toggle" @click="toggle">Filtrar por Estatus
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
+                                        <text x="50" y="65" font-size="48" fill="White">▼</text>
+                                    </svg>
                                 </button>
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                    <li><a href="javascript:;" @click="toggle">Activos</a></li>
-                                    <li><a href="javascript:;" @click="toggle">Inactivos</a></li>
+                                    <li><a href="?status=Todos" @click="toggle">Todos</a></li>
+                                    <li><a href="?status=Activos" @click="toggle">Activos</a></li>
+                                    <li><a href="?status=Inactivos" @click="toggle">Inactivos</a></li>
                                 </ul>
                             </div>
                             <!-- Final del boton de dropdown-->
@@ -591,25 +592,31 @@
                         <div class="pagination">
                             <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
                                 <li>
-                                    <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary" onclick="changePage(<?php echo $currentPage > 1 ? $currentPage - 1 : 1; ?>)">
-                                        <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                        </svg>
-                                    </button>
+                                    <a href="?page=<?php echo $currentPage > 1 ? $currentPage - 1 : 1; ?>&status=<?php echo $statusFilter; ?>">
+                                        <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary">
+                                            <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                            </svg>
+                                        </button>
+                                    </a>
                                 </li>
                                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                     <li>
-                                        <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition <?php echo ($i === $currentPage) ? 'bg-primary text-white' : 'bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary'; ?>" onclick="changePage(<?php echo $i; ?>)">
-                                            <?php echo $i; ?>
-                                        </button>
+                                        <a href="?page=<?php echo $i; ?>&status=<?php echo $statusFilter; ?>">
+                                            <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition <?php echo ($i === $currentPage) ? 'bg-primary text-white' : 'bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary'; ?>">
+                                                <?php echo $i; ?>
+                                            </button>
+                                        </a>
                                     </li>
                                 <?php endfor; ?>
                                 <li>
-                                    <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary" onclick="changePage(<?php echo $currentPage < $totalPages ? $currentPage + 1 : $totalPages; ?>)">
-                                        <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                        </svg>
-                                    </button>
+                                    <a href="?page=<?php echo $currentPage < $totalPages ? $currentPage + 1 : $totalPages; ?>&status=<?php echo $statusFilter; ?>">
+                                        <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary">
+                                            <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                            </svg>
+                                        </button>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
