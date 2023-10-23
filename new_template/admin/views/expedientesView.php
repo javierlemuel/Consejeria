@@ -376,6 +376,19 @@
                 <div x-data="contacts">
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <h2 class="text-xl">Expedientes de Estudiantes</h2>
+                            <!-- Comienzo Boton drop down -->
+                            <div x-data="dropdown" @click.outside="open = false" class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" @click="toggle">Action
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
+                                    <text x="50" y="65" font-size="48" fill="White">▼</text>
+                                </svg>
+                                </button>
+                                <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
+                                    <li><a href="javascript:;" @click="toggle">Activos</a></li>
+                                    <li><a href="javascript:;" @click="toggle">Inactivos</a></li>
+                                </ul>
+                            </div>
+                            <!-- Final del boton de dropdown-->
                             <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                                 <div class="flex gap-3">
                                     <div>
