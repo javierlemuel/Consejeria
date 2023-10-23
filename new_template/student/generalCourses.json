@@ -1,0 +1,97 @@
+[
+    {
+      "courseCode": "ESPA3101",
+      "name": "Español Basico I",
+      "credits": 3
+    },
+    {
+      "courseCode": "ESPA3102",
+      "name": "Español Basico II",
+      "credits": 3
+    },
+    {
+      "courseCode": "ESPA3112",
+      "name": "Lengua y discurso nivel honor II",
+      "credits": 3
+    },
+    {
+      "courseCode": "ESPA3208",
+      "name": "Redacción y Estilo",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3101",
+      "name": "Ingles Basico I",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3102",
+      "name": "Ingles Basico II",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3103",
+      "name": "Inglés Intermedio I",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3104",
+      "name": "Inglés Intermedio II",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3011",
+      "name": "Inglés Honor I",
+      "credits": 3
+    },
+    {
+      "courseCode": "INGL3015",
+      "name": "Inglés de Ciencia y Tecnología",
+      "credits": 3
+    },
+    {
+      "courseCode": "MATE3171",
+      "name": "Pre-Calculo I",
+      "credits": 3
+    },
+    {
+      "courseCode": "MATE3172",
+      "name": "Pre-Calculo II",
+      "credits": 3
+    },
+    {
+      "courseCode": "MATE3031",
+      "name": "Calculo I",
+      "credits": 4
+    },
+    {
+      "courseCode": "CIBI3001",
+      "name": "Instrucción a Ciencias Biológicas I",
+      "credits": 3
+    },
+    {
+      "courseCode": "CIBI3002",
+      "name": "Instrucción a Ciencias Biológicas II",
+      "credits": 3
+    },
+    {
+      "courseCode": "FISI3011",
+      "name": "Fisica Universitaria I",
+      "credits": 3
+    },
+    {
+      "courseCode": "FISI3012",
+      "name": "Fisica Universitaria II",
+      "credits": 3
+    },
+    {
+      "courseCode": "FISI3013",
+      "name": "Lab Fisica Universitaria I",
+      "credits": 1
+    },
+    {
+      "courseCode": "FISI3014",
+      "name": "Lab Fisica Universitaria II",
+      "credits": 1
+    }
+  ]

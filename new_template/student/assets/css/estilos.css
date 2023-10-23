@@ -1,0 +1,17 @@
+.active {
+    color: #E2A03F; /* Color de fuente para el tab activo */
+}
+
+/* Estilo del triángulo */
+.dropdown-arrow {
+    display: inline-block;
+    top: -8px;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    content: "";
+    border-top: 4px solid #000; /* Color del triángulo */
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    margin-left: 4px; /* Espacio entre el texto y el triángulo */
+}

@@ -1,0 +1,83 @@
+[
+    {
+      "courseCode": "CCOM 3001",
+      "name": "Programación I",
+      "credits": "5"
+    },
+    {
+      "courseCode": "CCOM 3010",
+      "name": "Niveles Lógicos",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 3025",
+      "name": "Int. Sist. Comp.",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 3002",
+      "name": "Programación II",
+      "credits": "5"
+    },
+    {
+      "courseCode": "CCOM 3015",
+      "name": "Comp. en la Sociedad",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 3035",
+      "name": "Organización de Comp.",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4005",
+      "name": "Estructuras de Datos",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 3020",
+      "name": "Matemáticas Discretas",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4006",
+      "name": "Diseño y Análisis de Algoritmos",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4007",
+      "name": "Int. Probabilidad y Estad.",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4065",
+      "name": "Álgebra Lineal Numérica",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 3041",
+      "name": "Sistemas Operativos",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4025",
+      "name": "Organización de Lenguaje",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4115",
+      "name": "Diseño de Base de Datos",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4075",
+      "name": "Ingeniería de Programación",
+      "credits": "3"
+    },
+    {
+      "courseCode": "CCOM 4095",
+      "name": "Proyecto Ing. de Prog.",
+      "credits": "3"
+    }
+  ]
+  
