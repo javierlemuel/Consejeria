@@ -2,7 +2,7 @@
 // config/database.php
 $host = 'localhost';
 $username = 'root';
-$password = 'contra';
+$password = '';
 $database = 'counseling_draft';
 
 $conn = new mysqli($host, $username, $password, $database);
