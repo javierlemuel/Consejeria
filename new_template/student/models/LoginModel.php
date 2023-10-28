@@ -1,13 +1,14 @@
 <?php
 // models/LoginModel.php
 class LoginModel {
-    public function authenticateUser($conn, $email, $password) {
+    public function authenticateUser($conn, $email, $dob, $student_num) {
         // Implementa la lógica de autenticación aquí
         // Por ejemplo, puedes realizar una consulta SQL para verificar las credenciales
         $email = mysqli_real_escape_string($conn, $email); // Evita inyección SQL
-        $password = mysqli_real_escape_string($conn, $password);
+        $dob = mysqli_real_escape_string($conn, $dob);
+        $student_num = mysqli_real_escape_string($conn, $student_num);
 
-        $sql = "SELECT * FROM advisor WHERE email = '$email' AND pass = '$password'";
+        $sql = "SELECT * FROM student WHERE email = '$email' AND dob = '$dob' AND student_num = $student_num";
 
         $result = $conn->query($sql);
 
@@ -20,4 +21,3 @@ class LoginModel {
         }
     }
 }
-?>
