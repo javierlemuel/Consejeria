@@ -452,29 +452,31 @@
                                                         x-text="params.id ? 'Editar estudiante' : 'Crear estudiante'"
                                                     ></h3>
                                                     <div class="p-5">
-                                                        <form @submit.prevent="saveUser">
+                                                        <form @submit.prevent="saveUser" id="studentForm" action="#" method="POST">
                                                             <div class="mb-5 grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                                                <input type="hidden" name="action" value="addStudent">
                                                                 <div>
                                                                     <label for="nombre">Nombre</label>
-                                                                    <input x-model="params.nombre" id="nombre" type="text" placeholder="" class="form-input" required/>
+                                                                    <input x-model="params.nombre" id="nombre" name="nombre" type="text" placeholder="" class="form-input" required/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="nombre2">2do nombre</label>
-                                                                    <input x-model="params.nombre2" id="nombre2" type="text" placeholder="" class="form-input"/>
+                                                                    <input x-model="params.nombre2" id="nombre2" name="nombre2" type="text" placeholder="" class="form-input"/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="apellidoP">Apellido P</label>
-                                                                    <input x-model="params.apellidoP" id="apellidoP" type="text" placeholder="" class="form-input" required/>
+                                                                    <input x-model="params.apellidoP" id="apellidoP" name="apellidoP" type="text" placeholder="" class="form-input" required/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="apellidoM">Apellido M</label>
-                                                                    <input x-model="params.apellidoM" id="apellidoM" type="text" placeholder="" class="form-input"/>
+                                                                    <input x-model="params.apellidoM" id="apellidoM" name="apellidoM" type="text" placeholder="" class="form-input"/>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="email">Email</label>
                                                                 <input
                                                                     id="email"
+                                                                    name="email"
                                                                     type="email"
                                                                     placeholder="yeyo.soto2@upr.edu"
                                                                     class="form-input"
@@ -483,7 +485,7 @@
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="tipo">Minor</label>
-                                                                <select id="gridYear" x-model="params.minor" class="form-select text-white-dark">
+                                                                <select id="gridYear" x-model="params.minor" class="form-select text-white-dark" name="minor">
                                                                 <option></option>    
                                                                 <option>Web Design</option>
                                                                 </select>
@@ -493,6 +495,7 @@
                                                                 <label for="numero">Número de estudiante</label>
                                                                 <input
                                                                     id="numero"
+                                                                    name="numero_estu"
                                                                     type="text"
                                                                     placeholder="840-xx-xxxx"
                                                                     class="form-input"
@@ -503,11 +506,19 @@
                                                                 <label for="cohorte">Cohorte</label>
                                                                 <input
                                                                     id="cohorte"
+                                                                    name="cohorte"
                                                                     type="text"
                                                                     placeholder="2022"
                                                                     class="form-input"
                                                                     x-model="params.cohorte"
                                                                 />
+                                                            </div>
+                                                            <div class="mb-5">
+                                                                <label for="estatus">Estatus</label>
+                                                                <select id="status" x-model="params.minor" class="form-select text-white-dark" name="estatus">
+                                                                <option>Activo</option>    
+                                                                <option>Inactivo</option>
+                                                                </select>
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="birthday">Birthday</label>
@@ -516,13 +527,9 @@
                                                             
                                                             <div class="mt-8 flex items-center justify-end">
                                                                 <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
-                                                                    Cancel
+                                                                    Cancelar
                                                                 </button>
-                                                                <button
-                                                                    type="submit"
-                                                                    class="btn btn-primary ltr:ml-4 rtl:mr-4"
-                                                                    x-text="params.id ? 'Update' : 'Add'"
-                                                                ></button>
+                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" x-text="params.id ? 'Update' : 'Anadir'"></button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -642,6 +649,31 @@
 
 
     <script>
+
+        /*document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Evita la recarga de la página por defecto al enviar el formulario
+
+            // Obtiene los datos del formulario
+            const formData = new FormData(this);
+
+            // Realiza una solicitud HTTP POST para enviar los datos al controlador PHP
+            fetch('expedientesController.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // Aquí puedes manejar la respuesta del servidor (si es necesario)
+                    console.log(data);
+                    // Por ejemplo, puedes cerrar el modal o mostrar un mensaje de éxito
+                    addContactModal = false; // Cierra el modal
+                })
+                .catch(error => {
+                    // Maneja cualquier error de la solicitud
+                    console.error('Error:', error);
+                });
+        });*/
+
         document.addEventListener('alpine:init', () => {
             // main section
             Alpine.data('scrollToTop', () => ({

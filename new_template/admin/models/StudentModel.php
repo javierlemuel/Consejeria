@@ -60,5 +60,28 @@ class StudentModel {
         $row = $result->fetch_assoc();
         return $row['total'];
     }
+
+    public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
+        // Preparar la consulta SQL
+        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+
+        // Vincular los parámetros con los valores
+        $stmt->bind_param("ssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday);
+
+        // Ejecutar la sentencia
+        $result = $stmt->execute();
+
+        // Verificar si la inserción se realizó con éxito
+        if ($result === true) {
+            // Inserción exitosa
+            return true;
+        } else {
+            // Error en la inserción
+            return false;
+        }
+    }
 }
 ?>
