@@ -452,7 +452,7 @@
                                                         x-text="params.id ? 'Editar estudiante' : 'Crear estudiante'"
                                                     ></h3>
                                                     <div class="p-5">
-                                                        <form @submit.prevent="saveUser" id="studentForm" action="#" method="POST">
+                                                        <form id="studentForm" action="#" method="POST">
                                                             <div class="mb-5 grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                                 <input type="hidden" name="action" value="addStudent">
                                                                 <div>
@@ -487,7 +487,7 @@
                                                             <div class="mb-5">
                                                                 <label for="minor">Minor</label>
                                                                 <select id="gridYear" class="form-select text-white-dark" name="minor">
-                                                                    <option value="0"></option>
+                                                                    <option value="0">N/A</option>
                                                                     <option value="1">Web Design</option>
                                                                 </select>
                                                             </div>
@@ -587,8 +587,8 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <form method="POST" action="#">
-                                                    <input type="hidden" name="action" value="editStudent">
+                                                <form method="POST" action="index.php">
+                                                    <input type="hidden" name="action" value="selecteStudent">
                                                     <input type="hidden" name="student_num" value="<?= $student['student_num'] ?>">
                                                     <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2" x-text="params.id ? 'Update' : 'Editar'"></button>
                                                 </form>
