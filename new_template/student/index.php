@@ -4,6 +4,7 @@ require_once 'config/database.php';
 
 // Inicia o reanuda la sesión
 session_start();
+
 //session_destroy();
 // Verifica si la sesión de autenticación está establecida
 if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
