@@ -247,7 +247,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 <div>
                                     <label for="gridCode">Nombre</label>
-                                    <input id="gridCode" type="text" placeholder="Raul Jimenez" class="form-input" readonly />
+                                    <input id="gridCode" type="text" class="form-input" readonly value="<?php echo $studentData['name1']; ?>" />
                                 </div>
                                 <div>
                                     <label for="gridName">Email</label>

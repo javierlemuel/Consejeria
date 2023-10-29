@@ -27,6 +27,12 @@ class ExpedientesController {
                 // Llama al modelo para insertar el estudiante en la base de datos
                 $success = $studentModel->insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday);
             }
+            elseif ($action === 'editStudent')
+            {
+                $student_num = $_POST['student_num'];
+                $studentData = $studentModel->editStudent($student_num, $conn);
+                require_once(__DIR__ . '/../views/editStudentView.php');
+            }
         }
 
         // Parámetros de paginación

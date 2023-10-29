@@ -457,19 +457,19 @@
                                                                 <input type="hidden" name="action" value="addStudent">
                                                                 <div>
                                                                     <label for="nombre">Nombre</label>
-                                                                    <input x-model="params.nombre" id="nombre" name="nombre" type="text" placeholder="" class="form-input" required/>
+                                                                    <input x-model="params.nombre" id="nombre" name="nombre" type="text" class="form-input" maxlength="15" required/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="nombre2">2do nombre</label>
-                                                                    <input x-model="params.nombre2" id="nombre2" name="nombre2" type="text" placeholder="" class="form-input"/>
+                                                                    <input id="nombre2" name="nombre2" type="text" class="form-input" maxlength="15"/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="apellidoP">Apellido P</label>
-                                                                    <input x-model="params.apellidoP" id="apellidoP" name="apellidoP" type="text" placeholder="" class="form-input" required/>
+                                                                    <input x-model="params.apellidoP" id="apellidoP" name="apellidoP" type="text"class="form-input" maxlength="20" required/>
                                                                 </div>
                                                                 <div>
                                                                     <label for="apellidoM">Apellido M</label>
-                                                                    <input x-model="params.apellidoM" id="apellidoM" name="apellidoM" type="text" placeholder="" class="form-input"/>
+                                                                    <input id="apellidoM" name="apellidoM" type="text" class="form-input" maxlength="20"/>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-5">
@@ -481,16 +481,16 @@
                                                                     placeholder="yeyo.soto2@upr.edu"
                                                                     class="form-input"
                                                                     x-model="params.email"
+                                                                    required
                                                                 />
                                                             </div>
                                                             <div class="mb-5">
-                                                                <label for="tipo">Minor</label>
-                                                                <select id="gridYear" x-model="params.minor" class="form-select text-white-dark" name="minor">
-                                                                <option></option>    
-                                                                <option>Web Design</option>
+                                                                <label for="minor">Minor</label>
+                                                                <select id="gridYear" class="form-select text-white-dark" name="minor">
+                                                                    <option value="0"></option>
+                                                                    <option value="1">Web Design</option>
                                                                 </select>
                                                             </div>
-
                                                             <div class="mb-5">
                                                                 <label for="numero">Número de estudiante</label>
                                                                 <input
@@ -500,29 +500,28 @@
                                                                     placeholder="840-xx-xxxx"
                                                                     class="form-input"
                                                                     x-model="params.numero"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 9);"
+                                                                    maxlength="9"
+                                                                    required
                                                                 />
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="cohorte">Cohorte</label>
-                                                                <input
-                                                                    id="cohorte"
-                                                                    name="cohorte"
-                                                                    type="text"
-                                                                    placeholder="2022"
-                                                                    class="form-input"
-                                                                    x-model="params.cohorte"
-                                                                />
+                                                                <select id="gridYear" class="form-select text-white-dark" name="cohorte" x-model="params.cohorte" required>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2022">2022</option>
+                                                                </select>
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="estatus">Estatus</label>
-                                                                <select id="status" x-model="params.minor" class="form-select text-white-dark" name="estatus">
-                                                                <option>Activo</option>    
-                                                                <option>Inactivo</option>
+                                                                <select id="status" x-model="params.estatus" class="form-select text-white-dark" name="estatus" required>
+                                                                    <option>Activo</option>    
+                                                                    <option>Inactivo</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-5">
                                                                 <label for="birthday">Birthday</label>
-                                                                <input type="date" x-model="params.birthday" id="birthday" name="birthday">               
+                                                                <input type="date" x-model="params.birthday" id="birthday" name="birthday" required>               
                                                             </div>
                                                             
                                                             <div class="mt-8 flex items-center justify-end">
@@ -587,8 +586,13 @@
                                                     <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><a href="" style="text-decoration: underline;">Editar</a></td>
-                                            <!--<td><?php //echo $student['status']; ?></td>-->
+                                            <td>
+                                                <form method="POST" action="#">
+                                                    <input type="hidden" name="action" value="editStudent">
+                                                    <input type="hidden" name="student_num" value="<?= $student['student_num'] ?>">
+                                                    <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2" x-text="params.id ? 'Update' : 'Editar'"></button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

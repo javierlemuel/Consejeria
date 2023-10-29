@@ -83,5 +83,32 @@ class StudentModel {
             return false;
         }
     }
+
+    public function editStudent($student_num, $conn) {
+    // Preparar la consulta SQL
+    $sql = "SELECT * FROM student WHERE student_num = ?";
+    // Preparar la sentencia
+    $stmt = $conn->prepare($sql);
+    // Vincular el parámetro con el valor
+    $stmt->bind_param("s", $student_num);
+    // Ejecutar la sentencia
+    $stmt->execute();
+    // Obtener el resultado de la consulta
+    $result = $stmt->get_result();
+    // Verificar si se encontraron resultados
+    if ($result->num_rows == 1) {
+        while ($row = $result->fetch_assoc()) {
+            $studentData = $row;
+        }
+    } else {
+        echo"Querie ejecutado con error.";
+    }
+    // Cierra la sentencia
+    $stmt->close();
+    $conn->close();
+    // Devuelve los datos del estudiante
+    return $studentData;
+    }
+    
 }
 ?>
