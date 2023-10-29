@@ -94,8 +94,90 @@ if (session_status() == PHP_SESSION_NONE) {
                         </template>
                         <template x-if="tab === 'expediente'">
                             <div>
-                                <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
-                                <p class="mb-4"><b><a style="color: blue;" href="">Link</a></b> para el expediente</p>
+                                <div class="row flex">
+                                    <div class="grid-cols-1" style="width:70%;">
+                                        <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p>Universidad de Puerto Rico en Arecibo</p>
+                                        <p>Departamento de Ciencias de Computos</p>
+
+                                    </div>
+                                </div>
+                                <div class="row flex">
+                                    <div class="grid-cols-1 justify-end" style="width:20%;">
+                                        <p><b>Nombre:</b></p>
+                                    </div>
+                                    <div class="grid-cols-1" style="width:50%;">
+                                        <p><?php echo $studentInfo["full_student_name"]; ?></p>
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p><b>Año:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row flex">
+                                    <div class="grid-cols-1" style="width:20%;">
+                                        <p><b>Numero de Estudiante:</b> </p>
+                                    </div>
+                                    <div class="grid-cols-1" style="width:50%;">
+                                        <p><?php echo $studentInfo["formatted_student_num"]; ?></p>
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p><b>Semestre:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row flex">
+                                    <div class="grid-cols-1" style="width:20%;">
+                                        <p><b>Correo electronico:</b> </p>
+                                    </div>
+                                    <div class="grid-cols-1" style="width:50%;">
+                                        <p><?php echo $studentInfo["email"]; ?></p>
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p><b>Creditos Recomendados:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row flex">
+                                    <div class="grid-cols-1" style="width:70%;">
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p><b>GPA Departamental:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row flex">
+                                    <div class="grid-cols-1" style="width:70%;">
+                                    </div>
+                                    <div class="grid-cols-1">
+                                        <p><b>GPA General:</b></p>
+                                    </div>
+                                </div>
+                                <!-- start expediente table -->
+                                <div class="table-responsive">
+                                    <table class="table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Curso</th>
+                                                <th>Descripcion</th>
+                                                <th>Creditos</th>
+                                                <th class="text-center">Notas</th>
+                                                <th class="text-center">Matriculado</th>
+                                                <th class="text-center">Recomendado</th>
+                                                <th class="text-center">Convalidacion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="whitespace-nowrap">hola</td>
+                                                <td>perro</td>
+                                                <td>salchicha </td>
+                                                <td>gordo</td>
+                                                <td>y barrigon</td>
+                                                <td>con sombrero</td>
+                                                <td>de marinero</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </template>
                     </div>

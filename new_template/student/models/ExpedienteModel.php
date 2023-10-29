@@ -33,4 +33,35 @@ class StudentModel
 
         return $studentInfo;
     }
+
+    public function getStudentCourses($conn, $student_num)
+    {
+        $sql = "SELECT merged.crse_code, merged.name, merged.credits, student_courses.crse_grade, student_courses.crse_status, student_courses.convalidacion, student_courses.equivalencia
+        FROM (
+            SELECT *
+            FROM ccom_courses
+            UNION
+            SELECT *
+            FROM general_courses
+        ) AS merged
+        LEFT JOIN student_courses ON merged.crse_code = student_courses.crse_code
+        AND student_courses.student_num = ?";
+
+        $stmt = $conn->prepare($sql);
+
+        // sustituye el ? por el valor de $student_num
+        $stmt->bind_param("s", $student_num);
+
+        // ejecuta el statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        $studentRecord = $result->fetch_assoc();
+
+        return $studentRecord;
+    }
 }
