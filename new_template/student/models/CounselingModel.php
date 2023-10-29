@@ -39,8 +39,9 @@ class CounselingModel
     public function getConcentrationCourses($conn)
     {
 
-        $sql = "SELECT *
-                FROM ccom_courses";
+        $sql = "SELECT DISTINCT crse_code, name, credits 
+                FROM ccom_courses
+                WHERE crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
 
         $stmt = $conn->prepare($sql);
 
@@ -63,7 +64,7 @@ class CounselingModel
     public function getStudentInfo($conn, $student_num)
     {
 
-        $sql = "SELECT name1, last_name1, last_name2, email  
+        $sql = "SELECT name1, name2, last_name1, last_name2, email  
                 FROM student 
                 WHERE student_num = ?";
 
@@ -79,7 +80,11 @@ class CounselingModel
         }
 
         $studentInfo = $result->fetch_assoc();
-        $studentName = $studentInfo['name1'] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
+        if ($studentInfo['name2'] != null) {
+            $studentName = $studentInfo['name1'] . " " . $studentInfo['name2'] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
+        } else
+            $studentName = $studentInfo['name1'] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
+
         $studentInfo['full_student_name'] = $studentName;
         $formatted_student_num = substr($student_num, 0, 3) . '-' . substr($student_num, 3, 2) . '-' . substr($student_num, 5);
         $studentInfo['formatted_student_num'] = $formatted_student_num;
@@ -90,8 +95,9 @@ class CounselingModel
     public function getGeneralCourses($conn)
     {
 
-        $sql = "SELECT *
-                FROM general_courses";
+        $sql = "SELECT DISTINCT crse_code, name, credits 
+        FROM general_courses
+        WHERE crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
 
         $stmt = $conn->prepare($sql);
         // ejecuta el statement

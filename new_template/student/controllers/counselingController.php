@@ -9,7 +9,10 @@ class CounselingController
     {
         global $conn;
         $counselingModel = new CounselingModel();
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            // Start the session
+            session_start();
+        }
 
         //obtenemos el numero de estudiante        
         if (isset($_SESSION['student_num'])) {
