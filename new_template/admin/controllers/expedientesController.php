@@ -27,11 +27,33 @@ class ExpedientesController {
                 // Llama al modelo para insertar el estudiante en la base de datos
                 $success = $studentModel->insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday);
             }
-            elseif ($action === 'editStudent')
+            elseif ($action === 'selecteStudent')
             {
                 $student_num = $_POST['student_num'];
-                $studentData = $studentModel->editStudent($student_num, $conn);
+                $studentData = $studentModel->selectStudent($student_num, $conn);
                 require_once(__DIR__ . '/../views/editStudentView.php');
+                return;
+            }
+            elseif ($action === 'editStudent')
+            {
+
+                $nombre = $_POST['nombre'];
+                $nombre2 = $_POST['nombre2'];
+                $apellidoP = $_POST['apellidoP'];
+                $apellidoM = $_POST['apellidoM'];
+                $email = $_POST['email'];
+                $numeroEst = $_POST['numeroEstu'];
+                $fechaNac = $_POST['fechaNac'];
+                $cohorte = $_POST['cohorte'];
+                $minor = $_POST['minor'];
+                $graduacion = $_POST['graduacion'];
+                $notaAdmin = $_POST['notaAdmin'];
+                $notaEstudiante = $_POST['notaEstudiante'];
+                $status = $_POST['estatus'];
+                $result = $studentModel->editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $conn);
+                $studentData = $studentModel->selectStudent($numeroEst, $conn);
+                require_once(__DIR__ . '/../views/editStudentView.php');
+                return;
             }
         }
 

@@ -124,89 +124,184 @@
                             </div>
                         </div>
                     </div>
+
                     </ul>
                 </div>
             </header>
             <!-- end header section -->
-            <!-- start main content section -->
+
             <div class="animate__animated p-6" :class="[$store.app.animation]">
-                <form action="index.php" class="space-y-5" method="POST">
-                    <input type="hidden" name="action" value="editStudent">
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="numeroEstu">Número de estudiante</label>
-                            <input type="text" name="numeroEstu" class="form-input" maxlength="9" value="<?php echo $studentData['student_num']; ?>" required readonly/>
+                <!-- start main content section -->
+                <!-- <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: '2017'}"> Cambiamos 'tab' a 'info' por defecto -->
+                <!-- buttons -->
+                <!-- <div class="mx-10 mb-5 sm:mb-0">
+                    <ul class="w-24 m-auto text-center font-semibold">
+                        <li>
+                            </li>
+                        <li>
+                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === '2017'}" @click="tab='2017'">2017</a>
+                        <li>
+                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === '2022'}" @click="tab='2022'">2022</a>
+                        </li>
+                    </ul>
+                </div> -->
+
+                <!-- description -->
+                <div class="flex-1 text-sm ">
+                    <div>
+                        <!-- start cohort 2017 -->
+                        <div x-data="{ tab1: null }">
+                            <!-- start cohort 2017 -->
+                            <?php
+                            $path = 's_expediente.json';
+                            $jsonString = file_get_contents($path);
+                            $jsonData = json_decode($jsonString, true);
+
+                            echo "<div class='mb-5'>
+            <!-- tabs-años -->
+            <div>
+                <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
+
+                            // Generate the outer year tabs
+                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
+                                if ($yearTitle !== 'Electivas') {
+                                    echo "<li>
+                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
+                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
+                        @click='tab1 = \"$yearTitle\"'>
+                        " . strtoupper($yearTitle) . " AÑO
+                    </a>
+                </li>";
+                                } else {
+                                    echo "<li>
+                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
+                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
+                        @click='tab1 = \"$yearTitle\"'>
+                        " . strtoupper($yearTitle) . "
+                    </a>
+                </li>";
+                                }
+                            }
+
+                            echo "</ul>
+        </div>";
+
+                            // Display data for the selected year
+                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
+                                echo "<div x-show='tab1 === \"$yearTitle\"'>
+                ";
+
+
+
+                                foreach ($yearData as $semesterTitle => $semesterCourses) {
+                                    echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
+                    " . strtoupper($semesterTitle);
+
+                                    if ($semesterTitle !== "") {
+                                        echo " SEMESTRE
+                </div>";
+                                    } else {
+                                        echo "</div>";
+                                    }
+
+                                    echo "<table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CODIGO</th>
+                        <th>NOMBRE</th>
+                        <th>CREDITOS</th>
+                        <th>NOTA</th>
+                        <th>SEMESTRE</th>
+                        <th>EQUIVALENCIA</th>
+                    </tr>
+                </thead>
+                <tbody>";
+                                    foreach ($semesterCourses as $course) {
+                                        echo "<tr>
+                        <td><input type='checkbox'></td>
+                        <td class='whitespace-normal'>" . $course['code'] . "</td>
+                        <td>" . $course['name'] . "</td>
+                        <td>" . $course['credits'] . "</td>
+                        <td>" . $course['nota'] . "</td>
+                        <td>" . $course['semestre'] . "</td>
+                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='" . $course['equivalencia'] . "'> </td>
+                    </tr>";
+                                    }
+
+
+                                    echo "</tbody>
+            </table>";
+                                }
+                                echo "</div>";
+                            }
+                            ?>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="nombre">Nombre</label>
-                            <input id="nombre" name="nombre" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="nombre2">Segundo Nombre</label>
-                            <input name="nombre2" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="apellidoP">Apellido Paterno</label>
-                            <input name="apellidoP" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="apellidoM">Apellido Materno</label>
-                            <input name="apellidoM" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="email">Email</label>
-                            <input name="email" type="email" class="form-input" maxlength="40" value="<?php echo $studentData['email']; ?>" required />
-                        </div>
-                        <div>
-                            <label for="fechaNac">Fecha de nacimiento</label>
-                            <input type="date" name="fechaNac" class="form-input" value="<?php echo date('Y-m-d', strtotime($studentData['dob'])); ?>" required />
-                        </div>
+
+
+
+
+
+
+                        <form action="index.php" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div>
+                                    <label for="gridCode">Nombre</label>
+                                    <input id="gridCode" type="text" class="form-input" readonly value="<?php echo $studentData['name1']; ?>" />
+                                </div>
+                                <div>
+                                    <label for="gridName">Email</label>
+                                    <input id="gridName" type="text" placeholder="raul.jimenez3@upr.edu" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridCred">Número de estudiante</label>
+                                    <input id="gridCred" type="number" placeholder="840-22-1240" class="form-input" readonly />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div>
+                                    <label for="gridYear">Año</label>
+                                    <input id="gridYear" type="number" placeholder="1" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridSem">Semestre</label>
+                                    <input id="gridSem" type="number" placeholder="1" class="form-input" readonly />
+                                </div>
+                                <div>
+                                    <label for="gridType">Minor</label>
+                                    <select id="gridType" class="form-select text-white-dark">
+                                        <option></option>
+                                        <option>Web Design</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                                <div>
+                                    <label for="gridStatus">Estatus</label>
+                                    <select id="gridStatus" class="form-select text-white-dark">
+                                        <option selected>Activo</option>
+                                        <option>Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary !mt-6">Someter</button>
+                        </form>
+
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="cohorte">Cohorte</label>
-                            <input type="text" name="cohorte" class="form-input" maxlength="4" value="<?php echo $studentData['cohort_year']; ?>" required />
-                        </div>
-                        <div>
-                            <label for="minor">Minor</label>
-                            <select class="form-select text-white-dark" name="minor">
-                                <option value="0"<?php if ($studentData['minor'] == 0) echo 'selected'; ?>>N/A</option>
-                                <option value="1" <?php if ($studentData['minor'] == 1) echo 'selected'; ?>>Web Design</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="graduacion">Termino de graduacion</label>
-                            <input type="text" class="form-input" name="graduacion" maxlength="3" value="<?php echo $studentData['grad_term'] !== null ? $studentData['grad_term'] : ''; ?>" />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="notaAdmin">Nota de Administrador (No visible para el estudiante)</label>
-                        <textarea name="notaAdmin" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['admin_note']; ?></textarea>
-                    </div>
-                    <div>
-                        <label for="notaEstudiante">Nota para Estudiante (Disponible para el estudiante)</label>
-                        <textarea name="notaEstudiante" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['student_note']; ?></textarea>
-                    </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="estatus">Estatus</label>
-                        <select class="form-select text-white-dark" name="estatus">
-                            <option value="Activo" <?php if ($studentData['status'] == "Activo") echo 'selected'; ?>>Activo</option>
-                            <option value="Inactivo" <?php if ($studentData['status'] == "Inactivo") echo 'selected'; ?>>Inactivo</option>
-                        </select>
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary !mt-6">Someter Cambios</button>
-                </form>
-                <button class="btn btn-danger !mt-6" onclick="window.location.href = 'index.php'">Cancelar</button>
+
+                </div>
+
+                <!-- forms grid -->
+
             </div>
+
+
         </div>
     </div>
+
     <!-- end main content section -->
 
     </div>
