@@ -36,7 +36,8 @@ class StudentModel
 
     public function getStudentCourses($conn, $student_num)
     {
-        $sql = "SELECT merged.crse_code, merged.name, merged.credits, student_courses.crse_grade, student_courses.crse_status, student_courses.convalidacion, student_courses.equivalencia
+        $sql = "SELECT merged.crse_code, merged.name, merged.credits, student_courses.crse_grade, student_courses.crse_status, 
+                student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, merged.type
         FROM (
             SELECT *
             FROM ccom_courses
@@ -60,8 +61,10 @@ class StudentModel
             throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
 
-        $studentRecord = $result->fetch_assoc();
-
+        $studentRecord = [];
+        while ($row = $result->fetch_assoc()) {
+            $studentRecord[] = $row;
+        }
         return $studentRecord;
     }
 }

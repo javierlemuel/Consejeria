@@ -25,7 +25,16 @@ class ExpedienteController
 
         //get student info
         $studentInfo = $studentModel->getStudentInfo($conn, $student_num);
+        $studentCourses = $studentModel->getStudentCourses($conn, $student_num);
 
+        $ccomStudentCourses = [];
+        $generalesStudentCourses = [];
+        foreach ($studentCourses as $studentCourse) {
+            if (str_starts_with($studentCourse["crse_code"], 'CCOM') && $studentCourse["type"] === "mandatory") {
+                array_push($ccomStudentCourses, $studentCourse);
+            } else
+                array_push($generalesStudentCourses, $studentCourse);
+        }
         // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedCoursesList'])) {
         //     // Verifica si los campos del formulario no están vacíos
         //     if (empty($_POST['selectedCoursesList'])) {

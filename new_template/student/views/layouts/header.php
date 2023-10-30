@@ -30,8 +30,8 @@
                                 Cohorte<!--<span class="dropdown-arrow"></span>-->
                             </button>
                             <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                <li><a href="cohorte2017.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2017</a></li>
-                                <li><a href="cohorte2022.php" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2022</a></li>
+                                <li><a href="index.php?page=cohorte2017" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2017</a></li>
+                                <li><a href="index.php?page=cohorte2022" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2022</a></li>
                             </ul>
                         </div>
                     </li>

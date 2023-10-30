@@ -1,11 +1,3 @@
-<?php
-// $obj = new ExpedienteController();
-// $info = $obj->get();
-if (session_status() == PHP_SESSION_NONE) {
-    // Start the session
-    session_start();
-}
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -21,7 +13,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -62,164 +53,183 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- end sidebar section -->
 
         <div class="main-content flex flex-col min-h-screen">
+            <!-- start header section -->
             <?php include('layouts/header.php'); ?>
+            <!-- end header section -->
 
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
-                <!-- Vertical line tabs -->
-                <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'info'}"> <!-- Cambiamos 'tab' a 'info' por defecto -->
-                    <!-- buttons -->
-                    <div class="mx-10 mb-5 sm:mb-0">
-                        <ul class="w-24 m-auto text-center font-semibold">
-                            <li>
-                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
-                            </li>
-                            <li>
-                                <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'expediente'}" @click="tab='expediente'">Expediente Academico</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div>
+                    <!-- start cohorte 2017 -->
+                    <div class="mb-5" x-data="{ tab: 'firstYear'}">
+                        <!-- tabs-a~os -->
+                        <div>
+                            <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'home'}" @click="tab = 'firstYear'">
+                                        PPRIMER AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'profile'}" @click="tab = 'secondYear'">
+                                        SEGUNDO AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'contact'}" @click="tab='thirdYear'">
+                                        TERCER AÑO</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" class="p-5 py-3 -mb-[1px] flex items-center hover:border-b border-transparent hover:!border-secondary hover:text-secondary" :class="{'border-b !border-secondary text-secondary' : tab === 'contact'}" @click="tab='fourthYear'">
+                                        CUERTO AÑO</a>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <!-- description -->
-                    <div class="flex-1 text-sm ">
-                        <template x-if="tab === 'info'">
-                            <div>
-                                <h4 class="font-semibold text-2xl mb-4">Informacion Basica:</h4>
-                                <p class="mb-4"><b>Nombre:</b> <?php echo $studentInfo["full_student_name"]; ?></p>
-                                <p class="mb-4"><b>Correo Electronico:</b> <?php echo $studentInfo["email"]; ?></p>
-                                <p class="mb-4"><b>Numero de Estudiante:</b> <?php echo $studentInfo["formatted_student_num"]; ?></p>
-                                <p class="mb-4"><b>Major:</b> CCOM</p>
-                                <p class="mb-4">Si alguna de esta informacion esta incorrecta favor de avisarle a la consejera. </p>
-                            </div>
-                        </template>
-                        <template x-if="tab === 'expediente'">
-                            <div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1" style="width:70%;">
-                                        <h4 class="font-semibold text-2xl mb-4">Expediente academico</h4>
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p>Universidad de Puerto Rico en Arecibo</p>
-                                        <p>Departamento de Ciencias de Computos</p>
-
-                                    </div>
-                                </div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1 justify-end" style="width:20%;">
-                                        <p><b>Nombre:</b></p>
-                                    </div>
-                                    <div class="grid-cols-1" style="width:50%;">
-                                        <p><?php echo $studentInfo["full_student_name"]; ?></p>
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p><b>Año:</b></p>
-                                    </div>
-                                </div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1" style="width:20%;">
-                                        <p><b>Numero de Estudiante:</b> </p>
-                                    </div>
-                                    <div class="grid-cols-1" style="width:50%;">
-                                        <p><?php echo $studentInfo["formatted_student_num"]; ?></p>
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p><b>Semestre:</b></p>
-                                    </div>
-                                </div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1" style="width:20%;">
-                                        <p><b>Correo electronico:</b> </p>
-                                    </div>
-                                    <div class="grid-cols-1" style="width:50%;">
-                                        <p><?php echo $studentInfo["email"]; ?></p>
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p><b>Creditos Recomendados:</b></p>
-                                    </div>
-                                </div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1" style="width:70%;">
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p><b>GPA Departamental:</b></p>
-                                    </div>
-                                </div>
-                                <div class="row flex">
-                                    <div class="grid-cols-1" style="width:70%;">
-                                    </div>
-                                    <div class="grid-cols-1">
-                                        <p><b>GPA General:</b></p>
-                                    </div>
-                                </div>
-                                <!-- start expediente table -->
+                        <!-- cursos -->
+                        <div class="flex-1 text-sm ">
+                            <template x-if="tab === 'firstYear'">
+                                <!-- prime año table -->
                                 <div class="table-responsive">
-                                    <h4 class="font-semibold text-2xl mb-4">Cursos de Concentracion</h4>
-                                    <table class="table-striped">
+                                    <table>
                                         <thead>
                                             <tr>
-                                                <th>Curso</th>
-                                                <th>Descripcion</th>
-                                                <th>Creditos</th>
-                                                <th class="text-center">Notas</th>
-                                                <th class="text-center">Matriculado</th>
-                                                <th class="text-center">Recomendado</th>
-                                                <th class="text-center">Convalidacion</th>
+                                                <th>PRIMER SEMESTRE</th>
+                                            </tr>
+                                            <tr>
+                                                <th>CODIGO</th>
+                                                <th>NOMBRE</th>
+                                                <th>CREDITOS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($ccomStudentCourses as $ccomStudentCourse) : ?>
-                                                <tr>
-                                                    <td class="whitespace-nowrap"><?php echo $ccomStudentCourse['crse_code'] ?></td>
-                                                    <td><?php echo $ccomStudentCourse['name'] ?></td>
-                                                    <td><?php echo $ccomStudentCourse['credits'] ?> </td>
-                                                    <td><?php if ($ccomStudentCourse['crse_grade'] == 'NULL')
-                                                            echo '';
-                                                        else echo $ccomStudentCourse['crse_grade'] ?></td>
-                                                    <td><?php if ($ccomStudentCourse['term'] == 'NULL')
-                                                            echo '';
-                                                        else echo $ccomStudentCourse['term'] ?></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table-responsive mt-5">
-                                    <h4 class="font-semibold text-2xl mb-4">Cursos Generales</h4>
-                                    <table class="table-striped">
-                                        <thead>
                                             <tr>
-                                                <th>Curso</th>
-                                                <th>Descripcion</th>
-                                                <th>Creditos</th>
-                                                <th class="text-center">Notas</th>
-                                                <th class="text-center">Matriculado</th>
-                                                <th class="text-center">Recomendado</th>
-                                                <th class="text-center">Convalidacion</th>
+                                                <td class="whitespace-nowrap">CCOM3001</td>
+                                                <td>Programacion I</td>
+                                                <td>5</td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($generalesStudentCourses as $generalesStudentCourse) : ?>
-                                                <tr>
-                                                    <td class="whitespace-nowrap"><?php echo $generalesStudentCourse['crse_code'] ?></td>
-                                                    <td><?php echo $generalesStudentCourse['name'] ?></td>
-                                                    <td><?php echo $generalesStudentCourse['credits'] ?> </td>
-                                                    <td><?php if ($generalesStudentCourse['crse_grade'] == 'NULL')
-                                                            echo '';
-                                                        else echo $generalesStudentCourse['crse_grade'] ?></td>
-                                                    <td><?php if ($generalesStudentCourse['term'] == 'NULL')
-                                                            echo '';
-                                                        else echo $generalesStudentCourse['term'] ?></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                            <tr>
+                                                <td class="whitespace-nowrap">CCOM3025</td>
+                                                <td>Int. Sist. Comp.</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap">INGL3101*</td>
+                                                <td>Ingles Basico I</td>
+                                                <td>3</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </template>
+
+                            </template>
+                            <template x-if="tab === 'secondYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
+                            <template x-if="tab === 'thirdYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
+                            <template x-if="tab === 'fourthYear'">
+                                <div>
+                                    <!-- prime año table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>PRIMER SEMESTRE</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>CREDITOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3001</td>
+                                                    <td>Programacion I</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">CCOM3025</td>
+                                                    <td>Int. Sist. Comp.</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap">INGL3101*</td>
+                                                    <td>Ingles Basico I</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </div>
                 <!-- end main content section -->

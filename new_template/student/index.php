@@ -15,6 +15,10 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
     if ($page === 'expediente') {
         // Load the "About Us" view
         require_once 'controllers/expedienteController.php';
+    } else if ($page === 'cohorte2017') {
+        require_once 'controllers/cohorte2017Controller.php';
+    } else if ($page === 'cohorte2022') {
+        require_once 'controllers/cohorte2022Controller.php';
     } else {
         // carga la pagina de consegeria 
         require_once 'controllers/counselingController.php';

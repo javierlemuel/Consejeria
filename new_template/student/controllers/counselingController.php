@@ -30,6 +30,12 @@ class CounselingController
 
         $studentInfo = $counselingModel->getStudentInfo($conn, $student_num);
 
+        if (isset($_SESSION['student_num'])) {
+            $_SESSION['full_student_name'] = $studentInfo['full_student_name'];
+            $_SESSION['formatted_student_num'] = $studentInfo['formatted_student_num'];
+            $_SESSION['email'] = $studentInfo['email'];
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedCoursesList'])) {
             // Verifica si los campos del formulario no están vacíos
             if (empty($_POST['selectedCoursesList'])) {
