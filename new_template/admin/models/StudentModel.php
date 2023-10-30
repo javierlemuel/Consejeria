@@ -1,10 +1,9 @@
 <?php
 // models/StudentModel.php
 class StudentModel {
-    public function getStudentsByPageAndStatus($conn, $perPage, $currentPage, $status) {
+    public function getStudentsByPageAndStatusAndSearch($conn, $perPage, $currentPage, $status, $search) {
         $offset = ($currentPage - 1) * $perPage;
-
-        // Modificamos la consulta SQL para incluir el filtro de estado
+    
         if ($status === 'Activos') {
             $statusCondition = "status = 'Activo'";
         } elseif ($status === 'Inactivos') {
@@ -12,20 +11,24 @@ class StudentModel {
         } else {
             $statusCondition = "1"; // Sin filtro, mostrar todos
         }
-
+    
+        // Modificar la consulta SQL para incluir el filtro de estado y búsqueda
         $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status 
                 FROM student 
                 WHERE $statusCondition 
+                AND name1 LIKE ? 
                 ORDER BY name1 ASC 
-                LIMIT $perPage 
-                OFFSET $offset";
-
-        $result = $conn->query($sql);
-
-        if ($result === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }
-
+                LIMIT ? 
+                OFFSET ?";
+    
+        $stmt = $conn->prepare($sql);
+    
+        // Modificar el filtro de búsqueda para buscar en cualquier parte del nombre
+        $searchKeyword = "%$search%";
+        $stmt->bind_param("sii", $searchKeyword, $perPage, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         $students = [];
         while ($row = $result->fetch_assoc()) {
             $student_num = $row['student_num'];
@@ -33,12 +36,11 @@ class StudentModel {
             $row['formatted_student_num'] = $formatted_student_num;
             $students[] = $row;
         }
-
+    
         return $students;
-    }
+    }    
 
-    public function getTotalStudentsByStatus($conn, $status) {
-        // Modificamos la consulta SQL para incluir el filtro de estado
+    public function getTotalStudentsByStatusAndSearch($conn, $status, $search) {
         if ($status === 'Activos') {
             $statusCondition = "status = 'Activo'";
         } elseif ($status === 'Inactivos') {
@@ -46,20 +48,24 @@ class StudentModel {
         } else {
             $statusCondition = "1"; // Sin filtro, contar todos
         }
-
+    
+        // Modificar la consulta SQL para incluir el filtro de estado y búsqueda
         $sql = "SELECT COUNT(*) as total 
                 FROM student 
-                WHERE $statusCondition";
-
-        $result = $conn->query($sql);
-
-        if ($result === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }
-
+                WHERE $statusCondition 
+                AND name1 LIKE ?";
+    
+        $stmt = $conn->prepare($sql);
+    
+        // Modificar el filtro de búsqueda para buscar en cualquier parte del nombre
+        $searchKeyword = "%$search%";
+        $stmt->bind_param("s", $searchKeyword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         $row = $result->fetch_assoc();
         return $row['total'];
-    }
+    }    
 
     public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
         // Preparar la consulta SQL

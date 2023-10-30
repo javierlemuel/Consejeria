@@ -61,14 +61,15 @@ class ExpedientesController {
         $studentsPerPage = 2; // Cambia esto al número deseado
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-        // Agregar un filtro para estudiantes activos o inactivos
+        // Obtener los parámetros del filtro de estado y búsqueda
         $statusFilter = isset($_GET['status']) ? $_GET['status'] : 'Todos';
+        $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // Obtenemos la lista de estudiantes según el filtro
-        $students = $studentModel->getStudentsByPageAndStatus($conn, $studentsPerPage, $currentPage, $statusFilter);
+        // Obtenemos la lista de estudiantes según el filtro y la búsqueda
+        $students = $studentModel->getStudentsByPageAndStatusAndSearch($conn, $studentsPerPage, $currentPage, $statusFilter, $searchKeyword);
 
-        // Contamos el total de estudiantes según el filtro
-        $totalStudents = $studentModel->getTotalStudentsByStatus($conn, $statusFilter);
+        // Contamos el total de estudiantes según el filtro y la búsqueda
+        $totalStudents = $studentModel->getTotalStudentsByStatusAndSearch($conn, $statusFilter, $searchKeyword);
 
         // Calculamos el número de páginas
         $totalPages = ceil($totalStudents / $studentsPerPage);

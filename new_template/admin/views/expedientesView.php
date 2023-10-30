@@ -384,9 +384,9 @@
                                     </svg>
                                 </button>
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                    <li><a href="?status=Todos" @click="toggle">Todos</a></li>
-                                    <li><a href="?status=Activos" @click="toggle">Activos</a></li>
-                                    <li><a href="?status=Inactivos" @click="toggle">Inactivos</a></li>
+                                    <li><a href="?status=Todos&search=<?php echo $searchKeyword?>" @click="toggle">Todos</a></li>
+                                    <li><a href="?status=Activos&search=<?php echo $searchKeyword?>" @click="toggle">Activos</a></li>
+                                    <li><a href="?status=Inactivos&search=<?php echo $searchKeyword?>" @click="toggle">Inactivos</a></li>
                                 </ul>
                             </div>
                             <!-- Final del boton de dropdown-->
@@ -537,21 +537,25 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="relative">
-                                    <input
-                                        type="text"
-                                        placeholder="Buscar estudiante"
-                                        class="peer form-input py-2 ltr:pr-11 rtl:pl-11"
-                                        x-model="searchUser"
-                                        @keyup="searchContacts"
-                                    />
-                                    <div class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
-                                        <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>
-                                            <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </svg>
-                                    </div>
+                                    <form action="index.php" method="GET">
+                                        <input
+                                            type="text"
+                                            name="search"
+                                            placeholder="Buscar estudiante"
+                                            class="peer form-input py-2 ltr:pr-11 rtl:pl-11"
+                                        />
+                                        <!-- Agrega campos ocultos para los parámetros de filtro de estado -->
+                                        <input type="hidden" name="status" value="<?php echo $statusFilter; ?>">
+                                        <div class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
+                                            <button type="submit">
+                                                <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>
+                                                    <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div> <br>
@@ -603,7 +607,7 @@
                         <div class="pagination">
                             <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
                                 <li>
-                                    <a href="?page=<?php echo $currentPage > 1 ? $currentPage - 1 : 1; ?>&status=<?php echo $statusFilter; ?>">
+                                    <a href="?page=<?php echo $currentPage > 1 ? $currentPage - 1 : 1; ?>&status=<?php echo $statusFilter; ?>&search=<?php echo $searchKeyword; ?>">
                                         <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover:text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary">
                                             <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -613,7 +617,7 @@
                                 </li>
                                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                     <li>
-                                        <a href="?page=<?php echo $i; ?>&status=<?php echo $statusFilter; ?>">
+                                        <a href="?page=<?php echo $i; ?>&status=<?php echo $statusFilter; ?>&search=<?php echo $searchKeyword; ?>">
                                             <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition <?php echo ($i === $currentPage) ? 'bg-primary text-white' : 'bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary'; ?>">
                                                 <?php echo $i; ?>
                                             </button>
@@ -621,7 +625,7 @@
                                     </li>
                                 <?php endfor; ?>
                                 <li>
-                                    <a href="?page=<?php echo $currentPage < $totalPages ? $currentPage + 1 : $totalPages; ?>&status=<?php echo $statusFilter; ?>">
+                                    <a href="?page=<?php echo $currentPage < $totalPages ? $currentPage + 1 : $totalPages; ?>&status=<?php echo $statusFilter; ?>&search=<?php echo $searchKeyword; ?>">
                                         <button type="button" class="flex justify-center font-semibold px-3.5 py-2 rounded transition bg-white-light text-dark hover-text-white hover-bg-primary dark-text-white-light dark-bg-[#191e3a] dark-hover-bg-primary">
                                             <svg xmlns="http://w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
