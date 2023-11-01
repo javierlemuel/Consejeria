@@ -7,6 +7,8 @@ class CounselingController
 {
     public function index()
     {
+        $selectedCourses = "";
+        $value = "*";
         global $conn;
         $counselingModel = new CounselingModel();
         if (session_status() == PHP_SESSION_NONE) {
@@ -36,21 +38,30 @@ class CounselingController
             $_SESSION['email'] = $studentInfo['email'];
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedCoursesList'])) {
-            // Verifica si los campos del formulario no están vacíos
+        if (isset($_POST['selectedCoursesList'])) {
+            // You should check if the selectedCoursesList is not empty before proceeding.
             if (empty($_POST['selectedCoursesList'])) {
-                // Al menos uno de los campos está vacío, redirige al usuario a loginView.php
-                header("Location: ../views/counselingView.php");
+                header("Location: ../index.php");
                 exit;
             }
-            $selectedCourses = $_POST['selectedCoursesList'];
 
-            $counselingModel->insertCourse($conn, $student_num, $selectedCourses);
-            header("Location: ../index.php");
+            // Store selected courses in a session for later use
+            //$_SESSION['selectedCourses'] = $_POST['selectedCoursesList'];
+
+            $selectedCourses = $_POST['selectedCoursesList'];
+            $value = $_POST['selectedCourseList'][0];
+
+            // Save selected courses to the database using the Model
+            $counselingModel->setCourses($conn, $student_num, $selectedCourses);
+
+            header("Location: ../index.php?value=" . count($selectedCourses) . "");
             exit;
         }
 
+
         require_once(__DIR__ . '/../views/counselingView.php');
+        require_once(__DIR__ . '/../views/layouts/sidebar.php');
+        require_once(__DIR__ . '/../views/layouts/header.php');
     }
 }
 

@@ -1,12 +1,3 @@
-<?php
-function readJson($path)
-{
-    $jsonString = file_get_contents($path);
-    return json_decode($jsonString, true);
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -122,7 +113,7 @@ function readJson($path)
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th></th>
+                                                                <th>Seleccionar</th>
                                                                 <th>Curso</th>
                                                                 <th>Nombre</th>
                                                                 <th>Creditos</th>
@@ -163,190 +154,190 @@ function readJson($path)
                                 <?php endforeach; ?>
                             </div>
 
+
                         </div>
                     </div>
+                    <!-- end main content section -->
+
                 </div>
-                <!-- end main content section -->
 
+                <!-- start footer section -->
+                <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
+                    © <span id="footer-year">2022</span>. UPRA All rights reserved.
+                </div>
+                <!-- end footer section -->
             </div>
-
-            <!-- start footer section -->
-            <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-                © <span id="footer-year">2022</span>. UPRA All rights reserved.
-            </div>
-            <!-- end footer section -->
         </div>
-    </div>
 
-    <script src="assets/js/alpine-collaspe.min.js"></script>
-    <script src="assets/js/alpine-persist.min.js"></script>
-    <script defer src="assets/js/alpine-ui.min.js"></script>
-    <script defer src="assets/js/alpine-focus.min.js"></script>
-    <script defer src="assets/js/alpine.min.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
-
-    <script>
-        function showinfo() {
-            document.getElementById("info").style.display = 'block';
-        }
-
-        function hideinfo() {
-            document.getElementById("info").style.display = 'none';
-        }
-
-        document.addEventListener('alpine:init', () => {
-            // main section
-            Alpine.data('scrollToTop', () => ({
-                showTopButton: false,
-                init() {
-                    window.onscroll = () => {
-                        this.scrollFunction();
-                    };
-                },
-
-                scrollFunction() {
-                    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                        this.showTopButton = true;
-                    } else {
-                        this.showTopButton = false;
-                    }
-                },
-
-                goToTop() {
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                },
-            }));
+        <script src="assets/js/alpine-collaspe.min.js"></script>
+        <script src="assets/js/alpine-persist.min.js"></script>
+        <script defer src="assets/js/alpine-ui.min.js"></script>
+        <script defer src="assets/js/alpine-focus.min.js"></script>
+        <script defer src="assets/js/alpine.min.js"></script>
+        <script src="assets/js/custom.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
 
-            // sidebar section
-            Alpine.data('sidebar', () => ({
-                init() {
-                    const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
-                    if (selector) {
-                        selector.classList.add('active');
-                        const ul = selector.closest('ul.sub-menu');
-                        if (ul) {
-                            let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
-                            if (ele) {
-                                ele = ele[0];
-                                setTimeout(() => {
-                                    ele.click();
-                                });
-                            }
-                        }
-                    }
-                },
-            }));
-
-            // header section
-            Alpine.data('header', () => ({
-                init() {
-                    const selector = document.querySelector('ul.horizontal-menu a[href="' + window.location.pathname + '"]');
-                    if (selector) {
-                        selector.classList.add('active');
-                        const ul = selector.closest('ul.sub-menu');
-                        if (ul) {
-                            let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
-                            if (ele) {
-                                ele = ele[0];
-                                setTimeout(() => {
-                                    ele.classList.add('active');
-                                });
-                            }
-                        }
-                    }
-                },
-
-                removeMessage(value) {
-                    this.messages = this.messages.filter((d) => d.id !== value);
-                },
-            }));
-        });
-        // elec script
-
-        // const clearCourse = (course, elements, category) => {
-        //     var query = document.getElementById(course).value; /* Value inputted by user */
-        //     var elements = document.getElementsByClassName(elements); /* Get the li elements in the list */
-        //     var myList = document.getElementById(category); /* Var to reference the list */
-        //     var length = (document.getElementsByClassName(element).length); /* # of li elements */
-        //     var checker = 'false'; /* boolean-ish value to determine if value was found */
-
-        //     myList.querySelectorAll('li').forEach(function(item) {
-        //         if (item.innerHTML.indexOf(query) !== -1)
-        //             item.remove();
-        //     });
-        // }
-
-        const clearCourse = (course) => {
-            console.log("courseList: ", courseList);
-            const index = courseList.indexOf(course.id);
-            let checkbox = $(`input[type="checkbox"][value=${course.id}]`);
-            if (index > -1) {
-                //uncheck el checkbox de la lista
-                checkbox.prop('checked', false);
-                console.log("el checkbox unchecked: ", checkbox);
-                courseList.splice(index, 1);
+        <script>
+            function showinfo() {
+                document.getElementById("info").style.display = 'block';
             }
-            course.remove();
-        }
 
-        const clearCourses = (courses) => {
-            document.getElementById(courses).innerHTML = "";
-        }
+            function hideinfo() {
+                document.getElementById("info").style.display = 'none';
+            }
 
-        document.addEventListener("alpine:init", () => {
-            Alpine.data("collapse", () => ({
-                collapse: false,
+            document.addEventListener('alpine:init', () => {
+                // main section
+                Alpine.data('scrollToTop', () => ({
+                    showTopButton: false,
+                    init() {
+                        window.onscroll = () => {
+                            this.scrollFunction();
+                        };
+                    },
 
-                collapseSidebar() {
-                    this.collapse = !this.collapse;
-                },
-            }));
+                    scrollFunction() {
+                        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                            this.showTopButton = true;
+                        } else {
+                            this.showTopButton = false;
+                        }
+                    },
 
-            Alpine.data("dropdown", (initialOpenState = false) => ({
-                open: initialOpenState,
+                    goToTop() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    },
+                }));
 
-                toggle() {
-                    this.open = !this.open;
-                },
-            }));
-        });
 
-        let courseList = [];
-        $(document).ready(() => {
-
-            $('input[type="checkbox"]').change(() => {
-
-                // Get all checked checkboxes
-                const checkedCheckboxes = $('input[type="checkbox"]:checked');
-                console.log("verificar if checked: ", checkedCheckboxes);
-                //lista de codigos de clases generales
-                const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
-
-                //verifica si hay clases selecccionadas con los checkboxes
-                if (checkedCheckboxes.length > 0) {
-                    //por cada checkbox seleccionado
-                    checkedCheckboxes.each((i, selectedCourse) => {
-                        //si la clase no existe en el array de clases seleccionadas la anade al array y al sidebar
-                        if (!courseList.includes(selectedCourse.value)) {
-                            console.log("each selected course: ", selectedCourse.value);
-                            const courseCode = selectedCourse.value;
-                            courseList.push(courseCode);
-
-                            let category = '';
-                            if (courseCode.startsWith("CCOM")) {
-                                category = $('#concentracion');
-                            } else if (generales.some(substr => courseCode.startsWith(substr))) {
-                                category = $('#generales');
-                            } else if (courseCode.startsWith("HUMA")) {
-                                category = $('#humanidades');
-                            } else if (courseCode.startsWith("CISO")) {
-                                category = $('#cienciasSociales');
+                // sidebar section
+                Alpine.data('sidebar', () => ({
+                    init() {
+                        const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
+                        if (selector) {
+                            selector.classList.add('active');
+                            const ul = selector.closest('ul.sub-menu');
+                            if (ul) {
+                                let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
+                                if (ele) {
+                                    ele = ele[0];
+                                    setTimeout(() => {
+                                        ele.click();
+                                    });
+                                }
                             }
-                            let html = `<li id=${courseCode}>
+                        }
+                    },
+                }));
+
+                // header section
+                Alpine.data('header', () => ({
+                    init() {
+                        const selector = document.querySelector('ul.horizontal-menu a[href="' + window.location.pathname + '"]');
+                        if (selector) {
+                            selector.classList.add('active');
+                            const ul = selector.closest('ul.sub-menu');
+                            if (ul) {
+                                let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
+                                if (ele) {
+                                    ele = ele[0];
+                                    setTimeout(() => {
+                                        ele.classList.add('active');
+                                    });
+                                }
+                            }
+                        }
+                    },
+
+                    removeMessage(value) {
+                        this.messages = this.messages.filter((d) => d.id !== value);
+                    },
+                }));
+            });
+            // elec script
+
+            // const clearCourse = (course, elements, category) => {
+            //     var query = document.getElementById(course).value; /* Value inputted by user */
+            //     var elements = document.getElementsByClassName(elements); /* Get the li elements in the list */
+            //     var myList = document.getElementById(category); /* Var to reference the list */
+            //     var length = (document.getElementsByClassName(element).length); /* # of li elements */
+            //     var checker = 'false'; /* boolean-ish value to determine if value was found */
+
+            //     myList.querySelectorAll('li').forEach(function(item) {
+            //         if (item.innerHTML.indexOf(query) !== -1)
+            //             item.remove();
+            //     });
+            // }
+
+            const clearCourse = (course) => {
+                console.log("courseList: ", courseList);
+                const index = courseList.indexOf(course.id);
+                let checkbox = $(`input[type="checkbox"][value=${course.id}]`);
+                if (index > -1) {
+                    //uncheck el checkbox de la lista
+                    checkbox.prop('checked', false);
+                    console.log("el checkbox unchecked: ", checkbox);
+                    courseList.splice(index, 1);
+                }
+                course.remove();
+            }
+
+            const clearCourses = (courses) => {
+                document.getElementById(courses).innerHTML = "";
+            }
+
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("collapse", () => ({
+                    collapse: false,
+
+                    collapseSidebar() {
+                        this.collapse = !this.collapse;
+                    },
+                }));
+
+                Alpine.data("dropdown", (initialOpenState = false) => ({
+                    open: initialOpenState,
+
+                    toggle() {
+                        this.open = !this.open;
+                    },
+                }));
+            });
+
+            let courseList = [];
+            $(document).ready(() => {
+
+                $('input[type="checkbox"]').change(() => {
+
+                    // Get all checked checkboxes
+                    const checkedCheckboxes = $('input[type="checkbox"]:checked');
+                    console.log("verificar if checked: ", checkedCheckboxes);
+                    //lista de codigos de clases generales
+                    const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
+
+                    //verifica si hay clases selecccionadas con los checkboxes
+                    if (checkedCheckboxes.length > 0) {
+                        //por cada checkbox seleccionado
+                        checkedCheckboxes.each((i, selectedCourse) => {
+                            //si la clase no existe en el array de clases seleccionadas la anade al array y al sidebar
+                            if (!courseList.includes(selectedCourse.value)) {
+                                console.log("each selected course: ", selectedCourse.value);
+                                const courseCode = selectedCourse.value;
+                                courseList.push(courseCode);
+
+                                let category = '';
+                                if (courseCode.startsWith("CCOM")) {
+                                    category = $('#concentracion');
+                                } else if (generales.some(substr => courseCode.startsWith(substr))) {
+                                    category = $('#generales');
+                                } else if (courseCode.startsWith("HUMA")) {
+                                    category = $('#humanidades');
+                                } else if (courseCode.startsWith("CISO")) {
+                                    category = $('#cienciasSociales');
+                                }
+                                let html = `<li id="${courseCode}">
                                 <h3 style="font-size: 12px;" class="justify-between -mx-4 mb-2 flex items-center  py-3 px-7 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]" style="text-size: 14px;">
                                 ${courseCode}
                                 <a onclick="clearCourse(${courseCode})"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -356,60 +347,61 @@ function readJson($path)
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5747 11.4815C14.9868 11.5249 15.2875 11.9118 15.2463 12.3456L14.7463 17.6088C14.7051 18.0426 14.3376 18.3592 13.9254 18.3158C13.5133 18.2724 13.2126 17.8855 13.2538 17.4517L13.7538 12.1885C13.795 11.7547 14.1625 11.4381 14.5747 11.4815Z" fill="currentColor" />
                                 </svg></a>
                                 </h3>
-                                <input type="hidden" name="selectedCoursesList[]" value=${courseCode}>
+                                <input type="hidden" name="selectedCoursesList[]" value="${courseCode}">
                             </li>`;
-                            category.append(html);
+                                category.append(html);
+                            }
+                        });
+
+                    }
+                    console.log("aquii: ", courseList);
+
+                    const UncheckedCheckboxes = $('input[type="checkbox"]:not(:checked)');
+                    console.log("verificar if not checked: ", UncheckedCheckboxes);
+                    UncheckedCheckboxes.each((i, notSelectedCourse) => {
+                        if (courseList.includes(notSelectedCourse.value)) {
+                            console.log("curso no seleccionado: ", notSelectedCourse.value);
+                            const course = $(`#${notSelectedCourse.value}`);
+                            console.log("li encontrado: ", course);
+                            const index = courseList.indexOf(notSelectedCourse.value);
+                            if (index > -1) {
+                                courseList.splice(index, 1);
+                            }
+                            course.remove();
                         }
                     });
 
-                }
 
-                const UncheckedCheckboxes = $('input[type="checkbox"]:not(:checked)');
-                console.log("verificar if not checked: ", UncheckedCheckboxes);
-                UncheckedCheckboxes.each((i, notSelectedCourse) => {
-                    if (courseList.includes(notSelectedCourse.value)) {
-                        console.log("curso no seleccionado: ", notSelectedCourse.value);
-                        const course = $(`#${notSelectedCourse.value}`);
-                        console.log("li encontrado: ", course);
-                        const index = courseList.indexOf(notSelectedCourse.value);
-                        if (index > -1) {
-                            courseList.splice(index, 1);
-                        }
-                        course.remove();
-                    }
                 });
 
 
             });
 
+            // document.addEventListener("DOMContentLoaded", () => {
+            //     //Necessary to check these buttons exist at moment of loading
+            //     // hook up click events for both buttons
+            //     //document.querySelector("#images/espresso_info.jpg").addEventListener("click", joinList("espresso"));
+            //     //$("#clear_form").addEventListener("click", clearForm);
+            //     document.querySelector(".elec").addEventListener("click") => {
+            //         document.getElementById("elec").innerHTML = "";
+            //     }
 
-        });
+            //     // set focus on first text box after the form loads
+            //     //$("#email_1").focus();
+            // });
+        </script>
+        <!-- dropdown script -->
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("dropdown", (initialOpenState = false) => ({
+                    open: initialOpenState,
 
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     //Necessary to check these buttons exist at moment of loading
-        //     // hook up click events for both buttons
-        //     //document.querySelector("#images/espresso_info.jpg").addEventListener("click", joinList("espresso"));
-        //     //$("#clear_form").addEventListener("click", clearForm);
-        //     document.querySelector(".elec").addEventListener("click") => {
-        //         document.getElementById("elec").innerHTML = "";
-        //     }
-
-        //     // set focus on first text box after the form loads
-        //     //$("#email_1").focus();
-        // });
-    </script>
-    <!-- dropdown script -->
-    <script>
-        document.addEventListener("alpine:init", () => {
-            Alpine.data("dropdown", (initialOpenState = false) => ({
-                open: initialOpenState,
-
-                toggle() {
-                    this.open = !this.open;
-                },
-            }));
-        });
-    </script>
+                    toggle() {
+                        this.open = !this.open;
+                    },
+                }));
+            });
+        </script>
 </body>
 
 </html>

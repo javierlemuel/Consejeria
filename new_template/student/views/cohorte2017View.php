@@ -1,11 +1,3 @@
-<?php
-function readJson($path)
-{
-    $jsonString = file_get_contents($path);
-    return json_decode($jsonString, true);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -71,7 +63,7 @@ function readJson($path)
                 <div>
                     <!-- start cohorte 2017 -->
                     <div class="mb-5" x-data="{ tab: '1'}">
-                        <h2>Cohorte 2017</h2>
+                        <h4 class="font-semibold text-2xl mb-4">Cohorte 2017</h4>
                         <!-- tabs-a~os -->
                         <div>
                             <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
@@ -98,7 +90,7 @@ function readJson($path)
                         <div class="flex-1 text-sm ">
                             <?php
                             $years = 4;
-                            $allCourses = readJson("cohort.json");
+                            //$allCourses = readJson("cohort.json");
 
                             for ($i = 1; $i <= $years; $i++) {
                                 echo "<template x-if=\"tab === '$i' \">
@@ -116,7 +108,7 @@ function readJson($path)
                                         </tr>
                                     </thead>
                                     <tbody>";
-
+                                //var_dump($allCourses);
                                 foreach ($allCourses as $course) {
                                     $code = $course["courseCode"];
                                     $name = $course["name"];
@@ -134,9 +126,9 @@ function readJson($path)
                                     }
                                 };
                                 echo "</tbody>
-                            </table>
-                        </div>
-                    </template>";
+                                </table>
+                                </div>
+                            </template>";
                             }
                             //second semester
                             for ($i = 1; $i <= $years; $i++) {

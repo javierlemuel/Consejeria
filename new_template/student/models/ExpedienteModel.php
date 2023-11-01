@@ -34,19 +34,41 @@ class StudentModel
         return $studentInfo;
     }
 
-    public function getStudentCourses($conn, $student_num)
+    public function getStudentCCOMCourses($conn, $student_num)
     {
-        $sql = "SELECT merged.crse_code, merged.name, merged.credits, student_courses.crse_grade, student_courses.crse_status, 
-                student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, merged.type
-        FROM (
-            SELECT *
-            FROM ccom_courses
-            UNION
-            SELECT *
-            FROM general_courses
-        ) AS merged
-        LEFT JOIN student_courses ON merged.crse_code = student_courses.crse_code
-        AND student_courses.student_num = ?";
+        $sql = "SELECT ccom_courses.crse_code, ccom_courses.name, ccom_courses.credits, student_courses.crse_grade, student_courses.crse_status, 
+                student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, ccom_courses.type
+        FROM ccom_courses
+        LEFT JOIN student_courses ON ccom_courses.crse_code = student_courses.crse_code
+        AND student_courses.student_num = ? WHERE ccom_courses.type = 'mandatory'";
+
+        $stmt = $conn->prepare($sql);
+
+        // sustituye el ? por el valor de $student_num
+        $stmt->bind_param("s", $student_num);
+
+        // ejecuta el statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        $studentRecord = [];
+        while ($row = $result->fetch_assoc()) {
+            $studentRecord[] = $row;
+        }
+        return $studentRecord;
+    }
+
+    public function getStudentGeneralCourses($conn, $student_num)
+    {
+        $sql = "SELECT general_courses.crse_code, general_courses.name, general_courses.credits, student_courses.crse_grade, student_courses.crse_status, 
+                        student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, general_courses.type
+                FROM general_courses
+                LEFT JOIN student_courses ON general_courses.crse_code = student_courses.crse_code
+                AND student_courses.student_num = ?";
 
         $stmt = $conn->prepare($sql);
 

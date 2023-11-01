@@ -91,7 +91,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]" style="background: linear-gradient(to right, #E2A03F, #000000); color: white;">
+                                <button type="submit" class="btn !mt-6 w-full border-0 text-white uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]" style="background-color: #2b2b2b;">
                                     Login
                                 </button>
                             </form>

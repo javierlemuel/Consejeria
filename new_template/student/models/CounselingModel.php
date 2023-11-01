@@ -116,43 +116,43 @@ class CounselingModel
         return $courses;
     }
 
-    public function insertCourse($conn, $student_num, $courses)
+
+    public function setCourses($conn, $student_num, $courses)
     {
         //var_dump($courses);
-        $placeholders = implode(',', array_fill(0, count($courses), '?'));
-        //echo $placeholders;
-        $sql = "SELECT * 
-                FROM offer 
-                WHERE crse_code IN ($placeholders)";
+        // $placeholders = implode(',', array_fill(0, count($courses), '?'));
+        // //echo $placeholders;
+        // $sql = "SELECT * 
+        //         FROM offer 
+        //         WHERE crse_code IN ($placeholders)";
 
-        $stmt = $conn->prepare($sql);
+        // $stmt = $conn->prepare($sql);
 
-        $types = str_repeat('s', count($courses)); // Assumes all values are strings
-        $stmt->bind_param($types, ...$courses);
-        // ejecuta el statement
-        $stmt->execute($courses);
-        $result = $stmt->get_result();
+        // $types = str_repeat('s', count($courses)); // Assumes all values are strings
+        // $stmt->bind_param($types, ...$courses);
+        // // ejecuta el statement
+        // $stmt->execute($courses);
+        // $result = $stmt->get_result();
 
-        if ($result === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }
+        // if ($result === false) {
+        //     throw new Exception("Error en la consulta SQL: " . $conn->error);
+        // }
 
-        $coursesArray = [];
-        while ($row = $result->fetch_assoc()) {
-            $coursesArray[] = $row;
-        }
+        // $coursesArray = [];
+        // while ($row = $result->fetch_assoc()) {
+        //     $coursesArray[] = $row;
+        // }
         //var_dump($coursesArray);
-        foreach ($coursesArray as $result) {
+        foreach ($courses as $course) {
             // Insert data into other tables
-            $code = $result['crse_code'];
-            $term = $result['term'];
+            $code = $course;
+            $term = 'BB1';
             //echo "\ncode: $code, \n term: $term  \n studentNum: $student_num";
 
             // Example insert statements (replace with your own)
             $sql = "INSERT INTO takes (student_num, crse_code, term) VALUES (?,?,?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $student_num, $code, $term);
-            $stmt->execute();
             if (!$stmt->execute()) {
                 throw new Exception("Error: " . $stmt->error);
             }

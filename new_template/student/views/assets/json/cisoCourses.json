@@ -1,0 +1,82 @@
+[
+    {
+      "courseCode": "ANTR3006",
+      "name": "Antropología Sociocultural",
+      "credits": 3
+    },
+    {
+      "courseCode": "CIPO3011",
+      "name": "Principios y Problemas de las Ciencias Políticas",
+      "credits": 3
+    },
+    {
+      "courseCode": "CISO 3122",
+      "name": "Introducción a Ciencias Sociales II",
+      "credits": 3
+    },
+    {
+      "courseCode": "CISO3121",
+      "name": "Introducción a Ciencias Sociales I",
+      "credits": 3
+    },
+    {
+      "courseCode": "CISO3155",
+      "name": "Fundamentos de Razonamiento Estadístico",
+      "credits": 3
+    },
+    {
+      "courseCode": "ECON3005",
+      "name": "Introducción a la Economía",
+      "credits": 3
+    },
+    {
+      "courseCode": "ECON3021",
+      "name": "Principios de Economía I",
+      "credits": 3
+    },
+    {
+      "courseCode": "ECON3022",
+      "name": "Principios de Economía II",
+      "credits": 3
+    },
+    {
+      "courseCode": "GEOG3155",
+      "name": "Elementos de Geografía",
+      "credits": 3
+    },
+    {
+      "courseCode": "PSIC3003",
+      "name": "Introducción a la Psicología",
+      "credits": 3
+    },
+    {
+      "courseCode": "PSIC3005",
+      "name": "Psicología General",
+      "credits": 3
+    },
+    {
+      "courseCode": "PSIC3006",
+      "name": "Psicología Social",
+      "credits": 3
+    },
+    {
+      "courseCode": "PSIC3048",
+      "name": "Dinámica de Grupo",
+      "credits": 3
+    },
+    {
+      "courseCode": "PSIC3116",
+      "name": "Psicología Industrial",
+      "credits": 3
+    },
+    {
+      "courseCode": "SOCI1001",
+      "name": "Fundamentos Sociológicos de la Educación Ambiental",
+      "credits": 3
+    },
+    {
+      "courseCode": "SOCI3245",
+      "name": "Principios de Sociología",
+      "credits": 3
+    }
+  ]

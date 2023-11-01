@@ -112,7 +112,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <p><?php echo $studentInfo["full_student_name"]; ?></p>
                                     </div>
                                     <div class="grid-cols-1">
-                                        <p><b>Año:</b></p>
+                                        <p><b>Año: </b>1</p>
                                     </div>
                                 </div>
                                 <div class="row flex">
@@ -123,7 +123,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <p><?php echo $studentInfo["formatted_student_num"]; ?></p>
                                     </div>
                                     <div class="grid-cols-1">
-                                        <p><b>Semestre:</b></p>
+                                        <p><b>Semestre: </b>2</p>
                                     </div>
                                 </div>
                                 <div class="row flex">
@@ -134,24 +134,25 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <p><?php echo $studentInfo["email"]; ?></p>
                                     </div>
                                     <div class="grid-cols-1">
-                                        <p><b>Creditos Recomendados:</b></p>
+                                        <p><b>Creditos Recomendados:</b> 14</p>
                                     </div>
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:70%;">
                                     </div>
                                     <div class="grid-cols-1">
-                                        <p><b>GPA Departamental:</b></p>
+                                        <p><b>GPA Departamental:</b> 4.00</p>
                                     </div>
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:70%;">
                                     </div>
                                     <div class="grid-cols-1">
-                                        <p><b>GPA General:</b></p>
+                                        <p><b>GPA General:</b> 3.50</p>
                                     </div>
                                 </div>
                                 <!-- start expediente table -->
+                                <!-- clases de concentracion -->
                                 <div class="table-responsive">
                                     <h4 class="font-semibold text-2xl mb-4">Cursos de Concentracion</h4>
                                     <table class="table-striped">
@@ -164,6 +165,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 <th class="text-center">Matriculado</th>
                                                 <th class="text-center">Recomendado</th>
                                                 <th class="text-center">Convalidacion</th>
+                                                <th class="text-center">Equivalencia</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -180,13 +182,33 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         else echo $ccomStudentCourse['term'] ?></td>
                                                     <td></td>
                                                     <td></td>
+                                                    <td><?php if ($ccomStudentCourse['equivalencia'] == 'NULL')
+                                                            echo '';
+                                                        else echo $ccomStudentCourse['equivalencia'] ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>
+                                                    <div>Creditos Departamentales:</div>
+                                                </th>
+                                                <th>
+                                                    <div>53</div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th class="p-3 text-center">
+                                                    <div></div>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
+                                <!-- clases generales -->
                                 <div class="table-responsive mt-5">
-                                    <h4 class="font-semibold text-2xl mb-4">Cursos Generales</h4>
+                                    <h4 class="font-semibold text-2xl my-4">Cursos Generales</h4>
                                     <table class="table-striped">
                                         <thead>
                                             <tr>
@@ -216,6 +238,114 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>
+                                                    <div>Creditos Generales:</div>
+                                                </th>
+                                                <th>
+                                                    <div>54</div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th class="p-3 text-center">
+                                                    <div></div>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- electivas departamentales -->
+                                <div class="table-responsive mt-5">
+                                    <h4 class="font-semibold text-2xl my-4">Electivas Departamentales</h4>
+                                    <table class="table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Curso</th>
+                                                <th>Descripcion</th>
+                                                <th>Creditos</th>
+                                                <th class="text-center">Notas</th>
+                                                <th class="text-center">Matriculado</th>
+                                                <th class="text-center">Recomendado</th>
+                                                <th class="text-center">Convalidacion</th>
+                                                <th class="text-center">Equivalencia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="whitespace-nowrap"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>
+                                                    <div>Creditos Electivas Departamentales:</div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th class="p-3 text-center">
+                                                    <div></div>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- electivas libres -->
+                                <div class="table-responsive mt-5">
+                                    <h4 class="font-semibold text-2xl my-4">Electivas Libres</h4>
+                                    <table class="table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Curso</th>
+                                                <th>Descripcion</th>
+                                                <th>Creditos</th>
+                                                <th class="text-center">Notas</th>
+                                                <th class="text-center">Matriculado</th>
+                                                <th class="text-center">Recomendado</th>
+                                                <th class="text-center">Convalidacion</th>
+                                                <th class="text-center">Equivalencia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="whitespace-nowrap"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>
+                                                    <div>Creditos Electivas Libres:</div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th>
+                                                    <div></div>
+                                                </th>
+                                                <th class="p-3 text-center">
+                                                    <div></div>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

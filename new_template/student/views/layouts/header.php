@@ -3,9 +3,9 @@
     <div class="shadow-sm">
         <div class="relative flex w-full items-center  px-5 py-2.5 dark:bg-[#0e1726]" style="background-color: #2b2b2b;">
             <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                <a href="index.html" class="main-logo flex shrink-0 items-center">
+                <a href="index.php?page=counseling" class="main-logo flex shrink-0 items-center">
                     <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/university.png" alt="image" />
-                    <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
+                    <span class="hidden align-middle text-white text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
                 </a>
 
                 <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
@@ -27,11 +27,11 @@
                     <li>
                         <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                             <button class="btn-link hover:text-primary text-lg font-bold relative" @click="toggle">
-                                Cohorte<!--<span class="dropdown-arrow"></span>-->
+                                Secuencia Curricular<!--<span class="dropdown-arrow"></span>-->
                             </button>
                             <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                <li><a href="index.php?page=cohorte2017" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2017</a></li>
-                                <li><a href="index.php?page=cohorte2022" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">2022</a></li>
+                                <li><a href="index.php?page=2017" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">Cohorte 2017</a></li>
+                                <li><a href="index.php?page=2022" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">Cohorte 2022</a></li>
                             </ul>
                         </div>
                     </li>
