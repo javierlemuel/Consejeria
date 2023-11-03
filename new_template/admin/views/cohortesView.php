@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -25,8 +24,8 @@
     <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
 
     <!-- screen loader -->
-    <div class="screen_loader animate__animated fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]">
-        <svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#4361ee">
+    <!-- <div class="screen_loader animate__animated fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]">
+        <svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#4361ee">
             <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite" />
             </path>
@@ -34,7 +33,7 @@
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s" repeatCount="indefinite" />
             </path>
         </svg>
-    </div>
+    </div> -->
 
     <!-- scroll to top button -->
     <div class="fixed bottom-6 z-50 ltr:right-6 rtl:left-6" x-data="scrollToTop">
@@ -57,11 +56,11 @@
             <!-- start header section -->
             <header class="z-40" :class="{'dark' : $store.app.semidark && $store.app.menu === 'horizontal'}">
                 <div class="shadow-sm">
-                    <div class="relative flex w-full items-center" style="background-color: #2b2b2b; padding: 5px 5px; dark:bg-[#0e1726]">
+                <div class="relative flex w-full items-center" style="background-color: #2b2b2b; padding: 5px 5px; dark:bg-[#0e1726]">
                         <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                            <a href="index.php" class="main-logo flex shrink-0 items-center">
+                            <a href="index.html" class="main-logo flex shrink-0 items-center">
                                 <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/university.png" alt="image" />
-                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 text-white dark:text-white-light md:inline">CONSEJERIA UPRA</span>
+                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
                             </a>
 
                             <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
@@ -75,6 +74,9 @@
                         <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
                             <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
                             </div>
+
+
+
                             <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                                 <a href="javascript:;" class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle()">
                                     <span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -86,115 +88,149 @@
                                 <!-- user-profile -->
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                    <form method="post" action="index.php">
-                                        <input type="hidden" name="signout" value="1">
-                                        <button type="submit" class="!py-3 text-danger">
+                                        <a href="login.php" class="!py-3 text-danger" @click="toggle">
                                             <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                                 <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             Sign Out
-                                        </button>
-                                    </form>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                     </ul>
                 </div>
             </header>
             <!-- end header section -->
-            <!-- start main content section -->
-            <div class="animate__animated p-6" :class="[$store.app.animation]">
-                <form action="index.php" class="space-y-5" method="POST">
-                    <input type="hidden" name="action" value="editStudent">
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="numeroEstu">Número de estudiante</label>
-                            <input type="text" name="numeroEstu" class="form-input" maxlength="9" value="<?php echo $studentData['student_num']; ?>" required readonly/>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="nombre">Nombre</label>
-                            <input id="nombre" name="nombre" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="nombre2">Segundo Nombre</label>
-                            <input name="nombre2" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="apellidoP">Apellido Paterno</label>
-                            <input name="apellidoP" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="apellidoM">Apellido Materno</label>
-                            <input name="apellidoM" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="email">Email</label>
-                            <input name="email" type="email" class="form-input" maxlength="40" value="<?php echo $studentData['email']; ?>" required />
-                        </div>
-                        <div>
-                            <label for="fechaNac">Fecha de nacimiento</label>
-                            <input type="date" name="fechaNac" class="form-input" value="<?php echo date('Y-m-d', strtotime($studentData['dob'])); ?>" required />
-                        </div>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="cohorte">Cohorte</label>
-                            <input type="text" name="cohorte" class="form-input" maxlength="4" value="<?php echo $studentData['cohort_year']; ?>" required />
+            <div class="animate__animated p-6" :class="[$store.app.animation]">
+                <!-- start main content section -->
+
+                <!-- Create new term button -->
+                <?php if (isset($_GET['message'])) { ?>
+                    <div style='padding: 15px 0' class="flex flex-wrap items-center justify-between gap-4">
+                            
+                                <?php if ($_GET['message'] == 'failure')
+                                        echo"<h2 style='color:red; bold' class='text-xl'>El cohorte ya existe!</h2>";
+                                     elseif ($_GET['message'] == "success") 
+                                        echo "<h2 style='color:limegreen; bold' class='text-xl'>Cohorte fue creado!</h2>";
+                                ?>
+                        <br>
+                    </div>
+                <?php } ?>
+                    
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                    <h2 class="text-xl">Cohortes</h2>
+                    <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+                    <div class="flex gap-3">
+                    <div x-data="modal">
+                <button type="button" class="btn btn-primary !mt-6" @click='toggle'>Crear cohorte nuevo</button>
+                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="open && '!block'">
+                    <div class="flex min-h-screen items-start justify-center px-4" @click.self="open = false">
+                        <div
+                            x-show="open"
+                            x-transition
+                            x-transition.duration.300
+                            class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
+                        >
+                            <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
+                                
+                            </div>
+                            <div class="p-5">
+                                <form action="?newcohort" method="POST">
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label for='cohort'>Year de cohorte nuevo</label>
+                                    <input style='color:black' min="2000" max="3000" name='cohort' type='number' placeholder='' required>
+                                </div>
+                                <div class="flex justify-center gap-4 p-5">
+
+                                    <button type="submit" class="btn dark:btn-dark bg-white text-black">Someter</button>
+                                </div>
+                                </form>
+                            </div>
                         </div>
-                        <div>
-                            <label for="minor">Minor</label>
-                            <select class="form-select text-white-dark" name="minor">
-                                <option value="0"<?php if ($studentData['minor'] == 0) echo 'selected'; ?>>N/A</option>
-                                <option value="1" <?php if ($studentData['minor'] == 1) echo 'selected'; ?>>Web Design</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="graduacion">Termino de graduacion</label>
-                            <input type="text" class="form-input" name="graduacion" maxlength="3" value="<?php echo $studentData['grad_term'] !== null ? $studentData['grad_term'] : ''; ?>" />
-                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="notaAdmin">Nota de Administrador (No visible para el estudiante)</label>
-                        <textarea name="notaAdmin" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['admin_note']; ?></textarea>
-                    </div>
-                    <div>
-                        <label for="notaEstudiante">Nota para Estudiante (Disponible para el estudiante)</label>
-                        <textarea name="notaEstudiante" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['student_note']; ?></textarea>
-                    </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="estatus">Estatus</label>
-                        <select class="form-select text-white-dark" name="estatus">
-                            <option value="Activo" <?php if ($studentData['status'] == "Activo") echo 'selected'; ?>>Activo</option>
-                            <option value="Inactivo" <?php if ($studentData['status'] == "Inactivo") echo 'selected'; ?>>Inactivo</option>
-                        </select>
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary !mt-6">Someter Cambios</button>
-                </form>
-                <button class="btn btn-danger !mt-6" onclick="window.location.href = 'index.php'">Cancelar</button>
+                </div>
             </div>
+                </div>
+                </div>
+                </div>
+        <br>
+
+                <!-- Classes -->
+                <div class="mb-5 flex flex-col sm:flex-row"> 
+
+
+    <div class='flex-1 text-sm'>
+    <div class="border border-[#d3d3d3] dark:border-[#1b2e4b] rounded">
+            <div class="p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
+            <div class="table-responsive">
+            <table style='text-align:center; font-size: 30px'>
+                <thead>
+                    <tr>
+                        <th style='text-align:center'>Año</th>
+                        <th style='text-align:center'></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+
+            <?php 
+
+            foreach ($cohortes as $year) { ?>
+        
+            <tr style='text-align:center'>
+
+                <td style='text-align:center'><?php echo $year ?></td>
+            
+                <td style='text-align:center'>
+                <a style='cursor: pointer' title='Editar Cohorte <?php echo $year ?>?' href='?cohort=<?php echo $year ?>&year=1'>
+                    <svg class='shrink-0 group-hover:!text-primary' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        opacity="0.5"
+                        d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
+                    <path
+                        d="M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                    <path
+                        opacity="0.5"
+                        d="M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                </svg>
+                </a>
+             </td>
+                                                         
+            </tr>
+            <?php } ?>
+    </tbody>
+            </table>
         </div>
     </div>
-    <!-- end main content section -->
+</div>   
+                                                
+                <!-- end main content section -->
 
-    </div>
+            </div>
 
-    <!-- start footer section -->
-    <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-        © <span id="footer-year">2022</span>. UPRA All rights reserved.
+            </div>
     </div>
-    <!-- end footer section -->
-    </div>
-    </div>
+            <!-- start footer section -->
+            <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
+                © <span id="footer-year">2022</span>. UPRA All rights reserved.
+            </div>
+            <!-- end footer section -->
+        
 
     <script src="assets/js/alpine-collaspe.min.js"></script>
     <script src="assets/js/alpine-persist.min.js"></script>
@@ -206,7 +242,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $("#sidebar").load("sidebar.php");
         });
 
@@ -318,8 +354,6 @@
                 
                 }));
         });
-
-        
     </script>
 </body>
 

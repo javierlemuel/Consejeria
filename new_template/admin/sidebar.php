@@ -17,7 +17,7 @@
                             class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold"
                             x-data="{ activeDropdown: null }"
                         >
-                            <li class="menu nav-item">
+                        <li class="menu nav-item">
                                 <button
                                     type="button"
                                     class="nav-link group"
@@ -51,20 +51,74 @@
                                     <li>
                                         <a href="index.php">Lista</a>
                                     </li>
-                                    <li>
-                                        <a href="index.php">Subir csv</a>
-                                    </li>
+                                    <div x-data="app">
+                                        <li>
+                                            <a @click="openUploadModal">Subir csv</a>
+                                        </li>
+                                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="showUploadModal ? '!block' : ''">
+                                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeUploadModal">
+                                                <div
+                                                    x-show="showUploadModal"
+                                                    x-transition
+                                                    x-transition.duration.300
+                                                    class="panel my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="absolute top-4 text-white-dark hover:text-dark ltr:right-4 rtl:left-4"
+                                                        @click="closeUploadModal"
+                                                    >
+                                                    <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24px"
+                                                            height="24px"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="1.5"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="h-6 w-6"
+                                                        >
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </button>
+                                                    <h3
+                                                        class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]"
+                                                    >
+                                                        Subir Archivo CSV
+                                                    </h3>
+                                                    <div class="p-5">
+                                                        <form @submit.prevent="submitForm">
+                                                            <div>
+                                                                <label for="csvfile">Subir el archivo .CSV con el formato requerido para añadir un estudiante.</label>
+                                                                <input
+                                                                    id="csvfile"
+                                                                    type="file"
+                                                                    class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary"
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div class="mt-8 flex items-center justify-end">
+                                                                <button type="button" class="btn btn-outline-danger" @click="closeUploadModal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">Subir</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ul>
                             </li>
-
                             
 
                             <li class="menu nav-item">
+                                <a href="?cohort">
                                 <button
                                     type="button"
                                     class="nav-link group"
-                                    :class="{'active' : activeDropdown === 'cohort'}"
-                                    @click="activeDropdown === 'students' ? activeDropdown = null : activeDropdown = 'cohort'"
                                 >
                                     <div class="flex items-center">
                                     <svg
@@ -88,28 +142,16 @@
 
                                         <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Cohortes</span>
                                     </div>
-                                    <div class="rtl:rotate-180" :class="{'!rotate-90' : activeDropdown === 'students'}">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
                                 </button>
-                                <ul x-cloak x-show="activeDropdown === 'cohort'" x-collapse class="sub-menu text-gray-500">
-                                    <li>
-                                        <a href="crear_cohorte.php">Crear</a>
-                                    </li>
-                                    <li>
-                                        <a href="editar_cohorte.php">Editar</a>
-                                    </li>
-                                </ul>
+                                </a>
                             </li>
 
                             <li class="menu nav-item">
+                                <a href="?classes">
                                 <button
                                     type="button"
                                     class="nav-link group"
-                                    :class="{'active' : activeDropdown === 'classes'}"
-                                    @click="activeDropdown === 'students' ? activeDropdown = null : activeDropdown = 'classes'"
+                                    @click="?classes"
                                 >
                                     <div class="flex items-center">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,24 +173,88 @@
 
                                         <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Clases</span>
                                     </div>
-                                    <div class="rtl:rotate-180" :class="{'!rotate-90' : activeDropdown === 'students'}">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                </button>
+                            </a>
+                            </li>
+
+                            <li class="menu nav-item">
+                                <a href="?reports">
+                                <button
+                                    type="button"
+                                    class="nav-link group"
+                                    @click="?reports"
+                                >
+                                    <div class="flex items-center">
+                                    <svg
+                                                    class="shrink-0 group-hover:!text-primary"
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        opacity="0.5"
+                                                        d="M21 15.9983V9.99826C21 7.16983 21 5.75562 20.1213 4.87694C19.3529 4.10856 18.175 4.01211 16 4H8C5.82497 4.01211 4.64706 4.10856 3.87868 4.87694C3 5.75562 3 7.16983 3 9.99826V15.9983C3 18.8267 3 20.2409 3.87868 21.1196C4.75736 21.9983 6.17157 21.9983 9 21.9983H15C17.8284 21.9983 19.2426 21.9983 20.1213 21.1196C21 20.2409 21 18.8267 21 15.9983Z"
+                                                        fill="currentColor"
+                                                    />
+                                                    <path
+                                                        d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z"
+                                                        fill="currentColor"
+                                                    />
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M12 9.25C12.4142 9.25 12.75 9.58579 12.75 10V12.25L15 12.25C15.4142 12.25 15.75 12.5858 15.75 13C15.75 13.4142 15.4142 13.75 15 13.75L12.75 13.75L12.75 16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16L11.25 13.75H9C8.58579 13.75 8.25 13.4142 8.25 13C8.25 12.5858 8.58579 12.25 9 12.25L11.25 12.25L11.25 10C11.25 9.58579 11.5858 9.25 12 9.25Z"
+                                                        fill="currentColor"
+                                                    />
+                                                </svg>
+
+                                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Reportes</span>
                                     </div>
                                 </button>
-                                <ul x-cloak x-show="activeDropdown === 'classes'" x-collapse class="sub-menu text-gray-500">
-                                    <li>
-                                        <a href="clases.php">Ver clases</a>
-                                    </li>
-                                    <li>
-                                        <a href="crear_clase.php">Crear clases</a>
-                                    </li>
-                                    <!-- <li>
-                                        <a href="crear_clase.php">Crear clase</a>
-                                    </li> -->
-                                </ul>
+                            </a>
                             </li>
+
+                            <li class="menu nav-item">
+                                <a href="?minor">
+                                <button
+                                    type="button"
+                                    class="nav-link group"
+                                    @click="?minor"
+                                >
+                                    <div class="flex items-center">
+                                    <svg
+                                                    class="shrink-0 group-hover:!text-primary"
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        opacity="0.5"
+                                                        d="M21 15.9983V9.99826C21 7.16983 21 5.75562 20.1213 4.87694C19.3529 4.10856 18.175 4.01211 16 4H8C5.82497 4.01211 4.64706 4.10856 3.87868 4.87694C3 5.75562 3 7.16983 3 9.99826V15.9983C3 18.8267 3 20.2409 3.87868 21.1196C4.75736 21.9983 6.17157 21.9983 9 21.9983H15C17.8284 21.9983 19.2426 21.9983 20.1213 21.1196C21 20.2409 21 18.8267 21 15.9983Z"
+                                                        fill="currentColor"
+                                                    />
+                                                    <path
+                                                        d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z"
+                                                        fill="currentColor"
+                                                    />
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M12 9.25C12.4142 9.25 12.75 9.58579 12.75 10V12.25L15 12.25C15.4142 12.25 15.75 12.5858 15.75 13C15.75 13.4142 15.4142 13.75 15 13.75L12.75 13.75L12.75 16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16L11.25 13.75H9C8.58579 13.75 8.25 13.4142 8.25 13C8.25 12.5858 8.58579 12.25 9 12.25L11.25 12.25L11.25 10C11.25 9.58579 11.5858 9.25 12 9.25Z"
+                                                        fill="currentColor"
+                                                    />
+                                                </svg>
+
+                                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Minors</span>
+                                    </div>
+                                </button>
+                            </a>
+                            </li>
+
 
 
                             
@@ -161,3 +267,47 @@
                 </div>
             </nav>
         </div>
+
+
+
+    
+    <script>
+
+
+        document.addEventListener("alpine:init", () => {
+            Alpine.data("dropdown", (initialOpenState = false) => ({
+                open: initialOpenState,
+
+                toggle() {
+                    this.open = !this.open;
+                },
+            }));
+
+            Alpine.data('app', () => ({
+                    showUploadModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openUploadModal() {
+                        this.showUploadModal = true;
+                    },
+                    closeUploadModal() {
+                        this.showUploadModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showUploadModal = false;
+                    },
+                
+                }));
+            });
+            
+ 
+    </script>
