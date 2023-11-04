@@ -8,7 +8,6 @@ class CounselingController
     public function index()
     {
         $selectedCourses = "";
-        $value = "*";
         global $conn;
         $counselingModel = new CounselingModel();
         if (session_status() == PHP_SESSION_NONE) {
@@ -49,12 +48,11 @@ class CounselingController
             //$_SESSION['selectedCourses'] = $_POST['selectedCoursesList'];
 
             $selectedCourses = $_POST['selectedCoursesList'];
-            $value = $_POST['selectedCourseList'][0];
 
             // Save selected courses to the database using the Model
             $counselingModel->setCourses($conn, $student_num, $selectedCourses);
 
-            header("Location: ../index.php?value=" . count($selectedCourses) . "");
+            header("Location: ../index.php");
             exit;
         }
 

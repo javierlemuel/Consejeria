@@ -26,7 +26,7 @@
 
                     <li>
                         <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                            <button class="btn-link hover:text-primary text-lg font-bold relative" @click="toggle">
+                            <button class="btn-link hover:text-primary  hover:border-primary  text-lg font-bold relative" @click="toggle">
                                 Secuencia Curricular<!--<span class="dropdown-arrow"></span>-->
                             </button>
                             <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">

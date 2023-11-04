@@ -71,13 +71,6 @@
                     <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button>
 
                 </form>
-                <?php if (isset($_SESSION['selectedCourses'])) {
-                    //echo $selectedCourses;
-                    //var_dump($test);
-                    printf($value);
-                    //var_dump($_SESSION['selectedCourses']);
-                }
-                ?>
 
             </ul>
         </div>
