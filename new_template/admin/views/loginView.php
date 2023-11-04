@@ -43,7 +43,7 @@
                     <div class="relative flex flex-col justify-center rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 px-6 lg:min-h-[758px] py-20">
                         <div class="mx-auto w-full max-w-[440px]">
                             <div class="mb-10">
-                                <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl" style="color: #E2A03F;">Iniciar Sesion</h1>
+                                <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl" style="color: #2b2b2b;">Iniciar Sesion</h1>
                                 <p class="text-base font-bold leading-normal text-white-dark">Entra tu correo electronico y contraseña.</p>
                             </div>
                             <form class="space-y-5 dark:text-white" method="post" action="controllers/loginController.php">
@@ -67,7 +67,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]" style="background: linear-gradient(to right, #E2A03F, #000000); color: white;">
+                                <button type="submit" class="btn !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]" style="background: #2b2b2b; color: white;">
                                     Login
                                 </button>
                             </form>

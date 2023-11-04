@@ -1,3 +1,5 @@
+<?php echo 'hi' ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -13,7 +15,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -57,11 +58,11 @@
             <!-- start header section -->
             <header class="z-40" :class="{'dark' : $store.app.semidark && $store.app.menu === 'horizontal'}">
                 <div class="shadow-sm">
-                    <div class="relative flex w-full items-center" style="background-color: #2b2b2b; padding: 5px 5px; dark:bg-[#0e1726]">
+                <div class="relative flex w-full items-center" style="background-color: #2b2b2b; padding: 5px 5px; dark:bg-[#0e1726]">
                         <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                            <a href="index.php" class="main-logo flex shrink-0 items-center">
+                            <a href="index.html" class="main-logo flex shrink-0 items-center">
                                 <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/university.png" alt="image" />
-                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 text-white dark:text-white-light md:inline">CONSEJERIA UPRA</span>
+                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
                             </a>
 
                             <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
@@ -75,6 +76,8 @@
                         <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
                             <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
                             </div>
+
+
                             <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                                 <a href="javascript:;" class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle()">
                                     <span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -86,114 +89,120 @@
                                 <!-- user-profile -->
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                    <form method="post" action="index.php">
-                                        <input type="hidden" name="signout" value="1">
-                                        <button type="submit" class="!py-3 text-danger">
+                                        <a href="login.php" class="!py-3 text-danger" @click="toggle">
                                             <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                                 <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             Sign Out
-                                        </button>
-                                    </form>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                     </ul>
                 </div>
             </header>
             <!-- end header section -->
-            <!-- start main content section -->
-            <div class="animate__animated p-6" :class="[$store.app.animation]">
-                <form action="index.php" class="space-y-5" method="POST">
-                    <input type="hidden" name="action" value="editStudent">
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="numeroEstu">Número de estudiante</label>
-                            <input type="text" name="numeroEstu" class="form-input" maxlength="9" value="<?php echo $studentData['student_num']; ?>" required readonly/>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="nombre">Nombre</label>
-                            <input id="nombre" name="nombre" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="nombre2">Segundo Nombre</label>
-                            <input name="nombre2" type="text" class="form-input" maxlength="15" value="<?php echo $studentData['name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="apellidoP">Apellido Paterno</label>
-                            <input name="apellidoP" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name1']; ?>" required/>
-                        </div>
-                        <div>
-                            <label for="apellidoM">Apellido Materno</label>
-                            <input name="apellidoM" type="text" class="form-input" maxlength="20" value="<?php echo $studentData['last_name2']; ?>"/>
-                        </div>
-                        <div>
-                            <label for="email">Email</label>
-                            <input name="email" type="email" class="form-input" maxlength="40" value="<?php echo $studentData['email']; ?>" required />
-                        </div>
-                        <div>
-                            <label for="fechaNac">Fecha de nacimiento</label>
-                            <input type="date" name="fechaNac" class="form-input" value="<?php echo date('Y-m-d', strtotime($studentData['dob'])); ?>" required />
-                        </div>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div>
-                            <label for="cohorte">Cohorte</label>
-                            <input type="text" name="cohorte" class="form-input" maxlength="4" value="<?php echo $studentData['cohort_year']; ?>" required />
-                        </div>
-                        <div>
-                            <label for="minor">Minor</label>
-                            <select class="form-select text-white-dark" name="minor">
-                                <option value="0"<?php if ($studentData['minor'] == 0) echo 'selected'; ?>>N/A</option>
-                                <option value="1" <?php if ($studentData['minor'] == 1) echo 'selected'; ?>>Web Design</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="graduacion">Termino de graduacion</label>
-                            <input type="text" class="form-input" name="graduacion" maxlength="3" value="<?php echo $studentData['grad_term'] !== null ? $studentData['grad_term'] : ''; ?>" />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="notaAdmin">Nota de Administrador (No visible para el estudiante)</label>
-                        <textarea name="notaAdmin" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['admin_note']; ?></textarea>
-                    </div>
-                    <div>
-                        <label for="notaEstudiante">Nota para Estudiante (Disponible para el estudiante)</label>
-                        <textarea name="notaEstudiante" class="form-input" rows="5" cols="40" maxlength="150"><?php echo $studentData['student_note']; ?></textarea>
-                    </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label for="estatus">Estatus</label>
-                        <select class="form-select text-white-dark" name="estatus">
-                            <option value="Activo" <?php if ($studentData['status'] == "Activo") echo 'selected'; ?>>Activo</option>
-                            <option value="Inactivo" <?php if ($studentData['status'] == "Inactivo") echo 'selected'; ?>>Inactivo</option>
-                        </select>
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary !mt-6">Someter Cambios</button>
-                </form>
-                <button class="btn btn-danger !mt-6" onclick="window.location.href = 'index.php'">Cancelar</button>
-            </div>
+            <div class="animate__animated p-6" :class="[$store.app.animation]">
+               
+
+
+
+
+
+<?php if(isset($_GET['error'])){ ?>
+        <h1 style='font-size: 20px; font-weight: bold; color: red'>ERROR: Ese código de curso ya existe!!</h1><br>
+<?php } ?>
+   
+
+        <form class="space-y-5" action="?createclass&code=<?php echo $courseType ?>" method="POST">
+    <h1 style='font-size: 20px; font-weight: bold'>Nuevo curso de tipo: <?php echo $courseType ?></h1><br>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
+        <div>
+            <label for="code">Código</label>
+            <input name="code" type="text" value="" class="form-input" required/>
+        </div>
+        <div>
+            <label for="name">Nombre</label>
+            <input name="name" type="text" value="" class="form-input" required/>
+        </div>
+        <div>
+        <label for="cred">Créditos</label>
+        <input name="cred" type="text" class="form-input" required />
         </div>
     </div>
-    <!-- end main content section -->
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
+        <div>
+            <label for="type">Tipo</label>
+            <select name="type" class="form-select text-white-dark">
+                <?php if($courseType == 'CCOM') { ?>
+                <option value='mandatory' selected>Curso requerido</option>
+                <option value='elective' >Electiva</option>
+                <option value='1' >Web Design</option>
+                <?php } 
+                else { ?>
+                    <option value='ESPA' >Español</option>
+                    <option value='INGL' >Inglés</option>
+                    <option value='MATE' >Matemáticas</option>
+                    <option value='FISI' >Física</option>
+                    <option value='CIBI' >Ciencias Biólogicas</option>
+                    <option value='CISO' >Ciencias Sociales</option>
+                    <option value='HUMA' >Humanidades</option>
+                <?php } ?>
+            </select>
+        </div>
+        <div>
+            <?php if($courseType == 'CCOM') { ?>
+            <label for="level">Level</label>
+            <select name='level' class="form-select text-white-dark">
+                <option value='NULL' >NULL</option>
+                <option value='intermediate' >Intermedia</option>
+                <option value='advanced' >Avanzada</option>
+            </select>
+            <?php } else { ?>
+                <label for='required'>¿General Requerida?</label>
+                <select name='required' class="form-select text-white-dark">
+                    <option value='1' >Sí</option>
+                    <option value='0' >No</option>
+                </select>
+            <?php } ?>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary !mt-6">Someter</button>
 
-    </div>
+    </form>
 
-    <!-- start footer section -->
-    <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-        © <span id="footer-year">2022</span>. UPRA All rights reserved.
-    </div>
-    <!-- end footer section -->
-    </div>
+</div>
+
+                        
+</div>          
+                        
+                    <!-- forms grid -->
+
+                </div>
+
+                
+                </div>
+            </div>
+                                                
+                <!-- end main content section -->
+
+            </div>
+
+            <!-- start footer section -->
+            <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
+                © <span id="footer-year">2022</span>. UPRA All rights reserved.
+            </div>
+            <!-- end footer section -->
+        </div>
     </div>
 
     <script src="assets/js/alpine-collaspe.min.js"></script>
@@ -203,11 +212,12 @@
     <script defer src="assets/js/alpine.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
+    <!-- <script src="assets/js/courses.js"></script> -->
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $("#sidebar").load("sidebar.php");
+            $("#createclass").load("crear_clase.php");
         });
 
         document.addEventListener('alpine:init', () => {
@@ -234,6 +244,30 @@
                 },
             }));
 
+            Alpine.data('app', () => ({
+                    showUploadModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openUploadModal() {
+                        this.showUploadModal = true;
+                    },
+                    closeUploadModal() {
+                        this.showUploadModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showUploadModal = false;
+                    },
+                }));
+
 
             // sidebar section
             Alpine.data('sidebar', () => ({
@@ -255,6 +289,30 @@
                 },
             }));
 
+            Alpine.data('app2', () => ({
+                    showClassModal: false,
+                    formData: {
+                        file: null,
+                    },
+                    openClassModal() {
+                        this.showClassModal = true;
+                    },
+                    closeClassModal() {
+                        this.showClassModal = false;
+                    },
+                    submitForm() {
+                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
+                        // Luego, cierra el modal.
+                        if (this.formData.file) {
+                            console.log("Archivo seleccionado:", this.formData.file);
+                            // Aquí puedes realizar las acciones necesarias con el archivo.
+                        } else {
+                            console.log("Ningún archivo seleccionado.");
+                        }
+                        this.showClassModal = false;
+                    },
+                }));
+
             // header section
             Alpine.data('header', () => ({
                 init() {
@@ -273,6 +331,7 @@
                         }
                     }
                 },
+
             }));
         });
 
@@ -319,7 +378,6 @@
                 }));
         });
 
-        
     </script>
 </body>
 
