@@ -64,7 +64,7 @@ class CounselingModel
     public function getStudentInfo($conn, $student_num)
     {
 
-        $sql = "SELECT name1, name2, last_name1, last_name2, email  
+        $sql = "SELECT name1, name2, last_name1, last_name2, email, student_note  
                 FROM student 
                 WHERE student_num = ?";
 

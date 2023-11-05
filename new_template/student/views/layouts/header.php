@@ -63,34 +63,21 @@
                                 <h4 class="relative z-10 text-lg font-semibold">Mensajes</h4>
                             </div>
                         </li>
-                        <template x-for="msg in messages">
-                            <li>
-                                <div class="flex items-center px-5 py-3" @click.self="toggle">
-                                    <div x-html="msg.image"></div>
-                                    <span class="px-3 dark:text-gray-500">
-                                        <div class="text-sm font-semibold dark:text-white-light/90">Dra. Valenzuela, Consejera</div>
-                                        <div>Solicitar equivalencia de HUMA1234 como electiva libre.</div>
-                                    </span>
-                                    <!-- <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span> -->
-                                    <button type="button" class="text-neutral-300 hover:text-danger" @click="removeMessage(msg.id)">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-                                            <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </li>
-                        </template>
-                        <!-- <template x-if="messages.length">
-                                        <li class="mt-5 border-t border-white-light text-center dark:border-white/10">
-                                            <div class="group flex cursor-pointer items-center justify-center px-4 py-4 font-semibold text-primary dark:text-gray-400" @click="toggle">
-                                                <span class="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
-                                                <svg class="h-4 w-4 transition duration-300 group-hover:translate-x-1 ltr:ml-1 rtl:mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </li>
-                                    </template> -->
+                        <li>
+                            <div class="flex items-center px-5 py-3" @click.self="toggle">
+                                <span class="px-3 dark:text-gray-500">
+                                    <div class="text-sm font-semibold dark:text-white-light/90">Dra. Valenzuela, Consejera</div>
+                                    <div><?php echo $_SESSION['student_note'] ?></div>
+                                </span>
+                                <!-- <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span> -->
+                                <!-- <button type="button" class="text-neutral-300 hover:text-danger" @click="removeMessage(msg.id)">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                                        <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                </button> -->
+                            </div>
+                        </li>
                         <template x-if="!messages.length">
                             <li class="mb-5">
                                 <div class="!grid min-h-[200px] place-content-center text-lg hover:!bg-transparent">
@@ -119,16 +106,16 @@
                     <!-- user-profile -->
                     <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                         <li class="border-t border-white-light dark:border-white-light/10">
-                        <form method="post" action="index.php">
-                                        <input type="hidden" name="signout" value="1">
-                                        <button type="submit" class="!py-3 text-danger">
-                                            <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                                <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Sign Out
-                                        </button>
-                                    </form>
+                            <form method="post" action="index.php">
+                                <input type="hidden" name="signout" value="1">
+                                <button type="submit" class="!py-3 text-danger">
+                                    <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    Sign Out
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

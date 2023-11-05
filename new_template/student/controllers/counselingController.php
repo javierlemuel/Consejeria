@@ -35,6 +35,7 @@ class CounselingController
             $_SESSION['full_student_name'] = $studentInfo['full_student_name'];
             $_SESSION['formatted_student_num'] = $studentInfo['formatted_student_num'];
             $_SESSION['email'] = $studentInfo['email'];
+            $_SESSION['student_note'] = $studentInfo['student_note'];
         }
 
         if (isset($_POST['selectedCoursesList'])) {
