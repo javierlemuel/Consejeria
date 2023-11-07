@@ -303,6 +303,7 @@
                                         <th>Consejeria</th>
                                         <th>Estatus</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -329,6 +330,13 @@
                                                     <input type="hidden" name="action" value="selecteStudent">
                                                     <input type="hidden" name="student_num" value="<?= $student['student_num'] ?>">
                                                     <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2" x-text="params.id ? 'Update' : 'Editar'"></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="POST" action="index.php">
+                                                    <input type="hidden" name="action" value="studentCounseling">
+                                                    <input type="hidden" name="student_num" value="<?= $student['student_num'] ?>">
+                                                    <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2" x-text="params.id ? 'Update' : 'Consejeria'"></button>
                                                 </form>
                                             </td>
                                         </tr>

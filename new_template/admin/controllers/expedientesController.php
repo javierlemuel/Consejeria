@@ -55,6 +55,13 @@ class ExpedientesController {
                 require_once(__DIR__ . '/../views/editStudentView.php');
                 return;
             }
+            elseif ($action === 'studentCounseling')
+            {
+                $student_num = $_POST['student_num'];
+                $studentData = $studentModel->selectStudent($student_num, $conn);
+                require_once(__DIR__ . '/../views/counseling.php');
+                return;
+            }
         }
 
         // Parámetros de paginación
