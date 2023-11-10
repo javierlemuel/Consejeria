@@ -65,7 +65,7 @@ class ExpedientesController {
         }
 
         // Parámetros de paginación
-        $studentsPerPage = 2; // Cambia esto al número deseado
+        $studentsPerPage = 8; // Cambia esto al número deseado
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         // Obtener los parámetros del filtro de estado y búsqueda
