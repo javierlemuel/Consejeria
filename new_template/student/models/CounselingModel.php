@@ -5,20 +5,25 @@ class CounselingModel
     public function getRecommendedCourses($conn, $student_num)
     {
 
-        $sql = "SELECT gc.*
+        $sql = "SELECT gc.crse_code, gc.name, gc.credits
                 FROM recommended_courses rc
                 JOIN general_courses gc ON rc.crse_code = gc.crse_code
                 WHERE rc.student_num = ?
                 UNION
-                SELECT cc.*
+                SELECT cc.crse_code, cc.name, cc.credits
                 FROM recommended_courses rc
                 JOIN ccom_courses cc ON rc.crse_code = cc.crse_code
+                WHERE rc.student_num = ?
+                UNION
+                SELECT dc.crse_code, dc.name, dc.credits
+                FROM recommended_courses rc
+                JOIN dummy_courses dc ON rc.crse_code = dc.crse_code
                 WHERE rc.student_num = ?";
 
         $stmt = $conn->prepare($sql);
 
         // sustituye el ? por el valor de $student_num
-        $stmt->bind_param("ss", $student_num, $student_num);
+        $stmt->bind_param("sss", $student_num, $student_num, $student_num);
 
         // ejecuta el statement
         $stmt->execute();
