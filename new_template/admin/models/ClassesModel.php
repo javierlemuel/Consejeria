@@ -26,6 +26,36 @@ class ClassesModel {
         return $result;
     }
 
+    public function getCcomCoursesE($conn)
+    {
+        $sql = "SELECT crse_code, name, credits
+                FROM ccom_courses 
+                WHERE type = 'mandatory' 
+                ORDER BY crse_code ASC";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        $courses = array();
+
+        // Iteramos sobre las filas y almacenamos los resultados en el array
+        while ($row = $result->fetch_assoc()) {
+            $courses[] = array(
+                'crse_code' => $row['crse_code'],
+                'name' => $row['name'],
+                'credits' => $row['credits']
+            );
+        }
+
+        // Liberamos el resultado
+        $result->free_result();
+
+        return $courses;
+    }
+
     public function getCcomElectives($conn)
     {
         $sql = "SELECT *

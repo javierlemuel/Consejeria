@@ -57,9 +57,14 @@ class ExpedientesController {
             }
             elseif ($action === 'studentCounseling')
             {
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
+
                 $student_num = $_POST['student_num'];
                 $studentData = $studentModel->selectStudent($student_num, $conn);
-                require_once(__DIR__ . '/../views/counseling.php');
+                $mandatoryClasses = $classesModel->getCcomCoursesE($conn);
+
+                require_once(__DIR__ . '/../views/counselingView.php');
                 return;
             }
         }

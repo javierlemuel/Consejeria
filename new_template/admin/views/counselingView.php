@@ -108,190 +108,119 @@
 
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
-                <!-- <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: '2017'}"> Cambiamos 'tab' a 'info' por defecto -->
-                <!-- buttons -->
-                <!-- <div class="mx-10 mb-5 sm:mb-0">
-                    <ul class="w-24 m-auto text-center font-semibold">
-                        <li>
-                            </li>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === '2017'}" @click="tab='2017'">2017</a>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === '2022'}" @click="tab='2022'">2022</a>
-                        </li>
-                    </ul>
-                </div> -->
-
-                <!-- description -->
                 <div class="flex-1 text-sm ">
                     <div>
-                        <!-- start cohort 2017 -->
-                        <div x-data="{ tab1: null }">
-                            <!-- start cohort 2017 -->
-                            <?php
-                            $path = 's_expediente.json';
-                            $jsonString = file_get_contents($path);
-                            $jsonData = json_decode($jsonString, true);
+                        <!-- Vertical line tabs -->
+                        <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
+                            <!-- buttons -->
+                            <div class="mx-10 mb-5 sm:mb-0">
+                                <ul class="w-24 m-auto text-center font-semibold">
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'mandatory'}" @click="tab='mandatory'">CCCOM Mandatorias</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'elective'}" @click="tab='elective'">CCOM Electivas</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'general'}" @click="tab='general'">Generales</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                            echo "<div class='mb-5'>
-            <!-- tabs-años -->
-            <div>
-                <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
-
-                            // Generate the outer year tabs
-                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-                                if ($yearTitle !== 'Electivas') {
-                                    echo "<li>
-                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                        @click='tab1 = \"$yearTitle\"'>
-                        " . strtoupper($yearTitle) . " AÑO
-                    </a>
-                </li>";
-                                } else {
-                                    echo "<li>
-                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                        @click='tab1 = \"$yearTitle\"'>
-                        " . strtoupper($yearTitle) . "
-                    </a>
-                </li>";
-                                }
-                            }
-
-                            echo "</ul>
-        </div>";
-
-                            // Display data for the selected year
-                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-                                echo "<div x-show='tab1 === \"$yearTitle\"'>
-                ";
-
-
-
-                                foreach ($yearData as $semesterTitle => $semesterCourses) {
-                                    echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
-                    " . strtoupper($semesterTitle);
-
-                                    if ($semesterTitle !== "") {
-                                        echo " SEMESTRE
-                </div>";
-                                    } else {
-                                        echo "</div>";
-                                    }
-
-                                    echo "<table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>CODIGO</th>
-                        <th>NOMBRE</th>
-                        <th>CREDITOS</th>
-                        <th>NOTA</th>
-                        <th>SEMESTRE</th>
-                        <th>EQUIVALENCIA</th>
-                        <th>CONVALIDACION</th>
-                    </tr>
-                </thead>
-                <tbody>";
-                                    foreach ($semesterCourses as $course) {
-                                        echo "<tr>
-                        <td><input type='checkbox'></td>
-                        <td class='whitespace-normal'>" . $course['code'] . "</td>
-                        <td>" . $course['name'] . "</td>
-                        <td>" . $course['credits'] . "</td>
-                        <td>" . $course['nota'] . "</td>
-                        <td>" . $course['semestre'] . "</td>
-                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='" . $course['equivalencia'] . "'> </td>
-                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='" . $course['convalidacion'] . "'> </td>
-                    </tr>";
-                                    }
-
-
-                                    echo "</tbody>
-            </table>";
-                                }
-                                echo "</div>";
-                            }
-                            ?>
+                            <!-- description -->
+                            <div class="flex-1 text-sm ">
+                                <div x-show="tab === 'mandatory'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($mandatoryClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div x-show="tab === 'elective'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='checkbox' name='seleccion[]' value='CCOMXXXX'></td>
+                                                    <td>CCOMXXXX</td>
+                                                    <td>Clases Electivas Intermedia</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type='checkbox' name='seleccion[]' value='CCOMXXXX'></td>
+                                                    <td>CCOMXXXX</td>
+                                                    <td>Clases Electivas Avanzada</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div x-show="tab === 'general'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                    <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='checkbox' name='seleccion[]' value='HUMAXXXX'></td>
+                                                    <td>HUMAXXXX</td>
+                                                    <td>Clase General de Humanidades</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type='checkbox' name='seleccion[]' value='CISOXXX'></td>
+                                                    <td>CISOXXXX</td>
+                                                    <td>Clase General de Ciencias Sociales</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'concentracion'}"> <!-- Cambiamos 'tab' a 'info' por defecto -->
-                <!-- buttons -->
-                <div class="mx-10 mb-5 sm:mb-0">
-                    <ul class="w-24 m-auto text-center font-semibold">
-                        <li>
-                            </li>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'concentracion'}" @click="tab='concentracion'">Cursos de CCOM</a>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'electivas'}" @click="tab='electivas'">Electivas CCOM</a>
-                        </li>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'electivas'}" @click="tab='electivas'">Generales</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <?php 
-$path = 'courses.json';
-$jsonString = file_get_contents($path);
-$jsonData = json_decode($jsonString, true);
-
-$courseCategories = array("concentracion", "electivas", "generales");
-
-for ($i = 0; $i < count($courseCategories); $i++) {
-    echo "<div class='flex-1 text-sm' x-show='tab === \"" . $courseCategories[$i] . "\"'>";
-    echo "<div class=\"border border-[#d3d3d3] dark:border-[#1b2e4b] rounded\">
-            <div class=\"p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]\">
-            <div class=\"table-responsive\">
-            <table style='text-align:center'>
-                <thead>
-                    <tr>
-                        <th style='text-align:center'>Codigo</th>
-                        <th style='text-align:center'>Nombre</th>
-                        <th style='text-align:center'>Creditos</th>
-                    </tr>
-                </thead>
-                <tbody>";
-
-    asort($jsonData);
-    foreach ($jsonData as $course) {
-        $courseCode = $course['course'];
-        $courseName = $course['courseName'];
-        $credits = $course['credits'];
-        $matriculados = $course['matriculados'];
-        echo "
-            <tr style='text-align:center'>
-                <td style='text-align:center'><input type='checkbox' name='claseSeleccionada' value='$courseCode'></td>
-                <td style='text-align:center'><a style='cursor: pointer' title='Editar' href='editar_clase.php'>$courseCode</a></td>
-                <td style='text-align:center'>$courseName</td>
-                <td style='text-align:center'>$credits</td>                                                        
-            </tr>";
-    }
-    echo "  </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</br>";
-
-echo '<a href="index.php">
-        <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2"">
-            Someter consejeria
-        </button>
-    </a>';
-}
-?>
-
                     </div>
                 </div>
-                <!-- forms grid -->
+                <!-- end main content section -->
             </div>
-        </div>
-    </div>
-    <!-- end main content section -->
-
-    </div>
 
     <!-- start footer section -->
     <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
