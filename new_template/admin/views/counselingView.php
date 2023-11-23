@@ -110,38 +110,81 @@
                 <!-- start main content section -->
                 <div class="flex-1 text-sm ">
                     <div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em;">Nombre: <?php echo $studentData['name1'] . " " . $studentData['last_name1'] . " " . $studentData['last_name2']; ?></h2>
+                        <!-- formateo de nuermo de estudiante-->
+                        <?php
+                            $studentNum = $studentData['student_num'];
+                            $formattedStudentNum = substr($studentNum, 0, 3) . '-' . substr($studentNum, 3, 2) . '-' . substr($studentNum, 5);
+                        ?>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 1em;">Numero de estudiante: <?php echo $formattedStudentNum; ?></h2>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 2em;">Correo electronico: <?php echo $studentData['email']; ?></h2>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases de concentracion</h2>
                         <!-- basic table -->
                         <div class="table-responsive">
-    <table style="font-size: 12px; border-collapse: collapse;">
-        <thead>
-            <tr>
-                <th style="padding: 5px;"></th>
-                <th style="padding: 5px;">Codigo Del Curso</th>
-                <th style="padding: 5px;">Nombre</th>
-                <th style="padding: 5px;">Creditos</th>
-                <th style="padding: 5px;">Nota</th>
-                <th style="padding: 5px;">Equivalencia</th>
-                <th style="padding: 5px;">Convalidacion</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Itera sobre los datos de los cursos y llena las celdas de la tabla
-            foreach ($ccomByCohort as $curso) {
-                echo "<tr>";
-                echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
-                echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
-                echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
-                echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
-                echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
-                echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
-                echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                            <table style="font-size: 12px; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 5px;"></th>
+                                        <th style="padding: 5px;">Codigo Del Curso</th>
+                                        <th style="padding: 5px;">Nombre</th>
+                                        <th style="padding: 5px;">Creditos</th>
+                                        <th style="padding: 5px;">Nota</th>
+                                        <th style="padding: 5px;">Equivalencia</th>
+                                        <th style="padding: 5px;">Convalidacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                    foreach ($ccomByCohort as $curso) {
+                                        echo "<tr>";
+                                        echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Generales</h2>
+                        <!-- basic table -->
+                        <div class="table-responsive">
+                            <table style="font-size: 12px; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 5px;"></th>
+                                        <th style="padding: 5px;">Codigo Del Curso</th>
+                                        <th style="padding: 5px;">Nombre</th>
+                                        <th style="padding: 5px;">Creditos</th>
+                                        <th style="padding: 5px;">Nota</th>
+                                        <th style="padding: 5px;">Equivalencia</th>
+                                        <th style="padding: 5px;">Convalidacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                    foreach ($notccomByCohort as $curso) {
+                                        echo "<tr>";
+                                        echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases a recomendar:</h2>
                         <!-- Vertical line tabs -->
                         <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
                             <!-- buttons -->

@@ -63,8 +63,9 @@ class ExpedientesController {
                 $student_num = $_POST['student_num'];
                 $studentData = $studentModel->selectStudent($student_num, $conn);
                 $studentCohort = $studentData['cohort_year'];
+
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
-                $notccomByCohort = $classesModel->getCohortCoursesNotCCOM($conn, $studentCohort);
+                $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
 
                 $mandatoryClasses = $classesModel->getCcomCourses($conn);
                 $dummyClasses = $classesModel->getDummyCourses($conn);
