@@ -110,6 +110,38 @@
                 <!-- start main content section -->
                 <div class="flex-1 text-sm ">
                     <div>
+                        <!-- basic table -->
+                        <div class="table-responsive">
+    <table style="font-size: 12px; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="padding: 5px;"></th>
+                <th style="padding: 5px;">Codigo Del Curso</th>
+                <th style="padding: 5px;">Nombre</th>
+                <th style="padding: 5px;">Creditos</th>
+                <th style="padding: 5px;">Nota</th>
+                <th style="padding: 5px;">Equivalencia</th>
+                <th style="padding: 5px;">Convalidacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Itera sobre los datos de los cursos y llena las celdas de la tabla
+            foreach ($ccomByCohort as $curso) {
+                echo "<tr>";
+                echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
+                echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
                         <!-- Vertical line tabs -->
                         <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
                             <!-- buttons -->
@@ -119,7 +151,7 @@
                                         <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'mandatory'}" @click="tab='mandatory'">CCCOM Mandatorias</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'elective'}" @click="tab='elective'">CCOM Electivas</a>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'elective'}" @click="tab='elective'">Cursos Dummy</a>
                                     </li>
                                     <li>
                                         <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'general'}" @click="tab='general'">Generales</a>
@@ -170,18 +202,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type='checkbox' name='seleccion[]' value='CCOMXXXX'></td>
-                                                    <td>CCOMXXXX</td>
-                                                    <td>Clases Electivas Intermedia</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='checkbox' name='seleccion[]' value='CCOMXXXX'></td>
-                                                    <td>CCOMXXXX</td>
-                                                    <td>Clases Electivas Avanzada</td>
-                                                    <td>3</td>
-                                                </tr>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($dummyClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -189,7 +220,7 @@
                                 <div x-show="tab === 'general'">
                                     <!-- basic table -->
                                     <div class="table-responsive">
-                                    <table>
+                                        <table>
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -199,18 +230,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type='checkbox' name='seleccion[]' value='HUMAXXXX'></td>
-                                                    <td>HUMAXXXX</td>
-                                                    <td>Clase General de Humanidades</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='checkbox' name='seleccion[]' value='CISOXXX'></td>
-                                                    <td>CISOXXXX</td>
-                                                    <td>Clase General de Ciencias Sociales</td>
-                                                    <td>3</td>
-                                                </tr>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($generalClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
