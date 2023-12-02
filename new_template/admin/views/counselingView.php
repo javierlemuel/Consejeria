@@ -49,19 +49,19 @@
     </div>
 
     <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
-        <!-- start sidebar section -->
-        <div id="sidebar"></div>
+       <!-- start sidebar section -->
+       <div id="sidebar"></div>
         <!-- end sidebar section -->
 
         <div class="main-content flex flex-col min-h-screen">
             <!-- start header section -->
             <header class="z-40" :class="{'dark' : $store.app.semidark && $store.app.menu === 'horizontal'}">
                 <div class="shadow-sm">
-                    <div class="relative flex w-full items-center bg-warning px-5 py-2.5 dark:bg-[#0e1726]">
+                    <div class="relative flex w-full items-center" style="background-color: #2b2b2b; padding: 5px 5px; dark:bg-[#0e1726]">
                         <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                            <a href="index.html" class="main-logo flex shrink-0 items-center">
+                            <a href="index.php" class="main-logo flex shrink-0 items-center">
                                 <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/university.png" alt="image" />
-                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">CONSEJERIA UPRA</span>
+                                <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 text-white dark:text-white-light md:inline">CONSEJERIA UPRA</span>
                             </a>
 
                             <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
@@ -75,32 +75,6 @@
                         <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
                             <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
                             </div>
-
-
-                            <div class="dropdown" x-data="dropdown" @click.outside="open = false">
-                                <a href="javascript:;" class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M22 10C22.0185 10.7271 22 11.0542 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                        <path d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                        <circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5" />
-                                    </svg>
-                                </a>
-                                <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[300px] !py-0 text-xs text-dark ltr:-right-16 rtl:-left-16 dark:text-white-dark sm:w-[375px] sm:ltr:-right-2 sm:rtl:-left-2">
-                                    <li class="mb-5">
-                                        <div class="relative overflow-hidden rounded-t-md !p-5 text-white">
-                                            <div class="absolute inset-0 h-full w-full bg-[url('../images/menu-heade.jpg')] bg-cover bg-center bg-no-repeat"></div>
-                                            <h4 class="relative z-10 text-lg font-semibold">Deje un mensaje al estudiante.</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <form style='padding: 0px 10px' class="space-y-5">
-                                            <input type='textarea' style='font-size: 16px; width: 300px' placeholder='Recuerde solicitar el Minor' rows="4" cols="50">
-                                            <br><br>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-
                             <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                                 <a href="javascript:;" class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle()">
                                     <span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -112,19 +86,21 @@
                                 <!-- user-profile -->
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                        <a href="login.php" class="!py-3 text-danger" @click="toggle">
+                                    <form method="post" action="index.php">
+                                        <input type="hidden" name="signout" value="1">
+                                        <button type="submit" class="!py-3 text-danger">
                                             <svg class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path opacity="0.5" d="M17 9.00195C19.175 9.01406 20.3529 9.11051 21.1213 9.8789C22 10.7576 22 12.1718 22 15.0002V16.0002C22 18.8286 22 20.2429 21.1213 21.1215C20.2426 22.0002 18.8284 22.0002 16 22.0002H8C5.17157 22.0002 3.75736 22.0002 2.87868 21.1215C2 20.2429 2 18.8286 2 16.0002L2 15.0002C2 12.1718 2 10.7576 2.87868 9.87889C3.64706 9.11051 4.82497 9.01406 7 9.00195" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                                 <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             Sign Out
-                                        </a>
+                                        </button>
+                                    </form>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
                     </ul>
                 </div>
             </header>
@@ -132,179 +108,192 @@
 
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
-                <!-- <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: '2017'}"> Cambiamos 'tab' a 'info' por defecto -->
-                <!-- buttons -->
-                <!-- <div class="mx-10 mb-5 sm:mb-0">
-                    <ul class="w-24 m-auto text-center font-semibold">
-                        <li>
-                            </li>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === '2017'}" @click="tab='2017'">2017</a>
-                        <li>
-                            <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === '2022'}" @click="tab='2022'">2022</a>
-                        </li>
-                    </ul>
-                </div> -->
-
-                <!-- description -->
                 <div class="flex-1 text-sm ">
                     <div>
-                        <!-- start cohort 2017 -->
-                        <div x-data="{ tab1: null }">
-                            <!-- start cohort 2017 -->
-                            <?php
-                            $path = 's_expediente.json';
-                            $jsonString = file_get_contents($path);
-                            $jsonData = json_decode($jsonString, true);
-
-                            echo "<div class='mb-5'>
-            <!-- tabs-años -->
-            <div>
-                <ul class='flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]'>";
-
-                            // Generate the outer year tabs
-                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-                                if ($yearTitle !== 'Electivas') {
-                                    echo "<li>
-                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                        @click='tab1 = \"$yearTitle\"'>
-                        " . strtoupper($yearTitle) . " AÑO
-                    </a>
-                </li>";
-                                } else {
-                                    echo "<li>
-                    <a href='javascript:' class='p-5 py-3 -mb-[1px] flex items-c​‌​enter hover:border-b border-transparent hover:!border-secondary hover:text-secondary' 
-                        :class='{ \"border-b !border-secondary text-secondary active\": tab1 === \"$yearTitle\" }' 
-                        @click='tab1 = \"$yearTitle\"'>
-                        " . strtoupper($yearTitle) . "
-                    </a>
-                </li>";
-                                }
-                            }
-
-                            echo "</ul>
-        </div>";
-
-                            // Display data for the selected year
-                            foreach ($jsonData['Year'] as $yearTitle => $yearData) {
-                                echo "<div x-show='tab1 === \"$yearTitle\"'>
-                ";
-
-
-
-                                foreach ($yearData as $semesterTitle => $semesterCourses) {
-                                    echo "<div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
-                    " . strtoupper($semesterTitle);
-
-                                    if ($semesterTitle !== "") {
-                                        echo " SEMESTRE
-                </div>";
-                                    } else {
-                                        echo "</div>";
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em;">Nombre: <?php echo $studentData['name1'] . " " . $studentData['last_name1'] . " " . $studentData['last_name2']; ?></h2>
+                        <!-- formateo de nuermo de estudiante-->
+                        <?php
+                            $studentNum = $studentData['student_num'];
+                            $formattedStudentNum = substr($studentNum, 0, 3) . '-' . substr($studentNum, 3, 2) . '-' . substr($studentNum, 5);
+                        ?>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 1em;">Numero de estudiante: <?php echo $formattedStudentNum; ?></h2>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 2em;">Correo electronico: <?php echo $studentData['email']; ?></h2>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases de concentracion</h2>
+                        <!-- basic table -->
+                        <div class="table-responsive">
+                            <table style="font-size: 12px; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 5px;"></th>
+                                        <th style="padding: 5px;">Codigo Del Curso</th>
+                                        <th style="padding: 5px;">Nombre</th>
+                                        <th style="padding: 5px;">Creditos</th>
+                                        <th style="padding: 5px;">Nota</th>
+                                        <th style="padding: 5px;">Equivalencia</th>
+                                        <th style="padding: 5px;">Convalidacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                    foreach ($ccomByCohort as $curso) {
+                                        echo "<tr>";
+                                        echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                        echo "</tr>";
                                     }
-
-                                    echo "<table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>CODIGO</th>
-                        <th>NOMBRE</th>
-                        <th>CREDITOS</th>
-                        <th>NOTA</th>
-                        <th>SEMESTRE</th>
-                        <th>EQUIVALENCIA</th>
-                    </tr>
-                </thead>
-                <tbody>";
-                                    foreach ($semesterCourses as $course) {
-                                        echo "<tr>
-                        <td><input type='checkbox'></td>
-                        <td class='whitespace-normal'>" . $course['code'] . "</td>
-                        <td>" . $course['name'] . "</td>
-                        <td>" . $course['credits'] . "</td>
-                        <td>" . $course['nota'] . "</td>
-                        <td>" . $course['semestre'] . "</td>
-                        <td> <input type='text' style=' 3px solid #ccc;' placeholder='" . $course['equivalencia'] . "'> </td>
-                    </tr>";
-                                    }
-
-
-                                    echo "</tbody>
-            </table>";
-                                }
-                                echo "</div>";
-                            }
-                            ?>
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
-
-
-
-
-
-
-                        <form action="index.php" class="space-y-5">
-                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                <div>
-                                    <label for="gridCode">Nombre</label>
-                                    <input id="gridCode" type="text" class="form-input" readonly value="<?php echo $studentData['name1']; ?>" />
-                                </div>
-                                <div>
-                                    <label for="gridName">Email</label>
-                                    <input id="gridName" type="text" placeholder="raul.jimenez3@upr.edu" class="form-input" readonly />
-                                </div>
-                                <div>
-                                    <label for="gridCred">Número de estudiante</label>
-                                    <input id="gridCred" type="number" placeholder="840-22-1240" class="form-input" readonly />
-                                </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Generales</h2>
+                        <!-- basic table -->
+                        <div class="table-responsive">
+                            <table style="font-size: 12px; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 5px;"></th>
+                                        <th style="padding: 5px;">Codigo Del Curso</th>
+                                        <th style="padding: 5px;">Nombre</th>
+                                        <th style="padding: 5px;">Creditos</th>
+                                        <th style="padding: 5px;">Nota</th>
+                                        <th style="padding: 5px;">Equivalencia</th>
+                                        <th style="padding: 5px;">Convalidacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                    foreach ($notccomByCohort as $curso) {
+                                        echo "<tr>";
+                                        echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
+                                        echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                        echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases a recomendar:</h2>
+                        <!-- Vertical line tabs -->
+                        <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
+                            <!-- buttons -->
+                            <div class="mx-10 mb-5 sm:mb-0">
+                                <ul class="w-24 m-auto text-center font-semibold">
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'mandatory'}" @click="tab='mandatory'">CCCOM Mandatorias</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'elective'}" @click="tab='elective'">Cursos Dummy</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 before:bg-secondary hover:before:h-[80%]" :class="{'text-secondary before:!h-[80%]' : tab === 'general'}" @click="tab='general'">Generales</a>
+                                    </li>
+                                </ul>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                <div>
-                                    <label for="gridYear">Año</label>
-                                    <input id="gridYear" type="number" placeholder="1" class="form-input" readonly />
+                            <!-- description -->
+                            <div class="flex-1 text-sm ">
+                                <div x-show="tab === 'mandatory'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($mandatoryClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label for="gridSem">Semestre</label>
-                                    <input id="gridSem" type="number" placeholder="1" class="form-input" readonly />
+                                <div x-show="tab === 'elective'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($dummyClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label for="gridType">Minor</label>
-                                    <select id="gridType" class="form-select text-white-dark">
-                                        <option></option>
-                                        <option>Web Design</option>
-                                    </select>
+                                <div x-show="tab === 'general'">
+                                    <!-- basic table -->
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo Del Curso</th>
+                                                    <th>Nombre</th>
+                                                    <th>Creditos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                                foreach ($generalClasses as $curso) {
+                                                    echo "<tr>";
+                                                    echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                                    echo "<td>" . $curso['crse_code'] . "</td>";
+                                                    echo "<td>" . $curso['name'] . "</td>";
+                                                    echo "<td>" . $curso['credits'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-
-                                <div>
-                                    <label for="gridStatus">Estatus</label>
-                                    <select id="gridStatus" class="form-select text-white-dark">
-                                        <option selected>Activo</option>
-                                        <option>Inactivo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary !mt-6">Someter</button>
-                        </form>
-
+                        </div>
                     </div>
-
-
                 </div>
-
-                <!-- forms grid -->
-
+                <!-- end main content section -->
             </div>
-
-
-        </div>
-    </div>
-
-    <!-- end main content section -->
-
-    </div>
 
     <!-- start footer section -->
     <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">

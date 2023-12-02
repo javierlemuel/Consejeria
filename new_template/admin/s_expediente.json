@@ -1,71 +1,63 @@
 {
     "Year": {
         "Primer": {
-            "Primero": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            "Primer": [
+                {"code":"CCOM3001", "name":"Programacion I", "credits":5, "nota":"P", "semestre":"B91", "equivalencia":"", "convalidacion":"Tomo clase de INGEXXXX"},
+                {"code":"INGL3101", "name":"Inglés Básico I", "credits":3, "nota":"A", "semestre":"B91", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM3010", "name":"Niveles Lógicos", "credits":3, "nota":"A", "semestre":"B91", "equivalencia":"", "convalidacion":""},
+                {"code":"MATE3171", "name":"Pre-Cálculo I", "credits":3, "nota":"C", "semestre":"B91", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM3025", "name":"Int. Sist. Comp.", "credits":3, "nota":"B", "semestre":"B91", "equivalencia":"", "convalidacion":""}
             ],
             "Segundo": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"CCOM3002", "name":"Programación II", "credits":5, "nota":"C", "semestre":"B92", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM3015", "name":"Comp. en la Sociedad", "credits":3, "nota":"B", "semestre":"B92", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM3035", "name":"Organización de Comp.", "credits":3, "nota":"A", "semestre":"B92", "equivalencia":"", "convalidacion":""},
+                {"code":"MATE3172", "name":"Pre-Cálculo II", "credits":3, "nota":"B", "semestre":"B92", "equivalencia":"", "convalidacion":""}
             ]
         },
 
         "Segundo": {
-            "Primero": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+            "Primer": [
+                {"code":"CCOM4005", "name":"Estructuras de Datos", "credits":3, "nota":"A", "semestre":"C01", "equivalencia":"", "convalidacion":""},
+                {"code":"MATE3031", "name":"Cálculo I", "credits":4, "nota":"F", "semestre":"C01", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM3020", "name":"Matemáticas Discretas", "credits":3, "nota":"C", "semestre":"C01", "equivalencia":"", "convalidacion":""},
+                {"code":"ESPA3101", "name":"Español Básico I", "credits":3, "nota":"B", "semestre":"C01", "equivalencia":"", "convalidacion":""}
             ],
             "Segundo": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"CCOM4006", "name":"Diseño y Análisis de Algoritmos", "credits":3, "nota":"D", "semestre":"C02", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM4007", "name":"Int. Probabilidad y Estad.", "credits":4, "nota":"A", "semestre":"C02", "equivalencia":"", "convalidacion":""},
+                {"code":"CCOM4065", "name":"Álgebra Lineal Numérica", "credits":3, "nota":"A", "semestre":"C02", "equivalencia":"", "convalidacion":""},
+                {"code":"ESPA3102", "name":"Español Básico II", "credits":3, "nota":"B", "semestre":"C02", "equivalencia":"", "convalidacion":""}
             ]
         },
 
         "Tercer": {
             "Primer": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C11", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C11", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C11", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C11", "equivalencia":"", "convalidacion":""}
             ],
             "Segundo": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C12", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C12", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C12", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C12", "equivalencia":"", "convalidacion":""}
             ]
         },
 
         "Cuarto": {
             "Primer": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":"", "convalidacion":""}
             ],
             "Segundo": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
-            ]
-        },
-
-        "Electivas": {
-            "": [
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""},
-                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C21", "equivalencia":""}
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C22", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C22", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C22", "equivalencia":"", "convalidacion":""},
+                {"code":"Sentra", "name":4, "credits":3, "nota":"A", "semestre":"C22", "equivalencia":"", "convalidacion":""}
             ]
         }
     }

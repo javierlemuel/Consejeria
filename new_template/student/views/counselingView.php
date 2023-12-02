@@ -136,7 +136,11 @@
 
                                                             <?php foreach ($courses as $course) : ?>
                                                                 <tr>
-                                                                    <td><input type='checkbox' class='form-checkbox' value=<?php echo $course['crse_code'] ?> /></td>
+                                                                    <td>
+                                                                        <?php  if (substr($course['crse_code'], -1) != 'X') { ?>
+                                                                        <input type='checkbox' class='form-checkbox' value=<?php echo $course['crse_code'] ?> />
+                                                                        <?php } ?>
+                                                                    </td>
                                                                     <td><?= $course['crse_code'] ?></td>
                                                                     <td><?= $course['name'] ?></td>
                                                                     <td><?= $course['credits'] ?></td>

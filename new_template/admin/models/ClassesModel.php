@@ -57,6 +57,63 @@ class ClassesModel {
         return $result;
     }
 
+    public function getDummyCourses($conn)
+    {
+        $sql = "SELECT *
+                FROM dummy_courses
+                ORDER BY crse_code ASC";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
+    public function getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num)
+    {
+        $sql = "SELECT cohort.crse_code, ccom_courses.name, ccom_courses.credits, student_courses.crse_grade,
+                        student_courses.equivalencia, student_courses.convalidacion
+                FROM cohort
+                JOIN ccom_courses ON cohort.crse_code = ccom_courses.crse_code
+                LEFT JOIN student_courses ON cohort.crse_code = student_courses.crse_code
+                    AND cohort.cohort_year = $studentCohort
+                    AND student_courses.student_num = $student_num
+                WHERE cohort.cohort_year = $studentCohort
+                ORDER BY cohort.crse_code ASC;";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
+    public function getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num)
+    {
+        $sql = "SELECT cohort.crse_code, general_courses.name, general_courses.credits, student_courses.crse_grade,
+                        student_courses.equivalencia, student_courses.convalidacion
+                FROM cohort
+                JOIN general_courses ON cohort.crse_code = general_courses.crse_code
+                LEFT JOIN student_courses ON cohort.crse_code = student_courses.crse_code
+                    AND cohort.cohort_year = $studentCohort
+                    AND student_courses.student_num = $student_num
+                WHERE cohort.cohort_year = $studentCohort
+                ORDER BY cohort.crse_code ASC;";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
     public function getOfferCourses($conn)
     {
         $sql = "SELECT *

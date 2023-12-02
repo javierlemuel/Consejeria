@@ -55,10 +55,29 @@ class ExpedientesController {
                 require_once(__DIR__ . '/../views/editStudentView.php');
                 return;
             }
+            elseif ($action === 'studentCounseling')
+            {
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
+
+                $student_num = $_POST['student_num'];
+                $studentData = $studentModel->selectStudent($student_num, $conn);
+                $studentCohort = $studentData['cohort_year'];
+
+                $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
+                $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
+
+                $mandatoryClasses = $classesModel->getCcomCourses($conn);
+                $dummyClasses = $classesModel->getDummyCourses($conn);
+                $generalClasses = $classesModel->getGeneralCourses($conn);
+
+                require_once(__DIR__ . '/../views/counselingView.php');
+                return;
+            }
         }
 
         // Parámetros de paginación
-        $studentsPerPage = 2; // Cambia esto al número deseado
+        $studentsPerPage = 8; // Cambia esto al número deseado
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         // Obtener los parámetros del filtro de estado y búsqueda
