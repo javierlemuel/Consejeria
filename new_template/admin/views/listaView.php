@@ -24,8 +24,8 @@
     <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
 
     <!-- screen loader -->
-    <!-- <div class="screen_loader animate__animated fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]">
-        <svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#4361ee">
+    <div class="screen_loader animate__animated fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]">
+        <svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#4361ee">
             <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite" />
             </path>
@@ -33,7 +33,7 @@
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s" repeatCount="indefinite" />
             </path>
         </svg>
-    </div> -->
+    </div>
 
     <!-- scroll to top button -->
     <div class="fixed bottom-6 z-50 ltr:right-6 rtl:left-6" x-data="scrollToTop">
@@ -53,6 +53,7 @@
         <!-- end sidebar section -->
 
         <div class="main-content flex flex-col min-h-screen">
+            <!-- start header section -->
             <!-- start header section -->
             <header class="z-40" :class="{'dark' : $store.app.semidark && $store.app.menu === 'horizontal'}">
                 <div class="shadow-sm">
@@ -104,72 +105,64 @@
                 </div>
             </header>
             <!-- end header section -->
+            <!-- end header section -->
 
-            <div class="animate__animated p-6" :class="[$store.app.animation]" style='padding: 5% 10%'>
+            <div class="animate__animated p-6" :class="[$store.app.animation]">
+                <h2 class="text-xl" style='text-align: center'>Estudiantes de <?php echo $course; ?></h2>
+
                 <!-- start main content section -->
-
-                <div style='text-align:center; font-size: 35px'><h2>Reportes Generales: <?php echo $term ?></h2></div>
-                <br><br><br>
-
-                <table style='font-size: 20px'>
-                    <thead>
-                        <tr>
-                            <th style='text-align:center; bold'>Tipo de Reporte</th>
-                            <th style='text-align:center; width: 40%; bold'>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style='background-color: lightgray'>
-                            <td style='text-align:center'>Estudiantes Aconsejados</td>
-                            <td style='text-align:center'><?php echo $studentsAconsejados ?></td>
-                        </tr>
-                        <tr>
-                            <td style='text-align:center'>Estudiantes Aconsejados sin Cursos de CCOM</td>
-                            <td style='text-align:center'><?php echo $studentsSinCCOM  ?></td>
-                        </tr>
-                        <tr style='background-color: lightgray'>
-                            <td style='text-align:center'>Estudiantes que realizaron su Consejería</td>
-                            <td style='text-align:center'><?php echo $studentsRegistrados  ?></td>
-                        </tr>
-                        <tr>
-                            <td style='text-align:center'>Expedientes revisados</td>
-                            <td style='text-align:center'><?php echo $studentsEditados  ?></td>
-                        </tr>
-                    </tbody></table>
-
-
-                <br><br><br>
-                <div style='text-align:center; font-size: 35px'><h2>Reportes por Curso de CCOM</h2></div>
-                <br><br><br>
-
-                <table style='font-size: 20px'>
-                    <thead>
-                        <tr>
-                            <th style='text-align:center; bold'>Curso</th>
-                            <th style='text-align:center; width: 40%; bold'>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        if(isset($studentsPerClass)){
-                            foreach($studentsPerClass as $s)
-                            { ?>
-                                <tr <?php if($count % 2 == 0) echo "style='background-color: lightgray'"; ?>>
-                                    <td style='text-align:center'><?php echo $s['crse_code']?></td>
-                                    <td style='text-align:center'><?php echo $s['count'] ?></td>
-                                </tr>
-                            <?php $count++;
-                            } 
-                        }?>
-                    </tbody></table>
                 
-    </div>
+                <div x-data="contacts">
+                        <div class="panel mt-5 overflow-hidden border-0 p-0">
+                            <template x-if="displayType === 'list'">
+                                <div class="table-responsive">
+                                    <table class="table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Estudiante</th>
+                                                <th>Número de estudiante</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($matriculados as $student) { ?>
+                                                <tr>
+                                                    <?php $studentNum = $student['student_num'];
+                                                        $formattedStudentNum = substr($studentNum, 0, 3) . '-' . substr($studentNum, 3, 2) . '-' . substr($studentNum, 5); ?>
+                                                    <td x-html="'<?php echo htmlspecialchars($student['name1'] . ' ' . $student['last_name1'] . ' ' . $student['last_name2']); ?>'"></td>
+                                                    <td x-html="'<?php echo $formattedStudentNum; ?>'"></td>
+                                                    <td style='text-align: center'>
+                                                        <!-- <div class="flex items-center justify-center gap-4">
+                                                            <button type="button" class="btn btn-sm btn-outline-primary" onclick = "window.location.href='s_expediente.php'">
+                                                                Editar
+                                                            </button>
+                                                        </div> -->
+                                                        <form method="POST" action="index.php">
+                                                            <input type="hidden" name="action" value="selecteStudent">
+                                                            <input type="hidden" name="student_num" value="<?= $student['student_num'] ?>">
+                                                            <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2">Editar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </template>
+                        </div>
+                </div>
+                    
+                <!-- end main content section -->
+
+            </div>
+
             <!-- start footer section -->
             <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
                 © <span id="footer-year">2022</span>. UPRA All rights reserved.
             </div>
             <!-- end footer section -->
-        
+        </div>
+    </div>
 
     <script src="assets/js/alpine-collaspe.min.js"></script>
     <script src="assets/js/alpine-persist.min.js"></script>
@@ -249,7 +242,6 @@
                     }
                 },
 
-                
             }));
         });
 
@@ -269,32 +261,34 @@
                     this.open = !this.open;
                 },
             }));
-
-            Alpine.data('app', () => ({
-                    showUploadModal: false,
-                    formData: {
-                        file: null,
-                    },
-                    openUploadModal() {
-                        this.showUploadModal = true;
-                    },
-                    closeUploadModal() {
-                        this.showUploadModal = false;
-                    },
-                    submitForm() {
-                        // Aquí puedes realizar acciones con el archivo seleccionado, como enviarlo a un servidor.
-                        // Luego, cierra el modal.
-                        if (this.formData.file) {
-                            console.log("Archivo seleccionado:", this.formData.file);
-                            // Aquí puedes realizar las acciones necesarias con el archivo.
-                        } else {
-                            console.log("Ningún archivo seleccionado.");
-                        }
-                        this.showUploadModal = false;
-                    },
-                
-                }));
         });
+    </script>
+
+    <script>
+        document.addEventListener("alpine:init", () => {
+
+            //contacts
+            Alpine.data('contacts', () => ({
+
+                    displayType: 'list',
+                    addContactModal: false,
+                    
+                    filterdContactsList: [],
+                    searchUser: '',
+                    contactList: [
+                    
+                    ],
+
+                    init() {
+                        this.searchContacts();
+                    },
+
+                    searchContacts() {
+                        this.filterdContactsList = this.contactList.filter((d) => d.nombre.toLowerCase().includes(this.searchUser.toLowerCase()));
+                    },
+                }));
+            });
+ 
     </script>
 </body>
 

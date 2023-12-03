@@ -187,7 +187,7 @@ class CohorteModel {
     }
 
 
-    public function createCohorte($conn, $cohort){
+    public function createCohorte($conn, $cohort, $copy){
         // Verifica que no exista ya el cohorte
 
         $sql = "SELECT * 
@@ -200,11 +200,55 @@ class CohorteModel {
 
         if ($result->num_rows == 0) //No existe todavia el cohorte. Great!
         {
-            $sql2 = "INSERT INTO cohort
-                    VALUES($cohort, 'CCOM3001', 1, 1)"; //Inicializa ese cohorte nuevo con CCOM3001
-            $result2 = $conn->query($sql2);
-            if ($result2 === false) {
-                throw new Exception("Error2 en la consulta SQL: " . $conn->error);
+            //Si vamos a copiar el cohorte pasado al cohorte nuevo
+            if($copy == 'Sí')
+            {
+                //Busca el cohorte pasado
+                $sql = "SELECT cohort_year
+                        FROM cohort
+                        ORDER BY cohort_year DESC
+                        LIMIT 1";
+                $result = $conn->query($sql);
+                if ($result === false) {
+                    throw new Exception("Error en la consulta SQL: " . $conn->error);
+                }
+                foreach ($result as $res)
+                    $past_year = $res['cohort_year'];
+
+                //Busca la data del cohorte pasado
+                $sql2 = "SELECT * 
+                        FROM cohort
+                        WHERE cohort_year = $past_year";
+                $result = $conn->query($sql2);
+                if ($result === false) {
+                    throw new Exception("Error en la consulta SQL: " . $conn->error);
+                }
+
+                //Cambia el cohorte al nuevo que se va a crear e inserta en DB
+                foreach ($result as $res)
+                {
+                    $sql2 = "INSERT INTO cohort (cohort_year, crse_code, crse_year, crse_semester) 
+                            VALUES (?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql2);
+                    $stmt->bind_param("ssis", $cohort, $res['crse_code'], 
+                                        $res['crse_year'], $res['crse_semester']);
+                    $result2 = $stmt->execute();
+                    if ($result2 === false) {
+                        throw new Exception("Error2 en la consulta SQL: " . $conn->error);
+                    }
+                
+                }
+
+
+
+            }
+            else{
+                $sql2 = "INSERT INTO cohort
+                        VALUES($cohort, 'CCOM3001', 1, 1)"; //Inicializa ese cohorte nuevo con CCOM3001
+                $result2 = $conn->query($sql2);
+                if ($result2 === false) {
+                    throw new Exception("Error2 en la consulta SQL: " . $conn->error);
+                }
             }
 
             return 'success';

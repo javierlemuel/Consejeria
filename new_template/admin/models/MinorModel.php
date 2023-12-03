@@ -17,6 +17,9 @@ class MinorModel {
 
    public function editMinor($conn, $mID, $name, $credits)
    {
+        echo $mID;
+        echo "\n$name";
+        echo "\n$credits";
         $sql = "UPDATE minor
                 SET name = '$name',
                 required_credits = $credits

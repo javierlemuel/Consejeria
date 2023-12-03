@@ -1,5 +1,3 @@
-<?php echo 'hi' ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -114,22 +112,18 @@
             <?php if (isset($message)) { ?>
                     <div style='padding: 15px 0' class="flex flex-wrap items-center justify-between gap-4">
                             
-                                <?php if ($message == 'no prereq') 
-                                            echo"<h2 style='color:red; bold' class='text-xl'>El prerequisito no es un curso existente.</h2>";
-                                      elseif ($message == "prereq exists") 
-                                            echo"<h2 style='color:red; bold' class='text-xl'>El prerequisito ya existe para este curso.</h2>";
-                                      elseif ($message == "no coreq") 
-                                            echo"<h2 style='color:red; bold' class='text-xl'>El corequisito no es un curso existente.</h2>";
-                                      elseif ($message == "coreq exists") 
-                                            echo"<h2 style='color:red; bold' class='text-xl'>El corequisito ya existe para este curso.</h2>";
-                                      elseif ($message == "empty") 
-                                            echo"<h2 style='color:red; bold' class='text-xl'>Form fue enviado sin información.</h2>";
+                                <?php if ($message == 'No course') 
+                                            echo"<h2 style='color:red; bold' class='text-xl'>El curso requisito no existe.</h2>";
+                                      elseif ($message == "No cohort") 
+                                            echo"<h2 style='color:red; bold' class='text-xl'>El cohorte no existe.</h2>";
+                                      elseif ($message == "Req exist") 
+                                            echo"<h2 style='color:red; bold' class='text-xl'>El curso ya tiene este requisito.</h2>";
                                       elseif ($message == "deleted") 
                                             echo"<h2 style='color:limegreen; bold' class='text-xl'>El requisito fue eliminado.</h2>";
                                       elseif ($message == "success") 
-                                            echo"<h2 style='color:limegreen; bold' class='text-xl'>Los requisitos fueron actualizados!!!</h2>";
+                                            echo"<h2 style='color:limegreen; bold' class='text-xl'>El requisito fue actualizado!!!</h2>";
                                       elseif ($message == "insert success") 
-                                            echo"<h2 style='color:limegreen; bold' class='text-xl'>Los requisitos fueron añadidos!!!</h2>";
+                                            echo"<h2 style='color:limegreen; bold' class='text-xl'>El requisito fue añadido!!!</h2>";
                                 ?>
                      <br>
                     </div>
@@ -180,7 +174,10 @@
                                     <?php if((strpos($class['crse_code'], 'CCOM') !== false)) { ?>
                                     <option value='mandatory' <?php if($class['type']=='mandatory'){echo 'selected';} ?>>Curso requerido</option>
                                     <option value='elective' <?php if($class['type']=='elective'){echo 'selected';} ?>>Electiva</option>
-                                    <option value='1' <?php if($class['type']=='1'){echo 'selected';} ?>>Web Design</option>
+                                    <?php foreach($minors as $minor) { ?>
+                                    <option value='<?php echo $minor["ID"]; ?>' <?php if($class['type']==strval($minor["ID"])){echo 'selected';} ?>>
+                                <?php echo $minor['name']; ?></option>
+                                    <?php } ?>
                                     <?php } 
                                     else { ?>
                                         <option value='ESPA' <?php if($class['type']=='ESPA'){echo 'selected';} ?>>Español</option>
@@ -233,17 +230,25 @@
                             <form style="space-y-5" action='?editReqs' method='POST'>
                             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     <input type='hidden' name='course' value='<?php echo $course ?>'>
-                                    <input type='hidden' name='old_prereq' value='<?php echo $req['prerequisite'] ?>'>
-                                    <input type='hidden' name='old_coreq' value='<?php echo $req['corequisite'] ?>'>
+                                    <input type='hidden' name='old_req' value='<?php echo $req['req_crse_code'] ?>'>
+                                    <input type='hidden' name='oldcohort' value='<?php echo $req['cohort_year'] ?>'>
                                     <div>
-                                    <label for='prereq'>Prerequisito</label>
-                                    <input type='text' name='prereq' class="form-input" value='<?php echo $req['prerequisite'] ?>'>
+                                    <label for='req'>Pre/Corequisito</label>
+                                    <input type='text' name='req' class="form-input" value='<?php echo $req['req_crse_code'] ?>' required>
                                     </div>
                                     <div>
-                                    <label for='prereq'>Corequisito</label>
-                                    <input type='text' name='coreq' class="form-input" value='<?php echo $req['corequisite'] ?>'>
+                                    <label for='cohort'>Cohorte</label>
+                                    <input type='number' class="form-input" name='cohort' value='<?php echo $req['cohort_year'] ?>' required>
                                     </div>
                                     <div>
+                                    <label for='type'>Tipo</label>
+                                    <select class="form-input" style='color: black' name='type'>
+                                        <option style='color: black' value='pre' <?php if ($req['type']=='pre') {echo 'selected="selected"';} ?> >Prerequisito</option>
+                                        <option style='color: black' value='co' <?php if ($req['type']=='co') {echo 'selected="selected"';} ?> >Corequisito</option>
+                                    </select>
+                                    </div>
+                                    <div>
+                                        <br>
                                         <div>
                                         <button class='badge whitespace-nowrap badge-outline-primary' type='submit' name='action' value='edit'>Editar</button>
                                         </div>
@@ -256,19 +261,30 @@
                         <?php } 
                         }
                       ?>
+                      <br><hr><br>
 
                       <form style="space-y-5" action='?addReq' method='POST'>
                              <input type='hidden' name='course' value='<?php echo $course ?>'>
                              <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     <div>
-                                    <label for='prereq'>Prerequisito</label>
-                                    <input type='text' class="form-input" name='prereq'>
+                                    <label for='req'>Pre/Corequisito</label>
+                                    <input type='text' class="form-input" name='req' placeholder="CCOM3001" required>
                                     </div>
                                     <div>
-                                    <label for='coreq'>Corequisito</label>
-                                    <input type='text' class="form-input" name='coreq'>
+                                    <label for='cohort'>Cohorte</label>
+                                    <input type='number' class="form-input" name='cohort' required>
                                     </div>
+                                    <div>
+                                    <label for='type'>Tipo</label>
+                                    <select class="form-input" style='color: black' name='type'>
+                                        <option style='color: black' value='pre' selected>Prerequisito</option>
+                                        <option style='color: black' value='co'>Corequisito</option>
+                                    </select>
+                                    </div> 
+                                    <div>
+                                    <br>
                                     <button class='badge whitespace-nowrap badge-outline-primary' type='submit'>Añadir</button>
+                                    </div>
                              </div>
                             
                       </form>

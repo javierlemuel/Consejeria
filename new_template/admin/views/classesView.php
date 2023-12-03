@@ -137,6 +137,7 @@
                             x-transition
                             x-transition.duration.300
                             class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
+                            style='background-color: white'
                         >
                             <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
                                 
@@ -144,13 +145,14 @@
                             <div class="p-5">
                                 <form action="?newterm" method="POST">
                                 <div class="py-5 text-center text-white dark:text-white-light">
-                                    <p><b>WARNING:</b> Esto borrará la data de consejería del semestre pasado!!</p><br>
-                                    <label for='term'>Codigo (term) para proximo semestre: </label>
-                                    <input style='color:black' size="3" maxlength="3" name='term' type='text' placeholder='' required>
+                                    <p style='color:black'><b>WARNING:</b> Esto borrará la data de consejería del semestre pasado con excepción de los cursos aconsejados!!</p><br>
+                                    <label for='term' style='color:black'>Código (term) para próximo semestre: </label>
+                                    <input style='color:black' size="3" maxlength="3" name='term' type='text' placeholder='' 
+                                    class='form-input' required>
                                 </div>
                                 <div class="flex justify-center gap-4 p-5">
 
-                                    <button type="submit" class="btn dark:btn-dark bg-white text-black">Crear term</button>
+                                    <button type="submit" class="btn btn-primary !mt-6">Crear term</button>
                                 </div>
                                 </form>
                             </div>
@@ -270,7 +272,7 @@
                         <?php if ($category != 'oferta') { ?>
                         <th style='text-align:center'></th>
                         <?php } else { ?>
-                        <th style='text-align:center'>Matriculados</th>
+                        <th style='text-align:center'>Registrados</th>
                         <th style='text-align:center'></th>
                         <?php } ?>
                     </tr>
@@ -299,7 +301,7 @@
                 
                 else {
                     echo "<td style='text-align:center; vertical-align:middle'>
-                    <a href='lista.php'>
+                    <a href='?lista&class=$courseCode'>
                         <svg class='shrink-0 group-hover:!text-primary' width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' style='display: block; margin: auto'>
                             <circle opacity='0.5' cx='15' cy='6' r='3' fill='currentColor' />
                             <ellipse opacity='0.5' cx='16' cy='17' rx='5' ry='3' fill='currentColor' />
@@ -375,6 +377,27 @@
 
 
     <script>
+
+        if (sessionStorage.getItem('csv_content')) {
+            // Create a Blob from the CSV content
+            var blob = new Blob([sessionStorage.getItem('csv_content')], { type: 'application/csv' });
+
+            // Create a link element to trigger the download
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Report.csv';
+            document.body.appendChild(a);
+
+            // Trigger the click event to initiate the download
+            a.click();
+
+            // Remove the link element
+            document.body.removeChild(a);
+
+            // Clear the session variable
+            sessionStorage.removeItem('csv_content');
+        }
+
         $(document).ready(function(){
             $("#sidebar").load("sidebar.php");
         });
@@ -491,5 +514,30 @@
         });
     </script>
 </body>
+
+<?php
+    // Check if the session variables are set
+    if (isset($_SESSION['csv_content'], $_SESSION['filename'])) {
+        // Output the CSV content in a JavaScript block
+        echo '<script>';
+        echo 'var csvContent = ' . json_encode($_SESSION['csv_content']) . ';';
+        echo 'var csvFileName = "' . $_SESSION['filename'] . '";';
+        echo 'console.log(csvContent);';  // For debugging purposes
+        echo 'console.log(csvFileName);';  // For debugging purposes
+        echo 'var blob = new Blob([csvContent], { type: "application/csv" });';
+        echo 'var a = document.createElement("a");';
+        echo 'a.href = URL.createObjectURL(blob);';
+        echo 'a.download = csvFileName;';
+        echo '  document.body.appendChild(a);';
+        echo '  a.click();';
+        echo '  document.body.removeChild(a);';
+        echo '  sessionStorage.removeItem("csv_content");';
+        echo '  sessionStorage.removeItem("filename");';
+        echo '</script>';
+
+        // Clear the session variables
+        unset($_SESSION['csv_content'], $_SESSION['filename']);
+    }
+    ?>
 
 </html>

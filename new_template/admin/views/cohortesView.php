@@ -106,7 +106,7 @@
             </header>
             <!-- end header section -->
 
-            <div class="animate__animated p-6" :class="[$store.app.animation]">
+            <div class="animate__animated p-6" :class="[$store.app.animation]" style='padding: 5% 10%'>
                 <!-- start main content section -->
 
                 <!-- Create new term button -->
@@ -123,7 +123,7 @@
                 <?php } ?>
                     
                     <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h2 class="text-xl">Cohortes</h2>
+                    <h2 class="text-xl" style='text-align: center'>Cohortes</h2>
                     <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                     <div class="flex gap-3">
                     <div x-data="modal">
@@ -135,6 +135,7 @@
                             x-transition
                             x-transition.duration.300
                             class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
+                            style='background-color: white'
                         >
                             <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
                                 
@@ -142,12 +143,19 @@
                             <div class="p-5">
                                 <form action="?newcohort" method="POST">
                                 <div class="py-5 text-center text-white dark:text-white-light">
-                                    <label for='cohort'>Year de cohorte nuevo</label>
-                                    <input style='color:black' min="2000" max="3000" name='cohort' type='number' placeholder='' required>
+                                    <label style='color:black'for='cohort'>Año de cohorte nuevo</label>
+                                    <input class='form-input' style='color:black' min="2000" max="3000" name='cohort' type='number' placeholder='' required>
+                                </div>
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='copy_previous'>¿Copiar cohorte pasado?</label>
+                                    <select style='color: black' name='copy'>
+                                        <option style='color: black' value='no' selected>No</option>
+                                        <option style='color: black' value='si'>Sí</option>
+                                    </select>
                                 </div>
                                 <div class="flex justify-center gap-4 p-5">
 
-                                    <button type="submit" class="btn dark:btn-dark bg-white text-black">Someter</button>
+                                    <button type="submit" class="btn btn-primary !mt-6">Someter</button>
                                 </div>
                                 </form>
                             </div>
@@ -168,11 +176,11 @@
     <div class="border border-[#d3d3d3] dark:border-[#1b2e4b] rounded">
             <div class="p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
             <div class="table-responsive">
-            <table style='text-align:center; font-size: 30px'>
+            <table style='text-align:center; font-size: 18px'>
                 <thead>
                     <tr>
                         <th style='text-align:center'>Año</th>
-                        <th style='text-align:center'></th>
+                        <th style='text-align:center; width: 30%'></th>
                        
                     </tr>
                 </thead>
