@@ -131,5 +131,28 @@ class StudentModel {
         return $result !== false;
     }
     
+    public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $salon_hogar, $phone, $license, $average, $department, $address1, $address2, $residence, $state, $zipcode, $email) {
+        $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+    
+        // Imprime cada valor para confirmar que están bien
+        error_log("El numero de estudiante: " . $student_num . "\n", 3, $archivoRegistro);
+        error_log("Nombre: " . $nombre . "\n", 3, $archivoRegistro);
+        error_log("Segundo Nombre: " . $segundo_nombre . "\n", 3, $archivoRegistro);
+        error_log("Apellido Materno: " . $apellido_materno . "\n", 3, $archivoRegistro);
+        error_log("Apellido Paterno: " . $apellido_paterno . "\n", 3, $archivoRegistro);
+        error_log("Salon Hogar: " . $salon_hogar . "\n", 3, $archivoRegistro);
+        error_log("Teléfono: " . $phone . "\n", 3, $archivoRegistro);
+        error_log("Licencia: " . $license . "\n", 3, $archivoRegistro);
+        error_log("Promedio: " . $average . "\n", 3, $archivoRegistro);
+        error_log("Departamento: " . $department . "\n", 3, $archivoRegistro);
+        error_log("Dirección 1: " . $address1 . "\n", 3, $archivoRegistro);
+        error_log("Dirección 2: " . $address2 . "\n", 3, $archivoRegistro);
+        error_log("Residencia: " . $residence . "\n", 3, $archivoRegistro);
+        error_log("Estado: " . $state . "\n", 3, $archivoRegistro);
+        error_log("Código postal: " . $zipcode . "\n", 3, $archivoRegistro);
+        error_log("Correo electrónico: " . $email . "\n", 3, $archivoRegistro);
+    }
+    
+    
 }
 ?>

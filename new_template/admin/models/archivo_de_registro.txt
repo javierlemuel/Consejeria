@@ -1,0 +1,32 @@
+El numero de estudiante: 840199656
+Nombre: JARED
+Segundo Nombre: J
+Apellido Materno: MORALES
+Apellido Paterno: PUPO
+Salon Hogar: 275
+Teléfono: (000) 000-0000
+Licencia: 0002971
+Promedio: 2.859
+Departamento: COMS
+Dirección 1: URB. LOS PINOS
+Dirección 2: 170 CALLE JUNIPERO SAVINA
+Residencia: ARECIBO
+Estado: PR
+Código postal: 00612
+Correo electrónico: jared.pupo
+El numero de estudiante: 840199857
+Nombre: EMANUEL
+Segundo Nombre: D
+Apellido Materno: SANCHEZ
+Apellido Paterno: MARTINEZ
+Salon Hogar: 307
+Teléfono: (787) 615-9375
+Licencia: 0001590
+Promedio: 3.035
+Departamento: COMS
+Dirección 1: HC 1 BOX 4780
+Dirección 2: 
+Residencia: CAMUY
+Estado: PR
+Código postal: 00627
+Correo electrónico: emanuel.martinez8

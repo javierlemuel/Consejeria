@@ -36,7 +36,6 @@ class ExpedientesController {
             }
             elseif ($action === 'editStudent')
             {
-
                 $nombre = $_POST['nombre'];
                 $nombre2 = $_POST['nombre2'];
                 $apellidoP = $_POST['apellidoP'];
@@ -74,6 +73,78 @@ class ExpedientesController {
                 require_once(__DIR__ . '/../views/counselingView.php');
                 return;
             }
+            elseif ($action === 'uploadCSV')
+            {
+                $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+                error_log("Estoy en el uploadCSV \n", 3, $archivoRegistro);
+
+                // Verificamos si se han subido archivos
+                if (!empty($_FILES['files']['name'])) {
+                    $file_tmp = $_FILES['files']['tmp_name'];
+                    $file_type = $_FILES['files']['type'];
+                    $file_size = $_FILES['files']['size'];
+                    
+                    // Validamos que el archivo sea de tipo texto
+                    if ($file_type == "text/plain") {
+                        // Leemos el contenido del archivo
+                        $file_content = file_get_contents($file_tmp);
+
+                        // Dividimos el contenido por líneas
+                        $lines = explode("\n", $file_content);
+
+                        foreach ($lines as $line) {
+                            // Dividimos cada línea por el delimitador ";"
+                            $data = explode(";", $line);
+                        
+                            // Aplicamos trim a cada parte para eliminar espacios en blanco
+                            $student_num = trim($data[0]);
+                            
+                            // Obtenemos el apellido paterno y materno
+                            $apellidos_nombres = explode(",", trim($data[1]));
+                            $apellidos = $apellidos_nombres[0];
+                        
+                            // Verificamos si hay un segundo apellido (materno)
+                            $apellido_paterno = $apellido_materno = "";
+                        
+                            if (strpos($apellidos, ' ') !== false) {
+                                list($apellido_paterno, $apellido_materno) = explode(' ', $apellidos, 2);
+                            } else {
+                                $apellido_paterno = $apellidos;
+                            }
+                        
+                            // Obtenemos el nombre y segundo nombre
+                            $nombres = explode(" ", trim($apellidos_nombres[1]));
+                            $nombre = isset($nombres[0]) ? trim($nombres[0]) : "";
+                            $segundo_nombre = isset($nombres[1]) ? trim($nombres[1]) : "";
+                        
+                            $salon_hogar = trim($data[2]);
+                            $phone = trim($data[3]);
+                            $license = trim($data[4]);
+                            $average = trim($data[5]);
+                            $department = trim($data[6]);
+                            $address1 = trim($data[7]);
+                            $address2 = trim($data[8]);
+                            $residence = trim($data[9]);
+                            $state = trim($data[10]);
+                            $zipcode = trim($data[11]);
+                            $email = trim($data[12]);
+                        
+                            // Llamamos a la función del modelo para insertar el estudiante
+                            $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $salon_hogar, $phone, $license, $average, $department, $address1, $address2, $residence, $state, $zipcode, $email);
+                        }                                                                                              
+
+                        // Puedes agregar un mensaje de éxito o realizar alguna acción adicional si es necesario
+                        $result = "Archivos CSV procesados correctamente.";
+                    } else {
+                        // Puedes manejar el caso en el que el archivo no sea de tipo texto
+                        $result = "Error: El archivo debe ser de tipo texto (.txt).";
+                    }
+                } else {
+                    // Puedes manejar el caso en el que no se haya subido ningún archivo
+                    $result = "Error: No se ha seleccionado ningún archivo.";
+                }
+            }
+            
         }
 
         // Parámetros de paginación
