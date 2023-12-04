@@ -26,9 +26,12 @@ class ExpedienteController
         //get student info
         $studentInfo = $studentModel->getStudentInfo($conn, $student_num);
 
+
         //get student courses
-        $ccomStudentCourses = $studentModel->getStudentCCOMCourses($conn, $student_num);
-        $generalesStudentCourses = $studentModel->getStudentGeneralCourses($conn, $student_num);
+        $ccomStudentCourses = $studentModel->getStudentCCOMCourses($conn, $student_num, $studentInfo['cohort_year']);
+        $generalesStudentCourses = $studentModel->getStudentGeneralCourses($conn, $student_num,  $studentInfo['cohort_year']);
+        $ccomElectives = $studentModel->getCCOMElectives($conn, $student_num);
+        $freeElectives = $studentModel->getFREElectives($conn, $student_num);
 
 
 
