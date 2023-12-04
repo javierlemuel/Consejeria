@@ -69,7 +69,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <!-- Vertical line tabs -->
                 <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'info'}"> <!-- Cambiamos 'tab' a 'info' por defecto -->
                     <!-- buttons -->
-                    <div class="mx-10 mb-5 sm:mb-0">
+                    <div class="mx-3 mb-5 sm:mb-0">
                         <ul class="w-24 m-auto text-center font-semibold">
                             <li>
                                 <a href="javascript:" class="p-3.5 py-4 -mb-[1px] block ltr:border-r rtl:border-l border-white-light dark:border-[#191e3a] relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-[1px] before:bottom-0 before:top-0 ltr:before:-right-[1px] rtl:before:-left-[1px] before:m-auto before:h-0 hover:before:h-[80%] before:bg-secondary" :class="{'text-secondary before:!h-[80%]' : tab === 'info'}" @click="tab='info'">Informacion Basica</a>
@@ -158,7 +158,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <table class="table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Curso</th>
+                                                <th class="text-center">Curso</th>
                                                 <th>Descripcion</th>
                                                 <th>Creditos</th>
                                                 <th class="text-center">Notas</th>
@@ -169,10 +169,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($ccomStudentCourses as $ccomStudentCourse) : ?>
+                                            <?php $ccomCredits = 0;
+
+                                            foreach ($ccomStudentCourses as $ccomStudentCourse) :
+                                                $ccomCredits += $ccomStudentCourse['credits']; ?>
                                                 <tr>
-                                                    <td class="whitespace-nowrap"><?php echo $ccomStudentCourse['crse_code'] ?></td>
-                                                    <td><?php echo $ccomStudentCourse['name'] ?></td>
+                                                    <td><?php echo $ccomStudentCourse['crse_code'] ?></td>
+                                                    <td><?php echo strtoupper($ccomStudentCourse['name']) ?></td>
                                                     <td><?php echo $ccomStudentCourse['credits'] ?> </td>
                                                     <td><?php if ($ccomStudentCourse['crse_grade'] == 'NULL')
                                                             echo '';
@@ -191,10 +194,10 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <tfoot>
                                             <tr>
                                                 <th>
-                                                    <div>Creditos Departamentales:</div>
+                                                    <div>Creditos Totales:</div>
                                                 </th>
                                                 <th>
-                                                    <div>53</div>
+                                                    <div><?php echo $ccomCredits ?></div>
                                                 </th>
                                                 <th>
                                                     <div></div>
@@ -219,13 +222,16 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 <th class="text-center">Matriculado</th>
                                                 <th class="text-center">Recomendado</th>
                                                 <th class="text-center">Convalidacion</th>
+                                                <th class="text-center">Equivalencia</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($generalesStudentCourses as $generalesStudentCourse) : ?>
+                                            <?php $generalCredits = 0;
+                                            foreach ($generalesStudentCourses as $generalesStudentCourse) :
+                                                $generalCredits += $generalesStudentCourse['credits']; ?>
                                                 <tr>
                                                     <td class="whitespace-nowrap"><?php echo $generalesStudentCourse['crse_code'] ?></td>
-                                                    <td><?php echo $generalesStudentCourse['name'] ?></td>
+                                                    <td><?php echo mb_strtoupper($generalesStudentCourse['name']) ?></td>
                                                     <td><?php echo $generalesStudentCourse['credits'] ?> </td>
                                                     <td><?php if ($generalesStudentCourse['crse_grade'] == 'NULL')
                                                             echo '';
@@ -235,16 +241,17 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         else echo $generalesStudentCourse['term'] ?></td>
                                                     <td></td>
                                                     <td></td>
+                                                    <td></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>
-                                                    <div>Creditos Generales:</div>
+                                                    <div>Creditos Totales:</div>
                                                 </th>
                                                 <th>
-                                                    <div>54</div>
+                                                    <div><?php echo $generalCredits ?></div>
                                                 </th>
                                                 <th>
                                                     <div></div>
@@ -273,24 +280,32 @@ if (session_status() == PHP_SESSION_NONE) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="whitespace-nowrap"></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            <?php $ccomElectives_credits = 0;
+                                            foreach ($ccomElectives as $ccomElective) :
+                                                $ccomElectives_credits += $ccomElective['credits']; ?>
+                                                <tr>
+                                                    <td class="whitespace-nowrap"><?php echo $ccomElective['crse_code'] ?></td>
+                                                    <td><?php echo mb_strtoupper($ccomElective['name']) ?></td>
+                                                    <td><?php echo $ccomElective['credits'] ?> </td>
+                                                    <td><?php if ($ccomElective['crse_grade'] == 'NULL')
+                                                            echo '';
+                                                        else echo $ccomElective['crse_grade'] ?></td>
+                                                    <td><?php if ($ccomElective['term'] == 'NULL')
+                                                            echo '';
+                                                        else echo $ccomElective['term'] ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>
-                                                    <div>Creditos Electivas Departamentales:</div>
+                                                    <div>Creditos Totales:</div>
                                                 </th>
                                                 <th>
-                                                    <div></div>
+                                                    <div><?php echo $ccomElectives_credits ?></div>
                                                 </th>
                                                 <th>
                                                     <div></div>
@@ -319,24 +334,32 @@ if (session_status() == PHP_SESSION_NONE) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="whitespace-nowrap"></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            <?php $freeElectives_credits = 0;
+                                            foreach ($freeElectives as $freeElective) :
+                                                $freeElectives_credits += $freeElective['credits']; ?>
+                                                <tr>
+                                                    <td class="whitespace-nowrap"><?php echo $freeElective['crse_code'] ?></td>
+                                                    <td><?php echo mb_strtoupper($freeElective['name']) ?></td>
+                                                    <td><?php echo $freeElective['credits'] ?> </td>
+                                                    <td><?php if ($freeElective['crse_grade'] == 'NULL')
+                                                            echo '';
+                                                        else echo $freeElective['crse_grade'] ?></td>
+                                                    <td><?php if ($freeElective['term'] == 'NULL')
+                                                            echo '';
+                                                        else echo $freeElective['term'] ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>
-                                                    <div>Creditos Electivas Libres:</div>
+                                                    <div>Creditos Totales:</div>
                                                 </th>
                                                 <th>
-                                                    <div></div>
+                                                    <div><?php echo $freeElectives_credits ?></div>
                                                 </th>
                                                 <th>
                                                     <div></div>
@@ -475,23 +498,6 @@ if (session_status() == PHP_SESSION_NONE) {
         });
         // elec script
 
-        const clearCourse = (course, elements, category) => {
-            var query = document.getElementById(course).value; /* Value inputted by user */
-            var elements = document.getElementsByClassName(elements); /* Get the li elements in the list */
-            var myList = document.getElementById(category); /* Var to reference the list */
-            var length = (document.getElementsByClassName(element).length); /* # of li elements */
-            var checker = 'false'; /* boolean-ish value to determine if value was found */
-
-            myList.querySelectorAll('li').forEach(function(item) {
-                if (item.innerHTML.indexOf(query) !== -1)
-                    item.remove();
-            });
-        }
-
-        const clearCourses = (courses) => {
-            document.getElementById(courses).innerHTML = "";
-        }
-
         document.addEventListener("alpine:init", () => {
             Alpine.data("collapse", () => ({
                 collapse: false,
@@ -509,6 +515,85 @@ if (session_status() == PHP_SESSION_NONE) {
                 },
             }));
         });
+
+        const clearCourse = (course) => {
+            console.log("courseList: ", courseList);
+            const index = courseList.indexOf(course.id);
+            let checkbox = $(`input[type="checkbox"][value=${course.id}]`);
+            if (index > -1) {
+                //uncheck el checkbox de la lista
+                checkbox.prop('checked', false);
+                console.log("el checkbox unchecked: ", checkbox);
+                courseList.splice(index, 1);
+            }
+            course.remove();
+        }
+
+        const clearCourses = (courses) => {
+            document.getElementById(courses).innerHTML = "";
+        }
+
+        $(document).ready(() => {
+            let storedArrayJSON = sessionStorage.getItem('selectedCourses');
+            let courseList = JSON.parse(storedArrayJSON);
+            console.log("courses: ", courseList);
+
+            const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
+
+            //verifica si hay clases selecccionadas con los checkboxes
+            if (courseList.length > 0) {
+                //por cada checkbox seleccionado
+                courseList.forEach((selectedCourse) => {
+                    //si la clase no existe en el array de clases seleccionadas la anade al array y al sidebar
+
+                    console.log("each selected course: ", selectedCourse);
+                    const courseCode = selectedCourse;
+
+                    let category = '';
+                    if (courseCode.startsWith("CCOM")) {
+                        category = $('#concentracion');
+                    } else if (generales.some(substr => courseCode.startsWith(substr))) {
+                        category = $('#generales');
+                    } else if (courseCode.startsWith("HUMA")) {
+                        category = $('#humanidades');
+                    } else if (courseCode.startsWith("CISO")) {
+                        category = $('#cienciasSociales');
+                    }
+                    let html = `<li id="${courseCode}">
+                     <h3 style="font-size: 12px;" class="justify-between -mx-4 mb-2 flex items-center  py-3 px-7 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]" style="text-size: 14px;">
+                     ${courseCode}
+                     <a onclick="clearCourse(${courseCode})"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path opacity="0.5" d="M11.5956 22.0001H12.4044C15.1871 22.0001 16.5785 22.0001 17.4831 21.1142C18.3878 20.2283 18.4803 18.7751 18.6654 15.8686L18.9321 11.6807C19.0326 10.1037 19.0828 9.31524 18.6289 8.81558C18.1751 8.31592 17.4087 8.31592 15.876 8.31592H8.12405C6.59127 8.31592 5.82488 8.31592 5.37105 8.81558C4.91722 9.31524 4.96744 10.1037 5.06788 11.6807L5.33459 15.8686C5.5197 18.7751 5.61225 20.2283 6.51689 21.1142C7.42153 22.0001 8.81289 22.0001 11.5956 22.0001Z" fill="currentColor" />
+                         <path d="M3 6.38597C3 5.90152 3.34538 5.50879 3.77143 5.50879L6.43567 5.50832C6.96502 5.49306 7.43202 5.11033 7.61214 4.54412C7.61688 4.52923 7.62232 4.51087 7.64185 4.44424L7.75665 4.05256C7.8269 3.81241 7.8881 3.60318 7.97375 3.41617C8.31209 2.67736 8.93808 2.16432 9.66147 2.03297C9.84457 1.99972 10.0385 1.99986 10.2611 2.00002H13.7391C13.9617 1.99986 14.1556 1.99972 14.3387 2.03297C15.0621 2.16432 15.6881 2.67736 16.0264 3.41617C16.1121 3.60318 16.1733 3.81241 16.2435 4.05256L16.3583 4.44424C16.3778 4.51087 16.3833 4.52923 16.388 4.54412C16.5682 5.11033 17.1278 5.49353 17.6571 5.50879H20.2286C20.6546 5.50879 21 5.90152 21 6.38597C21 6.87043 20.6546 7.26316 20.2286 7.26316H3.77143C3.34538 7.26316 3 6.87043 3 6.38597Z" fill="currentColor" />
+                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.42543 11.4815C9.83759 11.4381 10.2051 11.7547 10.2463 12.1885L10.7463 17.4517C10.7875 17.8855 10.4868 18.2724 10.0747 18.3158C9.66253 18.3592 9.29499 18.0426 9.25378 17.6088L8.75378 12.3456C8.71256 11.9118 9.01327 11.5249 9.42543 11.4815Z" fill="currentColor" />
+                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5747 11.4815C14.9868 11.5249 15.2875 11.9118 15.2463 12.3456L14.7463 17.6088C14.7051 18.0426 14.3376 18.3592 13.9254 18.3158C13.5133 18.2724 13.2126 17.8855 13.2538 17.4517L13.7538 12.1885C13.795 11.7547 14.1625 11.4381 14.5747 11.4815Z" fill="currentColor" />
+                     </svg></a>
+                     </h3>
+                     <input type="hidden" name="selectedCoursesList[]" value="${courseCode}">
+                    </li>`;
+                    category.append(html);
+
+
+                });
+
+
+            }
+            const UncheckedCheckboxes = $('input[type="checkbox"]:not(:checked)');
+            console.log("verificar if not checked: ", UncheckedCheckboxes);
+            UncheckedCheckboxes.each((i, notSelectedCourse) => {
+                if (courseList.includes(notSelectedCourse.value)) {
+                    console.log("curso no seleccionado: ", notSelectedCourse.value);
+                    const course = $(`#${notSelectedCourse.value}`);
+                    console.log("li encontrado: ", course);
+                    const index = courseList.indexOf(notSelectedCourse.value);
+                    if (index > -1) {
+                        courseList.splice(index, 1);
+                    }
+                    course.remove();
+                }
+            });
+
+        })
     </script>
 </body>
 

@@ -9,7 +9,7 @@ class CohorteController
     public function cohorte2017()
     {
         global $conn;
-        $counselingModel = new CohorteModel();
+        $cohorteModel = new CohorteModel();
         if (session_status() == PHP_SESSION_NONE) {
             // Start the session
             session_start();
@@ -21,8 +21,11 @@ class CohorteController
         }
 
         //sacas los cursos de un json file
-        $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
-        $allCourses = json_decode($allCourses, true);
+        // $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
+        // $allCourses = json_decode($allCourses, true);
+
+        // Obtenemos el cohorte de 2017
+        $cohorte2017 = $cohorteModel->getCohort($conn, '2017');
 
         require_once(__DIR__ . '/../views/cohorte2017View.php');
     }
@@ -31,7 +34,7 @@ class CohorteController
     public function cohorte2022()
     {
         global $conn;
-        $counselingModel = new CohorteModel();
+        $cohorteModel = new CohorteModel();
         if (session_status() == PHP_SESSION_NONE) {
             // Start the session
             session_start();
@@ -42,9 +45,11 @@ class CohorteController
             $student_num = $_SESSION['student_num'];
         }
 
-        //sacas los cursos de un json file
-        $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
-        $allCourses = json_decode($allCourses, true);
+        // //sacas los cursos de un json file
+        // $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
+        // $allCourses = json_decode($allCourses, true);
+        // Obtenemos el cohorte de 2017
+        $cohorte2022 = $cohorteModel->getCohort($conn, '2022');
         require_once(__DIR__ . '/../views/cohorte2022View.php');
     }
 }
