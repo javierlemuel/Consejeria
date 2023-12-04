@@ -90,15 +90,11 @@
                                                         Subir Archivo CSV
                                                     </h3>
                                                     <div class="p-5">
-                                                        <form @submit.prevent="submitForm">
+                                                        <form action="./" method="POST" enctype="multipart/form-data">
+                                                            <input type="hidden" name="action" value="uploadCSV">
                                                             <div>
-                                                                <label for="csvfile">Subir el archivo .CSV con el formato requerido para añadir un estudiante.</label>
-                                                                <input
-                                                                    id="csvfile"
-                                                                    type="file"
-                                                                    class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary"
-                                                                    required
-                                                                />
+                                                                <label for="csvfile">Subir archivos .CSV con el formato requerido para añadir estudiantes.</label>
+                                                                <input type="file" id="files" name="files" multiple class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary">
                                                             </div>
                                                             <div class="mt-8 flex items-center justify-end">
                                                                 <button type="button" class="btn btn-outline-danger" @click="closeUploadModal">Cancelar</button>
@@ -253,16 +249,7 @@
                                     </div>
                                 </button>
                             </a>
-                            </li>
-
-
-
-                            
-
-                            
-
-
-
+                        </li>
                     </ul>
                 </div>
             </nav>
