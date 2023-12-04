@@ -175,7 +175,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 $ccomCredits += $ccomStudentCourse['credits']; ?>
                                                 <tr>
                                                     <td><?php echo $ccomStudentCourse['crse_code'] ?></td>
-                                                    <td><?php echo strtoupper($ccomStudentCourse['name']) ?></td>
+                                                    <td><?php echo mb_strtoupper($ccomStudentCourse['name']) ?></td>
                                                     <td><?php echo $ccomStudentCourse['credits'] ?> </td>
                                                     <td><?php if ($ccomStudentCourse['crse_grade'] == 'NULL')
                                                             echo '';

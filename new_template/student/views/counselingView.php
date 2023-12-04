@@ -142,7 +142,7 @@
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td><?= $course['crse_code'] ?></td>
-                                                                    <td><?= $course['name'] ?></td>
+                                                                    <td><?= strtoupper($course['name']) ?></td>
                                                                     <td><?= $course['credits'] ?></td>
                                                                 </tr>
                                                             <?php endforeach;  ?>

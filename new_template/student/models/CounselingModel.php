@@ -127,7 +127,7 @@ class CounselingModel
         foreach ($courses as $course) {
 
             $term = 'BB1';
-            $sql = "INSERT INTO takes (student_num, crse_code, term) VALUES (?,?,?)";
+            $sql = "INSERT INTO will_take (student_num, crse_code, term) VALUES (?,?,?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $student_num, $course, $term);
             if (!$stmt->execute()) {
