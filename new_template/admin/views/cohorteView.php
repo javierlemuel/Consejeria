@@ -1,3 +1,7 @@
+<?php $total1 = 0;
+      $total2 = 0; 
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -162,16 +166,17 @@
                     <thead>
                         <tr>
                             <th style='text-align:center'>CÓDIGO</th>
-                            <th style='text-align:center; width: 40%'>NOMBRE</th>
+                            <th style='text-align:left; width: 40%'>NOMBRE</th>
                             <th style='text-align:center'>CRÉDITOS</th>
                             <th style='text-align:center'></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($firstSem as $course) { ?>
+                    <?php foreach ($firstSem as $course) { 
+                        $total1 += $course['credits']?>
                             <tr>
                             <td style='text-align:center'><?php echo $course['crse_code'] ?></td>
-                            <td style='text-align:center'><?php echo $course['name'] ?></td>
+                            <td style='text-align:left'><?php echo $course['name'] ?></td>
                             <td style='text-align:center'><?php echo $course['credits'] ?></td>
                             <td style='text-align:center'>
                             <a style='cursor: pointer' title='Remover' href='?cohort=<?php echo $cohort ?>&courseID=<?php echo $course['crse_code']?>&year=<?php echo $year?>'>
@@ -200,6 +205,9 @@
                     </svg></a></td>
                         </tr>
                     <?php } ?>
+                    <td></td><td></td>
+                    <td style='text-align:right'><b>Total:</b></td>
+                    <td style='text-align:left'><b><?php echo $total1; ?></b></td>
                     </tbody></table>
 
                 <div class='mb-2 p-2 bg-gray-200 text-gray-700 rounded-md'>
@@ -209,16 +217,17 @@
                 <thead>
                     <tr>
                         <th style='text-align:center'>CÓDIGO</th>
-                        <th style='text-align:center; width: 40%'>NOMBRE</th>
+                        <th style='text-align:left; width: 40%'>NOMBRE</th>
                         <th style='text-align:center'>CRÉDITOS</th>
                         <th style='text-align:center'></th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($secondSem as $course) { ?>
+                <?php foreach ($secondSem as $course) { 
+                    $total2 += $course['credits'];?>
                         <tr>
                         <td style='text-align:center'><?php echo $course['crse_code'] ?></td>
-                        <td style='text-align:center'><?php echo $course['name'] ?></td>
+                        <td style='text-align:left'><?php echo $course['name'] ?></td>
                         <td style='text-align:center'><?php echo $course['credits'] ?></td>
                         <td style='text-align:center'>
                         <a style='cursor: pointer' title='Remover' href='?cohort=<?php echo $cohort ?>&courseID=<?php echo $course['crse_code']?>&year=<?php echo $year?>'>
@@ -247,6 +256,9 @@
                     </svg></a></td>
                     </tr>
                 <?php } ?>
+                <td></td><td></td>
+                    <td style='text-align:right'><b>Total:</b></td>
+                    <td style='text-align:left'><b><?php echo $total2; ?></b></td>
                 </tbody></table>
 
                 </div>  

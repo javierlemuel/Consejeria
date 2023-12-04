@@ -22,6 +22,18 @@ class ClassModel {
         return $result;
     }
 
+    public function getMinors($conn){
+        $sql = "SELECT *
+                FROM minor";
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
     public function updateCourse($conn, $oldcourse, $course_id, $course_name, $credits,
     $type, $level)
     {
@@ -77,94 +89,65 @@ class ClassModel {
         return $result;
     }
 
-    public function editRequisites($conn, $course, $table, $prereq, $coreq, $oldprereq, $oldcoreq)
+    public function editRequisites($conn, $course, $table, $req, $oldreq, $cohort, $oldcohort, $type)
     {
-        //Verificar que exista el prequisito en cursos y que no exista en nuestros requisitos
-        if($prereq != 'none')
-        {
-            $sql = "SELECT *
-                FROM ccom_courses
-                WHERE crse_code = '$prereq'
-                UNION ALL
-                SELECT *
-                FROM general_courses
-                WHERE crse_code = '$prereq'";
-            $result = $conn->query($sql);  
-
-            if ($result === false) {
-                throw new Exception("Error en la consulta SQL: " . $conn->error);
-            }
-
-            if ($result->num_rows == 0)
-                return "no prereq";
-
-
-            if($prereq != $oldprereq)
-            {
-                $sql = "SELECT * 
-                FROM $table
-                WHERE crse_code = '$course'
-                AND prerequisite = '$prereq'";
-                $result = $conn->query($sql);
-                if ($result === false) {
-                    throw new Exception("Error en la consulta SQL: " . $conn->error);
-                }
-    
-                if ($result->num_rows > 0)
-                    return 'prereq exists';
-            }
-           
-        }
         
 
-        //Verificar que exista el corequisito en cursos y no exista en nuestros requisitos
-        if($coreq != 'none')
-        {
-            $sql2 = "SELECT *
-            FROM ccom_courses
-            WHERE crse_code = '$coreq'
-            UNION ALL
-            SELECT *
-            FROM general_courses
-            WHERE crse_code = '$coreq'";
+        //Verifica si el curso requisito existe
+        $sql = "SELECT *
+        FROM ccom_courses
+        WHERE crse_code = '$req'
+        UNION ALL
+        SELECT *
+        FROM general_courses
+        WHERE crse_code = '$req'";
 
-            $result2 = $conn->query($sql2);  
-
-            if ($result2 === false) {
-                throw new Exception("Error2 en la consulta SQL2: " . $conn->error);
-            }
-
-            
-            if ($result2->num_rows == 0)
-                return "no coreq";
-
-
-            if($coreq != $oldcoreq){
-                $sql2 = "SELECT *
-                FROM $table
-                WHERE crse_code = '$course'
-                AND corequisite = '$coreq'";
-                $result2 = $conn->query($sql2);
-
-                if ($result2 === false) {
-                    throw new Exception("Error2 en la consulta SQL2: " . $conn->error);
-                }
-
-                if ($result2->num_rows > 0)
-                    return 'coreq exists';
-            }
-            
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
+
+        if ($result->num_rows == 0)
+            return 'No course';
+
+
+        //Verifica si el cohorte existe
+        $sql = "SELECT cohort_year
+        FROM cohort
+        WHERE cohort_year = $cohort";
+
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        if ($result->num_rows == 0)
+            return 'No cohort';
+
+
+        //Verifica que el requisito no existe en ese curso ya
+        $sql2 = "SELECT *
+        FROM $table
+        WHERE crse_code = '$course'
+        AND req_crse_code = '$req'
+        AND cohort_year = $cohort";
+        $result2 = $conn->query($sql2);
+        if ($result2 === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        if ($result2->num_rows > 0)
+            return 'Req exist';
 
 
         //Editar los requisitos del curso entonces
-
         $sql3 = "UPDATE $table
-                SET prerequisite = '$prereq',
-                corequisite = '$coreq'
+                SET req_crse_code = '$req',
+                type = '$type',
+                cohort_year = $cohort
                 WHERE crse_code = '$course'
-                AND prerequisite = '$oldprereq'
-                AND corequisite = '$oldcoreq'";
+                AND req_crse_code = '$oldreq'
+                AND cohort_year = '$oldcohort'";
         $result3 = $conn->query($sql3); 
 
         if ($result3 === false) {
@@ -175,12 +158,12 @@ class ClassModel {
     }
 
 
-    public function deleteReq($conn, $course, $prereq, $coreq, $table)
+    public function deleteReq($conn, $course, $req, $cohort, $table)
     {
         $sql = "DELETE FROM $table
                 WHERE crse_code = '$course'
-                AND prerequisite = '$prereq'
-                AND corequisite = '$coreq'";
+                AND req_crse_code = '$req'
+                AND cohort_year = $cohort";
         $result = $conn->query($sql);
 
         if ($result === false) {
@@ -191,51 +174,60 @@ class ClassModel {
 
     }
 
-    public function addReq($conn, $course, $prereq, $coreq, $table)
+    public function addReq($conn, $course, $req, $cohort, $type, $table)
     {
-        //Verificar que el prerequisito no exista ya para este curso.
-        if($prereq != 'none')
-        {
-            $sql = "SELECT * 
-                FROM $table
-                WHERE crse_code = '$course'
-                AND prerequisite = '$prereq'";
-            $result = $conn->query($sql);
-            if ($result === false) {
-                throw new Exception("Error en la consulta SQL: " . $conn->error);
-            }
+        
+        //Verifica si el curso requisito existe
+        $sql = "SELECT *
+        FROM ccom_courses
+        WHERE crse_code = '$req'
+        UNION ALL
+        SELECT *
+        FROM general_courses
+        WHERE crse_code = '$req'";
 
-            if ($result->num_rows > 0)
-                return 'prereq exists';
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
-        
 
-        //Verificar que el corequisito no exista ya para este curso.
-        if($coreq != 'none')
-        {
-            $sql2 = "SELECT *
-                FROM $table
-                WHERE crse_code = '$course'
-                AND corequisite = '$coreq'";
-            $result2 = $conn->query($sql2);
+        if ($result->num_rows == 0)
+            return 'No course';
 
-            if ($result2 === false) {
-                throw new Exception("Error2 en la consulta SQL2: " . $conn->error);
-            }
 
-            if ($result2->num_rows > 0)
-                return 'coreq exists';
+        //Verifica si el cohorte existe
+        $sql = "SELECT cohort_year
+        FROM cohort
+        WHERE cohort_year = $cohort";
+
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
-        
 
-        //Verificar que no hayas enviado form sin data.
-        if($prereq == 'none' && $coreq == 'none')
-            return 'empty';
-        
-        //Si no existen, insertamos esta fila nueva.
+        if ($result->num_rows == 0)
+            return 'No cohort';
+
+
+        //Verifica que el requisito no existe en ese curso ya
+        $sql2 = "SELECT *
+        FROM $table
+        WHERE crse_code = '$course'
+        AND req_crse_code = '$req'
+        AND cohort_year = $cohort";
+        $result2 = $conn->query($sql2);
+        if ($result2 === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        if ($result2->num_rows > 0)
+            return 'Req exist';
+
+
+        //Si no, insertamos esta fila nueva.
 
         $sql3 = "INSERT INTO $table
-                VALUES('$course', '$prereq', '$coreq')";
+                VALUES('$course', $cohort, '$type', '$req')";
         $result3 = $conn->query($sql3);
 
         if ($result3 === false)

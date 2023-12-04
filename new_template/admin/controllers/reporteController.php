@@ -12,6 +12,7 @@ class ReporteController{
         $studentsRegistrados = $reporteModel->getRegistrados($conn);
         $studentsEditados = $reporteModel->getEditados($conn);
         $studentsPerClass = $reporteModel->getStudentsPerClass($conn);
+        $term = $reporteModel->getTerm($conn);
         $count = 0;
 
         require_once(__DIR__ . '/../views/reporteView.php');

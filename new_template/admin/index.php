@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if(isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)
 {
     //La sesión está autenticada, muestra la página relevante
-    if(isset($_GET['classes']) || isset($_GET['ccomelectives']) || 
+    if(isset($_GET['lista']) || isset($_GET['classes']) || isset($_GET['ccomelectives']) || 
     isset($_GET['generalclasses']) || isset($_GET['addOffer']) || isset($_GET['removeOffer'])
     || isset($_GET['offer']) || isset($_GET['newterm']))
     {

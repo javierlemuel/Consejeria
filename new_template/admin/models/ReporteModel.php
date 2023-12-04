@@ -44,8 +44,8 @@ class ReporteModel {
    }
 
    public function getRegistrados($conn){
-        $sql = "SELECT COUNT(DISTINCT conducted_counseling) AS count
-        FROM student;";
+        $sql = "SELECT COUNT(DISTINCT student_num) AS count
+        FROM will_take;";
         $result = $conn->query($sql);
 
         if ($result === false) {
@@ -62,9 +62,9 @@ class ReporteModel {
 
    public function getEditados($conn)
    {
-        $sql = "SELECT COUNT(edited_flag) AS count
+        $sql = "SELECT COUNT(edited) AS count
                 FROM student
-                WHERE edited_flag=1";
+                WHERE edited != '0000-00-00'";
         $result = $conn->query($sql);
         if ($result === false) {
             throw new Exception("Error en la consulta SQL: " . $conn->error);
@@ -91,5 +91,22 @@ class ReporteModel {
 
         return $result;
 
+   }
+
+   public function getTerm($conn){
+        $sql = "SELECT DISTINCT term
+                FROM offer";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        foreach ($result as $res)
+            $term = $res['term'];
+
+        return $term;
+        
    }
 }

@@ -12,6 +12,7 @@ class ClassController{
             $classModel = new ClassModel();
     
             $class = $classModel->getCourse($conn, $course);
+            $minors = $classModel->getMinors($conn);
     
             require_once(__DIR__ . '/../views/classView.php');
         }
@@ -67,35 +68,29 @@ class ClassController{
 
             if($_POST['action'] == 'edit')
             {
-                if(isset($_POST['prereq']))
-                $prereq = $_POST['prereq'];
+                if(isset($_POST['req']))
+                    $req = $_POST['req'];
                 else    
-                    $prereq = 'none';
+                    $req = 'none';
 
-                if(isset($_POST['coreq']))
-                    $coreq = $_POST['coreq'];
-                else    
-                    $coreq = 'none';
-
-                if(isset($_POST['old_prereq']))
-                    $oldprereq = $_POST['old_prereq'];
+                if(isset($_POST['old_req']))
+                    $oldreq = $_POST['old_req'];
                 else  
                     $oldprereq = 'none';
 
-                if(isset($_POST['old_coreq']))
-                    $oldcoreq = $_POST['old_coreq'];
-                else    
-                    $oldcoreq = 'none';
+                $cohort = $_POST['cohort'];
+                $oldcohort = $_POST['oldcohort'];
+                $type = $_POST['type'];
 
-                $message = $classModel->editRequisites($conn, $course, $table, $prereq, $coreq, $oldprereq, $oldcoreq);
+                $message = $classModel->editRequisites($conn, $course, $table, $req, $oldreq, $cohort, $oldcohort, $type);
             }   
 
             elseif($_POST['action'] == 'delete')
             {
-                $prereq = $_POST['prereq'];
-                $coreq = $_POST['coreq'];
+                $req = $_POST['old_req'];
+                $cohort = $_POST['oldcohort'];
 
-                $message = $classModel->deleteReq($conn, $course, $prereq, $coreq, $table);
+                $message = $classModel->deleteReq($conn, $course, $req, $cohort, $table);
             }
 
             
@@ -111,21 +106,16 @@ class ClassController{
             $classModel = new ClassModel(); 
 
             $course = $_POST['course'];
-            if($_POST['prereq'] != '')
-                $prereq = $_POST['prereq'];
-            else 
-                $prereq = 'none';
-            if($_POST['coreq'] != '')
-                $coreq = $_POST['coreq'];
-            else    
-                $coreq = 'none';
+            $req = $_POST['req'];
+            $cohort = $_POST['cohort'];
+            $type = $_POST['type'];
 
             if((strpos($course, 'CCOM') !== false)) 
                 $table = 'ccom_requirements';
             else    
                 $table = 'general_requirements';
 
-            $message = $classModel->addReq($conn, $course, $prereq, $coreq, $table);
+            $message = $classModel->addReq($conn, $course, $req, $cohort, $type, $table);
 
             $class = $classModel->getCourse($conn, $course);
     
@@ -147,13 +137,7 @@ class ClassController{
 
         $requisitos = $classModel->getRequisitosModel($conn, $table, $course);
 
-        foreach($requisitos as $req)
-        {
-            if($req['corequisite'] == NULL)
-                $req['corequisite'] = 'none';
-            if($req['prerequisite'] == NULL)
-                $req['prerequisite'] = 'none';
-        }
+        
 
         return $requisitos;
 

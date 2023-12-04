@@ -114,8 +114,6 @@
                                         echo"<h2 style='color:limegreen; bold' class='text-xl'>Minor fue editado!</h2>";
                                      elseif ($message == "add_success") 
                                         echo "<h2 style='color:limegreen; bold' class='text-xl'>Minor fue creado!</h2>";
-                                        elseif ($message == "") 
-                                        echo "<h2 style='color:limegreen; bold' class='text-xl'>Message test!</h2>";
                                 ?>
                         <br>
                     </div>
@@ -139,27 +137,26 @@
                             x-transition
                             x-transition.duration.300
                             class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
+                            style='background-color: white'
                         >
                             <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
                                 
                             </div>
                             <div class="p-5">
-                                <h2> Add Minor </h2>
                                 <form action="?minor&add" method="POST">
                                     <input type="hidden" name="minor">
                                     <input type="hidden" name="add">
                                 <div class="py-5 text-center text-white dark:text-white-light">
-                                    <label for='name'>Titulo del minor</label>
-                                    <input style='color:black' name='name' type='text' required>
+                                    <label style='color:black' for='name'>Título del Minor</label>
+                                    <input class='form-input' style='color:black' name='name' type='text' required>
                                 </div>
                                 <div class="py-5 text-center text-white dark:text-white-light">
-                                    <label for='cohort'>Cantidad de creditos requeridos</label>
-                                    <input style='color:black' min="1" max="21" name='credits' type='number' required>
+                                    <label style='color:black' for='cohort'>Cantidad de créditos requeridos</label>
+                                    <input class='form-input' style='color:black' min="1" max="21" name='credits' type='number' required>
                                 </div>
                                 <div class="flex justify-center gap-4 p-5">
-                                    
+                                <button type="submit" class="btn btn-primary !mt-6">Crear Minor</button>
                                 </div>
-                                <button type="submit" class="btn dark:btn-dark bg-white text-black">Create</button>
                                 </form>
                             </div>
                         </div>
@@ -214,6 +211,7 @@
             <button type='submit' class='badge whitespace-nowrap badge-outline-primary'>Editar</button>
             </td>                                       
             </tr>
+            </form>
             <?php } ?>
     </tbody>
             </table>
