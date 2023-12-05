@@ -183,10 +183,27 @@ class StudentModel {
             $axo = $axo + 2000;
         }
         $birthdate_formatted = sprintf("%04d-%02d-%02d", $axo, $mes, $dia);
+
+        $numberStr = (string) $student_num;
+
+        // Check if the number has at least 5 digits
+        if (strlen($numberStr) >= 5) {
+            // Extract the 4th and 5th digits
+            $fourthDigit = $numberStr[3];
+            $fifthDigit = $numberStr[4];
+
+            // Concatenate the 4th and 5th digits into a single string
+            $combinedDigits = $fourthDigit . $fifthDigit;
+        }
+
+        if(intval($combinedDigits) <= 21)
+            $cohort_year = '2017';
+        else    
+            $cohort_year = '2022';
     
         // Ejecuta el query de inserción
         $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, given_counseling, minor, cohort_year, status, edited, type)
-                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, 2022, 'Activo', '0000-00-00', '')";
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', '0000-00-00', '')";
     
         // Ejecuta el query
         if ($conn->query($query) === TRUE) {
