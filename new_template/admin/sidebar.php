@@ -93,8 +93,13 @@
                                                         <form action="./" method="POST" enctype="multipart/form-data">
                                                             <input type="hidden" name="action" value="uploadCSV">
                                                             <div>
-                                                                <label for="csvfile">Subir archivos .CSV con el formato requerido para añadir estudiantes.</label>
-                                                                <input type="file" id="files" name="files" multiple class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary">
+                                                                <!-- Campo para el primer archivo CSV -->
+                                                                <label for="csvfile">Subir archivo .txt con información de estudiantes.</label>
+                                                                <input type="file" id="files" name="files" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary">
+
+                                                                <!-- Campo para el segundo archivo CSV -->
+                                                                <label for="csvfile2">Subir archivo .CSV con información de fechas de nacimiento.</label>
+                                                                <input type="file" id="files2" name="files2" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary">
                                                             </div>
                                                             <div class="mt-8 flex items-center justify-end">
                                                                 <button type="button" class="btn btn-outline-danger" @click="closeUploadModal">Cancelar</button>

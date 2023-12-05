@@ -129,7 +129,7 @@ class StudentModel {
                 $studentData = $row;
             }
         } else {
-            echo"Querie ejecutado con error en el selectstudent.";
+            return NULL;
         }
         // Cierra la sentencia
         //$stmt->close();
@@ -164,17 +164,36 @@ class StudentModel {
         return $result !== false;
     }
     
-    public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email) {
+    public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
     
-        // Imprime cada valor para confirmar que están bien
-        error_log("El numero de estudiante: " . $student_num . "\n", 3, $archivoRegistro);
-        error_log("Nombre: " . $nombre . "\n", 3, $archivoRegistro);
-        error_log("Segundo Nombre: " . $segundo_nombre . "\n", 3, $archivoRegistro);
-        error_log("Apellido Materno: " . $apellido_materno . "\n", 3, $archivoRegistro);
-        error_log("Apellido Paterno: " . $apellido_paterno . "\n", 3, $archivoRegistro);
-        error_log("Correo electrónico: " . $email . "\n", 3, $archivoRegistro);
-    }
+        // Extraer el mes, día y año de $birthdate
+        $mes = substr($birthdate, 0, 2);
+        $dia = substr($birthdate, 2, 2);
+        $axo = substr($birthdate, 4, 2);
+
+        if($axo > 50)
+        {
+            $axo = $axo + 1900;
+        }
+        else
+        {
+            $axo = $axo + 2000;
+        }
+        $birthdate_formatted = sprintf("%04d-%02d-%02d", $axo, $mes, $dia);
     
+        // Ejecuta el query de inserción
+        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, given_counseling, minor, cohort_year, status, edited, type)
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', $birthdate_formatted, '0000-00-00', 0, 2022, 'Activo', '0000-00-00', '')";
+    
+        // Ejecuta el query
+        if ($conn->query($query) === TRUE) {
+            // Insert exitoso
+            error_log("Estudiante insertado correctamente en la base de datos.\n", 3, $archivoRegistro);
+        } else {
+            // querie fallo
+            error_log("Error al insertar estudiante en la base de datos: " . $conn->error . "\n", 3, $archivoRegistro);
+        }
+    }    
 }
 ?>
