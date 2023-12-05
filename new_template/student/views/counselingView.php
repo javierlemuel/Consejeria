@@ -130,7 +130,7 @@
                                                             }
 
                                                             //var_dump($recommendedCourses);
-                                                            // var_dump($category);
+                                                            //var_dump($courses);
                                                             ?>
 
 
