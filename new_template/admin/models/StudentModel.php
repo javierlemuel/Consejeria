@@ -13,13 +13,15 @@ class StudentModel {
         }
     
         // Modificar la consulta SQL para incluir el filtro de estado y búsqueda
-        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status 
+        //JAVIER//
+        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, given_counseling, status 
                 FROM student 
-                WHERE $statusCondition 
+                WHERE $statusCondition
                 AND name1 LIKE ? 
                 ORDER BY name1 ASC 
                 LIMIT ? 
                 OFFSET ?";
+        //
     
         $stmt = $conn->prepare($sql);
     
@@ -34,6 +36,26 @@ class StudentModel {
             $student_num = $row['student_num'];
             $formatted_student_num = substr($student_num, 0, 3) . '-' . substr($student_num, 3, 2) . '-' . substr($student_num, 5);
             $row['formatted_student_num'] = $formatted_student_num;
+
+            //JAVIER (Add si el estudiante hizo consejeria)
+            $sql2 = "SELECT DISTINCT will_take.student_num
+                FROM will_take NATURAL JOIN student
+                WHERE will_take.student_num = $student_num
+                AND student.name1 LIKE '$searchKeyword'";
+             $result2 = $conn->query($sql2);
+
+            if ($result2 === false) {
+                throw new Exception("Error en la consulta SQL: " . $conn->error);
+            }
+
+            $counseling = 0;
+
+            foreach($result2 as $res)
+                $counseling = 1;
+
+            $row['conducted_counseling'] = $counseling;
+            //
+
             $students[] = $row;
         }
     
@@ -116,16 +138,27 @@ class StudentModel {
         return $studentData;
     }
 
-    public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $conn) {
+    //JAVIER
+    public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn) {
         // Preparar la consulta SQL
-        $sql = "UPDATE student SET name1 = ?, name2 = ?, last_name1 = ?, last_name2 = ?, email = ?, dob = ?, cohort_year = ?, minor = ?, grad_term = ?, admin_note = ?, student_note = ?, status = ? WHERE student_num = ?";
+        $sql = "UPDATE student SET name1 = ?, name2 = ?, last_name1 = ?, 
+        last_name2 = ?, email = ?, dob = ?, cohort_year = ?, minor = ?, 
+        grad_term = ?, admin_note = ?, student_note = ?, status = ?, 
+        edited = ? WHERE student_num = ?";
 
         // Preparar los datos para la consulta
-        $params = array($nombre, $nombre2, $apellidoP, $apellidoM, $email, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $numeroEst);
+        $params = array($nombre, $nombre2, $apellidoP, $apellidoM, $email, $fechaNac, 
+        $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $numeroEst);
+
+        //$types = str_repeat('s', count($params) - 2) . 'ii';  
+        $types = ('sssssssisssssi');
 
         // Ejecutar la consulta
         $stmt = $conn->prepare($sql);
-        $result = $stmt->execute($params);
+        $stmt->bind_param($types, ...$params);
+
+        $result = $stmt->execute();
+     // Cambios para que recoja el array bien y considerando que dos de ellos no son string. También puse el 'edited' date
 
         // Devolver true si la consulta se ejecutó correctamente, o false en caso contrario
         return $result !== false;

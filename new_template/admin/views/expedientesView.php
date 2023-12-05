@@ -222,7 +222,10 @@
                                                                 <label for="minor">Minor</label>
                                                                 <select id="gridYear" class="form-select text-white-dark" name="minor">
                                                                     <option value="0">N/A</option>
-                                                                    <option value="1">Web Design</option>
+                                                                    <!-- JAVIER -->
+                                                                    <?php foreach($minors as $minor) { ?>
+                                                                        <option value="<?php echo $minor['ID']; ?>"><?php echo $minor['name']; ?></option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-5">

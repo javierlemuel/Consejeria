@@ -1,12 +1,18 @@
 <?php
 // controllers/expedientesController.php
 require_once(__DIR__ . '/../models/StudentModel.php');
+//JAVIER
+require_once(__DIR__ . '/../models/MinorModel.php');
+//
 require_once(__DIR__ . '/../config/database.php');
 
 class ExpedientesController {
     public function index() {
         global $conn;
         $studentModel = new StudentModel();
+        //JAVIER
+        $minorModel = new MinorModel();
+        //
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
@@ -49,7 +55,11 @@ class ExpedientesController {
                 $notaAdmin = $_POST['notaAdmin'];
                 $notaEstudiante = $_POST['notaEstudiante'];
                 $status = $_POST['estatus'];
-                $result = $studentModel->editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $conn);
+                //JAVIER
+                $date = date("Y-m-d");
+                $result = $studentModel->editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn);
+                $minors = $minorModel->getMinors($conn);
+                //
                 $studentData = $studentModel->selectStudent($numeroEst, $conn);
                 require_once(__DIR__ . '/../views/editStudentView.php');
                 return;
@@ -163,6 +173,10 @@ class ExpedientesController {
 
         // Calculamos el número de páginas
         $totalPages = ceil($totalStudents / $studentsPerPage);
+
+        //JAVIER (Add minors)
+        $minors = $minorModel->getMinors($conn);
+        //
 
         require_once(__DIR__ . '/../views/expedientesView.php');
     }

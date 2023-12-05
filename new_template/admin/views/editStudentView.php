@@ -150,8 +150,11 @@
                         <div>
                             <label for="minor">Minor</label>
                             <select class="form-select text-white-dark" name="minor">
+                                <!-- JAVIER -->
                                 <option value="0"<?php if ($studentData['minor'] == 0) echo 'selected'; ?>>N/A</option>
-                                <option value="1" <?php if ($studentData['minor'] == 1) echo 'selected'; ?>>Web Design</option>
+                                <?php foreach($minors as $minor) { ?>
+                                <option value="<?php echo $minor['ID']; ?>" <?php if ($studentData['minor'] == strval($minor['ID'])) echo 'selected'; ?>><?php echo $minor['name']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div>
