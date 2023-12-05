@@ -5,25 +5,38 @@ class CounselingModel
     public function getRecommendedCourses($conn, $student_num)
     {
 
+        $sql = "SELECT term
+                FROM offer
+                WHERE crse_code = 'XXXX'";
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+        
+        while ($row = $result->fetch_assoc()) {
+            $term = $row['term'];
+            break;
+        }
+
         $sql = "SELECT gc.crse_code, gc.name, gc.credits
                 FROM recommended_courses rc
                 JOIN general_courses gc ON rc.crse_code = gc.crse_code
-                WHERE rc.student_num = ?
+                WHERE rc.student_num = ? AND rc.term = ?
                 UNION
                 SELECT cc.crse_code, cc.name, cc.credits
                 FROM recommended_courses rc
                 JOIN ccom_courses cc ON rc.crse_code = cc.crse_code
-                WHERE rc.student_num = ?
+                WHERE rc.student_num = ? AND rc.term = ?
                 UNION
                 SELECT dc.crse_code, dc.name, dc.credits
                 FROM recommended_courses rc
                 JOIN dummy_courses dc ON rc.crse_code = dc.crse_code
-                WHERE rc.student_num = ?";
+                WHERE rc.student_num = ? AND rc.term = ?";
 
         $stmt = $conn->prepare($sql);
 
         // sustituye el ? por el valor de $student_num
-        $stmt->bind_param("sss", $student_num, $student_num, $student_num);
+        $stmt->bind_param("ssssss", $student_num, $term, $student_num, $term, $student_num, $term);
 
         // ejecuta el statement
         $stmt->execute();
