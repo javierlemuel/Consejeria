@@ -127,21 +127,11 @@ class ExpedientesController {
                             $nombre = isset($nombres[0]) ? trim($nombres[0]) : "";
                             $segundo_nombre = isset($nombres[1]) ? trim($nombres[1]) : "";
                         
-                            $salon_hogar = trim($data[2]);
-                            $phone = trim($data[3]);
-                            $license = trim($data[4]);
-                            $average = trim($data[5]);
-                            $department = trim($data[6]);
-                            $address1 = trim($data[7]);
-                            $address2 = trim($data[8]);
-                            $residence = trim($data[9]);
-                            $state = trim($data[10]);
-                            $zipcode = trim($data[11]);
                             $email = trim($data[12]);
                         
                             // Llamamos a la función del modelo para insertar el estudiante
-                            $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $salon_hogar, $phone, $license, $average, $department, $address1, $address2, $residence, $state, $zipcode, $email);
-                        }                                                                                              
+                            $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email);
+                        }                                                                                                                      
 
                         // Puedes agregar un mensaje de éxito o realizar alguna acción adicional si es necesario
                         $result = "Archivos CSV procesados correctamente.";
@@ -150,6 +140,7 @@ class ExpedientesController {
                         $result = "Error: El archivo debe ser de tipo texto (.txt).";
                     }
                 } else {
+                    error_log("No se subio nada \n", 3, $archivoRegistro);
                     // Puedes manejar el caso en el que no se haya subido ningún archivo
                     $result = "Error: No se ha seleccionado ningún archivo.";
                 }
