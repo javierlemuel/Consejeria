@@ -96,7 +96,7 @@ class StudentModel {
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
 
-        $edited = '0000-00-00'
+        $edited = '0000-00-00';
 
         // Vincular los parámetros con los valores
         $stmt->bind_param("sssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday, $edited);
@@ -216,6 +216,52 @@ class StudentModel {
             // querie fallo
             error_log("Error al insertar estudiante en la base de datos: " . $conn->error . "\n", 3, $archivoRegistro);
         }
+    }
+    
+    public function alreadyRecomended($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM recommended_courses WHERE student_num = ? AND crse_code = ? AND term = ?";
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular el parámetro con el valor
+        $stmt->bind_param("sss", $student_num, $class, $term);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        // Verificar si se encontraron resultados
+        if ($result->num_rows > 0)
+            {
+                return TRUE;
+            }
+        else 
+        {
+            return FALSE;
+        }
+    }
+
+    public function insertRecomendation($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "INSERT INTO recommended_courses (student_num, crse_code, term) VALUES (?, ?, ?)";
+        
+        // Preparar la declaración
+        $stmt = $conn->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("iss", $student_num, $class, $term);
+        
+        // Ejecutar la consulta
+        $result = $stmt->execute();
+        
+        // Verificar si la inserción fue exitosa
+        if ($result) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+        
+        // Cerrar la declaración
+        $stmt->close();
     }    
 }
 ?>
