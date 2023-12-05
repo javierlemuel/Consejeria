@@ -86,22 +86,34 @@ class ExpedientesController {
             elseif ($action === 'uploadCSV')
             {
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
-                error_log("Estoy en el uploadCSV \n", 3, $archivoRegistro);
 
                 // Verificamos si se han subido archivos
-                if (!empty($_FILES['files']['name'])) {
+                if (!empty($_FILES['files']['name']) && !empty($_FILES['files2']['name'])) {
                     $file_tmp = $_FILES['files']['tmp_name'];
-                    $file_type = $_FILES['files']['type'];
-                    $file_size = $_FILES['files']['size'];
-                    
-                    // Validamos que el archivo sea de tipo texto
-                    if ($file_type == "text/plain") {
-                        // Leemos el contenido del archivo
+                    $file_tmp2 = $_FILES['files2']['tmp_name'];
+                
+                    // Validamos que el primer archivo sea de tipo texto
+                    if ($_FILES['files']['type'] == "text/plain") {
+                        // Leemos el contenido del primer archivo CSV
                         $file_content = file_get_contents($file_tmp);
-
+                
                         // Dividimos el contenido por líneas
                         $lines = explode("\n", $file_content);
-
+                
+                        // Leemos el contenido del segundo archivo CSV
+                        $file_content2 = file_get_contents($file_tmp2);
+                        $lines2 = explode("\n", $file_content2);
+                        $birthdays = [];
+                
+                        foreach ($lines2 as $line2) {
+                            $data2 = explode(",", $line2);
+                            $student_num2 = trim($data2[0]);
+                            $birthday = trim($data2[count($data2) - 2]); // Asumiendo que la fecha de nacimiento está en el penúltimo índice
+                
+                            // Almacenar la fecha de nacimiento asociada al número de estudiante
+                            $birthdays[$student_num2] = $birthday;
+                        }
+                        
                         foreach ($lines as $line) {
                             // Dividimos cada línea por el delimitador ";"
                             $data = explode(";", $line);
@@ -127,34 +139,50 @@ class ExpedientesController {
                             $nombre = isset($nombres[0]) ? trim($nombres[0]) : "";
                             $segundo_nombre = isset($nombres[1]) ? trim($nombres[1]) : "";
                         
-                            $salon_hogar = trim($data[2]);
-                            $phone = trim($data[3]);
-                            $license = trim($data[4]);
-                            $average = trim($data[5]);
-                            $department = trim($data[6]);
-                            $address1 = trim($data[7]);
-                            $address2 = trim($data[8]);
-                            $residence = trim($data[9]);
-                            $state = trim($data[10]);
-                            $zipcode = trim($data[11]);
                             $email = trim($data[12]);
-                        
-                            // Llamamos a la función del modelo para insertar el estudiante
-                            $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $salon_hogar, $phone, $license, $average, $department, $address1, $address2, $residence, $state, $zipcode, $email);
-                        }                                                                                              
 
-                        // Puedes agregar un mensaje de éxito o realizar alguna acción adicional si es necesario
+                            // Obtener la fecha de nacimiento del array $birthdays si está disponible
+                            $birthdate = isset($birthdays[$student_num]) ? $birthdays[$student_num] : '';
+
+                            //hacer que los nombre comienzen con letra mayuscula y el resto sea minusculas.
+                            $nombre = ucwords(strtolower($nombre));
+                            $segundo_nombre = ucwords(strtolower($segundo_nombre));
+                            $apellido_paterno = ucwords(strtolower($apellido_paterno));
+                            $apellido_materno = ucwords(strtolower($apellido_materno));
+                            $email = strtolower($email) . "@upr.edu";
+                            
+                            if($birthdate != '')
+                            {
+                                $student = $studentModel->selectStudent($student_num, $conn);
+                                if($student != NULL)
+                                {
+                                    error_log("El estudiante: " . $student_num . " ya existia en la base de datos. \n", 3, $archivoRegistro);
+                                }
+                                else
+                                {
+                                    // Llamamos a la función del modelo para insertar el estudiante
+                                    $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate);
+                                }
+                            }
+                            else
+                            {
+                                error_log("El estudiante: " . $student_num . " no tiene fecha de nacimiento \n", 3, $archivoRegistro);
+                            }   
+                        }                                                                                                                      
+                        //exito
                         $result = "Archivos CSV procesados correctamente.";
+                        error_log("Archivos procesados correctamente \n", 3, $archivoRegistro);
                     } else {
-                        // Puedes manejar el caso en el que el archivo no sea de tipo texto
+                        // el archivo no es .txt
                         $result = "Error: El archivo debe ser de tipo texto (.txt).";
+                        error_log("El archivo debe ser tipo texto \n", 3, $archivoRegistro);
                     }
                 } else {
-                    // Puedes manejar el caso en el que no se haya subido ningún archivo
+                    // no se mando ningun arhivo o solo 1
                     $result = "Error: No se ha seleccionado ningún archivo.";
+                    error_log("No se a seleccionado ningun archivo \n", 3, $archivoRegistro);
                 }
             }
-            
         }
 
         // Parámetros de paginación
