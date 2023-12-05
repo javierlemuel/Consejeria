@@ -54,13 +54,22 @@ class CounselingModel
         // LEFT JOIN student_courses AS sc_course ON cr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
         // WHERE cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL";
 
-        $sql = "SELECT cr.req_crse_code,cr.type,cc.name,cc.credits,sc_student.crse_code
-                FROM ccom_requirements AS cr
-                LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
-                LEFT JOIN student_courses AS sc_course ON cr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
-                LEFT JOIN ccom_courses AS cc ON cr.req_crse_code = cc.crse_code
-                WHERE  cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL 
-                AND cc.crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
+        // /segundoo intento
+        // $sql = "SELECT cr.req_crse_code,cr.type,cc.name,cc.credits,sc_student.crse_code
+        //         FROM ccom_requirements AS cr
+        //         LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
+        //         LEFT JOIN student_courses AS sc_course ON cr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
+        //         LEFT JOIN ccom_courses AS cc ON cr.req_crse_code = cc.crse_code
+        //         WHERE  cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL 
+        //         AND cc.crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
+
+        $sql = "SELECT cr.crse_code, cr.req_crse_code, cr.type, cc.name, cc.credits
+        FROM ccom_requirements AS cr
+        LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
+        LEFT JOIN ccom_courses AS cc ON cr.crse_code = cc.crse_code
+        WHERE sc_student.crse_code IS NOT NULL 
+          AND cr.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE student_num = ?)
+          AND cr.crse_code LIKE 'CCOM%'";
 
         $stmt = $conn->prepare($sql);
 
@@ -114,22 +123,23 @@ class CounselingModel
         return $studentInfo;
     }
 
-    public function getGeneralCourses($conn, $student_num)
+    public function getGeneralCourses($conn)
     {
 
-        // $sql = "SELECT DISTINCT crse_code, name, credits 
-        // FROM general_courses
-        // WHERE crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
+        $sql = "SELECT DISTINCT crse_code, name, credits 
+        FROM general_courses
+        WHERE crse_code NOT IN (SELECT crse_code FROM recommended_courses)
+        AND type <> 'FREE'";
         //los cuross que me faltan 
-        $sql = "SELECT gr.req_crse_code,gr.type,gr.crse_code,gc.name,gc.credits,sc_student.crse_code AS student_crse_code
-                FROM general_requirements AS gr
-                LEFT JOIN student_courses AS sc_student ON gr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
-                LEFT JOIN student_courses AS sc_course ON gr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
-                LEFT JOIN general_courses AS gc ON gr.req_crse_code = gc.crse_code
-                WHERE  gr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL";
+        // $sql = "SELECT gr.req_crse_code,gr.type,gr.crse_code,gc.name,gc.credits,sc_student.crse_code AS student_crse_code
+        //         FROM general_requirements AS gr
+        //         LEFT JOIN student_courses AS sc_student ON gr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
+        //         LEFT JOIN student_courses AS sc_course ON gr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
+        //         LEFT JOIN general_courses AS gc ON gr.req_crse_code = gc.crse_code
+        //         WHERE  gr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $student_num, $student_num);
+        //$stmt->bind_param("ss", $student_num, $student_num);
         //ejecuta el statement
         $stmt->execute();
         $result = $stmt->get_result();
