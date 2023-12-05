@@ -63,13 +63,22 @@ class CounselingModel
         //         WHERE  cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL 
         //         AND cc.crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
 
-        $sql = "SELECT cr.crse_code, cr.req_crse_code, cr.type, cc.name, cc.credits
-        FROM ccom_requirements AS cr
-        LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
-        LEFT JOIN ccom_courses AS cc ON cr.crse_code = cc.crse_code
-        WHERE sc_student.crse_code IS NOT NULL 
-          AND cr.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE student_num = ?)
-          AND cr.crse_code LIKE 'CCOM%'";
+        // $sql = "SELECT cr.crse_code, cr.req_crse_code, cr.type, cc.name, cc.credits
+        // FROM ccom_requirements AS cr
+        // LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
+        // LEFT JOIN ccom_courses AS cc ON cr.crse_code = cc.crse_code
+        // WHERE sc_student.crse_code IS NOT NULL 
+        //   AND cr.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE student_num = ?)
+        //   AND cr.crse_code LIKE 'CCOM%'";
+
+        $student_num = intval($student_num);
+
+        $sql = "SELECT of.crse_code, cc.type, cc.name, cc.credits
+                FROM offer as of
+                NATURAL JOIN ccom_courses AS cc
+                WHERE of.crse_code = cc.crse_code
+                AND of.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE crse_status = 'P' AND student_num = $student_num)
+                AND of.crse_code LIKE 'CCOM%'";
 
         $stmt = $conn->prepare($sql);
 
@@ -196,9 +205,22 @@ class CounselingModel
 
     public function setCourses($conn, $student_num, $courses)
     {
+        $sql = "SELECT term
+                FROM offer
+                WHERE crse_code = 'XXXX'";
+            $result = $conn->query($sql);
+            if ($result === false) {
+                throw new Exception("Error en la consulta SQL: " . $conn->error);
+            }
+            
+            while ($row = $result->fetch_assoc()) {
+                $term = $row['term'];
+                break;
+            }
+        
         foreach ($courses as $course) {
 
-            $term = 'BB1';
+            //$term = 'BB1';
             $sql = "INSERT INTO will_take (student_num, crse_code, term) VALUES (?,?,?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $student_num, $course, $term);
