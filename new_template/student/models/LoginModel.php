@@ -1,5 +1,6 @@
 <?php
 // models/LoginModel.php
+session_start();
 class LoginModel {
     public function authenticateUser($conn, $email, $dob, $student_num) {
         // Implementa la lógica de autenticación aquí
@@ -17,6 +18,7 @@ class LoginModel {
             return true;
         } else {
             // Las credenciales son incorrectas, la autenticación falló
+            $_SESSION['message'] = "no student";
             return false;
         }
     }
