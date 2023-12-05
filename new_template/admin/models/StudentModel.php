@@ -168,6 +168,9 @@ class StudentModel {
     
     public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+        if(strlen($birthdate) == 5)
+            $birthdate = '0'.$birthdate;
     
         // Extraer el mes, día y año de $birthdate
         $mes = substr($birthdate, 0, 2);
