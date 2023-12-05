@@ -37,6 +37,7 @@ class ExpedientesController {
             {
                 $student_num = $_POST['student_num'];
                 $studentData = $studentModel->selectStudent($student_num, $conn);
+                $minors = $minorModel->getMinors($conn);
                 require_once(__DIR__ . '/../views/editStudentView.php');
                 return;
             }
