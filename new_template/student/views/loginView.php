@@ -43,6 +43,15 @@
                     <div class="relative flex flex-col justify-center rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 px-6 lg:min-h-[758px] py-20">
                         <div class="mx-auto w-full max-w-[440px]">
                             <div class="mb-10">
+                            <?php if (isset($_SESSION['message'])) { ?>
+                                <div style='padding: 15px 0' class="flex flex-wrap items-center justify-between gap-4">
+                                        
+                                            <?php if ($_SESSION['message'] == 'no student')
+                                                    echo"<h2 style='color:red; bold' class='text-xl'>Credenciales incorrectos!</h2>";
+                                            ?>
+                                    <br>
+                                </div>
+                            <?php } ?>
                                 <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl" style="color: #E2A03F;">Iniciar Sesion</h1>
                                 <p class="text-base font-bold leading-normal text-white-dark">Entra tu correo electronico, numero de estudiante y fecha de nacimiento</p>
                             </div>

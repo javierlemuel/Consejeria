@@ -110,7 +110,7 @@ class ClassesController{
 
 
                 // Generate the new term
-                $classesModel->setNewTerm($conn, $term);
+                $classesModel->setNewTerm($conn, $new_term);
 
             }
             else {   

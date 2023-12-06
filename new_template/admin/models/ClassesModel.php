@@ -228,8 +228,8 @@ class ClassesModel {
 
         //Borramos los edit flags de los estudiantes
         $sql2 = "UPDATE student
-                SET edited_flag = 0
-                WHERE edited_flag = 1";
+                SET edited = '0000-00-00'
+                WHERE edited != '0000-00-00'";
         $result2 = $conn->query($sql2);
         if ($result2 === false) {
             throw new Exception("Error en la consulta SQL KHE: " . $conn->error);

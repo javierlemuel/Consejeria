@@ -1,5 +1,6 @@
 <?php
 // models/LoginModel.php
+session_start();
 class LoginModel {
     public function authenticateUser($conn, $email, $password) {
         // Implementa la lógica de autenticación aquí
@@ -13,9 +14,11 @@ class LoginModel {
 
         if ($result && $result->num_rows > 0) {
             // Las credenciales son correctas, el usuario está autenticado
+           
             return true;
         } else {
             // Las credenciales son incorrectas, la autenticación falló
+            $_SESSION['message'] = "no admin";
             return false;
         }
     }

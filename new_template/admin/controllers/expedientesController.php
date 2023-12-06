@@ -37,6 +37,7 @@ class ExpedientesController {
             {
                 $student_num = $_POST['student_num'];
                 $studentData = $studentModel->selectStudent($student_num, $conn);
+                $minors = $minorModel->getMinors($conn);
                 require_once(__DIR__ . '/../views/editStudentView.php');
                 return;
             }
@@ -182,6 +183,62 @@ class ExpedientesController {
                     $result = "Error: No se ha seleccionado ningún archivo.";
                     error_log("No se a seleccionado ningun archivo \n", 3, $archivoRegistro);
                 }
+            }
+            elseif ($action === 'makecounseling')
+            {
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
+
+                $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+                $student_num = $_POST['student_num'];
+                $term = $classesModel->getTerm($conn);
+
+                if (isset($_POST['seleccion']) && is_array($_POST['seleccion']))
+                {
+                    // Obtiene los valores de los checkboxes seleccionados
+                    $selectedClasses = $_POST['seleccion'];
+
+                    foreach ($selectedClasses as $class)
+                    {
+                        $result = $studentModel->alreadyRecomended($student_num, $class, $term, $conn);
+
+                        if($result == TRUE)
+                        {
+                            error_log("La clase $class ya estaba recomendada para este semestre. \n", 3, $archivoRegistro);
+                        }
+                        else
+                        {
+                            $results = $studentModel->insertRecomendation($student_num, $class, $term, $conn);
+                            if($results == TRUE)
+                            {
+                                error_log("La clase $class se anadio a recommended courses. \n", 3, $archivoRegistro);
+                            }
+                            else
+                            {
+                                error_log("Hubo un error insertando la clase. \n", 3, $archivoRegistro);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // No se seleccionaron clases
+                    error_log("No se seleccionaron clases \n", 3, $archivoRegistro);
+                }
+
+                $studentData = $studentModel->selectStudent($student_num, $conn);
+                $studentCohort = $studentData['cohort_year'];
+
+                $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
+                $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
+
+                $mandatoryClasses = $classesModel->getCcomCourses($conn);
+                $dummyClasses = $classesModel->getDummyCourses($conn);
+                $generalClasses = $classesModel->getGeneralCourses($conn);
+
+                require_once(__DIR__ . '/../views/counselingView.php');
+                return;
             }
         }
 

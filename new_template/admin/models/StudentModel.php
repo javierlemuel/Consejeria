@@ -91,13 +91,15 @@ class StudentModel {
 
     public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
         // Preparar la consulta SQL
-        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
 
+        $edited = '0000-00-00';
+
         // Vincular los parámetros con los valores
-        $stmt->bind_param("ssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday);
+        $stmt->bind_param("sssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday, $edited);
 
         // Ejecutar la sentencia
         $result = $stmt->execute();
@@ -166,6 +168,9 @@ class StudentModel {
     
     public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+        if(strlen($birthdate) == 5)
+            $birthdate = '0'.$birthdate;
     
         // Extraer el mes, día y año de $birthdate
         $mes = substr($birthdate, 0, 2);
@@ -181,10 +186,27 @@ class StudentModel {
             $axo = $axo + 2000;
         }
         $birthdate_formatted = sprintf("%04d-%02d-%02d", $axo, $mes, $dia);
+
+        $numberStr = (string) $student_num;
+
+        // Check if the number has at least 5 digits
+        if (strlen($numberStr) >= 5) {
+            // Extract the 4th and 5th digits
+            $fourthDigit = $numberStr[3];
+            $fifthDigit = $numberStr[4];
+
+            // Concatenate the 4th and 5th digits into a single string
+            $combinedDigits = $fourthDigit . $fifthDigit;
+        }
+
+        if(intval($combinedDigits) <= 21)
+            $cohort_year = '2017';
+        else    
+            $cohort_year = '2022';
     
         // Ejecuta el query de inserción
         $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, given_counseling, minor, cohort_year, status, edited, type)
-                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', $birthdate_formatted, '0000-00-00', 0, 2022, 'Activo', '0000-00-00', '')";
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', '0000-00-00', '')";
     
         // Ejecuta el query
         if ($conn->query($query) === TRUE) {
@@ -194,6 +216,52 @@ class StudentModel {
             // querie fallo
             error_log("Error al insertar estudiante en la base de datos: " . $conn->error . "\n", 3, $archivoRegistro);
         }
+    }
+    
+    public function alreadyRecomended($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM recommended_courses WHERE student_num = ? AND crse_code = ? AND term = ?";
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular el parámetro con el valor
+        $stmt->bind_param("sss", $student_num, $class, $term);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        // Verificar si se encontraron resultados
+        if ($result->num_rows > 0)
+            {
+                return TRUE;
+            }
+        else 
+        {
+            return FALSE;
+        }
+    }
+
+    public function insertRecomendation($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "INSERT INTO recommended_courses (student_num, crse_code, term) VALUES (?, ?, ?)";
+        
+        // Preparar la declaración
+        $stmt = $conn->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("iss", $student_num, $class, $term);
+        
+        // Ejecutar la consulta
+        $result = $stmt->execute();
+        
+        // Verificar si la inserción fue exitosa
+        if ($result) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+        
+        // Cerrar la declaración
+        $stmt->close();
     }    
 }
 ?>
