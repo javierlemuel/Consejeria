@@ -50,7 +50,7 @@
                                 <div>
                                     <label for="email">Correo electronico</label>
                                     <div class="relative text-white-dark">
-                                        <input id="email" type="email" name="email" placeholder="ejemplo@upr.edu" class="form-input ps-10 placeholder:text-white-dark" />
+                                        <input id="email" type="email" name="email" placeholder="ejemplo@upr.edu" required class="form-input ps-10 placeholder:text-white-dark" />
                                         <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                 <path opacity="0.5" d="M10.65 2.25H7.35C4.23873 2.25 2.6831 2.25 1.71655 3.23851C0.75 4.22703 0.75 5.81802 0.75 9C0.75 12.182 0.75 13.773 1.71655 14.7615C2.6831 15.75 4.23873 15.75 7.35 15.75H10.65C13.7613 15.75 15.3169 15.75 16.2835 14.7615C17.25 13.773 17.25 12.182 17.25 9C17.25 5.81802 17.25 4.22703 16.2835 3.23851C15.3169 2.25 13.7613 2.25 10.65 2.25Z" fill="currentColor" />
@@ -62,13 +62,13 @@
                                 <div>
                                     <label for="student_num">Numero de Estudiante</label>
                                     <div class="relative text-white-dark">
-                                        <input id="student_num" type="number" name="student_num" placeholder="840######" class="form-input ps-10 placeholder:text-white-dark" />
+                                        <input id="student_num" type="number" name="student_num" required placeholder="840######" class="form-input ps-10 placeholder:text-white-dark" />
                                     </div>
                                 </div>
                                 <div>
                                     <label for="dob">Fecha de Nacimiento</label>
                                     <div class="relative text-white-dark">
-                                        <input id="dob" type="date" name="dob" class="form-input ps-10 placeholder:text-white-dark" />
+                                        <input id="dob" type="date" name="dob" required class="form-input ps-10 placeholder:text-white-dark" />
                                         <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.75 2.5C7.75 2.08579 7.41421 1.75 7 1.75C6.58579 1.75 6.25 2.08579 6.25 2.5V4.07926C4.81067 4.19451 3.86577 4.47737 3.17157 5.17157C2.47737 5.86577 2.19451 6.81067 2.07926 8.25H21.9207C21.8055 6.81067 21.5226 5.86577 20.8284 5.17157C20.1342 4.47737 19.1893 4.19451 17.75 4.07926V2.5C17.75 2.08579 17.4142 1.75 17 1.75C16.5858 1.75 16.25 2.08579 16.25 2.5V4.0129C15.5847 4 14.839 4 14 4H10C9.16097 4 8.41527 4 7.75 4.0129V2.5Z" fill="currentColor" />

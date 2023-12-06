@@ -30,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redirige al usuario a la página de expedientes
         header("Location: ../index.php");
         exit;
+    } else {
+        header("Location: ../index.php");
+        exit;
     }
 }
 require_once(__DIR__ . '/../views/loginView.php');

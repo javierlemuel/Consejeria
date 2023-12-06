@@ -431,6 +431,14 @@
                     }
                 }
 
+                $('#confirmarConsejeria').click(function() {
+                    $(this).prop("disabled", true);
+                    $('input[type="checkbox"]').prop('disabled', true);
+                    $('a[onClick]').remove();
+
+                });
+
+
 
             });
         </script>
