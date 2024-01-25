@@ -57,24 +57,16 @@ class CounselingModel
     public function getConcentrationCourses($conn, $student_num)
     {
 
-        // $sql = "SELECT DISTINCT crse_code, name, credits 
-        //         FROM ccom_courses
-        //         WHERE crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
-
-        // $sql = "SELECT cr.req_crse_code, cr.type, cr.crse_code, sc_student.crse_code AS student_crse_code
-        // FROM ccom_requirements AS cr
-        // LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
-        // LEFT JOIN student_courses AS sc_course ON cr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
-        // WHERE cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL";
-
-        // /segundoo intento
-        // $sql = "SELECT cr.req_crse_code,cr.type,cc.name,cc.credits,sc_student.crse_code
-        //         FROM ccom_requirements AS cr
-        //         LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
-        //         LEFT JOIN student_courses AS sc_course ON cr.crse_code = sc_course.crse_code AND sc_course.student_num = ?
-        //         LEFT JOIN ccom_courses AS cc ON cr.req_crse_code = cc.crse_code
-        //         WHERE  cr.crse_code IS NOT NULL AND sc_student.crse_code IS NOT NULL AND sc_course.crse_code IS NULL 
-        //         AND cc.crse_code NOT IN (SELECT crse_code FROM recommended_courses)";
+        //busca las clases de ccom_requiremnts que el requerimiento exista en student_courses
+        // pero no la clase como tal, que seria la clase que deba coger el proximo semestre
+        // $sql = "SELECT cr.req_crse_code, cr.crse_code, cr.type, scs.crse_code as student_crse_code, 
+        // FROM ccom_requirements AS cr 
+        // LEFT JOIN student_courses AS sc 
+        // ON sc.crse_code = cr.crse_code AND sc.student_num = ?
+        // LEFT JOIN student_courses AS scs
+        // ON scs.crse_code = cr.req_crse_code AND scs.student_num = ?
+        // WHERE cr.type = 'pre' AND scs.crse_code IS NOT NULL
+        // AND cr.crse_code LIKE 'CCOM%'";
 
         // $sql = "SELECT cr.crse_code, cr.req_crse_code, cr.type, cc.name, cc.credits
         // FROM ccom_requirements AS cr
@@ -90,13 +82,21 @@ class CounselingModel
                 FROM offer as of
                 NATURAL JOIN ccom_courses AS cc
                 WHERE of.crse_code = cc.crse_code
-                AND of.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE crse_status = 'P' AND student_num = $student_num)
+                AND of.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE crse_status = 'P' AND student_num = ?)
                 AND of.crse_code LIKE 'CCOM%'";
+        // $sql = "SELECT cr.crse_code, cr.req_crse_code, cr.type, cc.name, cc.credits
+        //  FROM ccom_requirements AS cr
+        //  LEFT JOIN student_courses AS sc_student ON cr.req_crse_code = sc_student.crse_code AND sc_student.student_num = ?
+        //  LEFT JOIN ccom_courses AS cc ON cr.crse_code = cc.crse_code
+        //  WHERE sc_student.crse_code IS NOT NULL 
+        //    AND cr.crse_code NOT IN (SELECT crse_code FROM student_courses WHERE student_num = ?)
+        //    AND cr.crse_code LIKE 'CCOM%'";
+
 
         $stmt = $conn->prepare($sql);
 
         // sustituye el ? por el valor de $student_num
-        $stmt->bind_param("ss", $student_num, $student_num);
+        $stmt->bind_param("s", $student_num);
 
         // ejecuta el statement
         $stmt->execute();
@@ -134,7 +134,7 @@ class CounselingModel
 
         $studentInfo = $result->fetch_assoc();
         if ($studentInfo['name2'] != null) {
-            $studentName = $studentInfo['name1'] . " " . $studentInfo['name2'] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
+            $studentName = $studentInfo['name1'] . " " . $studentInfo['name2'][0] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
         } else
             $studentName = $studentInfo['name1'] . " " . $studentInfo['last_name1'] . " " . $studentInfo['last_name2'];
 
