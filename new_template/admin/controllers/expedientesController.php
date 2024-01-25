@@ -32,6 +32,14 @@ class ExpedientesController {
 
                 // Llama al modelo para insertar el estudiante en la base de datos
                 $success = $studentModel->insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday);
+                if($success == TRUE)
+                {
+                    $mensaje = "studentAdded";
+                }
+                else
+                {
+                    $mensaje = "studentNotAdded";
+                }
             }
             elseif ($action === 'selecteStudent')
             {
@@ -225,6 +233,50 @@ class ExpedientesController {
                 {
                     // No se seleccionaron clases
                     error_log("No se seleccionaron clases \n", 3, $archivoRegistro);
+                }
+
+                $studentData = $studentModel->selectStudent($student_num, $conn);
+                $studentCohort = $studentData['cohort_year'];
+
+                $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
+                $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
+
+                $mandatoryClasses = $classesModel->getCcomCourses($conn);
+                $dummyClasses = $classesModel->getDummyCourses($conn);
+                $generalClasses = $classesModel->getGeneralCourses($conn);
+
+                require_once(__DIR__ . '/../views/counselingView.php');
+                return;
+            }
+            elseif ($action === 'updateGrade')
+            {
+                require_once(__DIR__ . '/../models/ClassModel.php');
+                $classModel = new ClassModel();
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
+
+                $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+                $student_num = $_POST['student_num'];
+                $course_code = $_POST['crse_code'];
+                $grade = $_POST['grade'];
+                $equi = $_POST['equivalencia'];
+                $conva = $_POST['convalidacion'];
+
+                $term = $classesModel->getTerm($conn);
+                $course_info = $classModel->selectCourse($conn, $course_code);
+                $credits = $course_info['credits'];
+                $type = $course_info['type'];
+
+                $result = $studentModel->studentAlreadyHasGrade($student_num, $course_code, $conn);
+
+                if($result == TRUE)
+                {
+                    $studentModel->UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn);
+                }
+                else
+                {
+                    $studentModel->InsertStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn);
                 }
 
                 $studentData = $studentModel->selectStudent($student_num, $conn);

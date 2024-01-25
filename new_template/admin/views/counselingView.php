@@ -120,7 +120,6 @@
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 2em;">Correo electronico: <?php echo $studentData['email']; ?></h2>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases de concentracion</h2>
                         <form method="POST" action="index.php">
-                            <input type="hidden" name="action" value="makecounseling">
                             <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">
                             <!-- basic table -->
                             <div class="table-responsive">
@@ -142,13 +141,18 @@
                                         foreach ($ccomByCohort as $curso) {
                                             echo "<tr>";
                                             echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                            echo"<form method='POST' action='index.php'>";
                                             echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                            echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
+                                            echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
+                                            echo "</form>";
                                         }
                                         ?>
                                     </tbody>
@@ -167,6 +171,7 @@
                                             <th style="padding: 5px;">Nota</th>
                                             <th style="padding: 5px;">Equivalencia</th>
                                             <th style="padding: 5px;">Convalidacion</th>
+                                            <th style="padding: 5px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -175,13 +180,18 @@
                                         foreach ($notccomByCohort as $curso) {
                                             echo "<tr>";
                                             echo "<td><input type='checkbox' name='seleccion[]' value='" . $curso['crse_code'] . "'></td>";
+                                            echo"<form method='POST' action='index.php'>";
                                             echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                            echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <input type='text' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
+                                            echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
+                                            echo "</form>";
                                         }
                                         ?>
                                     </tbody>
@@ -293,8 +303,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary ltr:ml-2 rtl:mr-2">Someter Consejeria</button>
+                            <button type="submit" name="action" value="makecounseling" class="btn btn-primary ltr:ml-2 rtl:mr-2">Someter Consejeria</button>
                         </form>
+                        <button class="btn btn-danger !mt-6" onclick="window.location.href = 'index.php'">Cancelar</button>
                     </div>
                 </div>
                 <!-- end main content section -->
