@@ -12,7 +12,7 @@ class CounselingModel
         if ($result === false) {
             throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
-        
+
         while ($row = $result->fetch_assoc()) {
             $term = $row['term'];
             break;
@@ -221,16 +221,16 @@ class CounselingModel
         $sql = "SELECT term
                 FROM offer
                 WHERE crse_code = 'XXXX'";
-            $result = $conn->query($sql);
-            if ($result === false) {
-                throw new Exception("Error en la consulta SQL: " . $conn->error);
-            }
-            
-            while ($row = $result->fetch_assoc()) {
-                $term = $row['term'];
-                break;
-            }
-        
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $term = $row['term'];
+            break;
+        }
+
         foreach ($courses as $course) {
 
             //$term = 'BB1';
