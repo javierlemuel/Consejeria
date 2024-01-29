@@ -44,7 +44,9 @@ class StudentModel
 
         $sql = "SELECT ccom_courses.crse_code, ccom_courses.name, ccom_courses.credits, student_courses.crse_grade, student_courses.crse_status, 
                 student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, ccom_courses.type,
-                cohort.cohort_year
+                cohort.cohort_year,
+                CASE WHEN ccom_courses.crse_code IN (SELECT crse_code FROM recommended_courses WHERE student_num = ?) THEN 'Prox. Sem' ELSE NULL END AS recommended
+
         FROM ccom_courses
         LEFT JOIN student_courses ON ccom_courses.crse_code = student_courses.crse_code
                 AND student_courses.student_num = ?
@@ -55,7 +57,7 @@ class StudentModel
         $stmt = $conn->prepare($sql);
 
         // sustituye el ? por el valor de $student_num
-        $stmt->bind_param("ss", $student_num, $cohort_year);
+        $stmt->bind_param("sss", $student_num, $student_num, $cohort_year);
 
         // ejecuta el statement
         $stmt->execute();
@@ -80,7 +82,9 @@ class StudentModel
         //         LEFT JOIN student_courses ON general_courses.crse_code = student_courses.crse_code
         //         AND student_courses.student_num = ?";
         $sql = "SELECT general_courses.crse_code, general_courses.name, general_courses.credits, student_courses.crse_grade, student_courses.crse_status, 
-                        student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, general_courses.type
+                        student_courses.convalidacion, student_courses.equivalencia,  student_courses.term, general_courses.type,
+                CASE WHEN general_courses.crse_code IN (SELECT crse_code FROM recommended_courses WHERE student_num = ?) THEN 'Prox. Sem' ELSE NULL END AS recommended
+
                 FROM general_courses
                 LEFT JOIN student_courses ON general_courses.crse_code = student_courses.crse_code
                 AND student_courses.student_num = ?
@@ -90,7 +94,7 @@ class StudentModel
         $stmt = $conn->prepare($sql);
 
         // sustituye el ? por el valor de $student_num
-        $stmt->bind_param("ss", $student_num, $cohort_year);
+        $stmt->bind_param("sss", $student_num, $student_num, $cohort_year);
 
         // ejecuta el statement
         $stmt->execute();

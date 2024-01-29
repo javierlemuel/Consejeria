@@ -117,7 +117,7 @@
                                         if ($code != "INGL3103" && $code != "INGL3011") {
                                             echo "
                                         <tr>
-                                            <td class=\"whitespace-normal\">$code</td>
+                                            <td>$code</td>
                                             <td>$name</td>
                                             <td>$credits</td>
                                         </tr>";
@@ -135,16 +135,16 @@
                             <!-- prime año table -->
                             <div class=\"table-responsive\">
                                 <table>
-                                    <thead>
-                                        <tr>
-                                            <th>SEGUNDO SEMESTRE</th>
-                                        </tr>
-                                        <tr>
-                                            <th>CODIGO</th>
-                                            <th>NOMBRE</th>
-                                            <th>CREDITOS</th>
-                                        </tr>
-                                    </thead>
+                                <thead>
+                                <tr>
+                                    <th>SEGUNDO SEMESTRE</th>
+                                </tr>
+                                <tr>
+                                    <th>CODIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>CREDITOS</th>
+                                </tr>
+                            </thead>
                                     <tbody>";
 
                                 foreach ($cohorte2017 as $course) {
@@ -155,7 +155,7 @@
                                         if ($code != "INGL3104") {
                                             echo "
                                             <tr>
-                                                <td class=\"whitespace-normal\">$code</td>
+                                                <td>$code</td>
                                                 <td>$name</td>
                                                 <td>$credits</td>
                                             </tr>";

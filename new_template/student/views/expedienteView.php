@@ -111,9 +111,10 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <div class="grid-cols-1" style="width:50%;">
                                         <p><?php echo $studentInfo["full_student_name"]; ?></p>
                                     </div>
-                                    <div class="grid-cols-1">
+                                    <!-- a~o de estudio -->
+                                    <!-- <div class="grid-cols-1">
                                         <p><b>Año: </b>1</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:20%;">
@@ -122,9 +123,10 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <div class="grid-cols-1" style="width:50%;">
                                         <p><?php echo $studentInfo["formatted_student_num"]; ?></p>
                                     </div>
-                                    <div class="grid-cols-1">
+                                    <!-- semestre -->
+                                    <!-- <div class="grid-cols-1">
                                         <p><b>Semestre: </b>2</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:20%;">
@@ -133,23 +135,26 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <div class="grid-cols-1" style="width:50%;">
                                         <p><?php echo $studentInfo["email"]; ?></p>
                                     </div>
-                                    <div class="grid-cols-1">
+                                    <!-- creditos recomendados -->
+                                    <!-- <div class="grid-cols-1">
                                         <p><b>Creditos Recomendados:</b> 14</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:70%;">
                                     </div>
-                                    <div class="grid-cols-1">
+                                    <!-- gpa -->
+                                    <!-- <div class="grid-cols-1">
                                         <p><b>GPA Departamental:</b> 4.00</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row flex">
                                     <div class="grid-cols-1" style="width:70%;">
                                     </div>
-                                    <div class="grid-cols-1">
+                                    <!-- gpa -->
+                                    <!-- <div class="grid-cols-1">
                                         <p><b>GPA General:</b> 3.50</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- start expediente table -->
                                 <!-- clases de concentracion -->
@@ -183,7 +188,9 @@ if (session_status() == PHP_SESSION_NONE) {
                                                     <td><?php if ($ccomStudentCourse['term'] == 'NULL')
                                                             echo '';
                                                         else echo $ccomStudentCourse['term'] ?></td>
-                                                    <td></td>
+                                                    <td><?php if ($ccomStudentCourse['recommended'] == 'NULL')
+                                                            echo '';
+                                                        else echo $ccomStudentCourse['recommended'] ?></td>
                                                     <td></td>
                                                     <td><?php if ($ccomStudentCourse['equivalencia'] == 'NULL')
                                                             echo '';
@@ -239,7 +246,9 @@ if (session_status() == PHP_SESSION_NONE) {
                                                     <td><?php if ($generalesStudentCourse['term'] == 'NULL')
                                                             echo '';
                                                         else echo $generalesStudentCourse['term'] ?></td>
-                                                    <td></td>
+                                                    <td><?php if ($generalesStudentCourse['recommended'] == 'NULL')
+                                                            echo '';
+                                                        else echo $generalesStudentCourse['recommended'] ?></td>
                                                     <td></td>
                                                     <td></td>
                                                 </tr>
