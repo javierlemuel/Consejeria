@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Realiza la autenticación en el modelo (debes implementar esta lógica en LoginModel.php)
+    // Realiza la autenticación en el modelo
     $loginModel = new LoginModel();
     $authenticated = $loginModel->authenticateUser($conn, $email, $password);
 
