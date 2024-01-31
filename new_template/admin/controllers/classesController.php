@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['authenticated']) && $_SESSION['authenticated'] !== true)
+{
+    header("Location: ../index.php");
+    exit;
+}
 require_once(__DIR__ . '/../models/ClassesModel.php');
 require_once(__DIR__ . '/../models/ReporteModel.php');
 require_once(__DIR__ . '/../config/database.php');

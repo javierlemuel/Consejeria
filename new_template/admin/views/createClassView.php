@@ -1,3 +1,10 @@
+<?php
+    if(!isset($_SESSION['authenticated']) && $_SESSION['authenticated'] !== true)
+    {
+        header("Location: ../index.php");
+        exit;
+    }
+?>
 <?php echo 'hi' ?>
 
 <!DOCTYPE html>

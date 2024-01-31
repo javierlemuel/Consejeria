@@ -1,5 +1,10 @@
 <?php $total1 = 0;
-      $total2 = 0; 
+      $total2 = 0;
+    if(!isset($_SESSION['authenticated']) && $_SESSION['authenticated'] !== true)
+    {
+        header("Location: ../index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>

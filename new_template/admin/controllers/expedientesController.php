@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['authenticated']) && $_SESSION['authenticated'] !== true)
+{
+    header("Location: ../index.php");
+    exit;
+}
 // controllers/expedientesController.php
 require_once(__DIR__ . '/../models/StudentModel.php');
 //JAVIER
@@ -295,7 +300,7 @@ class ExpedientesController {
         }
 
         // Parámetros de paginación
-        $studentsPerPage = 8; // Cambia esto al número deseado
+        $studentsPerPage = 9; // Cambia esto al número deseado
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         // Obtener los parámetros del filtro de estado y búsqueda

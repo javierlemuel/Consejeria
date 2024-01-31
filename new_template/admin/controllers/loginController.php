@@ -1,6 +1,5 @@
 <?php
 // controllers/loginController.php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifica si los campos del formulario no están vacíos
     if (empty($_POST['email']) || empty($_POST['password'])) {
@@ -33,5 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../index.php");
         exit;
     }
+}
+else{
+    header("Location: ../index.php");
 }
 ?>
