@@ -1,5 +1,4 @@
 <?php
-$url = "localhost/Consejeria/new_template/admin/";
 // index.php
 require_once 'config/database.php';
 

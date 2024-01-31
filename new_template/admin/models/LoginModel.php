@@ -6,18 +6,23 @@ class LoginModel {
         // Implementa la lógica de autenticación aquí
         // Por ejemplo, puedes realizar una consulta SQL para verificar las credenciales
         $email = mysqli_real_escape_string($conn, $email); // Evita inyección SQL
-        $password = mysqli_real_escape_string($conn, $password);
 
-        $sql = "SELECT * FROM advisor WHERE email = '$email' AND pass = '$password'";
+        $sql = "SELECT * FROM advisor WHERE email = '$email'";
 
         $result = $conn->query($sql);
 
-        if ($result && $result->num_rows > 0) {
-            // Las credenciales son correctas, el usuario está autenticado
-           
-            return true;
+        if ($result && $result->num_rows == 1) {
+            $user = $result->fetch_assoc();
+            if (password_verify($password, $user['pass'])) {
+                // Las credenciales son correctas, el usuario está autenticado
+                return true;
+            } else {
+                // Las credenciales son incorrectas, la autenticación falló
+                $_SESSION['message'] = "no admin";
+                return false;
+            }
         } else {
-            // Las credenciales son incorrectas, la autenticación falló
+            // El email no existe en la base de datos
             $_SESSION['message'] = "no admin";
             return false;
         }
