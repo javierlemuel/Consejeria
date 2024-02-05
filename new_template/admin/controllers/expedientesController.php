@@ -297,6 +297,39 @@ class ExpedientesController {
                 require_once(__DIR__ . '/../views/counselingView.php');
                 return;
             }
+            elseif ($action === 'updateGradeCSV')
+            {
+                $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+                // Verificamos si se han subido archivos
+                if (!empty($_FILES['files']['name']))
+                {
+                    // Obtén el archivo temporal subido
+                    $tmpName = $_FILES['files']['tmp_name'];
+
+                    // Abre el archivo para leer
+                    $file = fopen($tmpName, 'r');
+
+                    // Itera sobre cada línea del archivo
+                    while (($line = fgetcsv($file)) !== FALSE) {
+                        // Asigna cada dato a una variable
+                        $semester = $line[0];
+                        $studentNumber = $line[1];
+                        $class = $line[2];
+                        $creditAmount = $line[3];
+                        $grade = $line[5];
+
+                        error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
+                        error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
+                        error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
+                        error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
+                        error_log("La nota fue: " . $grade . "\n", 3, $archivoRegistro);
+                    }
+
+                    // Cierra el archivo
+                    fclose($file);
+                }
+            }
         }
 
         // Parámetros de paginación
