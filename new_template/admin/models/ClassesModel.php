@@ -236,7 +236,7 @@ class ClassesModel {
         }
 
         //Borramos los cursos que los estudiantes escogieron en sus consejerias
-        $sql4 = "DELETE FROM takes
+        $sql4 = "DELETE FROM will_take
                 WHERE crse_code != ''";
         $result4 = $conn->query($sql4);
         if ($result4 === false) {
@@ -276,7 +276,7 @@ class ClassesModel {
     public function getMatriculadosModel($conn, $course)
     {
         $sql = "SELECT count(student_num) AS count
-                FROM takes
+                FROM will_take
                 WHERE crse_code = '$course'";
         $result = $conn->query($sql);
         if ($result === false) {
@@ -300,8 +300,8 @@ class ClassesModel {
     public function getStudentsMatriculadosModel($conn, $course)
     {
         $sql = "SELECT *
-                FROM takes NATURAL JOIN student
-                WHERE takes.student_num = student.student_num AND
+                FROM will_take NATURAL JOIN student
+                WHERE will_take.student_num = student.student_num AND
                 crse_code = '$course'";
         $result = $conn->query($sql);
         if ($result === false) {

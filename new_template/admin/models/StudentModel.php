@@ -38,9 +38,9 @@ class StudentModel {
             $row['formatted_student_num'] = $formatted_student_num;
 
             //JAVIER (Add si el estudiante hizo consejeria)
-            $sql2 = "SELECT DISTINCT takes.student_num
-                FROM takes NATURAL JOIN student
-                WHERE takes.student_num = $student_num
+            $sql2 = "SELECT DISTINCT will_take.student_num
+                FROM will_take NATURAL JOIN student
+                WHERE will_take.student_num = $student_num
                 AND student.name1 LIKE '$searchKeyword'";
              $result2 = $conn->query($sql2);
 

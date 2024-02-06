@@ -386,20 +386,20 @@ CREATE TABLE `student_courses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `takes`
+-- Table structure for table `will_take`
 --
 
-CREATE TABLE `takes` (
+CREATE TABLE `will_take` (
   `student_num` varchar(9) NOT NULL,
   `crse_code` varchar(8) NOT NULL,
   `term` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `takes`
+-- Dumping data for table `will_take`
 --
 
-INSERT INTO `takes` (`student_num`, `crse_code`, `term`) VALUES
+INSERT INTO `will_take` (`student_num`, `crse_code`, `term`) VALUES
 ('840182717', 'CCOM3001', 'BB0'),
 ('840182717', 'CCOM3002', 'BB0'),
 ('840201040', 'CCOM3001', 'BB0'),

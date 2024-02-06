@@ -45,7 +45,7 @@ class ReporteModel {
 
    public function getRegistrados($conn){
         $sql = "SELECT COUNT(DISTINCT student_num) AS count
-        FROM takes;";
+        FROM will_take;";
         $result = $conn->query($sql);
 
         if ($result === false) {
