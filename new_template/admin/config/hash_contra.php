@@ -21,7 +21,7 @@
                           SET pass='$hash';";
                 if ($conn->query($query) === TRUE)
                 {
-                    echo"<h3>contrasena acutalizada correctamente.<h3>";
+                    echo"<h3>contrasena actualizada correctamente.<h3>";
                 }
                 else
                 {

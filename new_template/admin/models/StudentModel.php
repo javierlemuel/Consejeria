@@ -38,9 +38,9 @@ class StudentModel {
             $row['formatted_student_num'] = $formatted_student_num;
 
             //JAVIER (Add si el estudiante hizo consejeria)
-            $sql2 = "SELECT DISTINCT will_take.student_num
-                FROM will_take NATURAL JOIN student
-                WHERE will_take.student_num = $student_num
+            $sql2 = "SELECT DISTINCT takes.student_num
+                FROM takes NATURAL JOIN student
+                WHERE takes.student_num = $student_num
                 AND student.name1 LIKE '$searchKeyword'";
              $result2 = $conn->query($sql2);
 
@@ -93,12 +93,12 @@ class StudentModel {
 
     public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
         // Preparar la consulta SQL
-        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited, given_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited, conducted_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
 
-        $edited = '0000-00-00';
+        $edited = 0;
 
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday, $edited, $edited);
@@ -209,8 +209,8 @@ class StudentModel {
             $cohort_year = '2022';
     
         // Ejecuta el query de inserción
-        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, given_counseling, minor, cohort_year, status, edited, type)
-                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', '0000-00-00', '')";
+        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, conducted_counseling, minor, cohort_year, status, edited_flag, type)
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', 0, '')";
     
         // Ejecuta el query
         if ($conn->query($query) === TRUE) {

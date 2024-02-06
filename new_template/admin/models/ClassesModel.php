@@ -228,24 +228,15 @@ class ClassesModel {
 
         //Borramos los edit flags de los estudiantes
         $sql2 = "UPDATE student
-                SET edited = '0000-00-00'
-                WHERE edited != '0000-00-00'";
+                SET edited_flag = 0
+                WHERE edited_flag = 1";
         $result2 = $conn->query($sql2);
         if ($result2 === false) {
             throw new Exception("Error en la consulta SQL KHE: " . $conn->error);
         }
 
-        //Borramos el conteo de estudiantes editados desde admin
-        $sql3 = "UPDATE advisor
-                SET edited_count = 0
-                WHERE edited_count > 0";
-        $result3 = $conn->query($sql3);
-        if ($result3 === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }
-
         //Borramos los cursos que los estudiantes escogieron en sus consejerias
-        $sql4 = "DELETE FROM will_take
+        $sql4 = "DELETE FROM takes
                 WHERE crse_code != ''";
         $result4 = $conn->query($sql4);
         if ($result4 === false) {
@@ -285,7 +276,7 @@ class ClassesModel {
     public function getMatriculadosModel($conn, $course)
     {
         $sql = "SELECT count(student_num) AS count
-                FROM will_take
+                FROM takes
                 WHERE crse_code = '$course'";
         $result = $conn->query($sql);
         if ($result === false) {
@@ -309,8 +300,8 @@ class ClassesModel {
     public function getStudentsMatriculadosModel($conn, $course)
     {
         $sql = "SELECT *
-                FROM will_take NATURAL JOIN student
-                WHERE will_take.student_num = student.student_num AND
+                FROM takes NATURAL JOIN student
+                WHERE takes.student_num = student.student_num AND
                 crse_code = '$course'";
         $result = $conn->query($sql);
         if ($result === false) {

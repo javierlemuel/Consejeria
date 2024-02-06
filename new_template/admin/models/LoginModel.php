@@ -15,6 +15,8 @@ class LoginModel {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['pass'])) {
                 // Las credenciales son correctas, el usuario está autenticado
+                    $privileges = $user['privileges'];
+                    $_SESSION['privileges'] = $privileges;
                 return true;
             } else {
                 // Las credenciales son incorrectas, la autenticación falló
