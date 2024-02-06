@@ -83,6 +83,7 @@
                             </div>
 
 
+
                             <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                                 <a href="javascript:;" class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle()">
                                     <span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -118,61 +119,143 @@
             <div class="animate__animated p-6" :class="[$store.app.animation]" style='padding: 5% 10%'>
                 <!-- start main content section -->
 
-                <div style='text-align:center; font-size: 35px'><h2>Reportes Generales: <?php echo $term ?></h2></div>
-                <br><br><br>
+                <!-- Create new term button -->
+                <?php if (isset($message)) { ?>
+                    <div style='padding: 15px 0' class="flex flex-wrap items-center justify-between gap-4">
+                            
+                                <?php if ($message == 'failure')
+                                        echo"<h2 style='color:red; bold' class='text-xl'>Hubo un error en su query</h2>";
+                                        elseif ($message == "exist") 
+                                        echo "<h2 style='color:red; bold' class='text-xl'>Este email ya existe</h2>";
+                                     elseif ($message == "success") 
+                                        echo "<h2 style='color:limegreen; bold' class='text-xl'>Admin fue creado!</h2>";
+                                ?>
+                        <br>
+                    </div>
+                <?php } ?>
+                    
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                    <h2 class="text-xl" style='text-align: center'>Administradores</h2>
+                    <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+                    <div class="flex gap-3">
+                    <div x-data="modal">
+                <button type="button" class="btn btn-primary !mt-6" @click='toggle'>Crear admin nuevo</button>
+                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="open && '!block'">
+                    <div class="flex min-h-screen items-start justify-center px-4" @click.self="open = false">
+                        <div
+                            x-show="open"
+                            x-transition
+                            x-transition.duration.300
+                            class="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 dark:bg-secondary"
+                            style='background-color: white'
+                        >
+                            <div class="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
+                                
+                            </div>
+                            <div class="p-5">
+                                <form action="?admin&register" method="POST">
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='cohort'>Email</label>
+                                    <input class='form-input' style='color:black' name='email' type='email' placeholder='juanpueblo@upr.edu' required>
+                                </div>
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='cohort'>Primer Nombre</label>
+                                    <input class='form-input' style='color:black' maxlength="20" name='name' type='text' placeholder='Juan' required>
+                                </div>
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='cohort'>Apellido</label>
+                                    <input class='form-input' style='color:black' maxlength="20" name='lname' type='text' placeholder='DelPueblo' required>
+                                </div>
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='cohort'>Password</label>
+                                    <input class='form-input' style='color:black' maxlength="12" name='password' type='password' required>
+                                </div>
+                                <div class="py-5 text-center text-white dark:text-white-light">
+                                    <label style='color:black'for='cohort'>Privilegios</label>
+                                    <p style='color:black'> 0 para privilegios limitados <br> 1 para privilegios completos </p>
+                                    <input class='form-input' style='color:black' name='privileges' min=0 max=1 type='number' value=0 required>
+                                </div>
+                                <div class="flex justify-center gap-4 p-5">
 
-                <table style='font-size: 20px'>
-                    <thead>
-                        <tr>
-                            <th style='text-align:center; bold'>Tipo de Reporte</th>
-                            <th style='text-align:center; width: 40%; bold'>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style='background-color: lightgray'>
-                            <td style='text-align:center'>Estudiantes Aconsejados</td>
-                            <td style='text-align:center'><?php echo $studentsAconsejados ?></td>
-                        </tr>
-                        <tr>
-                            <td style='text-align:center'>Estudiantes Aconsejados sin Cursos de CCOM</td>
-                            <td style='text-align:center'><?php echo $studentsSinCCOM  ?></td>
-                        </tr>
-                        <tr style='background-color: lightgray'>
-                            <td style='text-align:center'>Estudiantes que realizaron su Consejería</td>
-                            <td style='text-align:center'><?php echo $studentsRegistrados  ?></td>
-                        </tr>
-                        <tr>
-                            <td style='text-align:center'>Expedientes revisados</td>
-                            <td style='text-align:center'><?php echo $studentsEditados  ?></td>
-                        </tr>
-                    </tbody></table>
+                                    <button type="submit" class="btn btn-primary !mt-6">Someter</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+                </div>
+                </div>
+        <br>
+
+                <!-- Classes -->
+                <div class="mb-5 flex flex-col sm:flex-row"> 
 
 
-                <br><br><br>
-                <div style='text-align:center; font-size: 35px'><h2>Reportes por Curso de CCOM</h2></div>
-                <br><br><br>
+    <div class='flex-1 text-sm'>
+    <div class="border border-[#d3d3d3] dark:border-[#1b2e4b] rounded">
+            <div class="p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
+            <div class="table-responsive">
+            <table style='text-align:center; font-size: 18px'>
+                <thead>
+                    <tr>
+                        <th style='text-align:center'>Email</th>
+                        <th style='text-align:center'>Privilegios Master</th>
+                        <th style='text-align:center; width: 30%'></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
 
-                <table style='font-size: 20px'>
-                    <thead>
-                        <tr>
-                            <th style='text-align:center; bold'>Curso</th>
-                            <th style='text-align:center; width: 40%; bold'>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        if(isset($studentsPerClass)){
-                            foreach($studentsPerClass as $s)
-                            { ?>
-                                <tr <?php if($count % 2 == 0) echo "style='background-color: lightgray'"; ?>>
-                                    <td style='text-align:center'><?php echo $s['crse_code']?></td>
-                                    <td style='text-align:center'><?php echo $s['count'] ?></td>
-                                </tr>
-                            <?php $count++;
-                            } 
-                        }?>
-                    </tbody></table>
-                
+            <?php 
+
+            foreach ($admins as $admin) { ?>
+        
+            <tr style='text-align:center'>
+
+                <td style='text-align:center'><?php echo $admin['email'] ?></td>
+                <td style='text-align:center'><?php echo $admin['privileges'] ?></td>
+            
+                <td style='text-align:center'>
+                <a style='cursor: pointer' title='Editar Admin?' href='?admin&edit=<?php echo $admin['email'] ?>'>
+                    <svg class='shrink-0 group-hover:!text-primary' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        opacity="0.5"
+                        d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
+                    <path
+                        d="M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                    <path
+                        opacity="0.5"
+                        d="M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                </svg>
+                </a>
+             </td>
+                                                         
+            </tr>
+            <?php } ?>
+    </tbody>
+            </table>
+        </div>
+    </div>
+</div>   
+                                                
+                <!-- end main content section -->
+
+            </div>
+
+            </div>
     </div>
             <!-- start footer section -->
             <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
@@ -258,8 +341,6 @@
                         }
                     }
                 },
-
-                
             }));
         });
 
