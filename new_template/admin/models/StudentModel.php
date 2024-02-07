@@ -14,7 +14,7 @@ class StudentModel {
     
         // Modificar la consulta SQL para incluir el filtro de estado y búsqueda
         //JAVIER//
-        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, given_counseling, status 
+        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status 
                 FROM student 
                 WHERE $statusCondition
                 AND name1 LIKE ? 
@@ -264,8 +264,8 @@ class StudentModel {
             // Obtener la fecha actual
             $date = date("Y-m-d");
 
-            // Consulta SQL para actualizar la columna given_counseling
-            $sql = "UPDATE student SET given_counseling = ? WHERE student_num = ?";
+            // Consulta SQL para actualizar la columna conducted_counseling
+            $sql = "UPDATE student SET conducted_counseling = ? WHERE student_num = ?";
 
             // Preparar la declaración
             $stmt = $conn->prepare($sql);

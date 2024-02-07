@@ -315,15 +315,38 @@ class ExpedientesController {
                         // Asigna cada dato a una variable
                         $semester = $line[0];
                         $studentNumber = $line[1];
+                        //le quita los guiones al numero de estudiantes.
+                        $studentNumber = str_replace("-", "", $studentNumber);
                         $class = $line[2];
                         $creditAmount = $line[3];
                         $grade = $line[5];
 
-                        error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
-                        error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
-                        error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
-                        error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
-                        error_log("La nota fue: " . $grade . "\n", 3, $archivoRegistro);
+                        $studentData = $studentModel->selectStudent($studentNumber, $conn);
+                        // El estudiante no existe en la base de datos.
+                        if ($studentData == NULL)
+                        {
+                            error_log("El estudiante: " . $studentNumber . " no existe.\n", 3, $archivoRegistro);
+                        }
+                        else
+                        {
+                            if($creditAmount == 0)
+                            {
+                                $grade = "NA";
+                                error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
+                                error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
+                                error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
+                                error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
+                                error_log("No hay nota ya que es 0 creditos, se pone nota: " . $grade . "\n", 3, $archivoRegistro);
+                            }
+                            else
+                            {
+                                error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
+                                error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
+                                error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
+                                error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
+                                error_log("La nota fue: " . $grade . "\n", 3, $archivoRegistro);
+                            }
+                        }
                     }
 
                     // Cierra el archivo
