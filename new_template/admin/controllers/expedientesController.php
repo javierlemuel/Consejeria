@@ -257,8 +257,6 @@ class ExpedientesController {
             {
                 require_once(__DIR__ . '/../models/ClassModel.php');
                 $classModel = new ClassModel();
-                require_once(__DIR__ . '/../models/ClassesModel.php');
-                $classesModel = new ClassesModel();
 
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 

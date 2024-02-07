@@ -209,8 +209,8 @@ class StudentModel {
             $cohort_year = '2022';
     
         // Ejecuta el query de inserción
-        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, conducted_counseling, minor, cohort_year, status, edited_flag, type)
-                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', 0, '')";
+        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, conducted_counseling, minor, cohort_year, status, edited_flag)
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', 0)";
     
         // Ejecuta el query
         if ($conn->query($query) === TRUE) {
