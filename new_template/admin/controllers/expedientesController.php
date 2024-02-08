@@ -309,13 +309,16 @@ class ExpedientesController {
                     $file = fopen($tmpName, 'r');
 
                     // Itera sobre cada línea del archivo
-                    while (($line = fgetcsv($file)) !== FALSE) {
+                    while (($line = fgetcsv($file)) !== FALSE)
+                    {
                         // Asigna cada dato a una variable
                         $semester = $line[0];
                         $studentNumber = $line[1];
                         //le quita los guiones al numero de estudiantes.
                         $studentNumber = str_replace("-", "", $studentNumber);
                         $class = $line[2];
+                        //Se toman solo los primeros 8 caracteres de la clase ya que el archivo incluye las secciones y no nos interesa esa informacion
+                        $class = substr($class, 0, 8);
                         $creditAmount = $line[3];
                         $grade = $line[5];
 
@@ -327,22 +330,26 @@ class ExpedientesController {
                         }
                         else
                         {
-                            if($creditAmount == 0)
+                            if($creditAmount != 0)
                             {
-                                $grade = "NA";
-                                error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
-                                error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
-                                error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
-                                error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
-                                error_log("No hay nota ya que es 0 creditos, se pone nota: " . $grade . "\n", 3, $archivoRegistro);
-                            }
-                            else
-                            {
-                                error_log("El semestre es: " . $semester . "\n", 3, $archivoRegistro);
-                                error_log("El estudiante es: " . $studentNumber . "\n", 3, $archivoRegistro);
-                                error_log("La clase fue: " . $class . "\n", 3, $archivoRegistro);
-                                error_log("La cantidad de creditos fue: " . $creditAmount . "\n", 3, $archivoRegistro);
-                                error_log("La nota fue: " . $grade . "\n", 3, $archivoRegistro);
+                                $result = $studentModel->studentAlreadyHasGrade($studentNumber, $class, $conn);
+                                //el estudiante ya tiene una nota en esa clase
+                                if ($result == TRUE)
+                                {
+                                    error_log("Actualizando la nota \n", 3, $archivoRegistro);
+                                    $equi = "";
+                                    $conva = 0;
+                                    $type = "mandatory";
+                                    $result = $studentModel->UpdateStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $conn);
+                                }
+                                else // el estudiante no tiene una nota en esa clase.
+                                {
+                                    error_log("Insertando la nota. \n", 3, $archivoRegistro);
+                                    $equi = "";
+                                    $conva = 0;
+                                    $type = "mandatory";
+                                    $result = $studentModel->InsertStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $conn);
+                                }
                             }
                         }
                     }

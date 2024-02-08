@@ -318,20 +318,32 @@ class StudentModel {
         
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            // Manejar el error de preparación de la consulta
+            return FALSE;
+        }
+        
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssss", $credits, $type, $grade, $term, $equi, $conva, $student_num, $course_code);
         
         // Ejecutar la sentencia
-        $stmt->execute();
-        
-        $stmt->close();
-        // Verificar si la actualización fue exitosa
-        if ($stmt->affected_rows > 0) {
-            return TRUE; // La actualización fue exitosa
+        if ($stmt->execute()) {
+            // Verificar si la actualización fue exitosa
+            if ($stmt->affected_rows > 0) {
+                $stmt->close();
+                return TRUE; // La actualización fue exitosa
+            } else {
+                $stmt->close();
+                return FALSE; // La actualización no tuvo ningún efecto (ninguna fila afectada)
+            }
         } else {
-            return FALSE; // La actualización no tuvo ningún efecto (ninguna fila afectada)
+            // Ocurrió un error al ejecutar la consulta
+            // Manejar el error según sea necesario
+            $stmt->close();
+            return FALSE;
         }
     }
+    
     
     public function InsertStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn) {
         // Preparar la consulta SQL para la inserción
@@ -340,20 +352,30 @@ class StudentModel {
         
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            // Manejar el error de preparación de la consulta
+            return FALSE;
+        }
+        
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssss", $student_num, $course_code, $credits, $type, $grade, $term, $equi, $conva);
         
         // Ejecutar la sentencia
-        $stmt->execute();
-        
-        $stmt->close();
-        // Verificar si la inserción fue exitosa
-        if ($stmt->affected_rows > 0) {
-            return TRUE; // La inserción fue exitosa
+        if ($stmt->execute()) {
+            // Verificar si la inserción fue exitosa
+            if ($stmt->affected_rows > 0) {
+                $stmt->close();
+                return TRUE; // La inserción fue exitosa
+            } else {
+                $stmt->close();
+                return FALSE; // La inserción no tuvo ningún efecto (ninguna fila afectada)
+            }
         } else {
-            return FALSE; // La inserción no tuvo ningún efecto (ninguna fila afectada)
+            // Ocurrió un error al ejecutar la consulta
+            // Manejar el error según sea necesario
+            $stmt->close();
+            return FALSE;
         }
-    }
-    
+    }    
 }
 ?>
