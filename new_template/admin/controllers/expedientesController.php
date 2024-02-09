@@ -257,6 +257,8 @@ class ExpedientesController {
             {
                 require_once(__DIR__ . '/../models/ClassModel.php');
                 $classModel = new ClassModel();
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
 
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
@@ -326,7 +328,7 @@ class ExpedientesController {
                         // El estudiante no existe en la base de datos.
                         if ($studentData == NULL)
                         {
-                            error_log("El estudiante: " . $studentNumber . " no existe.\n", 3, $archivoRegistro);
+                            error_log("El estudiante: " . $studentNumber . " no existe en la base de datos.\n", 3, $archivoRegistro);
                         }
                         else
                         {
@@ -336,7 +338,7 @@ class ExpedientesController {
                                 //el estudiante ya tiene una nota en esa clase
                                 if ($result == TRUE)
                                 {
-                                    error_log("Actualizando la nota \n", 3, $archivoRegistro);
+                                    error_log("Nota del estudiante " . $studentNumber . "en la clase " . $class . " fue actualizada\n", 3, $archivoRegistro);
                                     $equi = "";
                                     $conva = 0;
                                     $type = "mandatory";
@@ -344,7 +346,7 @@ class ExpedientesController {
                                 }
                                 else // el estudiante no tiene una nota en esa clase.
                                 {
-                                    error_log("Insertando la nota. \n", 3, $archivoRegistro);
+                                    error_log("Nota del estudiante " . $studentNumber . "en la clase " . $class . " fue insertada\n", 3, $archivoRegistro);
                                     $equi = "";
                                     $conva = 0;
                                     $type = "mandatory";
