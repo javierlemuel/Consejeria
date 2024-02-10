@@ -59,15 +59,24 @@
                     <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[300px] !py-0 text-xs text-dark ltr:-right-16 rtl:-left-16 dark:text-white-dark sm:w-[375px] sm:ltr:-right-2 sm:rtl:-left-2">
                         <li class="mb-5">
                             <div class="relative overflow-hidden rounded-t-md !p-5 text-white">
-                                <div class="absolute inset-0 h-full w-full bg-[url('../images/menu-heade.jpg')] bg-cover bg-center bg-no-repeat"></div>
+                                <div class="absolute inset-0 h-full w-full bg-warning bg-cover bg-center bg-no-repeat"></div>
                                 <h4 class="relative z-10 text-lg font-semibold">Mensajes</h4>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center px-5 py-3" @click.self="toggle">
                                 <span class="px-3 dark:text-gray-500">
-                                    <div class="text-sm font-semibold dark:text-white-light/90">Dra. Valenzuela, Consejera</div>
-                                    <div><?php echo $_SESSION['student_note'] ?></div>
+                                    <?php if ($_SESSION['student_note'] == NULL) {
+                                        //var_dump($_SESSION);
+                                        echo '<div class="text-sm font-semibold dark:text-white-light/90">No tienes mensajes.</div>';
+                                    } else {
+                                        // var_dump($_SESSION);
+                                        echo '<div class="text-sm font-semibold dark:text-white-light/90">Dra. Valenzuela, Consejera nulo</div>
+                                        <div><?php echo';
+                                        echo $_SESSION['student_note'];
+                                        echo '</div>';
+                                    }
+                                    ?>
                                 </span>
                                 <!-- <span class="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:mr-auto rtl:ml-2 dark:text-white-dark" x-text="msg.time"></span> -->
                                 <!-- <button type="button" class="text-neutral-300 hover:text-danger" @click="removeMessage(msg.id)">

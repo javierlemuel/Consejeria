@@ -52,7 +52,7 @@
                                         <br>
                                     </div>
                                 <?php } ?>
-                                <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl" style="color: #E2A03F;">Iniciar Sesion</h1>
+                                <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl" style="color: #2b2b2b;">Iniciar Sesion</h1>
                                 <p class="text-base font-bold leading-normal text-white-dark">Entra tu correo electronico, numero de estudiante y fecha de nacimiento</p>
                             </div>
                             <form class="space-y-5 dark:text-white" method="post" action="controllers/loginController.php">
