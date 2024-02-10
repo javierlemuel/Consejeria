@@ -1,3 +1,7 @@
+<?php
+session_start()
+?>
+
 <div :class="{'dark text-white-dark' : $store.app.semidark}">
             <nav x-data="sidebar" class="sidebar fixed top-0 bottom-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
                 <div class="h-full bg-white dark:bg-[#0e1726]">
@@ -169,6 +173,31 @@
                                     </div>
                                 </ul>
                             </li>
+
+                            <?php
+                            $privileges = isset($_SESSION['privileges']) ? $_SESSION['privileges'] : null;
+
+                            if($privileges == 1) {
+                                // Echo the HTML snippet if the condition is met
+                                echo '
+                                <li class="menu nav-item">
+                                    <a href="?admin">
+                                        <button type="button" class="nav-link group">
+                                            <div class="flex items-center">
+                                                <svg class="shrink-0 group-hover:!text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle opacity="0.5" cx="15" cy="6" r="3" fill="currentColor" />
+                                                    <ellipse opacity="0.5" cx="16" cy="17" rx="5" ry="3" fill="currentColor" />
+                                                    <circle cx="9.00098" cy="6" r="4" fill="currentColor" />
+                                                    <ellipse cx="9.00098" cy="17.001" rx="7" ry="4" fill="currentColor" />
+                                                </svg>
+                                                <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admins</span>
+                                            </div>
+                                        </button>
+                                    </a>
+                                </li>';
+                            }
+
+                            ?>
                             
 
                             <li class="menu nav-item">

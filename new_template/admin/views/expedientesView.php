@@ -323,7 +323,7 @@
                                             <td><?= $student['name1'] ?> <?= $student['name2'] ?> <?= $student['last_name1'] ?> <?= $student['last_name2'] ?></td>
                                             <td><?= $student['formatted_student_num'] ?></td>
                                             <td>
-                                                <?php if ($student['given_counseling'] == "0000-00-00"): ?>
+                                                <?php if ($student['conducted_counseling'] == "0"): ?>
                                                     <span class="badge whitespace-nowrap badge-outline-danger">No realizada</span>
                                                 <?php else: ?>
                                                     <span class="badge whitespace-nowrap badge-outline-primary">Realizada</span>
