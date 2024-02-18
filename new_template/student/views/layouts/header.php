@@ -41,6 +41,11 @@
                             Expediente
                         </a>
                     </li>
+                    <li>
+                        <a href="index.php?page=links" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">
+                            Enlaces Frecuentes
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
