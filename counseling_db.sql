@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2024 at 04:35 PM
+-- Generation Time: Feb 18, 2024 at 07:21 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -409,9 +409,15 @@ CREATE TABLE `offer` (
 --
 
 INSERT INTO `offer` (`crse_code`, `term`) VALUES
-('XXXX', 'BB0'),
-('CCOM3001', 'BB0'),
-('CCOM3002', 'BB0');
+('FISI3014', 'BB0'),
+('FISI3012', 'BB0'),
+('CCOM4095', 'BB0'),
+('INGL3102', 'BB0'),
+('INGL3114', 'BB0'),
+('MATE3172', 'BB0'),
+('CCOM3036', 'BB0'),
+('ESPA3111', 'BB0'),
+('ESPA3102', 'BB0');
 
 -- --------------------------------------------------------
 
@@ -438,7 +444,10 @@ INSERT INTO `recommended_courses` (`student_num`, `crse_code`) VALUES
 (840990101, 'ESPAXXXX'),
 (840781818, 'TEQU1234'),
 (840121234, 'ESPA1234'),
-(840182717, 'HUMAXXXX');
+(840182717, 'HUMAXXXX'),
+(840194867, 'CCOM4095'),
+(840194867, 'FISI3012'),
+(840194867, 'FISI3014');
 
 -- --------------------------------------------------------
 
@@ -719,7 +728,6 @@ INSERT INTO `student_courses` (`student_num`, `crse_code`, `credits`, `type`, `c
 (840194867, 'CCOM4065', 3, 'mandatory', 'B', 'P', 'XXX', '', ''),
 (840194867, 'CCOM4115', 3, 'mandatory', 'B', 'P', 'XXX', '', ''),
 (840194867, 'ESPA3101', 3, 'ESPA', 'P', 'P', 'XXX', '', ''),
-(840194867, 'ESPA3102', 3, 'ESPA', 'P', 'P', 'XXX', '', ''),
 (840194867, 'ESPA3208', 3, 'ESPA', 'B', 'P', 'XXX', '', ''),
 (840194867, 'INGL3101', 3, 'INGL', 'C', 'P', 'XXX', '', ''),
 (840194867, 'INGL3102', 3, 'INGL', 'B', 'P', 'XXX', '', ''),
