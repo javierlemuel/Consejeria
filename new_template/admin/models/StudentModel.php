@@ -93,12 +93,12 @@ class StudentModel {
 
     public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
         // Preparar la consulta SQL
-        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited, conducted_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited_date, conducted_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
 
-        $edited = 0;
+        $edited = date("Y-m-d");
 
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday, $edited, $edited);
@@ -143,32 +143,58 @@ class StudentModel {
         return $studentData;
     }
 
-    //JAVIER
     public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn) {
         // Preparar la consulta SQL
-        $sql = "UPDATE student SET name1 = ?, name2 = ?, last_name1 = ?, 
-        last_name2 = ?, email = ?, dob = ?, cohort_year = ?, minor = ?, 
-        grad_term = ?, admin_note = ?, student_note = ?, status = ?, 
-        edited = ? WHERE student_num = ?";
-
+        $sql = "UPDATE student 
+                SET name1 = ?, 
+                    name2 = ?, 
+                    last_name1 = ?, 
+                    last_name2 = ?, 
+                    email = ?, 
+                    dob = ?, 
+                    cohort_year = ?, 
+                    minor = ?, 
+                    grad_term = ?, 
+                    admin_note = ?, 
+                    student_note = ?, 
+                    status = ?, 
+                    edited_date = ? 
+                WHERE student_num = ?";
+    
         // Preparar los datos para la consulta
-        $params = array($nombre, $nombre2, $apellidoP, $apellidoM, $email, $fechaNac, 
-        $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $numeroEst);
-
-        //$types = str_repeat('s', count($params) - 2) . 'ii';  
-        $types = ('sssssssisssssi');
-
+        $params = array(
+            $nombre, 
+            $nombre2, 
+            $apellidoP, 
+            $apellidoM, 
+            $email, 
+            $fechaNac, 
+            $cohorte, 
+            $minor, 
+            $graduacion, 
+            $notaAdmin, 
+            $notaEstudiante, 
+            $status, 
+            $date, 
+            $numeroEst
+        );
+    
+        // Tipos de datos para los parámetros
+        $types = 'sssssssisssssi';
+    
         // Ejecutar la consulta
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($types, ...$params);
-
+    
         $result = $stmt->execute();
-        // Cambios para que recoja el array bien y considerando que dos de ellos no son string. También puse el 'edited' date
-
+    
+        // Cerrar la conexión
         $stmt->close();
+    
         // Devolver true si la consulta se ejecutó correctamente, o false en caso contrario
         return $result !== false;
     }
+    
     
     public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
