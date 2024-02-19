@@ -93,12 +93,12 @@ class StudentModel {
 
     public function insertStudent($conn, $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday) {
         // Preparar la consulta SQL
-        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited, conducted_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO student (name1, name2, last_name1, last_name2, email, minor, student_num, cohort_year, status, dob, edited_date, conducted_counseling) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
 
-        $edited = 0;
+        $edited = date("Y-m-d");
 
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssssssss", $nombre, $nombre2, $apellidoP, $apellidoM, $email, $minor, $numero, $cohorte, $estatus, $birthday, $edited, $edited);
@@ -143,32 +143,58 @@ class StudentModel {
         return $studentData;
     }
 
-    //JAVIER
     public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn) {
         // Preparar la consulta SQL
-        $sql = "UPDATE student SET name1 = ?, name2 = ?, last_name1 = ?, 
-        last_name2 = ?, email = ?, dob = ?, cohort_year = ?, minor = ?, 
-        grad_term = ?, admin_note = ?, student_note = ?, status = ?, 
-        edited = ? WHERE student_num = ?";
-
+        $sql = "UPDATE student 
+                SET name1 = ?, 
+                    name2 = ?, 
+                    last_name1 = ?, 
+                    last_name2 = ?, 
+                    email = ?, 
+                    dob = ?, 
+                    cohort_year = ?, 
+                    minor = ?, 
+                    grad_term = ?, 
+                    admin_note = ?, 
+                    student_note = ?, 
+                    status = ?, 
+                    edited_date = ? 
+                WHERE student_num = ?";
+    
         // Preparar los datos para la consulta
-        $params = array($nombre, $nombre2, $apellidoP, $apellidoM, $email, $fechaNac, 
-        $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $numeroEst);
-
-        //$types = str_repeat('s', count($params) - 2) . 'ii';  
-        $types = ('sssssssisssssi');
-
+        $params = array(
+            $nombre, 
+            $nombre2, 
+            $apellidoP, 
+            $apellidoM, 
+            $email, 
+            $fechaNac, 
+            $cohorte, 
+            $minor, 
+            $graduacion, 
+            $notaAdmin, 
+            $notaEstudiante, 
+            $status, 
+            $date, 
+            $numeroEst
+        );
+    
+        // Tipos de datos para los parámetros
+        $types = 'sssssssisssssi';
+    
         // Ejecutar la consulta
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($types, ...$params);
-
+    
         $result = $stmt->execute();
-        // Cambios para que recoja el array bien y considerando que dos de ellos no son string. También puse el 'edited' date
-
+    
+        // Cerrar la conexión
         $stmt->close();
+    
         // Devolver true si la consulta se ejecutó correctamente, o false en caso contrario
         return $result !== false;
     }
+    
     
     public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
@@ -209,8 +235,8 @@ class StudentModel {
             $cohort_year = '2022';
     
         // Ejecuta el query de inserción
-        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, conducted_counseling, minor, cohort_year, status, edited_flag, type)
-                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', 0, '')";
+        $query = "INSERT INTO student (student_num, email, name1, name2, last_name1, last_name2, dob, conducted_counseling, minor, cohort_year, status, edited_flag)
+                  VALUES ('$student_num', '$email', '$nombre', '$segundo_nombre', '$apellido_paterno', '$apellido_materno', '$birthdate_formatted', '0000-00-00', 0, $cohort_year, 'Activo', 0)";
     
         // Ejecuta el query
         if ($conn->query($query) === TRUE) {
@@ -318,20 +344,32 @@ class StudentModel {
         
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            // Manejar el error de preparación de la consulta
+            return FALSE;
+        }
+        
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssss", $credits, $type, $grade, $term, $equi, $conva, $student_num, $course_code);
         
         // Ejecutar la sentencia
-        $stmt->execute();
-        
-        $stmt->close();
-        // Verificar si la actualización fue exitosa
-        if ($stmt->affected_rows > 0) {
-            return TRUE; // La actualización fue exitosa
+        if ($stmt->execute()) {
+            // Verificar si la actualización fue exitosa
+            if ($stmt->affected_rows > 0) {
+                $stmt->close();
+                return TRUE; // La actualización fue exitosa
+            } else {
+                $stmt->close();
+                return FALSE; // La actualización no tuvo ningún efecto (ninguna fila afectada)
+            }
         } else {
-            return FALSE; // La actualización no tuvo ningún efecto (ninguna fila afectada)
+            // Ocurrió un error al ejecutar la consulta
+            // Manejar el error según sea necesario
+            $stmt->close();
+            return FALSE;
         }
     }
+    
     
     public function InsertStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn) {
         // Preparar la consulta SQL para la inserción
@@ -340,20 +378,30 @@ class StudentModel {
         
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            // Manejar el error de preparación de la consulta
+            return FALSE;
+        }
+        
         // Vincular los parámetros con los valores
         $stmt->bind_param("ssssssss", $student_num, $course_code, $credits, $type, $grade, $term, $equi, $conva);
         
         // Ejecutar la sentencia
-        $stmt->execute();
-        
-        $stmt->close();
-        // Verificar si la inserción fue exitosa
-        if ($stmt->affected_rows > 0) {
-            return TRUE; // La inserción fue exitosa
+        if ($stmt->execute()) {
+            // Verificar si la inserción fue exitosa
+            if ($stmt->affected_rows > 0) {
+                $stmt->close();
+                return TRUE; // La inserción fue exitosa
+            } else {
+                $stmt->close();
+                return FALSE; // La inserción no tuvo ningún efecto (ninguna fila afectada)
+            }
         } else {
-            return FALSE; // La inserción no tuvo ningún efecto (ninguna fila afectada)
+            // Ocurrió un error al ejecutar la consulta
+            // Manejar el error según sea necesario
+            $stmt->close();
+            return FALSE;
         }
-    }
-    
+    }    
 }
 ?>

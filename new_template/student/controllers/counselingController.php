@@ -27,7 +27,7 @@ class CounselingController
         $concentrationCourses = $counselingModel->getConcentrationCourses($conn, $student_num);
 
         // Obtenemos la lista de las clases generales
-        $generalCourses = $counselingModel->getGeneralCourses($conn);
+        $generalCourses = $counselingModel->getGeneralCourses($conn, $student_num);
 
         $studentInfo = $counselingModel->getStudentInfo($conn, $student_num);
 

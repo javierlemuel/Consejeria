@@ -32,6 +32,8 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
         require_once 'controllers/expedienteController.php';
     } else if ($page === '2017' || $page === '2022') {
         require_once 'controllers/cohorteController.php';
+    } else if ($page === 'links') {
+        require_once 'views/links.php';
     } else {
         // carga la pagina de consegeria 
         require_once 'controllers/counselingController.php';

@@ -4,7 +4,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'counseling_draft2';
+$database = 'counseling_db';
 
 
 // $host = "136.145.29.193"; // XAMPP crea el localhost

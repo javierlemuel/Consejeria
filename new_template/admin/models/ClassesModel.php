@@ -93,6 +93,52 @@ class ClassesModel {
         return $result;
     }
 
+    public function getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num)
+    {
+        $sql = "SELECT c.crse_code, c.name, c.credits, sc.crse_grade, sc.equivalencia, sc.convalidacion
+                FROM ccom_courses c
+                JOIN student_courses sc ON c.crse_code = sc.crse_code
+                WHERE sc.student_num = $student_num
+                AND c.crse_code NOT IN (
+                    SELECT co.crse_code
+                    FROM cohort co
+                    WHERE co.cohort_year = $studentCohort
+                )
+                ORDER BY c.crse_code ASC;
+                ";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
+    public function getCohortCoursesWgradesNotCCOMfree($conn, $studentCohort, $student_num)
+    {
+        $sql = "SELECT c.crse_code, c.name, c.credits, sc.crse_grade, sc.equivalencia, sc.convalidacion
+                FROM general_courses c
+                JOIN student_courses sc ON c.crse_code = sc.crse_code
+                WHERE sc.student_num = $student_num
+                AND c.crse_code NOT IN (
+                    SELECT co.crse_code
+                    FROM cohort co
+                    WHERE co.cohort_year = $studentCohort
+                )
+                ORDER BY c.crse_code ASC;
+                ";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
     public function getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num)
     {
         $sql = "SELECT cohort.crse_code, general_courses.name, general_courses.credits, student_courses.crse_grade,
@@ -104,6 +150,29 @@ class ClassesModel {
                     AND student_courses.student_num = $student_num
                 WHERE cohort.cohort_year = $studentCohort
                 ORDER BY cohort.crse_code ASC;";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
+
+    public function getAllOtherCoursesWgrades($conn, $student_num)
+    {
+        $sql = "SELECT *
+                FROM student_courses
+                WHERE crse_code NOT IN (
+                    SELECT crse_code
+                    FROM ccom_courses
+                    UNION
+                    SELECT crse_code
+                    FROM general_courses
+                )
+                AND student_num = $student_num;
+                ";
 
         $result = $conn->query($sql);
 
