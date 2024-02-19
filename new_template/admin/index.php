@@ -55,8 +55,6 @@ if(isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)
         require_once 'controllers/adminController.php';
     }
     else{
-        
-        echo $_SESSION['privileges'];
         require_once 'controllers/expedientesController.php'; // Incluye aquí
     } 
 }
