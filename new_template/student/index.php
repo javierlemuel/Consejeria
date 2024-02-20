@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //session_destroy();
 // Verifica si la sesión de autenticación está establecida
-if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
+if (isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] === true) {
     // La sesión está autenticada, muestra la página de expedientes
     $page = $_GET['page'] ?? 'counseling';
 

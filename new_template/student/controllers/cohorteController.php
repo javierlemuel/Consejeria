@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] !== true) {
+    header("Location: ./index.php");
+    exit;
+}
+
 // controllers/expedientesController.php
 require_once(__DIR__ . '/../models/CohorteModel.php');
 require_once(__DIR__ . '/../config/database.php');
