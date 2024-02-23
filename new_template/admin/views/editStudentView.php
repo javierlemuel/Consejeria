@@ -185,6 +185,7 @@
                         <select class="form-select text-white-dark" name="estatus">
                             <option value="Activo" <?php if ($studentData['status'] == "Activo") echo 'selected'; ?>>Activo</option>
                             <option value="Inactivo" <?php if ($studentData['status'] == "Inactivo") echo 'selected'; ?>>Inactivo</option>
+                            <option value="Graduado" <?php if ($studentData['status'] == "Graduado") echo 'selected'; ?>>Graduado</option>
                         </select>
                     </div>
                     </div>

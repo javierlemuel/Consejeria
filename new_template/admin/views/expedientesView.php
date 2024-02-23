@@ -128,6 +128,7 @@
                                     <li><a href="?status=Todos&search=<?php echo $searchKeyword?>" @click="toggle">Todos</a></li>
                                     <li><a href="?status=Activos&search=<?php echo $searchKeyword?>" @click="toggle">Activos</a></li>
                                     <li><a href="?status=Inactivos&search=<?php echo $searchKeyword?>" @click="toggle">Inactivos</a></li>
+                                    <li><a href="?status=Graduados&search=<?php echo $searchKeyword?>" @click="toggle">Graduados</a></li>
                                 </ul>
                             </div>
                             <!-- Final del boton de dropdown-->
@@ -261,6 +262,7 @@
                                                                 <select id="status" x-model="params.estatus" class="form-select text-white-dark" name="estatus" required>
                                                                     <option>Activo</option>    
                                                                     <option>Inactivo</option>
+                                                                    <option>Graduado</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-5">
@@ -272,7 +274,7 @@
                                                                 <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
                                                                     Cancelar
                                                                 </button>
-                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" x-text="params.id ? 'Update' : 'Anadir'"></button>
+                                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" x-text="params.id ? 'Update' : 'Añadir'"></button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -286,7 +288,7 @@
                                         <input
                                             type="text"
                                             name="search"
-                                            placeholder="Buscar estudiante"
+                                            placeholder="Buscar por nombre o #"
                                             class="peer form-input py-2 ltr:pr-11 rtl:pl-11"
                                         />
                                         <!-- Agrega campos ocultos para los parámetros de filtro de estado -->
@@ -337,11 +339,13 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <?php if ($student['status'] == 'Inactivo'): ?>
-                                                    <span class="badge whitespace-nowrap badge-outline-danger">Inactivo</span>
-                                                <?php else: ?>
-                                                    <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
-                                                <?php endif; ?>
+                                            <?php if ($student['status'] == 'Inactivo'): ?>
+                                                <span class="badge whitespace-nowrap badge-outline-danger">Inactivo</span>
+                                            <?php elseif ($student['status'] == 'Graduado'): ?>
+                                                <span class="badge whitespace-nowrap badge-outline-primary">Graduado</span>
+                                            <?php else: ?>
+                                                <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
+                                            <?php endif; ?>
                                             </td>
                                             <td>
                                                 <form method="POST" action="index.php">
