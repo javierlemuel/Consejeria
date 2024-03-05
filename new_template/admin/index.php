@@ -33,6 +33,10 @@ if(isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)
     {
         require_once 'controllers/createClassController.php';
     }
+    elseif(isset($_GET['admin']))
+    {
+        require_once 'controllers/adminController.php';
+    }
     elseif(isset($_GET['class']) || isset($_GET['edit']) || isset($_GET['editReqs'])
     || isset($_GET['addReq']))
     {
@@ -49,10 +53,6 @@ if(isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)
     elseif(isset($_GET['minor']))
     {
         require_once 'controllers/minorController.php';
-    }
-    elseif(isset($_GET['admin']))
-    {
-        require_once 'controllers/adminController.php';
     }
     else{
         require_once 'controllers/expedientesController.php'; // Incluye aquí

@@ -198,19 +198,19 @@
                                                             <div class="mb-5 grid grid-cols-1 md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                                 <input type="hidden" name="action" value="addStudent">
                                                                 <div>
-                                                                    <label for="nombre">Nombre</label>
+                                                                    <label for="nombre">Primer <br> Nombre</label>
                                                                     <input x-model="params.nombre" id="nombre" name="nombre" type="text" class="form-input" maxlength="15" required/>
                                                                 </div>
                                                                 <div>
-                                                                    <label for="nombre2">2do nombre</label>
+                                                                    <label for="nombre2">Segundo nombre</label>
                                                                     <input id="nombre2" name="nombre2" type="text" class="form-input" maxlength="15"/>
                                                                 </div>
                                                                 <div>
-                                                                    <label for="apellidoP">Apellido P</label>
+                                                                    <label for="apellidoP">Apellido Paterno</label>
                                                                     <input x-model="params.apellidoP" id="apellidoP" name="apellidoP" type="text"class="form-input" maxlength="20" required/>
                                                                 </div>
                                                                 <div>
-                                                                    <label for="apellidoM">Apellido M</label>
+                                                                    <label for="apellidoM">Apellido Materno</label>
                                                                     <input id="apellidoM" name="apellidoM" type="text" class="form-input" maxlength="20"/>
                                                                 </div>
                                                             </div>
@@ -266,7 +266,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-5">
-                                                                <label for="birthday">Birthday</label>
+                                                                <label for="birthday">Cumpleaños</label>
                                                                 <input type="date" x-model="params.birthday" id="birthday" name="birthday" required>               
                                                             </div>
                                                             
