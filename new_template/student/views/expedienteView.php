@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] !== true) {
+    header("Location: ../index.php");
+    exit;
+}
 // $obj = new ExpedienteController();
 // $info = $obj->get();
 if (session_status() == PHP_SESSION_NONE) {

@@ -34,9 +34,6 @@
                         <?php echo $_SESSION['email'] ?>
                     </h3>
 
-                    <h3 style="font-size: 12px;" class="-mx-4 mb-2 flex items-center  py-3 px-7 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]" style="text-size: 14px;">
-                        1er Semestre 2023
-                    </h3>
                 </div>
                 <form method="post" action="controllers/counselingController.php" class="mh-100">
 

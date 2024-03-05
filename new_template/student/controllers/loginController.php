@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($authenticated) {
         // La autenticación fue exitosa, establece la variable de sesión "authenticated" en true
         session_start();
-        $_SESSION['authenticated'] = true;
+        $_SESSION['student_authenticated'] = true;
         $_SESSION['student_num'] = $student_num;
 
         // Redirige al usuario a la página de expedientes

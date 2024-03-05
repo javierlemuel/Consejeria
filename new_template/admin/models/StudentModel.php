@@ -8,6 +8,8 @@ class StudentModel {
             $statusCondition = "status = 'Activo'";
         } elseif ($status === 'Inactivos') {
             $statusCondition = "status = 'Inactivo'";
+        } elseif ($status === 'Graduados') {
+            $statusCondition = "status = 'Graduado'";
         } else {
             $statusCondition = "1"; // Sin filtro, mostrar todos
         }
@@ -17,17 +19,18 @@ class StudentModel {
         $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status 
                 FROM student 
                 WHERE $statusCondition
-                AND name1 LIKE ? 
+                AND (name1 LIKE ? OR student_num LIKE ?)
                 ORDER BY name1 ASC 
                 LIMIT ? 
-                OFFSET ?";
+                OFFSET ?
+                ";
         //
     
         $stmt = $conn->prepare($sql);
     
         // Modificar el filtro de búsqueda para buscar en cualquier parte del nombre
         $searchKeyword = "%$search%";
-        $stmt->bind_param("sii", $searchKeyword, $perPage, $offset);
+        $stmt->bind_param("ssii", $searchKeyword, $searchKeyword, $perPage, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
     
@@ -68,6 +71,8 @@ class StudentModel {
             $statusCondition = "status = 'Activo'";
         } elseif ($status === 'Inactivos') {
             $statusCondition = "status = 'Inactivo'";
+        } elseif ($status === 'Graduados') {
+            $statusCondition = "status = 'Graduado'";
         } else {
             $statusCondition = "1"; // Sin filtro, contar todos
         }
@@ -76,13 +81,13 @@ class StudentModel {
         $sql = "SELECT COUNT(*) as total 
                 FROM student 
                 WHERE $statusCondition 
-                AND name1 LIKE ?";
+                AND (name1 LIKE ? OR student_num LIKE ?)";
     
         $stmt = $conn->prepare($sql);
     
         // Modificar el filtro de búsqueda para buscar en cualquier parte del nombre
         $searchKeyword = "%$search%";
-        $stmt->bind_param("s", $searchKeyword);
+        $stmt->bind_param("ss", $searchKeyword, $searchKeyword);
         $stmt->execute();
         $result = $stmt->get_result();
     
