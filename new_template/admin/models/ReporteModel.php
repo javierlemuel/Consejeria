@@ -62,9 +62,9 @@ class ReporteModel {
 
    public function getEditados($conn)
    {
-        $sql = "SELECT COUNT(edited_flag) AS count
+        $sql = "SELECT COUNT(edited_date) AS count
                 FROM student
-                WHERE edited_flag = 1";
+                WHERE edited_date != NULL";
         $result = $conn->query($sql);
         if ($result === false) {
             throw new Exception("Error en la consulta SQL: " . $conn->error);
