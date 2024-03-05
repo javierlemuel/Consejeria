@@ -411,6 +411,46 @@
         </div>
     </div>
 
+    <?php
+    // Check if the session variables are set
+    if (isset($_SESSION['registertxt'])) {
+        // Output the text content in a JavaScript block
+        echo '<script>';
+        echo 'var txtContent = ' . json_encode($_SESSION['registertxt']) . ';';
+        echo 'var txtFileName = "archivo_de_registro.txt";'; // Set your desired filename here
+        echo 'var blob = new Blob([txtContent], { type: "text/plain" });'; // Use "text/plain" for plain text
+        echo 'var a = document.createElement("a");';
+        echo 'a.href = URL.createObjectURL(blob);';
+        echo 'a.target = "_blank";'; // Open in a new window
+        echo 'document.body.appendChild(a);';
+        echo 'a.click();';
+        echo 'document.body.removeChild(a);';
+        echo '</script>';
+    
+        // Clear the session variable
+        unset($_SESSION['registertxt']);
+    }
+
+    if (isset($_SESSION['registermodeltxt'])) {
+        // Output the text content in a JavaScript block
+        echo '<script>';
+        echo 'var txtContent = ' . json_encode($_SESSION['registermodeltxt']) . ';';
+        echo 'var txtFileName = "archivo_de_registro_model.txt";'; // Set your desired filename here
+        echo 'var blob = new Blob([txtContent], { type: "text/plain" });'; // Use "text/plain" for plain text
+        echo 'var a = document.createElement("a");';
+        echo 'a.href = URL.createObjectURL(blob);';
+        echo 'a.target = "_blank";'; // Open in a new window
+        echo 'document.body.appendChild(a);';
+        echo 'a.click();';
+        echo 'document.body.removeChild(a);';
+        echo '</script>';
+    
+        // Clear the session variable
+        unset($_SESSION['registermodeltxt']);
+    }
+
+    ?>
+
     <script src="assets/js/alpine-collaspe.min.js"></script>
     <script src="assets/js/alpine-persist.min.js"></script>
     <script defer src="assets/js/alpine-ui.min.js"></script>

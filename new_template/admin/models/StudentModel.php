@@ -204,6 +204,10 @@ class StudentModel {
     public function insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate) {
         $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
+        $currentDateTime = date("Y-m-d H:i:s");
+        $logMessage = "\n" . $currentDateTime . "\n";
+        error_log($logMessage, 3, $archivoRegistro);
+
         if(strlen($birthdate) == 5)
             $birthdate = '0'.$birthdate;
     

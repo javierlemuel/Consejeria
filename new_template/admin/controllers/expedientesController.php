@@ -104,6 +104,10 @@ class ExpedientesController {
             {
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
+                $currentDateTime = date("Y-m-d H:i:s");
+                $logMessage = "\n" . $currentDateTime . "\n";
+                error_log($logMessage, 3, $archivoRegistro);
+
                 // Verificamos si se han subido archivos
                 if (!empty($_FILES['files']['name']) && !empty($_FILES['files2']['name'])) {
                     $file_tmp = $_FILES['files']['tmp_name'];
@@ -179,6 +183,7 @@ class ExpedientesController {
                                 {
                                     // Llamamos a la función del modelo para insertar el estudiante
                                     $studentModel->insertStudentCSV($conn, $student_num, $nombre, $segundo_nombre, $apellido_materno, $apellido_paterno, $email, $birthdate);
+                                    $archivoRegistroModel = __DIR__ . '/../models/archivo_de_registro.txt';
                                 }
                             }
                             else
@@ -206,6 +211,10 @@ class ExpedientesController {
                 $classesModel = new ClassesModel();
 
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+                $currentDateTime = date("Y-m-d H:i:s");
+                $logMessage = "\n" . $currentDateTime . "\n";
+                error_log($logMessage, 3, $archivoRegistro);
 
                 $student_num = $_POST['student_num'];
                 $term = $classesModel->getTerm($conn);
@@ -265,6 +274,10 @@ class ExpedientesController {
 
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
+                $currentDateTime = date("Y-m-d H:i:s");
+                $logMessage = "\n" . $currentDateTime . "\n";
+                error_log($logMessage, 3, $archivoRegistro);
+
                 $student_num = $_POST['student_num'];
                 $course_code = $_POST['crse_code'];
                 $grade = $_POST['grade'];
@@ -303,6 +316,10 @@ class ExpedientesController {
             elseif ($action === 'updateGradeCSV')
             {
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
+
+                $currentDateTime = date("Y-m-d H:i:s");
+                $logMessage = "\n" . $currentDateTime . "\n";
+                error_log($logMessage, 3, $archivoRegistro);
 
                 // Verificamos si se han subido archivos
                 if (!empty($_FILES['files']['name']))
@@ -386,6 +403,22 @@ class ExpedientesController {
         $minors = $minorModel->getMinors($conn);
         //
 
+
+        if(isset($archivoRegistro))
+        {
+            $fileContent = file_get_contents($archivoRegistro);
+            $_SESSION['registertxt'] = $fileContent;
+        }
+
+
+        if(isset($archivoRegistroModel))
+        {
+            $fileContentModel = file_get_contents($archivoRegistroModel);
+
+            if($fileContentModel != "")
+                $_SESSION['registermodeltxt'] = $fileContentModel;
+        }
+        
         require_once(__DIR__ . '/../views/expedientesView.php');
     }
 }
