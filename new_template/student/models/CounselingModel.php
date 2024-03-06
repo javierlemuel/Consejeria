@@ -279,8 +279,7 @@ class CounselingModel
     public function setCourses($conn, $student_num, $courses)
     {
         $sql = "SELECT term
-                FROM offer
-                WHERE crse_code = 'XXXX'";
+                FROM offer LIMIT 1";
         $result = $conn->query($sql);
         if ($result === false) {
             throw new Exception("Error en la consulta SQL: " . $conn->error);

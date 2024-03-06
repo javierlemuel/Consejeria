@@ -13,9 +13,13 @@ $password = "ema84023"; //contrasena de phpMyAdmin
 $database = "emamarsa_db"; 
 */
 
+// $host = "136.145.29.193"; // XAMPP crea el localhost
+// $username = "natramri"; // Usuario de phpMyAdmin
+// $password = "nat84023"; //contrasena de phpMyAdmin
+// $database = "natramri_db";
+
 $conn = new mysqli($host, $username, $password, $database);
 
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
-?>

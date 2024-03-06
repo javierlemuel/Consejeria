@@ -85,6 +85,9 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                                                         <li>Escoja los cursos que aspira tomar el próximo semestre.</li>
                                                         <li>Revise su lista de cursos seleccionados y confirme su consejería.</li>
                                                     </ol>
+                                                    <?php
+                                                    //var_dump($selectedCourses);
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -369,11 +372,9 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
 
                     // Retrieve the previously selected values from sessionStorage
                     let selectedCourses = JSON.parse(sessionStorage.getItem('selectedCourses')) || [];
-                    console.log("hola si entra: ", selectedCourses);
 
                     // Get the value of the current checkbox
                     const courseCode = $(this).val();
-                    console.log("hola si entra2: ", courseCode);
 
                     // If the checkbox is checked and its value is not already in the selectedCourses array, add it and update sessionStorage
                     if ($(this).prop('checked') && !selectedCourses.includes(courseCode)) {
@@ -420,12 +421,13 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                 });
 
 
-                $('#confirmarConsejeria').click(function() {
-                    $(this).prop("disabled", true);
-                    $('input[type="checkbox"]').prop('disabled', true);
-                    $('a[onClick]').remove();
+                // $('#confirmarConsejeria').click(function() {
+                //     // $(this).prop("disabled", true);
+                //     // $('input[type="checkbox"]').prop('disabled', true);
+                //     // $('a[onClick]').remove();
+                //     console.log('los cursos: ', selectedCoursesList);
 
-                });
+                // });
 
 
 

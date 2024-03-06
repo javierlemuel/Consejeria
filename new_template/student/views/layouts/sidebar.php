@@ -65,7 +65,8 @@
                         <span>Ciencias Sociales</span>
                     </h2>
                     <ul id="cienciasSociales"></ul>
-                    <button type="submit" id="confirmarConsejeria" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button>
+
+                    <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button>
 
                 </form>
 

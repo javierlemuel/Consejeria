@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] !== true) {
-    header("Location: ./index.php");
+    header("Location: ../index.php");
     exit;
 }
 // controllers/expedientesController.php
@@ -41,6 +41,29 @@ class CounselingController
             $_SESSION['email'] = $studentInfo['email'];
             $_SESSION['student_note'] = $studentInfo['student_note'];
         }
+
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //     // You should check if the selectedCoursesList is not empty before proceeding.
+        //     if (!isset($_POST['selectedCoursesList']) || empty($_POST['selectedCoursesList'])) {
+        //         $selectedCourses = "no hay nada";
+        //         header("Location: ../index.php");
+        //         exit;
+        //     } else if (isset($_POST['selectedCoursesList'])) {
+
+        //         // Store selected courses in a session for later use
+        //         //$_SESSION['selectedCourses'] = $_POST['selectedCoursesList'];
+
+        //         $selectedCourses = $_POST['selectedCoursesList'];
+
+        //         // Save selected courses to the database using the Model
+        //         $counselingModel->setCourses($conn, $student_num, $selectedCourses);
+
+        //         header("Location: ../index.php");
+        //         exit;
+        //     }
+        // } else {
+        //     $selectedCourses = 'no llega el post';
+        // }
 
         if (isset($_POST['selectedCoursesList'])) {
             // You should check if the selectedCoursesList is not empty before proceeding.

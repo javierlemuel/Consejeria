@@ -1,6 +1,6 @@
 <?php
 
-// config/database.php
+//config/database.php
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -12,6 +12,10 @@ $database = 'counseling_db';
 // $password = "ema84023"; //contrasena de phpMyAdmin
 // $database = "emamarsa_db"; 
 
+// $host = "136.145.29.193"; // XAMPP crea el localhost
+// $username = "natramri"; // Usuario de phpMyAdmin
+// $password = "nat84023"; //contrasena de phpMyAdmin
+// $database = "natramri_db";
 
 $conn = new mysqli($host, $username, $password, $database);
 
