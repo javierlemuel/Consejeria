@@ -71,6 +71,9 @@
                     <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button>
 
                 </form>
+                <?php
+                var_dump($selectedCourses);
+                ?>
 
             </ul>
         </div>
