@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] !== true) {
+if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticated'] != true) {
     header("Location: ./index.php");
     exit;
 }
@@ -87,6 +87,10 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                                                     </ol>
                                                     <?php
                                                     //var_dump($selectedCourses);
+                                                    var_dump($_SESSION);
+                                                    echo 'student auth';
+                                                    var_dump($_SESSION['student_authenticated']);
+
                                                     ?>
                                                 </div>
                                             </div>
