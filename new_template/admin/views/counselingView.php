@@ -125,7 +125,29 @@
                         ?>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 1em;">Numero de estudiante: <?php echo $formattedStudentNum; ?></h2>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 2em;">Correo electronico: <?php echo $studentData['email']; ?></h2>
-                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Mandatoria de CCOM</h2>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Recomendadas</h2>
+                        <div class="flex justify-center items-center h-screen">
+                            <div class="w-1/3">
+                                <form id="termForm" action="index.php" method="POST"> <!-- Este form utiliza JAVASCRIPT para enviar los valores -->
+                                    <input type="hidden" name="action" value="studentCounseling">
+                                    <?php if ($studentRecommendedTerms === null || empty($studentRecommendedTerms)): ?>
+                                        <h2 class="text-center">El estudiante aún no tiene ninguna recomendación en ningún semestre.</h2>
+                                    <?php else: ?>
+                                        <div>
+                                            <label for="estatus" class="block text-center text-lg">Term</label>
+                                            <select id="termSelect" class="form-select text-white-dark w-full" name="estatus" x-data="dropdown" @click.outside="open = false">
+                                                <?php foreach ($studentRecommendedTerms as $term): ?>
+                                                    <option value="<?php echo $term?>"><?php echo $term?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">
+                                            <input type="hidden" id="selectedTerm" name="selectedTerm">
+                                        </div>
+                                    <?php endif; ?>
+                                </form>
+                            </div>
+                        </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Mandatorias de CCOM</h2>
                         <form method="POST" action="index.php">
                             <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">
                             <!-- basic table -->
@@ -451,9 +473,15 @@
     <!-- <script src="assets/js/courses.js"></script> -->
 
     <script>
-        $(document).ready(function() {
-            $("#sidebar").load("sidebar.php");
-        });
+        
+        $(document).ready(function(){
+                $("#sidebar").load("sidebar.php");
+            });
+        document.getElementById('termSelect').addEventListener('change', function() {
+                var selectedTerm = this.value;
+                document.getElementById('selectedTerm').value = selectedTerm;
+                document.getElementById('termForm').submit();
+            });
 
         document.addEventListener('alpine:init', () => {
             // main section

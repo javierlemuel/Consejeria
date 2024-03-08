@@ -148,6 +148,31 @@ class StudentModel {
         return $studentData;
     }
 
+    public function studentRecommendedTerms($student_num, $conn) {
+        // Preparar la consulta SQL
+        $sql = "SELECT DISTINCT term FROM recommended_courses WHERE student_num = ?;";
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular el parámetro con el valor
+        $stmt->bind_param("s", $student_num);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        $stmt->close();
+        // Verificar si se encontraron resultados
+        $terms = array(); // Inicializar un array para almacenar los términos
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $terms[] = $row['term']; // Agregar el término al array
+            }
+        } else {
+            return NULL;
+        }
+    
+        return $terms;
+    }
+
     public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn) {
         // Preparar la consulta SQL
         $sql = "UPDATE student 

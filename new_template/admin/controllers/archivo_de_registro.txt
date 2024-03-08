@@ -1,6 +1,0 @@
-
-2024-03-05 19:21:54
-El estudiante: 440209162 ya existia en la base de datos. 
-El estudiante: 840182717 no tiene fecha de nacimiento 
-El estudiante: 840122568 ya existia en la base de datos. 
-Archivos procesados correctamente 

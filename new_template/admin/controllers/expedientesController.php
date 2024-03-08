@@ -82,17 +82,25 @@ class ExpedientesController {
             {
                 require_once(__DIR__ . '/../models/ClassesModel.php');
                 $classesModel = new ClassesModel();
+                $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
+                // info del estudiatne
                 $student_num = $_POST['student_num'];
                 $studentData = $studentModel->selectStudent($student_num, $conn);
                 $studentCohort = $studentData['cohort_year'];
-
+                $studentRecommendedTerms = $studentModel->studentRecommendedTerms($student_num, $conn);
+                if(isset($_POST['selectedTerm']) && !empty($_POST['selectedTerm'])) {
+                    // Obtener el valor del campo oculto
+                    $selectedTerm = $_POST['selectedTerm'];
+                }
+                // variables para las notas
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
                 $ccomFreeByNotCohort = $classesModel->getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num);
                 $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
                 $notccomByNotCohort = $classesModel->getCohortCoursesWgradesNotCCOMfree($conn, $studentCohort, $student_num);
                 $otherClasses = $classesModel->getAllOtherCoursesWgrades($conn, $student_num);
 
+                // variables para las recomendaciones
                 $mandatoryClasses = $classesModel->getCcomCourses($conn);
                 $dummyClasses = $classesModel->getDummyCourses($conn);
                 $generalClasses = $classesModel->getGeneralCourses($conn);
@@ -256,7 +264,10 @@ class ExpedientesController {
                 $studentCohort = $studentData['cohort_year'];
 
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
+                $ccomFreeByNotCohort = $classesModel->getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num);
                 $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
+                $notccomByNotCohort = $classesModel->getCohortCoursesWgradesNotCCOMfree($conn, $studentCohort, $student_num);
+                $otherClasses = $classesModel->getAllOtherCoursesWgrades($conn, $student_num);
 
                 $mandatoryClasses = $classesModel->getCcomCourses($conn);
                 $dummyClasses = $classesModel->getDummyCourses($conn);
@@ -304,7 +315,10 @@ class ExpedientesController {
                 $studentCohort = $studentData['cohort_year'];
 
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
+                $ccomFreeByNotCohort = $classesModel->getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num);
                 $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);
+                $notccomByNotCohort = $classesModel->getCohortCoursesWgradesNotCCOMfree($conn, $studentCohort, $student_num);
+                $otherClasses = $classesModel->getAllOtherCoursesWgrades($conn, $student_num);
 
                 $mandatoryClasses = $classesModel->getCcomCourses($conn);
                 $dummyClasses = $classesModel->getDummyCourses($conn);
