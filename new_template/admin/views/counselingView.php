@@ -125,7 +125,6 @@
                         ?>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 1em;">Numero de estudiante: <?php echo $formattedStudentNum; ?></h2>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 1.5em; margin-top: 1em; margin-bottom: 2em;">Correo electronico: <?php echo $studentData['email']; ?></h2>
-                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Recomendadas</h2>
                         <div class="flex justify-center items-center h-screen">
                             <div class="w-1/3">
                                 <form id="termForm" action="index.php" method="POST"> <!-- Este form utiliza JAVASCRIPT para enviar los valores -->
@@ -134,7 +133,7 @@
                                         <h2 class="text-center">El estudiante aún no tiene ninguna recomendación en ningún semestre.</h2>
                                     <?php else: ?>
                                         <div>
-                                            <label for="estatus" class="block text-center text-lg">Term</label>
+                                            <label for="estatus" class="block text-center text-lg">Escoge el term para ver las recomendaciones</label>
                                             <select id="termSelect" class="form-select text-white-dark w-full" name="estatus" x-data="dropdown" @click.outside="open = false">
                                                 <?php foreach ($studentRecommendedTerms as $term): ?>
                                                     <option value="<?php echo $term?>"><?php echo $term?></option>
@@ -147,6 +146,39 @@
                                 </form>
                             </div>
                         </div>
+                        <!-- tabla de los cursos recomendados -->
+                        <?php
+                        // Verificar si la variable $studentRecommendedClasses no es NULL y no está vacía
+                        if ($studentRecommendedClasses !== NULL && !empty($studentRecommendedClasses)) {
+                        ?>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Cursos Recomendados en el Semestre: <?php echo $selectedTerm?></h2>
+                            <!-- tabla de los cursos recomendados -->
+                            <div class="table-responsive">
+                                <table style="font-size: 12px; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 5px;">Codigo Del Curso</th>
+                                            <th style="padding: 5px;">Nombre</th>
+                                            <th style="padding: 5px;">Creditos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                        foreach ($studentRecommendedClasses as $recomendedCourse) {
+                                            echo "<tr>";
+                                            echo "<td style='padding: 5px;'>" . $recomendedCourse['crse_code'] . "</td>";
+                                            echo "<td style='padding: 5px;'>" . $recomendedCourse['name'] . "</td>";
+                                            echo "<td style='padding: 5px;'>" . $recomendedCourse['credits'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Mandatorias de CCOM</h2>
                         <form method="POST" action="index.php">
                             <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">

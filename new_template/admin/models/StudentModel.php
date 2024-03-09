@@ -173,6 +173,49 @@ class StudentModel {
         return $terms;
     }
 
+    public function studentRecommendedClasses($student_num, $selectedTerm, $conn) {
+        // Preparar la consulta SQL para obtener los cursos recomendados
+        $sql = "
+        SELECT
+            COALESCE(courses.name, '') AS name,
+            COALESCE(courses.credits, '') AS credits,
+            recommended_courses.crse_code
+        FROM
+            recommended_courses
+        LEFT JOIN
+            (SELECT crse_code, name, credits FROM ccom_courses
+             UNION
+             SELECT crse_code, name, credits FROM general_courses) AS courses
+        ON
+            recommended_courses.crse_code = courses.crse_code
+        WHERE
+            recommended_courses.student_num = ?
+            AND recommended_courses.term = ?";
+            
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular los parámetros con los valores
+        $stmt->bind_param("ss", $student_num, $selectedTerm);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        // Cerrar la sentencia
+        $stmt->close();
+        
+        // Verificar si hay resultados
+        if ($result->num_rows === 0) {
+            return NULL; // Devolver NULL si no hay filas
+        } else {
+            // Obtener los resultados como un array asociativo
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data; // Devolver los resultados
+        }
+    }
+
     public function editStudent($nombre, $nombre2, $apellidoP, $apellidoM, $email, $numeroEst, $fechaNac, $cohorte, $minor, $graduacion, $notaAdmin, $notaEstudiante, $status, $date, $conn) {
         // Preparar la consulta SQL
         $sql = "UPDATE student 

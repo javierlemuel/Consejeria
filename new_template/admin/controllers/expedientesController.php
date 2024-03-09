@@ -90,8 +90,11 @@ class ExpedientesController {
                 $studentCohort = $studentData['cohort_year'];
                 $studentRecommendedTerms = $studentModel->studentRecommendedTerms($student_num, $conn);
                 if(isset($_POST['selectedTerm']) && !empty($_POST['selectedTerm'])) {
-                    // Obtener el valor del campo oculto
-                    $selectedTerm = $_POST['selectedTerm'];
+                    $selectedTerm = $_POST['selectedTerm']; // term seleccionado en el select de counseling view
+                    $studentRecommendedClasses = $studentModel->studentRecommendedClasses($student_num, $selectedTerm, $conn); // clases recomendadas en ese term
+                }
+                else{
+                    $studentRecommendedClasses = NULL;
                 }
                 // variables para las notas
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
