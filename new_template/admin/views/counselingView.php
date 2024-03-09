@@ -179,6 +179,62 @@
                         <?php
                         }
                         ?>
+                        <!-- Añadir Calificacion para el estuidante -->
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Añadir Calificación</h2>
+                            <div class="table-responsive">
+                                <table style="font-size: 12px; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 5px;"></th>
+                                            <th style="padding: 5px;">Codigo Del Curso</th>
+                                            <th style="padding: 5px;">Creditos</th>
+                                            <th style="padding: 5px;">Tipo</th>
+                                            <th style="padding: 5px;">Nota</th>
+                                            <th style="padding: 5px;">Estatus</th>
+                                            <th style="padding: 5px;">Semestre</th>
+                                            <th style="padding: 5px;">Equivalencia</th>
+                                            <th style="padding: 5px;">Convalidacion</th>
+                                            <th style="padding: 5px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <form method='POST' action='index.php'>
+                                                <td></td>
+                                                <td style='padding: 5px;'><input type='text' name='crse_code' class='form-input' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='credits' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'>
+                                                    <select name='type' class='form-input'>
+                                                        <option value=''></option>
+                                                        <option value='mandatory'>Mandatory</option>
+                                                        <option value='elective'>Elective</option>
+                                                        <option value='free'>FREE</option>
+                                                        <option value='espa'>ESPA</option>
+                                                        <option value='ingl'>INGL</option>
+                                                        <option value='mate'>MATE</option>
+                                                        <option value='huma'>HUMA</option>
+                                                        <option value='ciso'>CISO</option>
+                                                        <option value='cibi'>CIBI</option>
+                                                        <option value='fisi'>FISI</option>
+                                                    </select>
+                                                </td>
+                                                <td style='padding: 5px;'><input type='text' name='grade' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'>
+                                                    <select name='status' class='form-input'>
+                                                        <option value=''></option>
+                                                        <option value='m'>Actualmente Tomando</option>
+                                                        <option value='p'>Paso</option>
+                                                        <option value='np'>No Paso</option>
+                                                    </select>
+                                                </td>
+                                                <td style='padding: 5px;'><input type='text' name='term' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='equivalencia' class='form-input' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='convalidacion' class='form-input' value=''/></td>
+                                                <input type='hidden' name='student_num' value='<?php $studentData['student_num']?>'>
+                                                <td style='padding: 5px;'><button type='submit' name='action' value='addGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Añadir</button></td>
+                                            </form>
+                                    </tbody>
+                                </table>
+                            </div>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Mandatorias de CCOM</h2>
                         <form method="POST" action="index.php">
                             <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">
