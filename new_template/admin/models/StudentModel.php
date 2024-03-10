@@ -392,6 +392,50 @@ class StudentModel {
         }
         
     }
+
+    public function deleteRecomendation($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "DELETE FROM recommended_courses WHERE student_num = ? AND crse_code = ? AND term = ?";
+        
+        // Preparar la declaración
+        $stmt = $conn->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("sss", $student_num, $class, $term);
+        
+        // Ejecutar la consulta
+        $result = $stmt->execute();
+        
+        // Verificar si la eliminación fue exitosa
+        if ($result)
+        {
+            // Obtener la fecha actual
+            $date = date("Y-m-d");
+    
+            // Consulta SQL para actualizar la columna conducted_counseling
+            $sql = "UPDATE student SET conducted_counseling = ? WHERE student_num = ?";
+    
+            // Preparar la declaración
+            $stmt = $conn->prepare($sql);
+    
+            // Vincular los parámetros
+            $stmt->bind_param("ss", $date, $student_num);
+    
+            // Ejecutar la consulta
+            $result = $stmt->execute();
+    
+            // Cerrar la declaración
+            $stmt->close();
+    
+            return TRUE;
+        } 
+        else
+        {
+            // Cerrar la declaración
+            $stmt->close();
+            return FALSE;
+        }
+    }  
     
     public function studentAlreadyHasGrade($student_num, $code, $conn) {
         // Preparar la consulta SQL

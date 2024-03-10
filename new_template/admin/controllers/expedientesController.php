@@ -96,6 +96,12 @@ class ExpedientesController {
                 else{
                     $studentRecommendedClasses = NULL;
                 }
+                if(isset($_POST['deleteRecomendation']) && !empty($_POST['deleteRecomendation'])) {
+                    $selectedTerm = $_POST['selectedTerm']; // term seleccionado en el select de counseling view
+                    $crse_code = $_POST['crse_code'];
+                    $deleteResult = $studentModel->deleteRecomendation($student_num, $crse_code, $selectedTerm, $conn); // clases recomendadas en ese term
+                    $studentRecommendedClasses = $studentModel->studentRecommendedClasses($student_num, $selectedTerm, $conn);
+                }
                 // variables para las notas
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
                 $ccomFreeByNotCohort = $classesModel->getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num);

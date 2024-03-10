@@ -1,4 +1,3 @@
-Se ejecuto el selectTerm!! 
 
-2024-03-09 02:51:33
-La clase FISI3011 se anadio a recommended courses. 
+2024-03-10 01:53:50
+La clase CCOM3010 se anadio a recommended courses. 

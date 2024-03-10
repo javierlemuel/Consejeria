@@ -160,6 +160,7 @@
                                             <th style="padding: 5px;">Codigo Del Curso</th>
                                             <th style="padding: 5px;">Nombre</th>
                                             <th style="padding: 5px;">Creditos</th>
+                                            <th style="padding: 5px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -167,9 +168,16 @@
                                         // Itera sobre los datos de los cursos y llena las celdas de la tabla
                                         foreach ($studentRecommendedClasses as $recomendedCourse) {
                                             echo "<tr>";
+                                            echo"<form method='POST' action='index.php'>";
+                                            echo"<input type='hidden' name='deleteRecomendation' value='deleteRecomendation'>";
                                             echo "<td style='padding: 5px;'>" . $recomendedCourse['crse_code'] . "</td>";
+                                            echo "<input type='hidden' name='crse_code' value='" . $recomendedCourse['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $recomendedCourse['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $recomendedCourse['credits'] . "</td>";
+                                            echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
+                                            echo "<input type='hidden' name='selectedTerm' value=" . $selectedTerm . ">";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2' style='background-color: #fc0345;'>Eliminar</button></td>";
+                                            echo "</form>";
                                             echo "</tr>";
                                         }
                                         ?>
