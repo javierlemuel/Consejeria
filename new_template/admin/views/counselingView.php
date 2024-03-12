@@ -274,7 +274,8 @@
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
                                             echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
                                             echo "</form>";
@@ -313,7 +314,8 @@
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
                                             echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
                                             echo "</form>";
@@ -352,7 +354,8 @@
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
                                             echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
                                             echo "</form>";
@@ -391,7 +394,8 @@
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
                                             echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
                                             echo "</form>";
@@ -428,7 +432,8 @@
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
-                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='updateGrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
                                             echo "</tr>";
                                             echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
                                             echo "</form>";
@@ -543,7 +548,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="action" value="makecounseling" class="btn btn-primary ltr:ml-2 rtl:mr-2">Someter Consejeria</button>
+                            <input type='hidden' name='makecounseling' value='makecounseling'>
+                            <button type="submit" name="action" value="studentCounseling" class="btn btn-primary ltr:ml-2 rtl:mr-2">Someter Consejeria</button>
                         </form>
                         <button class="btn btn-danger !mt-6" onclick="window.location.href = 'index.php'">Cancelar</button>
                     </div>
