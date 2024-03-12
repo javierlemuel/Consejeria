@@ -126,24 +126,31 @@
                         <tr>
                             <th style='text-align:center; bold'>Tipo de Reporte</th>
                             <th style='text-align:center; width: 40%; bold'>Cantidad</th>
+                            <th style='text-align:center'></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style='background-color: lightgray'>
                             <td style='text-align:center'>Estudiantes Aconsejados</td>
                             <td style='text-align:center'><?php echo $studentsAconsejados ?></td>
+                            <td style='text-align:center; vertical-align:middle'><a href='?reports&code=consCCOM'>
+                            <span class='badge whitespace-nowrap badge-outline-primary'>Abrir CSV</span> </td>
                         </tr>
                         <tr>
                             <td style='text-align:center'>Estudiantes Aconsejados sin Cursos de CCOM</td>
                             <td style='text-align:center'><?php echo $studentsSinCCOM  ?></td>
+                            <td style='text-align:center; vertical-align:middle'><a href='?reports&code=consSinCCOM'>
+                            <span class='badge whitespace-nowrap badge-outline-primary'>Abrir CSV</span> </td>
                         </tr>
                         <tr style='background-color: lightgray'>
                             <td style='text-align:center'>Estudiantes que realizaron su Consejería</td>
                             <td style='text-align:center'><?php echo $studentsRegistrados  ?></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style='text-align:center'>Expedientes revisados</td>
                             <td style='text-align:center'><?php echo $studentsEditados  ?></td>
+                            <td></td>
                         </tr>
                     </tbody></table>
 
@@ -307,5 +314,30 @@
         });
     </script>
 </body>
+
+<?php
+    // Check if the session variables are set
+    if (isset($_SESSION['csv_content'], $_SESSION['filename'])) {
+        // Output the CSV content in a JavaScript block
+        echo '<script>';
+        echo 'var csvContent = ' . json_encode($_SESSION['csv_content']) . ';';
+        echo 'var csvFileName = "' . $_SESSION['filename'] . '";';
+        echo 'console.log(csvContent);';  // For debugging purposes
+        echo 'console.log(csvFileName);';  // For debugging purposes
+        echo 'var blob = new Blob([csvContent], { type: "application/csv" });';
+        echo 'var a = document.createElement("a");';
+        echo 'a.href = URL.createObjectURL(blob);';
+        echo 'a.download = csvFileName;';
+        echo '  document.body.appendChild(a);';
+        echo '  a.click();';
+        echo '  document.body.removeChild(a);';
+        echo '  sessionStorage.removeItem("csv_content");';
+        echo '  sessionStorage.removeItem("filename");';
+        echo '</script>';
+
+        // Clear the session variables
+        unset($_SESSION['csv_content'], $_SESSION['filename']);
+    }
+    ?>
 
 </html>

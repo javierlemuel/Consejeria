@@ -1,3 +1,6 @@
 
 2024-03-10 01:53:50
 La clase CCOM3010 se anadio a recommended courses. 
+
+2024-03-12 18:29:11
+La clase CCOM3001 se anadio a recommended courses. 

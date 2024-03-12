@@ -185,9 +185,11 @@ class ClassesModel {
 
     public function getOfferCourses($conn)
     {
+        $termA = $this->getTerm($conn);
         $sql = "SELECT *
                 FROM offer
                 WHERE crse_code != 'XXXX'
+                AND term = '$termA'
                 ORDER BY crse_code ASC";
 
         $result = $conn->query($sql);
@@ -288,12 +290,12 @@ class ClassesModel {
         //Estamos seteando un nuevo semestre de consejeria
 
         //Borramos los cursos en oferta del semestre pasado
-        $sql = "DELETE FROM offer
-                WHERE term != ''";
-        $result = $conn->query($sql);
-        if ($result === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }
+        // $sql = "DELETE FROM offer
+        //         WHERE term != ''";
+        // $result = $conn->query($sql);
+        // if ($result === false) {
+        //     throw new Exception("Error en la consulta SQL: " . $conn->error);
+        // }
 
         //Borramos los edit flags de los estudiantes
         $sql2 = "UPDATE student
@@ -305,22 +307,30 @@ class ClassesModel {
         }
 
         //Borramos los cursos que los estudiantes escogieron en sus consejerias
-        $sql4 = "DELETE FROM will_take
-                WHERE crse_code != ''";
-        $result4 = $conn->query($sql4);
-        if ($result4 === false) {
-            throw new Exception("Error en la consulta SQL: " . $conn->error);
-        }     
+        // $sql4 = "DELETE FROM will_take
+        //         WHERE crse_code != ''";
+        // $result4 = $conn->query($sql4);
+        // if ($result4 === false) {
+        //     throw new Exception("Error en la consulta SQL: " . $conn->error);
+        // }     
 
-        //Insertamos el nuevo term/semestre con un curso 'dummy', como row de titulo del term
-        $sql5 = "INSERT INTO offer
-                VALUES('XXXX', '$term')";
+        //Insertamos el nuevo term/semestre con el curso 'dummy' XXXX, como row de titulo del term
+        $sql5 = "UPDATE offer
+                SET term = '$term'
+                WHERE crse_code = 'XXXX'";
         $result5 = $conn->query($sql5);
         if ($result5 === false) {   
             throw new Exception("Error2 en la consulta SQL:". $conn->error);
         }
 
-        return $result5;
+        $sqli = "INSERT INTO OFFER
+                VALUES('CCOM3001', '$term'), ('CCOM3002', '$term')";
+
+        $resulti = $conn->query($sqli);
+        if($resulti === false)
+            throw new Exception("Error Insert Term en la consulta SQL: " . $conn->error);
+
+        return $resulti;
     }
 
     public function getTerm($conn)
@@ -344,9 +354,11 @@ class ClassesModel {
 
     public function getMatriculadosModel($conn, $course)
     {
+        $term = $this->getTerm($conn);
         $sql = "SELECT count(student_num) AS count
                 FROM will_take
-                WHERE crse_code = '$course'";
+                WHERE crse_code = '$course'
+                AND term = '$term'";
         $result = $conn->query($sql);
         if ($result === false) {
             throw new Exception("Error en la consulta SQL HELLO: " . $conn->error);
@@ -368,10 +380,12 @@ class ClassesModel {
 
     public function getStudentsMatriculadosModel($conn, $course)
     {
+        $term = $this->getTerm($conn);
         $sql = "SELECT *
                 FROM will_take NATURAL JOIN student
                 WHERE will_take.student_num = student.student_num AND
-                crse_code = '$course'";
+                crse_code = '$course'
+                AND term = '$term'";
         $result = $conn->query($sql);
         if ($result === false) {
             throw new Exception("Error en la consulta SQL HELLO: " . $conn->error);
