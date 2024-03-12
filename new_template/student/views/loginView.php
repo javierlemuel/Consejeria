@@ -48,6 +48,8 @@
 
                                         <?php if ($_SESSION['message'] == 'no student')
                                             echo "<h2 style='color:red; bold' class='text-xl'>Credenciales incorrectos!</h2>";
+                                            else if ($_SESSION['message'] == 'student inactive')
+                                            echo "<h2 style='color:red; bold' class='text-xl'>Estudiante no está permitido entrar</h2>"
                                         ?>
                                         <br>
                                     </div>

@@ -16,6 +16,7 @@ class ClassesController{
         $classesModel = new ClassesModel();
         $reporteModel = new ReporteModel();
 
+        $terms = $classesModel->getTerms($conn);
 
         if(isset($_GET['lista']))
         {
@@ -34,9 +35,18 @@ class ClassesController{
         }
 
         elseif(isset($_GET['offer'])){
-            $courses = $classesModel->getOfferCourses($conn);
-            $term = $classesModel->getTerm($conn);
-            $category = 'oferta';
+            if(isset($_GET['otherterm']))
+            {
+                $term = $_GET['otherterm'];
+                $courses = $classesModel->getOfferCourses($conn, $term);
+                $category = 'oferta';
+            }
+            else{
+                $term = $classesModel->getTerm($conn);
+                $courses = $classesModel->getOfferCourses($conn, $term);
+                $category = 'oferta';
+            }
+            
         }
 
         elseif(isset($_GET['addOffer']) && isset($_GET['code']))

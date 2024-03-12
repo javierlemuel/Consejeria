@@ -160,6 +160,6 @@ class ReporteModel {
             $term = $res['term'];
 
         return $term;
-        
    }
+
 }

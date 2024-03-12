@@ -14,8 +14,16 @@ class LoginModel {
         $result = $conn->query($sql);
 
         if ($result && $result->num_rows > 0) {
-            // Las credenciales son correctas, el usuario está autenticado
-            return true;
+            while ($row = $result->fetch_assoc()) {
+                // Verifica el status del estudiante
+                $status = $row['status'];
+            }
+            if ($status == 'Activo')
+                // Las credenciales son correctas, el usuario está autenticado
+                return true;
+            else
+                $_SESSION['message'] = 'student inactive';
+                return false;
         } else {
             // Las credenciales son incorrectas, la autenticación falló
             $_SESSION['message'] = "no student";

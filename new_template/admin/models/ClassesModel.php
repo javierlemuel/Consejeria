@@ -183,9 +183,8 @@ class ClassesModel {
         return $result;
     }
 
-    public function getOfferCourses($conn)
+    public function getOfferCourses($conn, $termA)
     {
-        $termA = $this->getTerm($conn);
         $sql = "SELECT *
                 FROM offer
                 WHERE crse_code != 'XXXX'
@@ -351,6 +350,19 @@ class ClassesModel {
         return $term;
 
     }
+
+    public function getTerms($conn)
+   {
+        $sql = "SELECT DISTINCT term
+                FROM offer";
+
+        $result = $conn->query($sql);
+
+        if($result === false)
+            throw new Exception("Error en la consulta SQL: ". $conn->error);
+
+        return $result;
+   }
 
     public function getMatriculadosModel($conn, $course)
     {

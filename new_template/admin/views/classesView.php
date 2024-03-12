@@ -136,6 +136,18 @@
                     
                     <div class="flex flex-wrap items-center justify-between gap-4">
                     <h2 class="text-xl">Cursos para el proximo semestre (<?php echo $term ?>)</h2>
+                    <div x-data="dropdown" @click.outside="open = false" class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" @click="toggle">Filtrar por Term
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
+                                <text x="50" y="65" font-size="48" fill="White">▼</text>
+                            </svg>
+                        </button>
+                        <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
+                            <?php foreach($terms as $term) { ?>
+                                <li><a href="?offer&otherterm=<?php echo $term['term']?>" @click="toggle"><?php echo $term['term'] ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
                     <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                     <div class="flex gap-3">
                     <div x-data="modal">
@@ -155,7 +167,6 @@
                             <div class="p-5">
                                 <form action="?newterm" method="POST">
                                 <div class="py-5 text-center text-white dark:text-white-light">
-                                    <p style='color:black'><b>WARNING:</b> Esto borrará la data de consejería del semestre pasado con excepción de los cursos aconsejados!!</p><br>
                                     <label for='term' style='color:black'>Código (term) para próximo semestre: </label>
                                     <input style='color:black' size="3" maxlength="3" name='term' type='text' placeholder='' 
                                     class='form-input' required>
