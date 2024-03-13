@@ -426,6 +426,16 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
 
                 // });
 
+                $('#counseling_form').submit(function(event) {
+                    //stop the form to be submited
+                    event.preventDefault();
+
+                    if (confirm('¿Estas seguro de que quieres confirmar la consejeria?')) {
+                        //if the student confirm counseling the form will be submitted
+                        this.submit();
+                    }
+                });
+
                 //if the Confirmar COnsejeria buttton is disabled, disable the checkbox input and the remove course option
                 if ($('#counseling_button').prop('disabled')) {
                     //$(this).prop("disabled", true);

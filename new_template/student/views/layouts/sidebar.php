@@ -35,7 +35,7 @@
                     </h3>
 
                 </div>
-                <form method="post" action="controllers/counselingController.php" class="mh-100">
+                <form method="post" id="counseling_form" action="controllers/counselingController.php" class="mh-100">
 
                     <h2 class="-mx-4 mb-1 flex items-center bg-white-light/30 py-3 px-7 font-extrabold  dark:bg-dark dark:bg-opacity-[0.08]">
                         <svg class="hidden h-5 w-4 flex-none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -66,7 +66,6 @@
                     </h2>
                     <ul id="cienciasSociales"></ul>
 
-                    <!-- <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button> -->
                     <?php
                     //if the student conducted the counseling the button will be disable
                     echo $counseling_button;
