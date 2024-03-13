@@ -436,11 +436,11 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                     }
                 });
 
-                //if the Confirmar COnsejeria buttton is disabled, disable the checkbox input and the remove course option
+                //if the Confirmar Consejeria buttton is disabled, disable the checkbox input and the remove course option
                 if ($('#counseling_button').prop('disabled')) {
                     //$(this).prop("disabled", true);
                     $('input[type="checkbox"]').prop('disabled', true);
-                    $('a[onClick]').remove();
+                    $('#counseling_form a[onClick]').remove();
                 }
 
 

@@ -64,9 +64,9 @@ if (!isset($_SESSION['student_authenticated']) || $_SESSION['student_authenticat
 
             $conducted_counseling = $counselingModel->getCounselingStatus($conn, $student_num);
             if ($conducted_counseling === 1) {
-                $counseling_button = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end" disabled>Confirmar Consejeria</button>';
+                $_SESSION['counseling_button'] = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end" disabled>Confirmar Consejeria</button>';
             } else {
-                $counseling_button = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end">Confirmar Consejeria</button>';
+                $_SESSION['counseling_button']  = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end">Confirmar Consejeria</button>';
             }
 
 

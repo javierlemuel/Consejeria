@@ -68,7 +68,7 @@
 
                     <?php
                     //if the student conducted the counseling the button will be disable
-                    echo $counseling_button;
+                    echo $_SESSION['counseling_button'];
 
                     ?>
 
