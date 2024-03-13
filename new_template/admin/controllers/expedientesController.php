@@ -156,10 +156,18 @@ class ExpedientesController {
                     $equi = $_POST['equivalencia'];
                     $conva = $_POST['convalidacion'];
                     $term = $_POST['term'];
+                    $credits = $_POST['credits'];
 
                     $course_info = $classModel->selectCourse($conn, $course_code);
-                    $credits = $course_info['credits'];
-                    $type = $course_info['type'];
+                    if($course_info == NULL)
+                    {
+                        $type = "free";
+                    }
+                    else
+                    {
+                        $type = $course_info['type'];
+                    }
+                    
 
                     $result = $studentModel->studentAlreadyHasGrade($student_num, $course_code, $conn);
 
