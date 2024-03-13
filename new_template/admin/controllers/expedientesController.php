@@ -155,8 +155,8 @@ class ExpedientesController {
                     $grade = $_POST['grade'];
                     $equi = $_POST['equivalencia'];
                     $conva = $_POST['convalidacion'];
+                    $term = $_POST['term'];
 
-                    $term = $classesModel->getTerm($conn);
                     $course_info = $classModel->selectCourse($conn, $course_code);
                     $credits = $course_info['credits'];
                     $type = $course_info['type'];
