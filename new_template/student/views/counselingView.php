@@ -85,13 +85,6 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                                                         <li>Escoja los cursos que aspira tomar el próximo semestre.</li>
                                                         <li>Revise su lista de cursos seleccionados y confirme su consejería.</li>
                                                     </ol>
-                                                    <?php
-                                                    //var_dump($selectedCourses);
-                                                    var_dump($_SESSION);
-                                                    echo 'student auth';
-                                                    var_dump($_SESSION['student_authenticated']);
-
-                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -425,13 +418,20 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                 });
 
 
-                // $('#confirmarConsejeria').click(function() {
-                //     // $(this).prop("disabled", true);
-                //     // $('input[type="checkbox"]').prop('disabled', true);
+                // $('#counseling_button').click(function() {
+                //     $(this).prop("disabled", true);
+                //     $('input[type="checkbox"]').prop('disabled', true);
                 //     // $('a[onClick]').remove();
                 //     console.log('los cursos: ', selectedCoursesList);
 
                 // });
+
+                //if the Confirmar COnsejeria buttton is disabled, disable the checkbox input and the remove course option
+                if ($('#counseling_button').prop('disabled')) {
+                    //$(this).prop("disabled", true);
+                    $('input[type="checkbox"]').prop('disabled', true);
+                    $('a[onClick]').remove();
+                }
 
 
 

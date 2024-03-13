@@ -181,6 +181,7 @@ class CounselingModel
 
     public function setCourses($conn, $student_num, $courses)
     {
+        //add selected courses to will_take table
         $sql = "SELECT term
                 FROM offer LIMIT 1";
         $result = $conn->query($sql);
@@ -204,6 +205,33 @@ class CounselingModel
             }
         }
 
+        //update conducted_counseling status to true (1)
+        $sql = "UPDATE student
+                SET conducted_counseling = 1
+                WHERE student_num = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $student_num);
+        if (!$stmt->execute()) {
+            throw new Exception("Error: " . $stmt->error);
+        }
+
         return true;
+    }
+
+    public function getCounselingStatus($conn, $student_num)
+    {
+        //get the student counseling status 0 == not conducted, 1 == conducted
+        $sql = "SELECT conducted_counseling
+                FROM student
+                WHERE student_num = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $student_num);
+        if (!$stmt->execute()) {
+            throw new Exception("Error: " . $stmt->error);
+        } else {
+            $result = $stmt->get_result();
+            $status = $result->fetch_assoc();
+            return $status['conducted_counseling'];
+        }
     }
 }

@@ -66,7 +66,12 @@
                     </h2>
                     <ul id="cienciasSociales"></ul>
 
-                    <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button>
+                    <!-- <button type="submit" value="Submit" class="btn btn-warning self-end">Confirmar Consejeria</button> -->
+                    <?php
+                    //if the student conducted the counseling the button will be disable
+                    echo $counseling_button;
+
+                    ?>
 
                 </form>
 
