@@ -16,7 +16,7 @@ class StudentModel {
     
         // Modificar la consulta SQL para incluir el filtro de estado y búsqueda
         //JAVIER//
-        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status 
+        $sql = "SELECT student_num, name1, name2, last_name1, last_name2, conducted_counseling, status, edited_date
                 FROM student 
                 WHERE $statusCondition
                 AND (name1 LIKE ? OR student_num LIKE ?)

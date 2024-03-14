@@ -315,6 +315,7 @@
                                         <th>Recomendacion</th>
                                         <th>Consejeria</th>
                                         <th>Estatus</th>
+                                        <th>Ultima Actualizacion</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -339,14 +340,15 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                            <?php if ($student['status'] == 'Inactivo'): ?>
-                                                <span class="badge whitespace-nowrap badge-outline-danger">Inactivo</span>
-                                            <?php elseif ($student['status'] == 'Graduado'): ?>
-                                                <span class="badge whitespace-nowrap badge-outline-primary">Graduado</span>
-                                            <?php else: ?>
-                                                <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
-                                            <?php endif; ?>
+                                                <?php if ($student['status'] == 'Inactivo'): ?>
+                                                    <span class="badge whitespace-nowrap badge-outline-danger">Inactivo</span>
+                                                <?php elseif ($student['status'] == 'Graduado'): ?>
+                                                    <span class="badge whitespace-nowrap badge-outline-primary">Graduado</span>
+                                                <?php else: ?>
+                                                    <span class="badge whitespace-nowrap badge-outline-success">Activo</span>
+                                                <?php endif; ?>
                                             </td>
+                                            <td><?= $student['edited_date'] ?></td>
                                             <td>
                                                 <form method="POST" action="index.php">
                                                     <input type="hidden" name="action" value="selecteStudent">
