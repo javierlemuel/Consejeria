@@ -457,11 +457,11 @@ class StudentModel {
         }
     }
 
-    public function UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn) {
+    public function UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $old_term, $conn) {
         // Preparar la consulta SQL para la actualización
         $sql = "UPDATE student_courses 
                 SET credits = ?, type = ?, crse_grade = ?, crse_status = 'P', term = ?, equivalencia = ?, convalidacion = ?
-                WHERE student_num = ? AND crse_code = ?";
+                WHERE student_num = ? AND crse_code = ? AND term = ?";
         
         // Preparar la sentencia
         $stmt = $conn->prepare($sql);
@@ -471,7 +471,7 @@ class StudentModel {
         }
         
         // Vincular los parámetros con los valores
-        $stmt->bind_param("ssssssss", $credits, $type, $grade, $term, $equi, $conva, $student_num, $course_code);
+        $stmt->bind_param("sssssssss", $credits, $type, $grade, $term, $equi, $conva, $student_num, $course_code, $old_term);
         
         // Ejecutar la sentencia
         if ($stmt->execute()) {
@@ -490,8 +490,7 @@ class StudentModel {
             return FALSE;
         }
     }
-    
-    
+
     public function InsertStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn) {
         // Preparar la consulta SQL para la inserción
         $sql = "INSERT INTO student_courses (student_num, crse_code, credits, type, crse_grade, crse_status, term, equivalencia, convalidacion)

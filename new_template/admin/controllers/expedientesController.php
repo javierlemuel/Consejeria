@@ -156,6 +156,7 @@ class ExpedientesController {
                     $equi = $_POST['equivalencia'];
                     $conva = $_POST['convalidacion'];
                     $term = $_POST['term'];
+                    $old_term = $_POST['old_term'];
                     $credits = $_POST['credits'];
 
                     $course_info = $classModel->selectCourse($conn, $course_code);
@@ -168,12 +169,11 @@ class ExpedientesController {
                         $type = $course_info['type'];
                     }
                     
-
                     $result = $studentModel->studentAlreadyHasGrade($student_num, $course_code, $conn);
 
                     if($result == TRUE)
                     {
-                        $studentModel->UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $conn);
+                        $studentModel->UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $old_term, $conn);
                     }
                     else
                     {
@@ -303,6 +303,8 @@ class ExpedientesController {
             }
             elseif ($action === 'updateGradeCSV')
             {
+                require_once(__DIR__ . '/../models/ClassesModel.php');
+                $classesModel = new ClassesModel();
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
                 $currentDateTime = date("Y-m-d H:i:s");
@@ -350,7 +352,8 @@ class ExpedientesController {
                                     $equi = "";
                                     $conva = 0;
                                     $type = "mandatory";
-                                    $result = $studentModel->UpdateStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $conn);
+                                    $term = $classesModel->getTerm($conn);
+                                    $result = $studentModel->UpdateStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $term, $conn);
                                 }
                                 else // el estudiante no tiene una nota en esa clase.
                                 {
