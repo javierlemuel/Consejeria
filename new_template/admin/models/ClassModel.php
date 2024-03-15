@@ -236,29 +236,32 @@ class ClassModel {
         return 'insert success';
 
     }
-    public function selectCourse($conn, $course) {
+    public function selectCourseWNull($conn, $course) {
         
         $table = 'general_courses';
-
+    
         if (strpos($course, 'CCOM') !== false) {
             $table = 'ccom_courses';
         }
-
+    
         $sql = "SELECT *
                 FROM $table 
                 WHERE crse_code = '$course'";
-
+    
         $result = $conn->query($sql);
-
+    
         if ($result === false) {
             throw new Exception("Error en la consulta SQL: " . $conn->error);
         }
-
+    
+        // Verificar si se encontraron filas
+        if ($result->num_rows == 0) {
+            return null; // Devolver null si no se encontraron filas
+        }
+    
         // Obtener los datos como un arreglo asociativo
         $courseData = $result->fetch_assoc();
-
+    
         return $courseData;
     }
-
- 
 }
