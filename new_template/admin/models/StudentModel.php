@@ -522,6 +522,29 @@ class StudentModel {
             $stmt->close();
             return FALSE;
         }
-    }    
+    }
+    
+    public function alreadyHasGradeInTerm($student_num, $class, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM student_courses WHERE student_num = ? AND crse_code = ? AND term = ?";
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular el parámetro con el valor
+        $stmt->bind_param("sss", $student_num, $class, $term);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        // Verificar si se encontraron resultados
+        $stmt->close();
+        if ($result->num_rows > 0)
+            {
+                return TRUE;
+            }
+        else 
+        {
+            return FALSE;
+        }
+    }
 }
 ?>

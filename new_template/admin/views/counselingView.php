@@ -234,7 +234,7 @@
                                                         <option value='NP'>No Paso</option>
                                                     </select>
                                                 </td>
-                                                <td style='padding: 5px;'><input type='text' name='term' class='form-input' style='width: 4em;' value='' required></td>
+                                                <td style='padding: 5px;'><input type='text' name='term' class='form-input' style='width: 4.5em;' value='' required></td>
                                                 <td style='padding: 5px;'><input type='text' name='equivalencia' class='form-input' value=''/></td>
                                                 <td style='padding: 5px;'><input type='text' name='convalidacion' class='form-input' value=''/></td>
                                                 <input type='hidden' name='student_num' value="<?php echo $studentData['student_num']; ?>">

@@ -181,31 +181,39 @@ class ExpedientesController {
                 }
                 if(isset($_POST['insertGrade']) && !empty($_POST['insertGrade'])) {
                     $crse_code = $_POST['crse_code'];
-                    $credits = $_POST['credits'];
-                    $type = $_POST['type'];
-                    $grade = $_POST['grade'];
-                    $status = $_POST['status'];
                     $term = $_POST['term'];
                     if($term == '')
                     {
                         $term = $classesModel->getTerm($conn);
                     }
-                    $equivalencia = $_POST['equivalencia'];
-                    $convalidacion = $_POST['convalidacion'];
+                    $studentAlreadyHasGradeInTerm = $studentModel->alreadyHasGradeInTerm($student_num, $crse_code, $term, $conn); # revisa si ya el estudiante a tiene nota en esta clase y semestre
+                    if($studentAlreadyHasGradeInTerm == TRUE) # el estudiante ya tiene una nota en esa clase y semestre.
+                    {
+                        error_log("El estudiante $student_num ya tiene una calificacion en el curso $crse_code en el term $term. No se actualizo nada.\n", 3, $archivoRegistro);
+                    }
+                    else # el estudiante no tiene una nota en esa clase y semestre.
+                    {
+                        $credits = $_POST['credits'];
+                        $type = $_POST['type'];
+                        $grade = $_POST['grade'];
+                        $status = $_POST['status'];
+                        $equivalencia = $_POST['equivalencia'];
+                        $convalidacion = $_POST['convalidacion'];
 
-                    $course_info = $classModel->selectCourseWNull($conn, $crse_code);
-                    if($course_info == NULL){
-                        if($credits == '' or $type == ''){
-                            error_log("La clase " . $crse_code . "no está en la base de datos, tienes que proveer los creditos y el tipo de clase. \n", 3, $archivoRegistro);
+                        $course_info = $classModel->selectCourseWNull($conn, $crse_code);
+                        if($course_info == NULL){
+                            if($credits == '' or $type == ''){
+                                error_log("La clase " . $crse_code . "no está en la base de datos, tienes que proveer los creditos y el tipo de clase. \n", 3, $archivoRegistro);
+                            }
+                            else{
+                                $studentModel->InsertStudentGrade($student_num, $crse_code, $grade, $equivalencia, $convalidacion, $credits, $term, $type, $conn);
+                            }
                         }
                         else{
+                            $credits = $course_info['credits'];
+                            $type = $course_info['type'];
                             $studentModel->InsertStudentGrade($student_num, $crse_code, $grade, $equivalencia, $convalidacion, $credits, $term, $type, $conn);
                         }
-                    }
-                    else{
-                        $credits = $course_info['credits'];
-                        $type = $course_info['type'];
-                        $studentModel->InsertStudentGrade($student_num, $crse_code, $grade, $equivalencia, $convalidacion, $credits, $term, $type, $conn);
                     }
                 }
 
