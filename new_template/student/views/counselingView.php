@@ -265,6 +265,8 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                         this.messages = this.messages.filter((d) => d.id !== value);
                     },
                 }));
+
+
             });
 
 
@@ -360,8 +362,6 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
 
 
                         });
-
-
                     }
                 }
 
@@ -418,33 +418,40 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                 });
 
 
-                // $('#counseling_button').click(function() {
-                //     $(this).prop("disabled", true);
-                //     $('input[type="checkbox"]').prop('disabled', true);
-                //     // $('a[onClick]').remove();
-                //     console.log('los cursos: ', selectedCoursesList);
+                // $('#counseling_form').submit(function(event) {
+                //     //stop the form to be submited
+                //     event.preventDefault();
+                //     var modal = document.getElementById("confirmModal");
+                //     modal.style.display = "block";
 
+                //     document.getElementById("confirmYes").addEventListener("click", function() {
+                //         // Submit the form or perform other actions
+                //         document.getElementById("counseling_form").submit();
+                //     });
+
+                //     // Function to handle "No" button click
+                //     document.getElementById("confirmNo").addEventListener("click", function() {
+                //         // Close the modal
+                //         modal.style.display = "none";
+                //     });
                 // });
 
-                $('#counseling_form').submit(function(event) {
-                    //stop the form to be submited
-                    event.preventDefault();
+                // async function showAlert() {
+                //     new window.Swal({
+                //         icon: 'success',
+                //         title: 'Consejeria Confirmada!',
+                //         text: '',
+                //         padding: '2em',
+                //     });
+                // }
 
-                    if (confirm('¿Estas seguro de que quieres confirmar la consejeria?')) {
-                        //if the student confirm counseling the form will be submitted
-                        this.submit();
-                    }
-                });
-
-                //if the Confirmar Consejeria buttton is disabled, disable the checkbox input and the remove course option
+                // //if the Confirmar Consejeria buttton is disabled, disable the checkbox input and the remove course option
                 if ($('#counseling_button').prop('disabled')) {
-                    //$(this).prop("disabled", true);
                     $('input[type="checkbox"]').prop('disabled', true);
-                    $('#counseling_form a[onClick]').remove();
                 }
+                counselingButton();
 
-
-
+                checkForConfirmDialog();
             });
         </script>
         <!-- dropdown script -->
