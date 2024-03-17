@@ -208,8 +208,8 @@
                                     <tbody>
                                             <form method='POST' action='index.php'>
                                                 <td></td>
-                                                <td style='padding: 5px;'><input type='text' name='crse_code' class='form-input' value=''/></td>
-                                                <td style='padding: 5px;'><input type='text' name='credits' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='crse_code' class='form-input' value='' required></td>
+                                                <td style='padding: 5px;'><input type='text' name='credits' class='form-input' style='width: 4em;' value=''></td>
                                                 <td style='padding: 5px;'>
                                                     <select name='type' class='form-input'>
                                                         <option value=''></option>
@@ -225,20 +225,21 @@
                                                         <option value='fisi'>FISI</option>
                                                     </select>
                                                 </td>
-                                                <td style='padding: 5px;'><input type='text' name='grade' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='grade' class='form-input' style='width: 4em;' value='' required></td>
                                                 <td style='padding: 5px;'>
-                                                    <select name='status' class='form-input'>
+                                                    <select name='status' class='form-input' required>
                                                         <option value=''></option>
                                                         <option value='m'>Actualmente Tomando</option>
-                                                        <option value='p'>Paso</option>
-                                                        <option value='np'>No Paso</option>
+                                                        <option value='P'>Paso</option>
+                                                        <option value='NP'>No Paso</option>
                                                     </select>
                                                 </td>
-                                                <td style='padding: 5px;'><input type='text' name='term' class='form-input' style='width: 4em;' value=''/></td>
+                                                <td style='padding: 5px;'><input type='text' name='term' class='form-input' style='width: 4.5em;' value='' required></td>
                                                 <td style='padding: 5px;'><input type='text' name='equivalencia' class='form-input' value=''/></td>
                                                 <td style='padding: 5px;'><input type='text' name='convalidacion' class='form-input' value=''/></td>
-                                                <input type='hidden' name='student_num' value='<?php $studentData['student_num']?>'>
-                                                <td style='padding: 5px;'><button type='submit' name='action' value='addClassWgrade' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Añadir</button></td>
+                                                <input type='hidden' name='student_num' value="<?php echo $studentData['student_num']; ?>">
+                                                <input type='hidden' name='insertGrade' value='insertGrade'>
+                                                <td style='padding: 5px;'><button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Añadir</button></td>
                                             </form>
                                     </tbody>
                                 </table>
@@ -272,8 +273,10 @@
                                             echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                            echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
                                             echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
@@ -314,8 +317,10 @@
                                             echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                            echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
                                             echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
@@ -356,8 +361,10 @@
                                             echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                            echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
                                             echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
@@ -398,8 +405,10 @@
                                             echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
                                             echo "<td style='padding: 5px;'>" . $curso['name'] . "</td>";
                                             echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                            echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
                                             echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
@@ -441,6 +450,7 @@
                                             echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='equivalencia' class='form-input' value='" . $curso['equivalencia'] . "'/></td>";
                                             echo "<td style='padding: 5px;'> <input type='text' name='convalidacion' class='form-input' value='" . $curso['convalidacion'] . "'/></td>";
                                             echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
@@ -453,7 +463,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases a recomendar:</h2>
+                            <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases a recomendar</h2>
                             <!-- Vertical line tabs -->
                             <div class="mb-5 flex flex-col sm:flex-row" x-data="{ tab: 'home'}">
                                 <!-- buttons -->
