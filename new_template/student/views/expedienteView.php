@@ -25,7 +25,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -407,7 +406,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <script defer src="assets/js/alpine.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="assets/js/courses.js"></script>
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -530,13 +528,13 @@ if (session_status() == PHP_SESSION_NONE) {
         });
 
         const clearCourse = (course) => {
-            console.log("courseList: ", courseList);
+            //console.log("courseList: ", courseList);
             const index = courseList.indexOf(course.id);
             let checkbox = $(`input[type="checkbox"][value=${course.id}]`);
             if (index > -1) {
                 //uncheck el checkbox de la lista
                 checkbox.prop('checked', false);
-                console.log("el checkbox unchecked: ", checkbox);
+                //console.log("el checkbox unchecked: ", checkbox);
                 courseList.splice(index, 1);
             }
             course.remove();
@@ -549,7 +547,7 @@ if (session_status() == PHP_SESSION_NONE) {
         $(document).ready(() => {
             let storedArrayJSON = sessionStorage.getItem('selectedCourses');
             let courseList = JSON.parse(storedArrayJSON);
-            console.log("courses: ", courseList);
+            //console.log("courses: ", courseList);
 
             const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
 
@@ -559,7 +557,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 courseList.forEach((selectedCourse) => {
                     //si la clase no existe en el array de clases seleccionadas la anade al array y al sidebar
 
-                    console.log("each selected course: ", selectedCourse);
+                    //console.log("each selected course: ", selectedCourse);
                     const courseCode = selectedCourse;
 
                     let category = '';
@@ -585,26 +583,10 @@ if (session_status() == PHP_SESSION_NONE) {
                      <input type="hidden" name="selectedCoursesList[]" value="${courseCode}">
                     </li>`;
                     category.append(html);
-
-
                 });
-
-
             }
-            const UncheckedCheckboxes = $('input[type="checkbox"]:not(:checked)');
-            console.log("verificar if not checked: ", UncheckedCheckboxes);
-            UncheckedCheckboxes.each((i, notSelectedCourse) => {
-                if (courseList.includes(notSelectedCourse.value)) {
-                    console.log("curso no seleccionado: ", notSelectedCourse.value);
-                    const course = $(`#${notSelectedCourse.value}`);
-                    console.log("li encontrado: ", course);
-                    const index = courseList.indexOf(notSelectedCourse.value);
-                    if (index > -1) {
-                        courseList.splice(index, 1);
-                    }
-                    course.remove();
-                }
-            });
+
+            counselingButton();
 
         })
     </script>

@@ -19,7 +19,6 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/estilos.css" />
     <script src="assets/js/perfect-scrollbar.min.js"></script>
     <script defer src="assets/js/popper.min.js"></script>
     <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
@@ -67,7 +66,80 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
             <div class="animate__animated p-6" :class="[$store.app.animation]">
                 <!-- start main content section -->
                 <div>
+                    <div class="mb-5 mx-4 flex items-center ">
+                        <!-- <div class="border border-[#d3d3d3] rounded dark:border-[#1b2e4b]"> -->
+                        <div>
+                            <div class="my-5">
+                                <h5 class="text-lg font-bold dark:text-white-light">Enlaces Cursos Electivos y de Educacion General</h5>
+                                <ul class="space-y-3 mb-3 mx-4">
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="https://upra.edu/computadoras/cohorte-2015/#1582136406836-9121ada3-25a9" target="_blank" class="hover:underline">Electivas Departamentales</a></span>
+                                    </li>
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="https://upra.edu/academicos/educacion-general/" target="_blank" class="hover:underline">Cursos Válidos de Educación General</a></span>
+                                    </li>
+                                </ul>
+                            </div>
 
+                            <div class="my-5">
+                                <h5 class="text-lg font-bold dark:text-white-light">Evaluadora del Programa en la Oficina de Admisiones</h5>
+                                <p class="mb-2">(Verificar Convalidaciones, Equivalencias y trámites relacionados) </p>
+                                <p class="mx-4">Sheila Soler Vázquez (sheila.soler@upr.edu) </p>
+                            </div>
+                            <div class="my-5">
+                                <h5 class="text-lg font-bold dark:text-white-light">Información para Graduandos</h5>
+                                <p class="mb-2">Trámites para solicitar Graduación</p>
+                                <ul class="space-y-3mb-3 mx-4">
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="http://cartero.upra.edu/images/pdf/0409_solicitud_de_graduacion.pdf" target="_blank" class="hover:underline">Intrucciones Solicitud de Graduacion</a></span>
+                                    </li>
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="http://cartero.upra.edu/images/pdf/0409instrucciones_estatus_evaluacin_graduacin_portal_upr.pdf" target="_blank" class="hover:underline">Instrucciones Acceso a Estatus de Solicitud de Graduacion</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="my-5">
+                                <h5 class="text-lg font-bold dark:text-white-light">Información Prematricula online:</h5>
+                                <ul class="space-y-3 font-semibold mb-3 mx-4">
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="https://upra.edu/registraduria/proceso-matricula/#1478031446050-eba96eac-c203" target="_blank" class="hover:underline">Intrucciones para Realizar Prematricula</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="my-5">
+                                <h5 class="text-lg font-bold dark:text-white-light">Información Internados</h5>
+                                <ul class="space-y-3 font-semibold mb-3 mx-4">
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="assets/docs/CompuREU Internships and Co-op.pdf" target="_blank" class="hover:underline">Presentacion Como aplicar a REU, Internado y CO-OP</a></span>
+                                    </li>
+                                    <li>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="list-text"><a href="assets/docs/Taller Resume Valenzuela (UPDATE 2022).pdf" target="_blank" class="hover:underline">Como Preparar Resume</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- end main content section -->
 
@@ -88,7 +160,7 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
     <script defer src="assets/js/alpine.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="assets/js/courses.js"></script>
+
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -185,29 +257,13 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                     },
                 ],
 
+
                 removeMessage(value) {
                     this.messages = this.messages.filter((d) => d.id !== value);
                 },
             }));
         });
-        // elec script
 
-        const clearCourse = (course, elements, category) => {
-            var query = document.getElementById(course).value; /* Value inputted by user */
-            var elements = document.getElementsByClassName(elements); /* Get the li elements in the list */
-            var myList = document.getElementById(category); /* Var to reference the list */
-            var length = (document.getElementsByClassName(element).length); /* # of li elements */
-            var checker = 'false'; /* boolean-ish value to determine if value was found */
-
-            myList.querySelectorAll('li').forEach(function(item) {
-                if (item.innerHTML.indexOf(query) !== -1)
-                    item.remove();
-            });
-        }
-
-        const clearCourses = (courses) => {
-            document.getElementById(courses).innerHTML = "";
-        }
 
         document.addEventListener("alpine:init", () => {
             Alpine.data("collapse", () => ({
@@ -231,7 +287,7 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
         $(document).ready(() => {
             let storedArrayJSON = sessionStorage.getItem('selectedCourses');
             let courseList = JSON.parse(storedArrayJSON);
-            console.log("courses: ", courseList);
+            //console.log("courses: ", courseList);
 
             const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
 
@@ -241,7 +297,7 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                 courseList.forEach((selectedCourse) => {
                     //si la clase no existe en el array de clases seleccionadas la anade al array y al sidebar
 
-                    console.log("each selected course: ", selectedCourse);
+                    //console.log("each selected course: ", selectedCourse);
                     const courseCode = selectedCourse;
 
                     let category = '';
@@ -273,20 +329,12 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
 
 
             }
-            const UncheckedCheckboxes = $('input[type="checkbox"]:not(:checked)');
-            console.log("verificar if not checked: ", UncheckedCheckboxes);
-            UncheckedCheckboxes.each((i, notSelectedCourse) => {
-                if (courseList.includes(notSelectedCourse.value)) {
-                    console.log("curso no seleccionado: ", notSelectedCourse.value);
-                    const course = $(`#${notSelectedCourse.value}`);
-                    console.log("li encontrado: ", course);
-                    const index = courseList.indexOf(notSelectedCourse.value);
-                    if (index > -1) {
-                        courseList.splice(index, 1);
-                    }
-                    course.remove();
-                }
-            });
+            //if the Confirmar Consejeria buttton is disabled, disable the checkbox input and the remove course option
+            if ($('#counseling_button').prop('disabled')) {
+                //$(this).prop("disabled", true);
+                //$('input[type="checkbox"]').prop('disabled', true);
+                $('#counseling_form a[onClick]').remove();
+            }
 
         })
     </script>
