@@ -341,6 +341,8 @@ class ExpedientesController {
             {
                 require_once(__DIR__ . '/../models/ClassesModel.php');
                 $classesModel = new ClassesModel();
+                require_once(__DIR__ . '/../models/ClassModel.php');
+                $classModel = new ClassModel();
                 $archivoRegistro = __DIR__ . '/archivo_de_registro.txt';
 
                 $currentDateTime = date("Y-m-d H:i:s");
@@ -360,7 +362,8 @@ class ExpedientesController {
                     while (($line = fgetcsv($file)) !== FALSE)
                     {
                         // Asigna cada dato a una variable
-                        $semester = $line[0];
+                        $term = $line[0];
+                        $term = trim($term); # no se por que esta pone un espacio en blanco en el comienzo del archivo. ya con trim lo quitamos
                         $studentNumber = $line[1];
                         //le quita los guiones al numero de estudiantes.
                         $studentNumber = str_replace("-", "", $studentNumber);
@@ -378,26 +381,32 @@ class ExpedientesController {
                         }
                         else
                         {
-                            if($creditAmount != 0)
+                            if($creditAmount != 0) # clases de 0 creditos no se ponen en las notas
                             {
-                                $result = $studentModel->studentAlreadyHasGrade($studentNumber, $class, $conn);
-                                //el estudiante ya tiene una nota en esa clase
+                                $equi = "";
+                                $conva = 0;
+                                $course_info = $classModel->selectCourseWNull($conn, $class);
+                                if ($course_info == NULL)
+                                {
+                                    $type = "free";
+                                }
+                                else
+                                {
+                                    $type = $course_info["type"];
+                                }
+                                $result = $studentModel->studentAlreadyHasGradeWithSemester($studentNumber, $class, $term, $conn);
+                                //el estudiante ya tiene una nota en esa clase y en ese semestre
                                 if ($result == TRUE)
                                 {
-                                    error_log("Nota del estudiante " . $studentNumber . "en la clase " . $class . " fue actualizada\n", 3, $archivoRegistro);
-                                    $equi = "";
-                                    $conva = 0;
-                                    $type = "mandatory";
-                                    $term = $classesModel->getTerm($conn);
-                                    $result = $studentModel->UpdateStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $term, $conn);
+                                    error_log("Nota del estudiante " . $studentNumber . " en la clase " . $class . " fue actualizada\n", 3, $archivoRegistro);
+                                    error_log("El term a ser actualizado es: $term\n", 3, $archivoRegistro);
+                                    $result = $studentModel->UpdateStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $term, $type, $term, $conn);
                                 }
                                 else // el estudiante no tiene una nota en esa clase.
                                 {
-                                    error_log("Nota del estudiante " . $studentNumber . "en la clase " . $class . " fue insertada\n", 3, $archivoRegistro);
-                                    $equi = "";
-                                    $conva = 0;
-                                    $type = "mandatory";
-                                    $result = $studentModel->InsertStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $semester, $type, $conn);
+                                    error_log("Nota del estudiante " . $studentNumber . " en la clase " . $class . " fue insertada\n", 3, $archivoRegistro);
+                                    error_log("El term a ser insertado es: $term\n", 3, $archivoRegistro);
+                                    $result = $studentModel->InsertStudentGrade($studentNumber, $class, $grade, $equi, $conva, $creditAmount, $term, $type, $conn);
                                 }
                             }
                         }
