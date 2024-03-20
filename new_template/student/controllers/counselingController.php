@@ -38,6 +38,10 @@ if (!isset($_SESSION['student_authenticated']) || $_SESSION['student_authenticat
 
             $studentInfo = $counselingModel->getStudentInfo($conn, $student_num);
 
+            //obtenemos la lista de los diferentes cohortes que existen en la base de datos
+            $_SESSION['cohortes'] = $counselingModel->getCohortes($conn);
+            //$cohortes = $counselingModel->getCohortes($conn);
+
             if (isset($_SESSION['student_num'])) {
                 $_SESSION['full_student_name'] = $studentInfo['full_student_name'];
                 $_SESSION['formatted_student_num'] = $studentInfo['formatted_student_num'];

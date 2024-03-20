@@ -11,32 +11,7 @@ require_once(__DIR__ . '/../config/database.php');
 class CohorteController
 {
     //funcion para obtener los cursos pertenecientes a la secuencia curricular cohorte 2017
-    public function cohorte2017()
-    {
-        global $conn;
-        $cohorteModel = new CohorteModel();
-        if (session_status() == PHP_SESSION_NONE) {
-            // Start the session
-            session_start();
-        }
-
-        //obtenemos el numero de estudiante        
-        if (isset($_SESSION['student_num'])) {
-            $student_num = $_SESSION['student_num'];
-        }
-
-        //sacas los cursos de un json file
-        // $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
-        // $allCourses = json_decode($allCourses, true);
-
-        // Obtenemos el cohorte de 2017
-        $cohorte2017 = $cohorteModel->getCohort($conn, '2017');
-
-        require_once(__DIR__ . '/../views/cohorte2017View.php');
-    }
-
-    //funcion para obtener los cursos pertenecientes a la secuencia curricular cohorte 2017
-    public function cohorte2022()
+    public function cohorte($cohort_year)
     {
         global $conn;
         $cohorteModel = new CohorteModel();
@@ -50,21 +25,13 @@ class CohorteController
             $student_num = $_SESSION['student_num'];
         }
 
-        // //sacas los cursos de un json file
-        // $allCourses = file_get_contents(__DIR__ . '/../views/assets/json/cohort.json');
-        // $allCourses = json_decode($allCourses, true);
-        // Obtenemos el cohorte de 2017
-        $cohorte2022 = $cohorteModel->getCohort($conn, '2022');
-        require_once(__DIR__ . '/../views/cohorte2022View.php');
+        $cohorte = $cohorteModel->getCohort($conn, $cohort_year);
+        require_once(__DIR__ . '/../views/cohorteView.php');
     }
 }
 
+
 if (isset($_GET['page'])) {
-    if ($_GET['page'] === "2017") {
-        $cohorteController = new CohorteController();
-        $cohorteController->cohorte2017();
-    } else if ($_GET['page'] === "2022") {
-        $cohorteController = new CohorteController();
-        $cohorteController->cohorte2022();
-    }
+    $cohorteController = new CohorteController();
+    $cohorteController->cohorte($_GET['page']);
 }

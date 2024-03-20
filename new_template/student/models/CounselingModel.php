@@ -234,4 +234,28 @@ class CounselingModel
             return $status['conducted_counseling'];
         }
     }
+
+    public function getCohortes($conn)
+    {
+        $sql = "SELECT DISTINCT cohort_year  
+                FROM cohort";
+
+        $stmt = $conn->prepare($sql);
+
+        // ejecuta el statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        $cohortes = [];
+        while ($row = $result->fetch_assoc()) {
+            //$cohortes[] = $row['cohort_year'];
+            array_push($cohortes, $row['cohort_year']);
+        }
+
+        return $cohortes;
+    }
 }
