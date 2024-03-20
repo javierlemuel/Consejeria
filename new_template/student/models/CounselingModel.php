@@ -258,4 +258,29 @@ class CounselingModel
 
         return $cohortes;
     }
+
+    public function getStudentSelectedCourses($conn, $student_num)
+    {
+
+        $sql = "SELECT wt.student_num, wt.crse_code, wt.term
+                FROM will_take as wt 
+                JOIN offer as of
+                ON of.term = wt.term
+                WHERE of.crse_code = 'XXXX' 
+                AND wt.student_num = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $student_num);
+        if (!$stmt->execute()) {
+            throw new Exception("Error: " . $stmt->error);
+        } else {
+            $result = $stmt->get_result();
+
+            $courses = [];
+            while ($row = $result->fetch_assoc()) {
+                $courses[] = $row['crse_code'];
+            }
+            return $courses;
+        }
+    }
 }

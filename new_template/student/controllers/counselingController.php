@@ -73,6 +73,13 @@ if (!isset($_SESSION['student_authenticated']) || $_SESSION['student_authenticat
                 $_SESSION['counseling_button']  = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end">Confirmar Consejeria</button>';
             }
 
+            $selected_courses = $counselingModel->getStudentSelectedCourses($conn, $student_num);
+            if ($selected_courses != null) {
+                $selectedCourses = json_encode($selected_courses);
+            } else {
+                $selectedCourses = json_encode('');
+            }
+
 
             require_once(__DIR__ . '/../views/counselingView.php');
             require_once(__DIR__ . '/../views/layouts/sidebar.php');
