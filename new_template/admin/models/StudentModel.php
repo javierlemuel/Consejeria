@@ -457,6 +457,26 @@ class StudentModel {
         }
     }
 
+    public function studentAlreadyHasGradeWithSemester($student_num, $code, $term, $conn) {
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM student_courses WHERE student_num = ? AND crse_code = ? AND term = ?";
+        // Preparar la sentencia
+        $stmt = $conn->prepare($sql);
+        // Vincular el parámetro con el valor
+        $stmt->bind_param("sss", $student_num, $code, $term);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        // Verificar si se encontraron resultados
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function UpdateStudentGrade($student_num, $course_code, $grade, $equi, $conva, $credits, $term, $type, $old_term, $conn) {
         // Preparar la consulta SQL para la actualización
         $sql = "UPDATE student_courses 
@@ -518,7 +538,6 @@ class StudentModel {
             }
         } else {
             // Ocurrió un error al ejecutar la consulta
-            // Manejar el error según sea necesario
             $stmt->close();
             return FALSE;
         }
