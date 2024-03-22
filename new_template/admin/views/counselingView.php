@@ -244,6 +244,45 @@
                                     </tbody>
                                 </table>
                             </div>
+                        <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Actualmente Tomando</h2>
+                        <form method="POST" action="index.php">
+                            <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">
+                            <!-- basic table -->
+                            <div class="table-responsive">
+                                <table style="font-size: 12px; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 5px;">Codigo Del Curso</th>
+                                            <th style="padding: 5px;">Nombre</th>
+                                            <th style="padding: 5px;">Creditos</th>
+                                            <th style="padding: 5px;">Nota</th>
+                                            <th style="padding: 5px;">Semestre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Itera sobre los datos de los cursos y llena las celdas de la tabla
+                                        foreach ($currentlyTaking as $curso) {
+                                            echo "<tr>";
+                                            echo"<form method='POST' action='index.php'>";
+                                            echo "<td style='padding: 5px;'>" . $curso['crse_code'] . "</td>";
+                                            echo "<input type='hidden' name='crse_code' value='" . $curso['crse_code'] . "'/>";
+                                            echo "<td style='padding: 5px;'>" . $curso['course_name'] . "</td>";
+                                            echo "<td style='padding: 5px;'>" . $curso['credits'] . "</td>";
+                                            echo "<input type='hidden' name='credits' value='" . $curso['credits'] . "'/>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='grade' class='form-input' style='width: 4em;' value='" . $curso['crse_grade'] . "'/></td>";
+                                            echo "<td style='padding: 5px;'> <input type='text' name='term' class='form-input' style='width: 5em;' value='" . $curso['term'] . "'/></td>";
+                                            echo "<input type='hidden' name='old_term' value='" . $curso['term'] . "'/>";
+                                            echo"<input type='hidden' name='updateGrade' value='updateGrade'>";
+                                            echo "<td style='padding: 5px;'> <button type='submit' name='action' value='studentCounseling' class='btn btn-primary ltr:ml-2 rtl:mr-2'>Actualizar</button></td>";
+                                            echo "</tr>";
+                                            echo "<input type='hidden' name='student_num' value=" . $studentData['student_num'] . ">";
+                                            echo "</form>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         <h2 class="m-0 dark:text-white-dark" style="font-size: 2em; font-weight: bold; text-align: center; margin-top: 1em; margin-bottom: 1em;">Clases Mandatorias de CCOM</h2>
                         <form method="POST" action="index.php">
                             <input type="hidden" name="student_num" value="<?= $studentData['student_num'] ?>">

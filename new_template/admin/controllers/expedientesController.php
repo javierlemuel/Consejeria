@@ -218,6 +218,7 @@ class ExpedientesController {
                 }
 
                 // variables para las notas
+                $currentlyTaking = $classesModel->getCurrentlyTakingClasses($conn, $student_num);
                 $ccomByCohort = $classesModel->getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num);
                 $ccomFreeByNotCohort = $classesModel->getCohortCoursesWgradesCCOMfree($conn, $studentCohort, $student_num);
                 $notccomByCohort = $classesModel->getCohortCoursesWgradesNotCCOM($conn, $studentCohort, $student_num);

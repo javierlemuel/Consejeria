@@ -72,6 +72,31 @@ class ClassesModel {
         return $result;
     }
 
+    public function getCurrentlyTakingClasses($conn, $student_num)
+    {
+        $sql = "SELECT 
+                    sc.*,
+                    CASE 
+                        WHEN cc.crse_code IS NOT NULL THEN cc.name 
+                        WHEN gc.crse_code IS NOT NULL THEN gc.name 
+                    END AS course_name
+                FROM 
+                    student_courses sc
+                LEFT JOIN 
+                    ccom_courses cc ON sc.crse_code = cc.crse_code
+                LEFT JOIN 
+                    general_courses gc ON sc.crse_code = gc.crse_code
+                WHERE 
+                    sc.crse_status = 'M' AND student_num = '$student_num';";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            throw new Exception("Error en la consulta SQL: " . $conn->error);
+        }
+
+        return $result;
+    }
     public function getCohortCoursesWgradesCCOM($conn, $studentCohort, $student_num)
     {
         $sql = "SELECT cohort.crse_code, ccom_courses.name, ccom_courses.credits, student_courses.crse_grade,
