@@ -85,6 +85,9 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                                                         <li>Escoja los cursos que aspira tomar el próximo semestre.</li>
                                                         <li>Revise su lista de cursos seleccionados y confirme su consejería.</li>
                                                     </ol>
+                                                    <?php
+                                                    //var_dump($selected_courses);
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -184,7 +187,6 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
         <script defer src="assets/js/alpine-ui.min.js"></script>
         <script defer src="assets/js/alpine-focus.min.js"></script>
         <script defer src="assets/js/alpine.min.js"></script>
-        <script src="assets/js/custom.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
 
@@ -320,11 +322,23 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
             $(document).ready(() => {
                 const generales = ['MATE', 'INGL', 'CIBI', 'ESPA', 'FISI'];
 
+                var selectedCourses_db = <?php echo $selectedCourses ?>;
+                console.log("courses db: ", selectedCourses_db);
                 //retrieve the list of courses in session storage 
-                if (sessionStorage.getItem('selectedCourses')) {
-                    //copy the course list in the session storage
-                    let courseList = JSON.parse(sessionStorage.getItem('selectedCourses'));
-                    console.log("courses: ", courseList);
+                if (sessionStorage.getItem('selectedCourses') || selectedCourses_db.length > 0) {
+                    //if(sessionStorage.getItem('selectedCourses') != null || selectedCourses_db != null) {
+                    let courseList = [];
+                    //courseList = JSON.parse(sessionStorage.getItem('selectedCourses'));
+                    console.log("courses session storage: ", courseList);
+                    if (selectedCourses_db != null) {
+                        //copy the course list in the db
+                        courseList = selectedCourses_db;
+                        console.log("courses db2: ", courseList);
+                    } else {
+                        //copy the course list in the session storage
+                        courseList = JSON.parse(sessionStorage.getItem('selectedCourses'));
+                        console.log("courses session storage: ", courseList);
+                    }
 
                     if (courseList.length > 0) {
                         //por cada checkbox seleccionado
@@ -390,7 +404,7 @@ if (!isset($_SESSION['student_authenticated']) && $_SESSION['student_authenticat
                             category = $('#cienciasSociales');
                         }
                         let html = `<li id="${courseCode}">
-                                <h3 style="font-size: 12px;" class="justify-between -mx-4 mb-2 flex items-center  py-3 px-7 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]" style="text-size: 14px;">
+                                <h3 style="font-size: 12px;" class="justify-between -mx-4 mb-2 flex items-center  py-3 px-7 uppercase dark:bg-dark dark:bg-opacity-[0.08]" style="text-size: 14px;">
                                 ${courseCode}
                                 <a onclick="clearCourse(${courseCode})"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path opacity="0.5" d="M11.5956 22.0001H12.4044C15.1871 22.0001 16.5785 22.0001 17.4831 21.1142C18.3878 20.2283 18.4803 18.7751 18.6654 15.8686L18.9321 11.6807C19.0326 10.1037 19.0828 9.31524 18.6289 8.81558C18.1751 8.31592 17.4087 8.31592 15.876 8.31592H8.12405C6.59127 8.31592 5.82488 8.31592 5.37105 8.81558C4.91722 9.31524 4.96744 10.1037 5.06788 11.6807L5.33459 15.8686C5.5197 18.7751 5.61225 20.2283 6.51689 21.1142C7.42153 22.0001 8.81289 22.0001 11.5956 22.0001Z" fill="currentColor" />

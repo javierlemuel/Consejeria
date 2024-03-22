@@ -38,6 +38,10 @@ if (!isset($_SESSION['student_authenticated']) || $_SESSION['student_authenticat
 
             $studentInfo = $counselingModel->getStudentInfo($conn, $student_num);
 
+            //obtenemos la lista de los diferentes cohortes que existen en la base de datos
+            $_SESSION['cohortes'] = $counselingModel->getCohortes($conn);
+            //$cohortes = $counselingModel->getCohortes($conn);
+
             if (isset($_SESSION['student_num'])) {
                 $_SESSION['full_student_name'] = $studentInfo['full_student_name'];
                 $_SESSION['formatted_student_num'] = $studentInfo['formatted_student_num'];
@@ -67,6 +71,13 @@ if (!isset($_SESSION['student_authenticated']) || $_SESSION['student_authenticat
                 $_SESSION['counseling_button'] = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end" disabled>Confirmar Consejeria</button>';
             } else {
                 $_SESSION['counseling_button']  = '<button type="submit" value="Submit" id="counseling_button" class="btn btn-warning self-end">Confirmar Consejeria</button>';
+            }
+
+            $selected_courses = $counselingModel->getStudentSelectedCourses($conn, $student_num);
+            if ($selected_courses != null) {
+                $selectedCourses = json_encode($selected_courses);
+            } else {
+                $selectedCourses = json_encode('');
             }
 
 

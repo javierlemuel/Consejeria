@@ -29,9 +29,15 @@
                             <button class="btn-link hover:text-primary  hover:border-primary  text-lg font-bold relative" @click="toggle">
                                 Secuencia Curricular<!--<span class="dropdown-arrow"></span>-->
                             </button>
+                            <?php
+                            //var_dump($_SESSION['cohortes']);
+                            ?>
                             <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 whitespace-nowrap">
-                                <li><a href="index.php?page=2017" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">Cohorte 2017</a></li>
-                                <li><a href="index.php?page=2022" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">Cohorte 2022</a></li>
+                                <?php
+                                foreach ($_SESSION['cohortes'] as $year) {
+                                    echo '<li><a href="index.php?page=' . $year . '" @click="toggle" class="block p-2 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60 border-b border-transparent hover:border-primary text-lg font-bold">Cohorte' . $year . '</a></li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </li>
@@ -47,6 +53,7 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
             <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
                 <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
