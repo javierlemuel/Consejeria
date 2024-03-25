@@ -82,4 +82,18 @@ class AdminModel {
         return "success";
     }
 
+
+    public function deleteAdminModel($conn, $email)
+    {
+        $sql = "DELETE FROM advisor
+                WHERE email = '$email'";
+
+        $result = $conn->query($sql);
+
+        if ($result === true)
+            return "success";
+
+        return "failure";
+    }
+
 }

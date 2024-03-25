@@ -82,15 +82,32 @@ class AdminController{
 
         else if($result == 'success')
         {
-            header('Location: ?admin&edit='.$email);
+            header('Location: ?admin&edit='.$email.'&message='.$message);
             die;
         }
         else
         {
             $message = 'failureEdit';
-            header('Location: ?admin&edit='.$old_email);
+            header('Location: ?admin&edit='.$old_email.'&message='.$message);
             die;
         }
+
+    }
+
+    public function deleteadmin($email)
+    {
+        global $conn;
+        $adminModel = new AdminModel();
+
+        $result = $adminModel->deleteAdminModel($conn, $email);
+
+
+        
+        $message = "success";
+        if($result == 'failure')
+            $message = "failure";
+       
+        $this->index($message);
 
     }
 }
@@ -104,6 +121,8 @@ else if(isset($_GET['edit']))
     $adminController->editadmin($_GET['edit']);
 else if(isset($_GET['changes']))
     $adminController->changeadmininfo();
+else if(isset($_GET['delete']))
+    $adminController->deleteadmin($_GET['delete']);
 else
     $adminController->index('');
 

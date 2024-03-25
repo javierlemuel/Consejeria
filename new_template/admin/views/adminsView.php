@@ -128,7 +128,7 @@
                                         elseif ($message == "exist") 
                                         echo "<h2 style='color:red; bold' class='text-xl'>Este email ya existe</h2>";
                                      elseif ($message == "success") 
-                                        echo "<h2 style='color:limegreen; bold' class='text-xl'>Admin fue creado!</h2>";
+                                        echo "<h2 style='color:limegreen; bold' class='text-xl'>Admin fue creado/modificado!</h2>";
                                 ?>
                         <br>
                     </div>

@@ -119,13 +119,13 @@
 
             <div class="animate__animated p-6" :class="[$store.app.animation]">
 
-            <?php if (isset($message)) { ?>
+            <?php if (isset($_GET['message'])) { ?>
                     <div style='padding: 15px 0' class="flex flex-wrap items-center justify-between gap-4">
                             
                                 <?php 
-                                      if ($message == "failureEdit") 
+                                      if ($_GET['message'] == "failureEdit") 
                                             echo"<h2 style='color:red; bold' class='text-xl'>El admin no pudo ser editado correctamente.</h2>";
-                                      elseif ($message == "successEdit") 
+                                      elseif ($_GET['message'] == "successEdit") 
                                             echo"<h2 style='color:limegreen; bold' class='text-xl'>El admin fue editado!!!</h2>";
                                 ?>
                      <br>
@@ -186,7 +186,14 @@
                         <button type="submit" class="btn btn-primary !mt-6">Actualizar</button>
 
                         </form>
+
+                        <form class="space-y-5" action="?admin&delete=<?php echo $admin['email']?>" method="POST">
+                        <button class="btn btn-danger !mt-6">Eliminar</button>
+                        </form>
+
                         <?php } ?>
+
+                        
                     
 
                     </div>  
